@@ -1,9 +1,12 @@
-﻿using System;
-using System.Web.Http;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+
 
 namespace Swegrant.Server.Controllers
 {
-    public class MediaController : ApiController
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MediaController 
     {
         [HttpGet]
         public DateTime GetCurrentTime()

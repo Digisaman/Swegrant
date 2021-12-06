@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Swegrant.Server"
         mc:Ignorable="d"
-        Title="Swegrant Server" Height="450" Width="800">
+        Title="Swegrant Server" Height="450" Width="800" >
     <Grid>
-
+        <Button x:Name="btnStartServer" Content="Start Server" HorizontalAlignment="Left" Margin="37,31,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnStartServer_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-14.938"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-4.135"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <TextBox x:Name="txtServerAddress" HorizontalAlignment="Left" Margin="371,34,0,0" Text="http://localhost:5000/" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" Height="27"/>
     </Grid>
 </Window>
