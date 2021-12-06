@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Swegrant.Views.MainPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Swegrant!" FontSize="Title"
+                VerticalOptions="Start"
+                HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="Please Choose Your Language" FontSize="Large"
+                VerticalOptions="Start"
+                HorizontalOptions="CenterAndExpand" />
+
+
+            <Button x:Name="btnPersian" Text="Persian" Clicked="btnPersian_Clicked" />
+            <Button x:Name="btnEnglish" Text="English" Clicked="btnEnglish_Clicked" />
+            <Button x:Name="btnSweden" Text="Sweden" Clicked="btnSweden_Clicked" />
+
+            <Label Text="ASDASDASD">
+                
+            </Label>
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>
