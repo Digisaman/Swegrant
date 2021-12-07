@@ -27,7 +27,7 @@ namespace Swegrant.Server.Hubs
 
             await Clients.Group(groupName).SendAsync("ReceiveMessage", user, message);
 
-            await Clients.Group(groupName).SendAsync("ReceiveMessage", user, "Recievesd");
+            //await Clients.Group(groupName).SendAsync("ReceiveMessage", user, "Recievesd");
 
 
         }

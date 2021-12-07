@@ -13,7 +13,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
 using Microsoft.Extensions.Logging;
-
+using Microsoft.AspNetCore.SignalR;
+using Swegrant.Server.Hubs;
 
 namespace Swegrant.Server
 {
@@ -22,6 +23,8 @@ namespace Swegrant.Server
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public static IHubContext<ChatHub> HUB { get; set; }
         //private HttpSelfHostServer restService;
         //private IDisposable apiServer;
         public MainWindow()
@@ -31,15 +34,27 @@ namespace Swegrant.Server
 
         private async void btnStartServer_Click(object sender, RoutedEventArgs e)
         {
+            Task task = new Task(() => StartServer());
+            task.Start();
+            MessageBox.Show("Server Started");
+        }
+
+        private static void StartServer()
+        {
             try
             {
-                CreateWebHostBuilder(new string[] { }).Build().Run();
+                //CreateWebHostBuilder(new string[] { }).Build().Run();
+
+                var host = CreateWebHostBuilder(new string[] { }).Build();
+                HUB = (IHubContext<ChatHub>)host.Services.GetService(typeof(IHubContext<ChatHub>));
+                host.Run();
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         public static IHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -59,6 +74,11 @@ namespace Swegrant.Server
               })
               .UseStartup<Startup>();
           });
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         //private bool StartWebApp(string baseAddress)
         //{

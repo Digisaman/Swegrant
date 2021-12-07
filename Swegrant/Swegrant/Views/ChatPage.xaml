@@ -20,7 +20,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
-        <!--<Frame
+        <Frame
             Grid.ColumnSpan="2"
             Margin="0"
             Padding="0"
@@ -164,7 +164,7 @@
                 </Frame>
             </Grid>
 
-        </Frame>-->
+        </Frame>
 
 
         <ActivityIndicator

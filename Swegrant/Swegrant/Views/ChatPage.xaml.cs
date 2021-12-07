@@ -21,18 +21,25 @@ namespace Swegrant.Views
 
         public ChatPage()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
-        //    if (!DesignMode.IsDesignModeEnabled)
-        //        VM.ConnectCommand.Execute(null);
+            //if (!DesignMode.IsDesignModeEnabled)
+                VM.ConnectCommand.Execute(null);
 
-        //    ToolbarDone.Clicked += ToolbarDone_Clicked;
-        //}
+            //ToolbarDone.Clicked += ToolbarDone_Clicked;
+        }
 
         //private async void ToolbarDone_Clicked(object sender, EventArgs e)
         //{
