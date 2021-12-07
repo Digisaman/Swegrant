@@ -93,6 +93,9 @@
     <FlyoutItem Title="Video" Icon="icon_feed.png">
         <ShellContent Route="VideoPage" ContentTemplate="{DataTemplate local:VideoPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Subtitle" Icon="icon_feed.png">
+        <ShellContent Route="ChatPage" ContentTemplate="{DataTemplate local:ChatPage}" />
+    </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">

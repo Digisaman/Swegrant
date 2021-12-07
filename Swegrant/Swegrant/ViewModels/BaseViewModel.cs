@@ -1,4 +1,5 @@
-﻿using Swegrant.Models;
+﻿using Swegrant.Interfaces;
+using Swegrant.Models;
 using Swegrant.Services;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Swegrant.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        //public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
         bool isBusy = false;
         public bool IsBusy
@@ -49,6 +50,16 @@ namespace Swegrant.ViewModels
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
+
+        #region SignalR
+        ChatService chatService;
+        public ChatService ChatService =>
+            chatService ?? (chatService = DependencyService.Resolve<ChatService>());
+
+        IDialogService dialogService;
+        public IDialogService DialogService =>
+            dialogService ?? (dialogService = DependencyService.Resolve<IDialogService>());
         #endregion
     }
 }

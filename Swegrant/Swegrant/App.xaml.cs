@@ -13,7 +13,8 @@ namespace Swegrant
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            //DependencyService.Register<MockDataStore>();
+            DependencyService.Register<ChatService>();
             MainPage = new AppShell();
         }
 
