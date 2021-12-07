@@ -6,7 +6,7 @@ namespace Swegrant.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MediaController 
+    public class MediaController : ControllerBase
     {
         [HttpGet]
         public DateTime GetCurrentTime()

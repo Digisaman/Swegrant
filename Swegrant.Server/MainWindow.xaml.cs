@@ -31,7 +31,14 @@ namespace Swegrant.Server
 
         private async void btnStartServer_Click(object sender, RoutedEventArgs e)
         {
-            CreateWebHostBuilder(new string[] { }).Build().Run();
+            try
+            {
+                CreateWebHostBuilder(new string[] { }).Build().Run();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
