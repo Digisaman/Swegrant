@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.SignalR;
 using Swegrant.Server.Hubs;
+using System.Threading;
 
 namespace Swegrant.Server
 {
@@ -23,13 +24,47 @@ namespace Swegrant.Server
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private System.Timers.Timer timer;
         public static IHubContext<ChatHub> HUB { get; set; }
         //private HttpSelfHostServer restService;
         //private IDisposable apiServer;
         public MainWindow()
         {
             InitializeComponent();
+            FillListBox();
+            timer = new System.Timers.Timer();
+            timer.Interval = TimeSpan.FromMilliseconds(1000).TotalMilliseconds;
+            timer.Elapsed += Timer_Elapsed;
+            
+        }
+
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            string message = this.lstBox.SelectedItem.ToString();
+            this.lstBox.SelectedIndex = this.lstBox.SelectedIndex + 1;
+            HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
+        }
+
+        private void FillListBox()
+        {
+            string text = Properties.Recources.Theater_01_EN;
+            
+            List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
+                               StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> list2 = new List<string>();
+            foreach(var item in list)
+            {
+                string[] parts = item.Split(new string[] { Environment.NewLine },
+                               StringSplitOptions.RemoveEmptyEntries).ToArray();
+                string line = "";
+                for( int i = 2; i < parts.Length; i++)
+                {
+                    line += parts[i];
+                }
+                list2.Add(line);
+            }
+            this.lstBox.ItemsSource = list2;
+            this.lstBox.SelectedIndex = 0;
         }
 
         private async void btnStartServer_Click(object sender, RoutedEventArgs e)
@@ -47,6 +82,8 @@ namespace Swegrant.Server
 
                 var host = CreateWebHostBuilder(new string[] { }).Build();
                 HUB = (IHubContext<ChatHub>)host.Services.GetService(typeof(IHubContext<ChatHub>));
+
+                HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", "Start");
                 host.Run();
 
 
@@ -77,7 +114,28 @@ namespace Swegrant.Server
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                string message = this.lstBox.SelectedItem.ToString();
+                this.lstBox.SelectedIndex = this.lstBox.SelectedIndex + 1;
+                HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
+            }
+            catch(Exception ex)
+            {
 
+            }
+        }
+
+        private void btnNextAuto_Click(object sender, RoutedEventArgs e)
+        {
+            while (true)
+            {
+                string message = this.lstBox.SelectedItem.ToString();
+                this.lstBox.SelectedIndex = this.lstBox.SelectedIndex + 1;
+                HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
+                int delay = message.Length * 70;
+                Thread.Sleep(delay);
+            }
         }
 
         //private bool StartWebApp(string baseAddress)
