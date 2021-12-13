@@ -16,10 +16,6 @@
             <Button x:Name="btnPersian" Text="Persian" Clicked="btnPersian_Clicked" />
             <Button x:Name="btnEnglish" Text="English" Clicked="btnEnglish_Clicked" />
             <Button x:Name="btnSweden" Text="Sweden" Clicked="btnSweden_Clicked" />
-
-            <Label Text="ASDASDASD">
-                
-            </Label>
         </StackLayout>
 
 

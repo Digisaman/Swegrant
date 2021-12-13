@@ -24,8 +24,11 @@ namespace Swegrant.Server
     /// </summary>
     public partial class MainWindow : Window
     {
+        private volatile bool continueAutoLine;
         private System.Timers.Timer timer;
         public static IHubContext<ChatHub> HUB { get; set; }
+
+        private Task autoLine;
         //private HttpSelfHostServer restService;
         //private IDisposable apiServer;
         public MainWindow()
@@ -128,7 +131,11 @@ namespace Swegrant.Server
 
         private void btnNextAuto_Click(object sender, RoutedEventArgs e)
         {
-            while (true)
+            this.continueAutoLine = true;
+            //this.autoLine = new Task(() => AutoLine());
+            //this.autoLine.Start();
+
+            while (this.continueAutoLine)
             {
                 string message = this.lstBox.SelectedItem.ToString();
                 this.lstBox.SelectedIndex = this.lstBox.SelectedIndex + 1;
@@ -136,6 +143,29 @@ namespace Swegrant.Server
                 int delay = message.Length * 70;
                 Thread.Sleep(delay);
             }
+
+        }
+
+        private void AutoLine()
+        {
+            while (this.continueAutoLine)
+            {
+                string message = this.lstBox.SelectedItem.ToString();
+                this.lstBox.SelectedIndex = this.lstBox.SelectedIndex + 1;
+                HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
+                int delay = message.Length * 70;
+                Thread.Sleep(delay);
+            }
+        }
+
+        private void btnNextAuto_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            this.continueAutoLine = false;
+        }
+
+        private void btnstopAutoLine_Click(object sender, RoutedEventArgs e)
+        {
+            this.continueAutoLine = false;
         }
 
         //private bool StartWebApp(string baseAddress)

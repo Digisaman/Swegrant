@@ -39,7 +39,17 @@
         <ListBox Grid.Row="3" x:Name="lstBox">
 
         </ListBox>
-        <Button Grid.Row="2" x:Name="btnNextAuto" Content="Next Line Auto" HorizontalAlignment="Left" Margin="361,30,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNextAuto_Click">
+        <Button Grid.Row="2" x:Name="btnNextAuto" Content="Start Auto Line" HorizontalAlignment="Left" Margin="361,30,0,0" VerticalAlignment="Top" Height="31" Width="159" RenderTransformOrigin="0.5,0.5" Click="btnNextAuto_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-14.938"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-4.135"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Grid.Row="2" x:Name="btnstopAutoLine" Content="Stop Auto Line" HorizontalAlignment="Left" Margin="607,30,0,0" VerticalAlignment="Top" Height="31" Width="146" RenderTransformOrigin="0.5,0.5" Click="btnstopAutoLine_Click">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

@@ -16,6 +16,12 @@ namespace Swegrant.ViewModels
         public ObservableCollection<ChatMessage> Messages { get; }
         public ObservableCollection<User> Users { get; }
 
+        public ChatMessage LastReceivedMessage { get
+            {
+                return Messages.FirstOrDefault();
+            }
+        }
+
         bool isConnected;
         public bool IsConnected
         {
@@ -137,12 +143,14 @@ namespace Swegrant.ViewModels
             {
                 var first = Users.FirstOrDefault(u => u.Name == user);
 
+                Messages.Clear();
                 Messages.Insert(0, new ChatMessage
                 {
                     Message = message,
                     User = user,
                     Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
                 });
+                
             });
         }
 
