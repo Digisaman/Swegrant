@@ -16,5 +16,14 @@ namespace Swegrant.Views
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            this.webBrowser.Source = @"http://10.0.2.2:5000/index.html";
+            //this.webBrowser.Reload();
+
+
+        }
     }
 }

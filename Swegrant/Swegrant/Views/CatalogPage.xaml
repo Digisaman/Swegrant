@@ -3,13 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Swegrant.Views.CatalogPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout 
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand">
             <!--<Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />-->
-            <WebView Source="http://samanpirooz.com" >
-                
-            </WebView>
+            <WebView x:Name="webBrowser" />
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

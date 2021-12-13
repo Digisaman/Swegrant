@@ -59,6 +59,8 @@ namespace Swegrant.Server
                     app.UseHsts();
                 }
 
+                app.UseStaticFiles();
+
                 app.UseRouting();
 
                 app.UseCors("CorsPolicy");
