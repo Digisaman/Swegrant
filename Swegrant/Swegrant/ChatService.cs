@@ -25,9 +25,10 @@ namespace Swegrant
         {
             random = new Random();
 
-            var port = (urlRoot == "localhost" || urlRoot == "10.0.2.2") ?
-                (useHttps ? ":5001" : ":5000") :
-                string.Empty;
+            //var port = (urlRoot == "localhost" || urlRoot == "10.0.2.2") ?
+            //    (useHttps ? ":5001" : ":5000") :
+            //    string.Empty;
+            var port = (useHttps ? ":5001" : ":5000");
 
             var url = $"http{(useHttps ? "s" : string.Empty)}://{urlRoot}{port}/hubs/chat";
             hubConnection = new HubConnectionBuilder()

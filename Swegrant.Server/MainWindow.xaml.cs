@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.SignalR;
 using Swegrant.Server.Hubs;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Swegrant.Server
 {
@@ -38,7 +39,7 @@ namespace Swegrant.Server
             timer = new System.Timers.Timer();
             timer.Interval = TimeSpan.FromMilliseconds(1000).TotalMilliseconds;
             timer.Elapsed += Timer_Elapsed;
-            
+
         }
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -51,16 +52,16 @@ namespace Swegrant.Server
         private void FillListBox()
         {
             string text = Properties.Recources.Theater_01_EN;
-            
+
             List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
                                StringSplitOptions.RemoveEmptyEntries).ToList();
             List<string> list2 = new List<string>();
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 string[] parts = item.Split(new string[] { Environment.NewLine },
                                StringSplitOptions.RemoveEmptyEntries).ToArray();
                 string line = "";
-                for( int i = 2; i < parts.Length; i++)
+                for (int i = 2; i < parts.Length; i++)
                 {
                     line += parts[i];
                 }
@@ -108,9 +109,11 @@ namespace Swegrant.Server
           {
               webBuilder.ConfigureKestrel((context, options) =>
               {
-#if DEBUG
-                  options.Listen(IPAddress.Loopback, 5000);
-#endif
+                  //#if DEBUG
+                  //                  options.Listen(IPAddress.Loopback, 5000);
+                  //#endif
+                  IPAddress address = IPAddress.Parse("192.168.1.53");
+                  options.Listen(address, 5000);
               })
               .UseStartup<Startup>();
           });
@@ -123,7 +126,7 @@ namespace Swegrant.Server
                 this.lstBox.SelectedIndex = this.lstBox.SelectedIndex + 1;
                 HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -166,6 +169,32 @@ namespace Swegrant.Server
         private void btnstopAutoLine_Click(object sender, RoutedEventArgs e)
         {
             this.continueAutoLine = false;
+        }
+
+        private void openMediaPlayer_Click(object sender, RoutedEventArgs e)
+        {
+            MediaPlayer windown = new MediaPlayer();
+            windown.Show();
+        }
+
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process process = new Process();
+                // Configure the process using the StartInfo properties.
+                process.StartInfo.FileName = @"C:\Program Files\Combined Community Codec Pack 64bit\MPC\mpc-hc64.exe";
+                process.StartInfo.Arguments = "/fullscreen " + @"C:\Users\saman\source\repos\Swegrant\Swegrant.Server\bin\Debug\net5.0-windows\Media01.mp4";
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                process.Start();
+                process.WaitForExit();// Waits here for the process to exit.
+                
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         //private bool StartWebApp(string baseAddress)

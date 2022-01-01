@@ -8,7 +8,8 @@ namespace Swegrant.Helpers
         public static string AppCenterAndroid = "AC_ANDROID";
 
 #if DEBUG
-        static readonly string defaultIP = DeviceInfo.Platform == DevicePlatform.Android ? "10.0.2.2" : "localhost";
+        //static readonly string defaultIP = DeviceInfo.Platform == DevicePlatform.Android ? "10.0.2.2" : "localhost";
+        static readonly string defaultIP = "192.168.1.53";
 #else
                 static readonly string defaultIP = "Swegrantr.azurewebsites.net";
 #endif
@@ -21,7 +22,8 @@ namespace Swegrant.Helpers
 
         public static bool UseHttps
         {
-            get => (defaultIP != "localhost" && defaultIP != "10.0.2.2");
+            get => false;
+            //get => (defaultIP != "localhost" && defaultIP != "10.0.2.2");
         }
 
         public static string ServerIP

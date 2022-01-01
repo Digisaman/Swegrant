@@ -33,6 +33,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyStore>C:\Users\saman\AppData\Local\Xamarin\Mono for Android\Keystore\SPASK\SPASK.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>Athr12624120@ask</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>SPASK</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>Athr12624120@ask</AndroidSigningKeyPass>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

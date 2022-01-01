@@ -6,15 +6,15 @@
         xmlns:local="clr-namespace:Swegrant.Server"
         mc:Ignorable="d"
         Title="Swegrant Server" Height="450" Width="800" >
-    <Grid Margin="0,0,10,18">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition Height="*"/>
-
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Button Grid.Row="0" x:Name="btnStartServer" Content="Start Server" HorizontalAlignment="Left" Margin="37,31,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnStartServer_Click">
             <Button.RenderTransform>
                 <TransformGroup>
@@ -25,39 +25,71 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <TextBox Grid.Row="1" x:Name="txtServerAddress" HorizontalAlignment="Left" Margin="105,39,0,0" Text="http://localhost:5000/" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" Height="27"/>
-        <Button Grid.Row="2" x:Name="btnNext" Content="Next Line" HorizontalAlignment="Left" Margin="81,30,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNext_Click">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-14.938"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-4.135"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
-        <ListBox Grid.Row="3" x:Name="lstBox">
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtServerAddress" HorizontalAlignment="Left" Margin="105,39,0,0" Text="http://localhost:5000/" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" Height="27"/>
+        <TabControl Grid.Row="1" Grid.ColumnSpan="2">
+            <TabItem Header="Theater Modde">
+                <Grid Margin="0,0,10,18">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="*"/>
 
-        </ListBox>
-        <Button Grid.Row="2" x:Name="btnNextAuto" Content="Start Auto Line" HorizontalAlignment="Left" Margin="361,30,0,0" VerticalAlignment="Top" Height="31" Width="159" RenderTransformOrigin="0.5,0.5" Click="btnNextAuto_Click">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-14.938"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-4.135"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
-        <Button Grid.Row="2" x:Name="btnstopAutoLine" Content="Stop Auto Line" HorizontalAlignment="Left" Margin="607,30,0,0" VerticalAlignment="Top" Height="31" Width="146" RenderTransformOrigin="0.5,0.5" Click="btnstopAutoLine_Click">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-14.938"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-4.135"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
+                    </Grid.RowDefinitions>
+
+
+                    <Button x:Name="btnNext" Content="Next Line" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNext_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="-14.938"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-4.135"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <ListBox Grid.Row="3" x:Name="lstBox">
+
+                    </ListBox>
+                    <Button Grid.Row="1" x:Name="btnNextAuto" Content="Start Auto Line" HorizontalAlignment="Left" Margin="91,27,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNextAuto_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="-14.938"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-4.135"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Button Grid.Row="2" x:Name="btnstopAutoLine" Content="Stop Auto Line" HorizontalAlignment="Left" Margin="83,29,0,0" VerticalAlignment="Top" Height="31" Width="221" RenderTransformOrigin="0.5,0.5" Click="btnstopAutoLine_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="-14.938"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-4.135"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Video Mode">
+                <StackPanel Background="#FFE5E5E5">
+                    <!--<Button Name="openMediaPlayer" Click="openMediaPlayer_Click"/>-->
+                    <ListBox x:Name="lstFiles">
+                        <ListBoxItem>Part 1</ListBoxItem>
+                        <ListBoxItem>Part 2</ListBoxItem>
+                        <ListBoxItem>Part 3</ListBoxItem>
+                        <ListBoxItem>Part 4</ListBoxItem>
+                        <ListBoxItem>Part 5</ListBoxItem>
+                    </ListBox>
+                    <Button x:Name="btnPlay" Click="btnPlay_Click">Play Video</Button>
+                </StackPanel>
+                
+            </TabItem>
+        </TabControl>
     </Grid>
+
+
 </Window>
