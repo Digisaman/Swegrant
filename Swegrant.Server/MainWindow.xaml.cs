@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.SignalR;
 using Swegrant.Server.Hubs;
 using System.Threading;
 using System.Diagnostics;
+using Swegrant.Server.Models;
 
 namespace Swegrant.Server
 {
@@ -28,6 +29,8 @@ namespace Swegrant.Server
         private volatile bool continueAutoLine;
         private System.Timers.Timer timer;
         public static IHubContext<ChatHub> HUB { get; set; }
+
+        private List<Subtitle> currentSub;
 
         private Task autoLine;
         //private HttpSelfHostServer restService;
@@ -72,19 +75,27 @@ namespace Swegrant.Server
         {
             List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
                                StringSplitOptions.RemoveEmptyEntries).ToList();
-            List<string> list2 = new List<string>();
+            this.currentSub = new List<Subtitle>();
+
+            //List<string> subLine = new List<string>();
             foreach (var item in list)
             {
+                Subtitle sub = new Subtitle();
                 string[] parts = item.Split(new string[] { Environment.NewLine },
                                StringSplitOptions.RemoveEmptyEntries).ToArray();
+                sub.Id = Convert.ToInt32(parts[0]);
+                string[] times = parts[1].Split("-->", StringSplitOptions.RemoveEmptyEntries).ToArray();
+                sub.StartTime = TimeSpan.Parse(times[0].Replace(',', '.').Trim());
+                sub.EndTime = TimeSpan.Parse(times[1].Replace(',', '.').Trim());
                 string line = "";
                 for (int i = 2; i < parts.Length; i++)
                 {
                     line += parts[i];
                 }
-                list2.Add(line);
+                sub.Text = line;
+                currentSub.Add(sub);
             }
-            this.lstvdSub.ItemsSource = list2;
+            this.lstvdSub.ItemsSource = currentSub.Select( c=> c.Text).ToArray();
             this.lstvdSub.SelectedIndex = 0;
         }
 
@@ -309,11 +320,47 @@ namespace Swegrant.Server
             if (File.Exists(videoFilePath))
             {
                 PLayVideo(videoFilePath);
+                Task.Run(PlaySub);
+                //PlaySub();
             }
             else
             {
                 MessageBox.Show("File Does NOT Exist");
             }
         }
+
+        private void PlaySub()
+        {
+            TimeSpan initial = this.currentSub[0].StartTime;
+            //Thread.Sleep(initial);
+            for (int i = 0; i < this.currentSub.Count-1; i++)
+            {
+                try
+                {
+                    txtCurrentLine.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        txtCurrentLine.Text = currentSub[i].Text;
+                        
+                    }));
+                    HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", this.currentSub[i].Text);
+                    Thread.Sleep(currentSub[i].Duration);
+                    txtCurrentLine.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        txtCurrentLine.Text = "";
+                        this.lstvdSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
+                    }));
+                    
+                    HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", " ");
+                    TimeSpan gap = currentSub[i + 1].StartTime - currentSub[i].EndTime;
+                    Thread.Sleep(gap);
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
+        }
+
+
     }
 }

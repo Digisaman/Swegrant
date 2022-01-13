@@ -119,6 +119,7 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
                         <RowDefinition Height="4*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -148,7 +149,9 @@
                     </Button>
                 </StackPanel >
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                        <TextBlock Margin="20">Charachter :</TextBlock>
+                        <TextBlock Margin="20" Text="Charchter">
+                            
+                        </TextBlock>
                         <ComboBox x:Name="cmbvdCharchter" Margin="20" SelectedIndex="0">
                             <ComboBoxItem>SI</ComboBoxItem>
                             <ComboBoxItem>TA</ComboBoxItem>
@@ -169,6 +172,13 @@
                             <ComboBoxItem>05</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
+                    <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20">Current Line : </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20" Text="NONE" x:Name="txtCurrentLine">
+                        <TextBlock.RenderTransform>
+                            <ScaleTransform ScaleX="-1" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                    
                     <ListBox Grid.Row="2" Grid.ColumnSpan="2" x:Name="lstvdSub">
 
                     </ListBox>
