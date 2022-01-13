@@ -9,7 +9,7 @@ namespace Swegrant.Helpers
 
 #if DEBUG
         //static readonly string defaultIP = DeviceInfo.Platform == DevicePlatform.Android ? "10.0.2.2" : "localhost";
-        static readonly string defaultIP = "192.168.1.53";
+        static readonly string defaultIP = "192.168.1.55";
 #else
                 static readonly string defaultIP = "Swegrantr.azurewebsites.net";
 #endif
@@ -30,6 +30,14 @@ namespace Swegrant.Helpers
         {
             get => Preferences.Get(nameof(ServerIP), defaultIP);
             set => Preferences.Set(nameof(ServerIP), value);
+        }
+
+        public static string ServerPort
+        {
+            get
+            {
+                return "5000";
+            }
         }
 
         static Random random = new Random();

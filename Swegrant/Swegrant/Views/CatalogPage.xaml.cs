@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Swegrant.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,8 @@ namespace Swegrant.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            this.webBrowser.Source = @"http://10.0.2.2:5000/index.html";
+            this.webBrowser.Source = $"http://{Settings.ServerIP}:{Settings.ServerPort}/index.html";
+            this.webBrowser.Reload();
             //this.webBrowser.Reload();
 
 

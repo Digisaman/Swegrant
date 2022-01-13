@@ -62,6 +62,48 @@ namespace Swegrant.Server.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to 1
+        ///00:00:02,132 --&gt; 00:00:03,133
+        ///Previously on Young Sheldon...
+        ///
+        ///2
+        ///00:00:03,177 --&gt; 00:00:05,005
+        ///What the hell&apos;s
+        ///wrong with you?
+        ///
+        ///3
+        ///00:00:05,048 --&gt; 00:00:06,180
+        ///What is going on?
+        ///
+        ///4
+        ///00:00:06,223 --&gt; 00:00:07,964
+        ///He&apos;s dropping out
+        ///of school!
+        ///What?!
+        ///
+        ///5
+        ///00:00:08,008 --&gt; 00:00:09,270
+        ///It&apos;s not a big deal.
+        ///
+        ///6
+        ///00:00:09,313 --&gt; 00:00:11,533
+        ///You are finishing high school,
+        ///end of discussion.
+        ///
+        ///7
+        ///00:00:11,576 --&gt; 00:00:13,926
+        ///It&apos;s my life.It&apos;s my house.
+        ///
+        ///8
+        ///00:00:13,970 --&gt; 00:00:16,103        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Test {
+            get {
+                return ResourceManager.GetString("Test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1
         ///00:05:20,285 --&gt; 00:05:22,514
         ///Vill du inte äta mat?
         ///(in Swedish)

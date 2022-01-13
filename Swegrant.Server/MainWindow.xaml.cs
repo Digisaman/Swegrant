@@ -35,24 +35,21 @@ namespace Swegrant.Server
         public MainWindow()
         {
             InitializeComponent();
-            FillListBox();
             timer = new System.Timers.Timer();
             timer.Interval = TimeSpan.FromMilliseconds(1000).TotalMilliseconds;
             timer.Elapsed += Timer_Elapsed;
-
+            
         }
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            string message = this.lstBox.SelectedItem.ToString();
-            this.lstBox.SelectedIndex = this.lstBox.SelectedIndex + 1;
+            string message = this.lstthSub.SelectedItem.ToString();
+            this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
             HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
         }
 
-        private void FillListBox()
+        private void FillSbutitleListBox(string text)
         {
-            string text = Properties.Recources.Theater_01_EN;
-
             List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
                                StringSplitOptions.RemoveEmptyEntries).ToList();
             List<string> list2 = new List<string>();
@@ -67,24 +64,54 @@ namespace Swegrant.Server
                 }
                 list2.Add(line);
             }
-            this.lstBox.ItemsSource = list2;
-            this.lstBox.SelectedIndex = 0;
+            this.lstthSub.ItemsSource = list2;
+            this.lstthSub.SelectedIndex = 0;
+        }
+
+        private void FillVideoSbutitleListBox(string text)
+        {
+            List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
+                               StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> list2 = new List<string>();
+            foreach (var item in list)
+            {
+                string[] parts = item.Split(new string[] { Environment.NewLine },
+                               StringSplitOptions.RemoveEmptyEntries).ToArray();
+                string line = "";
+                for (int i = 2; i < parts.Length; i++)
+                {
+                    line += parts[i];
+                }
+                list2.Add(line);
+            }
+            this.lstvdSub.ItemsSource = list2;
+            this.lstvdSub.SelectedIndex = 0;
         }
 
         private async void btnStartServer_Click(object sender, RoutedEventArgs e)
         {
-            Task task = new Task(() => StartServer());
-            task.Start();
-            MessageBox.Show("Server Started");
+            string localIP = Helpers.NetworkHelpers.GetLocalIPv4();
+            string port = "5000";
+            if (!string.IsNullOrEmpty(localIP))
+            {
+                txtServerAddress.Text = $"{localIP}:{port}";
+                Task task = new Task(() => StartServer(localIP, port));
+                task.Start();
+                MessageBox.Show("Server Started");
+            }
+            else
+            {
+                MessageBox.Show("IP NOT FOUND!");
+            }
         }
 
-        private static void StartServer()
+        private static void StartServer(string ip, string port)
         {
             try
             {
                 //CreateWebHostBuilder(new string[] { }).Build().Run();
 
-                var host = CreateWebHostBuilder(new string[] { }).Build();
+                var host = CreateWebHostBuilder(new string[] { ip, port}).Build();
                 HUB = (IHubContext<ChatHub>)host.Services.GetService(typeof(IHubContext<ChatHub>));
 
                 HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", "Start");
@@ -109,11 +136,9 @@ namespace Swegrant.Server
           {
               webBuilder.ConfigureKestrel((context, options) =>
               {
-                  //#if DEBUG
-                  //                  options.Listen(IPAddress.Loopback, 5000);
-                  //#endif
-                  IPAddress address = IPAddress.Parse("192.168.1.53");
-                  options.Listen(address, 5000);
+                  IPAddress address = IPAddress.Parse(args[0]);
+                  int port = Int32.Parse(args[1]);
+                  options.Listen(address, port);
               })
               .UseStartup<Startup>();
           });
@@ -122,8 +147,8 @@ namespace Swegrant.Server
         {
             try
             {
-                string message = this.lstBox.SelectedItem.ToString();
-                this.lstBox.SelectedIndex = this.lstBox.SelectedIndex + 1;
+                string message = this.lstthSub.SelectedItem.ToString();
+                this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
                 HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
             }
             catch (Exception ex)
@@ -140,8 +165,8 @@ namespace Swegrant.Server
 
             while (this.continueAutoLine)
             {
-                string message = this.lstBox.SelectedItem.ToString();
-                this.lstBox.SelectedIndex = this.lstBox.SelectedIndex + 1;
+                string message = this.lstthSub.SelectedItem.ToString();
+                this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
                 HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
                 int delay = message.Length * 70;
                 Thread.Sleep(delay);
@@ -153,8 +178,8 @@ namespace Swegrant.Server
         {
             while (this.continueAutoLine)
             {
-                string message = this.lstBox.SelectedItem.ToString();
-                this.lstBox.SelectedIndex = this.lstBox.SelectedIndex + 1;
+                string message = this.lstthSub.SelectedItem.ToString();
+                this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
                 HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
                 int delay = message.Length * 70;
                 Thread.Sleep(delay);
@@ -171,99 +196,124 @@ namespace Swegrant.Server
             this.continueAutoLine = false;
         }
 
-        private void openMediaPlayer_Click(object sender, RoutedEventArgs e)
+
+        //private void FillVideoListBox()
+        //{
+        //    string videoDirectory = $"{Directory.GetCurrentDirectory()}\\Video\\Background";
+        //    DirectoryInfo d = new DirectoryInfo(videoDirectory);
+        //    FileInfo[] Files = d.GetFiles();
+        //    //foreach( var file in  Files)
+        //    //{
+        //    //    this.lstthSub.Items.Add(file.Name);
+        //    //}
+        //    this.lstVideos.ItemsSource = Files.Select(c => c.Name).ToArray();
+        //}
+ 
+
+       
+
+        private static void PLayVideo(string videoFilePath)
         {
-            MediaPlayer windown = new MediaPlayer();
-            windown.Show();
+            Process process = new Process();
+            // Configure the process using the StartInfo properties.
+            process.StartInfo.FileName = @"C:\Program Files\Combined Community Codec Pack 64bit\MPC\mpc-hc64.exe";
+            process.StartInfo.Arguments = "/fullscreen " + videoFilePath;
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            process.Start();
+            //process.WaitForExit();// Waits here for the process to exit.
         }
 
-        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        private void btnLoadSubTitle_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Process process = new Process();
-                // Configure the process using the StartInfo properties.
-                process.StartInfo.FileName = @"C:\Program Files\Combined Community Codec Pack 64bit\MPC\mpc-hc64.exe";
-                process.StartInfo.Arguments = "/fullscreen " + @"C:\Users\saman\source\repos\Swegrant\Swegrant.Server\bin\Debug\net5.0-windows\Media01.mp4";
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
-                process.Start();
-                process.WaitForExit();// Waits here for the process to exit.
-                
+                string text = "";
+                string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
+                string scence = this.cmbthScence.SelectionBoxItem.ToString();
+                string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Subtitle";
+                string subtitleFilePath = $"{subtitleDirectory}\\TH-SUB-{lang}-SC-{scence}.srt";
+                if ( File.Exists(subtitleFilePath) )
+                {
+                    text = System.IO.File.ReadAllText(subtitleFilePath);
+                    FillSbutitleListBox(text);
+                }
+                else
+                {
+                    MessageBox.Show("File Does NOT Exist");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
+        }
+
+        private void btnthPlayVideo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string text = "";
+                //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
+                string scence = this.cmbthScence.SelectionBoxItem.ToString();
+                string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Background";
+                string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
+                if (File.Exists(videoFilePath))
+                {
+                    PLayVideo(videoFilePath);
+                }
+                else
+                {
+                    MessageBox.Show("File Does NOT Exist");
+                }
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
 
-        //private bool StartWebApp(string baseAddress)
-        //{
-        //    string responseText = "";
-        //    try
-        //    {
+        private void btnvdLoadSubTitle_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string text = "";
+                string charachter = this.cmbvdCharchter.SelectionBoxItem.ToString();
+                string lang = this.cmbvdLanguage.SelectionBoxItem.ToString();
+                string scence = this.cmbvdScence.SelectionBoxItem.ToString();
+                string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\Video\\Subtitle";
+                string subtitleFilePath = $"{subtitleDirectory}\\VD-{charachter}-SUB-{lang}-SC-{scence}.srt";
+                if (File.Exists(subtitleFilePath))
+                {
+                    text = System.IO.File.ReadAllText(subtitleFilePath);
+                    FillVideoSbutitleListBox(text);
+                }
+                else
+                {
+                    MessageBox.Show("File Does NOT Exist");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-        //        //    //this.apiServer = WebApp.Start<Startup>(baseAddress);
-
-        //        //    ////Create HttpClient and make a request to api/ values
-        //        //    //HttpClient client = new HttpClient();
-
-        //        //    //HttpResponseMessage response = await client.GetAsync(baseAddress + "api/media/GetCurrentTime");
-
-
-        //        //    var config = new HttpSelfHostConfiguration(baseAddress);
-        //        //    config.Routes.MapHttpRoute(
-        //        //        "Scale Comm API Default", "api/{controller}/{action}",
-        //        //        new { id = RouteParameter.Optional });
-
-        //        //    config.Formatters.Clear();
-        //        //    config.Formatters.Add(new JsonMediaTypeFormatter());
-        //        //    config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings
-        //        //    {
-        //        //        ContractResolver = new CamelCasePropertyNamesContractResolver()
-        //        //    };
-        //        //    config.MapHttpAttributeRoutes();
-        //        //    config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
-        //        //    //ConfigureSwagger(config);
-        //        //    restService = new HttpSelfHostServer(config);
-        //        //    restService.OpenAsync().Wait();
-
-
-        //        //}
-        //        //catch(Exception ex)
-        //        //{
-        //        //    MessageBox.Show(ex.Message);
-        //        //    return false;
-        //        //}
-        //        //return true;
-        //    }
-
-
-        ////private static void ConfigureSwagger(HttpSelfHostConfiguration config)
-        ////{
-        ////    //Configure swagger
-        ////    config.EnableSwagger((c) =>
-        ////    {
-        ////        var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        ////        var commentsFileName = Assembly.GetExecutingAssembly().GetName().Name + ".XML";
-        ////        var commentsFile = Path.Combine(baseDirectory, commentsFileName);
-
-        //    //        c.SingleApiVersion("v1", "Scale Communication API");
-        //    //        c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-        //    //        //c.IncludeXmlComments(comments
-        //    //        c.RootUrl(req => { return "http://localhost:2016"; });
-        //    //    }).EnableSwaggerUi();
-        //    //}
-
-
-
-        //    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        //    {
-        //        if (this.restService != null)
-        //        {
-        //            this.restService.Dispose();
-        //        }
-        //    }
-        //}
+        private void btnvdPlayVideo_Click(object sender, RoutedEventArgs e)
+        {
+            string text = "";
+            //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
+            string scence = this.cmbvdScence.SelectionBoxItem.ToString();
+            string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Video\\Background";
+            string videoFilePath = $"{VideoDirectory}\\VD-SC-{scence}.mp4";
+            if (File.Exists(videoFilePath))
+            {
+                PLayVideo(videoFilePath);
+            }
+            else
+            {
+                MessageBox.Show("File Does NOT Exist");
+            }
+        }
     }
 }
