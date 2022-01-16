@@ -8,25 +8,34 @@
         Title="Swegrant Server" Height="450" Width="800" >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" x:Name="btnStartServer" Content="Start Server" HorizontalAlignment="Left" Margin="37,31,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnStartServer_Click">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-14.938"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-4.135"/>
-                </TransformGroup>
-            </Button.RenderTransform>
+        <Button Grid.Row="0" x:Name="btnStartServer" Content="Start Server" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="200" Click="btnStartServer_Click">
+          
         </Button>
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtServerAddress" HorizontalAlignment="Left" Margin="105,39,0,0" Text="http://localhost:5000/" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" Height="27"/>
-        <TabControl Grid.Row="1" Grid.ColumnSpan="2">
+        <TextBox Grid.Row="0" Grid.Column="1" 
+                 x:Name="txtServerAddress"
+                 Height="30" Width="200" 
+                 Text="http://localhost:5000/" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        
+            <Button x:Name="btnvdOpenSecondary" 
+                    Grid.Row="0" Grid.Column="2" 
+                    Height="30" Width="200"
+                    Content="Oprn Secondary Window" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnvdOpenSecondary_Click">
+            </Button>
+        <Button x:Name="btnvdCloseSecondary" Grid.Row="0" Grid.Column="3"  Content="Close Secondary Window" 
+                Height="30" Width="200"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnvdCloseSecondary_Click">
+            </Button>
+        
+        <TabControl Grid.Row="1" Grid.ColumnSpan="4">
             <TabItem Header="Theater Modde">
                 <Grid Margin="0,0,10,18">
                     <Grid.RowDefinitions>
@@ -38,41 +47,10 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-
-                    <Button x:Name="btnNext" Grid.ColumnSpan="2" Content="Next Line" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNext_Click">
-                        <Button.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform AngleX="-14.938"/>
-                                <RotateTransform/>
-                                <TranslateTransform X="-4.135"/>
-                            </TransformGroup>
-                        </Button.RenderTransform>
-                    </Button>
-
-                    <Button Grid.Row="1" Grid.Column="0" x:Name="btnNextAuto" Content="Start Auto Line" HorizontalAlignment="Left" Margin="91,27,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNextAuto_Click">
-                        <Button.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform AngleX="-14.938"/>
-                                <RotateTransform/>
-                                <TranslateTransform X="-4.135"/>
-                            </TransformGroup>
-                        </Button.RenderTransform>
-                    </Button>
-                    <Button Grid.Row="1" Grid.Column="1" x:Name="btnstopAutoLine" Content="Stop Auto Line" HorizontalAlignment="Left" Margin="83,29,0,0" VerticalAlignment="Top" Height="31" Width="221" RenderTransformOrigin="0.5,0.5" Click="btnstopAutoLine_Click">
-                        <Button.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform AngleX="-14.938"/>
-                                <RotateTransform/>
-                                <TranslateTransform X="-4.135"/>
-                            </TransformGroup>
-                        </Button.RenderTransform>
-                    </Button>
-                    <StackPanel  Grid.Row="2" Grid.Column="0">
+                    <StackPanel  Grid.Row="0" Grid.Column="0">
                         <Button x:Name="btnLoadSubTitle" Content="Load Subtitle" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnLoadSubTitle_Click">
                             <Button.RenderTransform>
                                 <TransformGroup>
@@ -94,7 +72,7 @@
                             </Button.RenderTransform>
                         </Button>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                         <TextBlock Margin="20">Language :</TextBlock>
                         <ComboBox x:Name="cmbthLanguage" Margin="20" SelectedIndex="0">
                             <ComboBoxItem>EN</ComboBoxItem>
@@ -110,7 +88,64 @@
                             <ComboBoxItem>05</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
-                    <ListBox Grid.Row="3" Grid.ColumnSpan="2" x:Name="lstthSub">
+                    
+                    
+
+
+                    <Button x:Name="btnNext" Grid.Row="1" Grid.ColumnSpan="2" Content="Next Line" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNext_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="-14.938"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-4.135"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+
+                    <Button Grid.Row="2" Grid.Column="0" x:Name="btnNextAuto" Content="Start Auto Line" HorizontalAlignment="Left" Margin="91,27,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNextAuto_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="-14.938"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-4.135"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Button Grid.Row="2" Grid.Column="1" x:Name="btnstopAutoLine" Content="Stop Auto Line" HorizontalAlignment="Left" Margin="83,29,0,0" VerticalAlignment="Top" Height="31" Width="221" RenderTransformOrigin="0.5,0.5" Click="btnstopAutoLine_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="-14.938"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-4.135"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+
+                    <Button Grid.Row="3" Grid.Column="0" x:Name="btnthShowSub" Content="Show Subtitle" HorizontalAlignment="Left" Margin="91,27,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNextAuto_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="-14.938"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-4.135"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+                    <Button Grid.Row="3" Grid.Column="1" x:Name="btnthHideSub" Content="Hide Subtitle" HorizontalAlignment="Left" Margin="83,29,0,0" VerticalAlignment="Top" Height="31" Width="221" RenderTransformOrigin="0.5,0.5" Click="btnstopAutoLine_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="-14.938"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-4.135"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+
+                    <ListBox Grid.RowSpan="4" Grid.Column="3" x:Name="lstthSub">
 
                     </ListBox>
                 </Grid>
@@ -123,34 +158,38 @@
                         <RowDefinition Height="4*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel  Grid.Row="0" Grid.Column="0">
-                    <Button x:Name="btnvdLoadSubTitle" Content="Load Subtitle" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="20" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnvdLoadSubTitle_Click">
-                        <Button.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform AngleX="-14.938"/>
-                                <RotateTransform/>
-                                <TranslateTransform X="-4.135"/>
-                            </TransformGroup>
-                        </Button.RenderTransform>
-                    </Button>
-                    <Button x:Name="btnvdPlayVideo" Content="Play Video" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="20" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnvdPlayVideo_Click">
-                        <Button.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform AngleX="-14.938"/>
-                                <RotateTransform/>
-                                <TranslateTransform X="-4.135"/>
-                            </TransformGroup>
-                        </Button.RenderTransform>
-                    </Button>
-                </StackPanel >
-                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+ 
+                    <StackPanel  Grid.Row="0" Grid.Column="1">
+                        <Button x:Name="btnvdLoadSubTitle" Content="Load Subtitle" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="20" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnvdLoadSubTitle_Click">
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="-14.938"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="-4.135"/>
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
+                        <Button x:Name="btnvdPlayVideo" Content="Play Video" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="20" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnvdPlayVideo_Click">
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="-14.938"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="-4.135"/>
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
+                    </StackPanel >
+
+                    
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
                         <TextBlock Margin="20" Text="Charchter">
-                            
+
                         </TextBlock>
                         <ComboBox x:Name="cmbvdCharchter" Margin="20" SelectedIndex="0">
                             <ComboBoxItem>SI</ComboBoxItem>
@@ -172,14 +211,14 @@
                             <ComboBoxItem>05</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
-                    <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20">Current Line : </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20">Current Line :</TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20" Text="NONE" x:Name="txtCurrentLine">
                         <TextBlock.RenderTransform>
                             <ScaleTransform ScaleX="-1" />
                         </TextBlock.RenderTransform>
                     </TextBlock>
-                    
-                    <ListBox Grid.Row="2" Grid.ColumnSpan="2" x:Name="lstvdSub">
+
+                    <ListBox Grid.Row="2" Grid.ColumnSpan="3" x:Name="lstvdSub">
 
                     </ListBox>
                 </Grid>

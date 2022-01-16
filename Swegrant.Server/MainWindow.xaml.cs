@@ -33,6 +33,21 @@ namespace Swegrant.Server
         private List<Subtitle> currentSub;
 
         private Task autoLine;
+
+        private SecondaryWindow _SecondaryWindow;
+        //public SecondaryWindow SecondaryWindow
+        //{
+        //    get
+        //    {
+        //        if (_SecondaryWindow == null)
+        //        {
+        //            _SecondaryWindow = new SecondaryWindow();
+        //        }
+        //        return _SecondaryWindow;
+        //    }
+        //}
+
+
         //private HttpSelfHostServer restService;
         //private IDisposable apiServer;
         public MainWindow()
@@ -271,7 +286,11 @@ namespace Swegrant.Server
                 string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
                 if (File.Exists(videoFilePath))
                 {
-                    PLayVideo(videoFilePath);
+                    //PLayVideo(videoFilePath);
+                    //Task.Run(PlaySub);
+                    _SecondaryWindow.Play(videoFilePath, "");
+
+
                 }
                 else
                 {
@@ -319,9 +338,11 @@ namespace Swegrant.Server
             string videoFilePath = $"{VideoDirectory}\\VD-SC-{scence}.mp4";
             if (File.Exists(videoFilePath))
             {
-                PLayVideo(videoFilePath);
-                Task.Run(PlaySub);
-                //PlaySub();
+                //PLayVideo(videoFilePath);
+                //Task.Run(PlaySub);
+                _SecondaryWindow.Play(videoFilePath, "");
+
+
             }
             else
             {
@@ -361,6 +382,19 @@ namespace Swegrant.Server
             }
         }
 
+        private void btnvdOpenSecondary_Click(object sender, RoutedEventArgs e)
+        {
+            if ( _SecondaryWindow != null)
+            {
+                _SecondaryWindow.Close();
+            }
+            _SecondaryWindow = new SecondaryWindow();
+            _SecondaryWindow.Show();
+        }
 
+        private void btnvdCloseSecondary_Click(object sender, RoutedEventArgs e)
+        {
+            _SecondaryWindow.Close();
+        }
     }
 }
