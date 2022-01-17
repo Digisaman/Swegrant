@@ -18,13 +18,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" 
+        <TextBlock x:Name="txtSub"
+                    Grid.Row="0" Grid.Column="0" 
                    TextWrapping="WrapWithOverflow"
                    HorizontalAlignment="Center" VerticalAlignment="Center" 
                    FontSize="24" Foreground="White" >
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec adipiscing
-    nulla quis libero egestas lobortis. Duis blandit imperdiet ornare. Nulla
-    ac arcu ut purus placerat congue. Integer pretium fermentum gravida.
+            <!--<TextBlock.RenderTransform>
+                <ScaleTransform ScaleX="-1" />
+            </TextBlock.RenderTransform>-->
         </TextBlock>
 
         <MediaElement Grid.Row="1" Grid.Column="0" x:Name="videoPlayer" 

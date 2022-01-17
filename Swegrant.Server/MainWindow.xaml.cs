@@ -18,6 +18,7 @@ using Swegrant.Server.Hubs;
 using System.Threading;
 using System.Diagnostics;
 using Swegrant.Server.Models;
+using System.Windows.Controls;
 
 namespace Swegrant.Server
 {
@@ -26,6 +27,9 @@ namespace Swegrant.Server
     /// </summary>
     public partial class MainWindow : Window
     {
+        private enum Mode {  Theater, Video}
+
+        private Mode CurrentMode;
         private volatile bool continueAutoLine;
         private System.Timers.Timer timer;
         public static IHubContext<ChatHub> HUB { get; set; }
@@ -66,23 +70,31 @@ namespace Swegrant.Server
             HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
         }
 
-        private void FillSbutitleListBox(string text)
+        private void FillTHSbutitleListBox(string text)
         {
             List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
-                               StringSplitOptions.RemoveEmptyEntries).ToList();
-            List<string> list2 = new List<string>();
+                              StringSplitOptions.RemoveEmptyEntries).ToList();
+            this.currentSub = new List<Subtitle>();
+
+            //List<string> subLine = new List<string>();
             foreach (var item in list)
             {
+                Subtitle sub = new Subtitle();
                 string[] parts = item.Split(new string[] { Environment.NewLine },
                                StringSplitOptions.RemoveEmptyEntries).ToArray();
+                sub.Id = Convert.ToInt32(parts[0]);
+                string[] times = parts[1].Split("-->", StringSplitOptions.RemoveEmptyEntries).ToArray();
+                sub.StartTime = TimeSpan.Parse(times[0].Replace(',', '.').Trim());
+                sub.EndTime = TimeSpan.Parse(times[1].Replace(',', '.').Trim());
                 string line = "";
                 for (int i = 2; i < parts.Length; i++)
                 {
                     line += parts[i];
                 }
-                list2.Add(line);
+                sub.Text = line;
+                currentSub.Add(sub);
             }
-            this.lstthSub.ItemsSource = list2;
+            this.lstthSub.ItemsSource = currentSub.Select(c => c.Text).ToArray();
             this.lstthSub.SelectedIndex = 0;
         }
 
@@ -261,7 +273,7 @@ namespace Swegrant.Server
                 if ( File.Exists(subtitleFilePath) )
                 {
                     text = System.IO.File.ReadAllText(subtitleFilePath);
-                    FillSbutitleListBox(text);
+                    FillTHSbutitleListBox(text);
                 }
                 else
                 {
@@ -279,22 +291,26 @@ namespace Swegrant.Server
         {
             try
             {
-                string text = "";
-                //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
-                string scence = this.cmbthScence.SelectionBoxItem.ToString();
-                string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Background";
-                string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
-                if (File.Exists(videoFilePath))
+                MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
                 {
-                    //PLayVideo(videoFilePath);
-                    //Task.Run(PlaySub);
-                    _SecondaryWindow.Play(videoFilePath, "");
+                    string text = "";
+                    //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
+                    string scence = this.cmbthScence.SelectionBoxItem.ToString();
+                    string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Background";
+                    string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
+                    if (File.Exists(videoFilePath))
+                    {
+                        //PLayVideo(videoFilePath);
+                        Task.Run(PlaySub);
+                        _SecondaryWindow.Play(videoFilePath);
 
 
-                }
-                else
-                {
-                    MessageBox.Show("File Does NOT Exist");
+                    }
+                    else
+                    {
+                        MessageBox.Show("File Does NOT Exist");
+                    }
                 }
             }
             catch (Exception ex)
@@ -331,22 +347,26 @@ namespace Swegrant.Server
 
         private void btnvdPlayVideo_Click(object sender, RoutedEventArgs e)
         {
-            string text = "";
-            //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
-            string scence = this.cmbvdScence.SelectionBoxItem.ToString();
-            string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Video\\Background";
-            string videoFilePath = $"{VideoDirectory}\\VD-SC-{scence}.mp4";
-            if (File.Exists(videoFilePath))
+            MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning");
+            if (result == MessageBoxResult.OK)
             {
-                //PLayVideo(videoFilePath);
-                //Task.Run(PlaySub);
-                _SecondaryWindow.Play(videoFilePath, "");
+                string text = "";
+                //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
+                string scence = this.cmbvdScence.SelectionBoxItem.ToString();
+                string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Video\\Background";
+                string videoFilePath = $"{VideoDirectory}\\VD-SC-{scence}.mp4";
+                if (File.Exists(videoFilePath))
+                {
+                    //PLayVideo(videoFilePath);
+                    //Task.Run(PlaySub);
+                    _SecondaryWindow.Play(videoFilePath);
 
 
-            }
-            else
-            {
-                MessageBox.Show("File Does NOT Exist");
+                }
+                else
+                {
+                    MessageBox.Show("File Does NOT Exist");
+                }
             }
         }
 
@@ -358,20 +378,42 @@ namespace Swegrant.Server
             {
                 try
                 {
-                    txtCurrentLine.Dispatcher.BeginInvoke(new Action(() =>
+                    if (CurrentMode == Mode.Theater)
                     {
-                        txtCurrentLine.Text = currentSub[i].Text;
-                        
-                    }));
+                        _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                           _SecondaryWindow.DisplayCurrentSub(currentSub[i].Text)
+                            ));
+                    }
+                    else if (CurrentMode == Mode.Video)
+                    {
+                        txtCurrentLine.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            txtCurrentLine.Text = currentSub[i].Text;
+
+                        }));
+                    }
+
                     HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", this.currentSub[i].Text);
+
                     Thread.Sleep(currentSub[i].Duration);
-                    txtCurrentLine.Dispatcher.BeginInvoke(new Action(() =>
+
+                    if (CurrentMode == Mode.Theater)
                     {
-                        txtCurrentLine.Text = "";
-                        this.lstvdSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
-                    }));
+                        _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                            _SecondaryWindow.DisplayCurrentSub(" ")
+                            ));
+                    }
+                    else if (CurrentMode == Mode.Video)
+                    {
+                        txtCurrentLine.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            txtCurrentLine.Text = "";
+                            //this.lstvdSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
+                        }));
+                    }                                   
                     
                     HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", " ");
+
                     TimeSpan gap = currentSub[i + 1].StartTime - currentSub[i].EndTime;
                     Thread.Sleep(gap);
                 }
@@ -395,6 +437,83 @@ namespace Swegrant.Server
         private void btnvdCloseSecondary_Click(object sender, RoutedEventArgs e)
         {
             _SecondaryWindow.Close();
+        }
+
+        private void TabControl_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (e.Source is TabControl)
+            {
+                TabControl tab = (TabControl)e.Source;
+                this.CurrentMode = (tab.SelectedIndex == 0 ? Mode.Theater : Mode.Video);
+                    
+                //do work when tab is changed
+            }
+        }
+
+        private void btnthShowSub_Click(object sender, RoutedEventArgs e)
+        {
+            _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                          _SecondaryWindow.ToggleSubVisibility(true)));
+        }
+
+        private void btnthHideSub_Click(object sender, RoutedEventArgs e)
+        {
+            _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                          _SecondaryWindow.ToggleSubVisibility(false)));
+        }
+
+        private void btnthPlayVideo_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnthStopVideo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning");
+                if (result == MessageBoxResult.OK)
+                {
+                    _SecondaryWindow.Stop();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnthPlayVideo_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnthChangeVideo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string text = "";
+                //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
+                string scence = this.cmbthScence.SelectionBoxItem.ToString();
+                string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Background";
+                string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
+                if (File.Exists(videoFilePath))
+                {
+                    //PLayVideo(videoFilePath);
+                    //Task.Run(PlaySub);
+                    _SecondaryWindow.Play(videoFilePath);
+
+
+                }
+                else
+                {
+                    MessageBox.Show("File Does NOT Exist");
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
     }
 }

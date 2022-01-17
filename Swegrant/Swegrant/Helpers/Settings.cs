@@ -9,7 +9,7 @@ namespace Swegrant.Helpers
 
 #if DEBUG
         //static readonly string defaultIP = DeviceInfo.Platform == DevicePlatform.Android ? "10.0.2.2" : "localhost";
-        static readonly string defaultIP = "192.168.1.55";
+        static readonly string defaultIP = "192.168.1.50";
 #else
                 static readonly string defaultIP = "Swegrantr.azurewebsites.net";
 #endif

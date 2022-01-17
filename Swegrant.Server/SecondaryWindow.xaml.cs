@@ -31,10 +31,11 @@ namespace Swegrant.Server
 
         }
 
-        public void Play(string videoFilePath, string subTilePath)
+        public void Play(string videoFilePath)
         {
             try
             {
+                this.videoPlayer.Visibility = Visibility.Visible;
                 videoFilePath = videoFilePath.Replace("\\", "/");
                 this.videoPlayer.Source = new Uri(videoFilePath, UriKind.Absolute);
                 this.videoPlayer.Play();
@@ -44,6 +45,28 @@ namespace Swegrant.Server
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        public void Stop()
+        {
+            try
+            {
+                this.videoPlayer.Visibility = Visibility.Hidden;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void DisplayCurrentSub(string sub)
+        {   
+            this.txtSub.Text = sub;
+        }
+
+        public void ToggleSubVisibility(bool displaySub)
+        {
+            this.txtSub.Visibility = (displaySub ? Visibility.Visible : Visibility.Hidden);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

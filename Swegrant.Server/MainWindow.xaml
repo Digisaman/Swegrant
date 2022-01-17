@@ -35,12 +35,12 @@
                 HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnvdCloseSecondary_Click">
             </Button>
         
-        <TabControl Grid.Row="1" Grid.ColumnSpan="4">
-            <TabItem Header="Theater Modde">
+        <TabControl Grid.Row="1" Grid.ColumnSpan="4" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem x:Name="tabTheater" Header="Theater Modde">
                 <Grid Margin="0,0,10,18">
                     <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition  />
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
@@ -61,7 +61,30 @@
                                 </TransformGroup>
                             </Button.RenderTransform>
                         </Button>
-                        <Button x:Name="btnthPlayVideo" Content="Play Video" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnthPlayVideo_Click">
+                        <StackPanel Orientation="Vertical">
+                            <Button x:Name="btnthPlayVideo" Content="Play Video" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnthPlayVideo_Click">
+                                <Button.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform AngleX="-14.938"/>
+                                        <RotateTransform/>
+                                        <TranslateTransform X="-4.135"/>
+                                    </TransformGroup>
+                                </Button.RenderTransform>
+                            </Button>
+                            <Button x:Name="btnthChangeVideo" Content="Change Video" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnthChangeVideo_Click">
+                                <Button.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform AngleX="-14.938"/>
+                                        <RotateTransform/>
+                                        <TranslateTransform X="-4.135"/>
+                                    </TransformGroup>
+                                </Button.RenderTransform>
+                            </Button>
+                        </StackPanel>
+                        
+                        <Button x:Name="btnthStopVideo" Content="Hide Video" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnthStopVideo_Click">
                             <Button.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -92,7 +115,7 @@
                     
 
 
-                    <Button x:Name="btnNext" Grid.Row="1" Grid.ColumnSpan="2" Content="Next Line" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNext_Click">
+                    <Button x:Name="btnNext" Grid.Row="1" Grid.ColumnSpan="2" Content="Next Subtitle Line" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNext_Click">
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -103,7 +126,7 @@
                         </Button.RenderTransform>
                     </Button>
 
-                    <Button Grid.Row="2" Grid.Column="0" x:Name="btnNextAuto" Content="Start Auto Line" HorizontalAlignment="Left" Margin="91,27,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNextAuto_Click">
+                    <Button Grid.Row="2" Grid.Column="0" x:Name="btnNextAuto" Content="Pause Auto Subtitle" HorizontalAlignment="Left" Margin="91,27,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNextAuto_Click">
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -113,7 +136,7 @@
                             </TransformGroup>
                         </Button.RenderTransform>
                     </Button>
-                    <Button Grid.Row="2" Grid.Column="1" x:Name="btnstopAutoLine" Content="Stop Auto Line" HorizontalAlignment="Left" Margin="83,29,0,0" VerticalAlignment="Top" Height="31" Width="221" RenderTransformOrigin="0.5,0.5" Click="btnstopAutoLine_Click">
+                    <Button Grid.Row="2" Grid.Column="1" x:Name="btnstopAutoLine" Content="Resume Auto Subtitle" HorizontalAlignment="Left" Margin="83,29,0,0" VerticalAlignment="Top" Height="31" Width="221" RenderTransformOrigin="0.5,0.5" Click="btnstopAutoLine_Click">
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -124,7 +147,7 @@
                         </Button.RenderTransform>
                     </Button>
 
-                    <Button Grid.Row="3" Grid.Column="0" x:Name="btnthShowSub" Content="Show Subtitle" HorizontalAlignment="Left" Margin="91,27,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNextAuto_Click">
+                    <Button Grid.Row="3" Grid.Column="0" x:Name="btnthShowSub" Content="Show Subtitle" HorizontalAlignment="Left" Margin="91,27,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnthShowSub_Click">
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -134,7 +157,7 @@
                             </TransformGroup>
                         </Button.RenderTransform>
                     </Button>
-                    <Button Grid.Row="3" Grid.Column="1" x:Name="btnthHideSub" Content="Hide Subtitle" HorizontalAlignment="Left" Margin="83,29,0,0" VerticalAlignment="Top" Height="31" Width="221" RenderTransformOrigin="0.5,0.5" Click="btnstopAutoLine_Click">
+                    <Button Grid.Row="3" Grid.Column="1" x:Name="btnthHideSub" Content="Hide Subtitle" HorizontalAlignment="Left" Margin="83,29,0,0" VerticalAlignment="Top" Height="31" Width="221" RenderTransformOrigin="0.5,0.5" Click="btnthHideSub_Click">
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -150,7 +173,7 @@
                     </ListBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Video Mode">
+            <TabItem x:Name="tabVideo" Header="Video Mode">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
@@ -213,9 +236,9 @@
                     </StackPanel>
                     <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20">Current Line :</TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20" Text="NONE" x:Name="txtCurrentLine">
-                        <TextBlock.RenderTransform>
+                        <!--<TextBlock.RenderTransform>
                             <ScaleTransform ScaleX="-1" />
-                        </TextBlock.RenderTransform>
+                        </TextBlock.RenderTransform>-->
                     </TextBlock>
 
                     <ListBox Grid.Row="2" Grid.ColumnSpan="3" x:Name="lstvdSub">
