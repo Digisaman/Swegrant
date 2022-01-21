@@ -35,6 +35,10 @@ namespace Swegrant.Server
         public static IHubContext<ChatHub> HUB { get; set; }
 
         private List<Subtitle> currentSub;
+        private int currentSubIndex = 0;
+        private Task currentSubTask;
+        private CancellationTokenSource currentSubCancelationSource;
+        private CancellationToken currentSubCancellationToken;
 
         private Task autoLine;
 
@@ -50,7 +54,7 @@ namespace Swegrant.Server
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var settings = configFile.AppSettings.Settings;
 
-            if ( settings["SecondaryStyle"] != null )
+            if (settings["SecondaryStyle"] != null)
             {
                 string windowStyle = settings["SecondaryStyle"].Value.ToString();
                 WindowStyle style = (WindowStyle)Enum.Parse(typeof(WindowStyle), windowStyle);
@@ -83,6 +87,7 @@ namespace Swegrant.Server
             List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
                               StringSplitOptions.RemoveEmptyEntries).ToList();
             this.currentSub = new List<Subtitle>();
+            this.currentSubIndex = 0;
 
             //List<string> subLine = new List<string>();
             foreach (var item in list)
@@ -195,7 +200,10 @@ namespace Swegrant.Server
             {
                 string message = this.lstthSub.SelectedItem.ToString();
                 this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
+                _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                        _SecondaryWindow.DisplayCurrentSub(this.currentSub[this.currentSubIndex].Text) ));
                 HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
+                this.currentSubIndex++;
             }
             catch (Exception ex)
             {
@@ -310,7 +318,15 @@ namespace Swegrant.Server
                     if (File.Exists(videoFilePath))
                     {
                         //PLayVideo(videoFilePath);
-                        Task.Run(PlaySub);
+                        this.currentSubCancelationSource = new CancellationTokenSource();
+                        //this.currentSubCancellationToken = this.currentSubCancelationSource.Token;
+                        //this.currentSubTask = Task.Run(PlaySub);
+                        this.currentSubTask = Task.Run(() =>
+                       {
+                           this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
+                           PlaySub();
+
+                       }, this.currentSubCancelationSource.Token);
                         _SecondaryWindow.Play(videoFilePath);
 
 
@@ -380,12 +396,23 @@ namespace Swegrant.Server
 
         private void PlaySub()
         {
-            TimeSpan initial = this.currentSub[0].StartTime;
-            //Thread.Sleep(initial);
-            for (int i = 0; i < this.currentSub.Count - 1; i++)
+            if (this.currentSubIndex == 0)
+            {
+                TimeSpan initial = this.currentSub[this.currentSubIndex].StartTime;
+                Thread.Sleep(initial);
+            }
+            for (int i = this.currentSubIndex; i < this.currentSub.Count - 1; i++)
             {
                 try
                 {
+                    if (this.currentSubCancelationSource.IsCancellationRequested)
+                    {
+                        this.currentSubCancellationToken.ThrowIfCancellationRequested();
+                        return;
+                    }
+
+                    this.currentSubIndex = i;
+
                     if (CurrentMode == Mode.Theater)
                     {
                         _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
@@ -410,14 +437,19 @@ namespace Swegrant.Server
                         _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
                             _SecondaryWindow.DisplayCurrentSub(" ")
                             ));
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                           this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1
+                        ));
                     }
                     else if (CurrentMode == Mode.Video)
                     {
                         txtCurrentLine.Dispatcher.BeginInvoke(new Action(() =>
                         {
                             txtCurrentLine.Text = "";
-                            //this.lstvdSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
                         }));
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                           this.lstvdSub.SelectedIndex = this.lstvdSub.SelectedIndex + 1
+                        ));
                     }
 
                     HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", " ");
@@ -442,7 +474,7 @@ namespace Swegrant.Server
 
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var settings = configFile.AppSettings.Settings;
-            if ( settings["SecondaryLeft"] != null && settings["SecondaryTop"] != null)
+            if (settings["SecondaryLeft"] != null && settings["SecondaryTop"] != null)
             {
                 int left = Convert.ToInt32(settings["SecondaryLeft"].Value.ToString());
                 int top = Convert.ToInt32(settings["SecondaryTop"].Value.ToString());
@@ -561,6 +593,46 @@ namespace Swegrant.Server
                 _SecondaryWindow.WindowStyle = WindowStyle.None;
                 _SecondaryWindow.WindowState = WindowState.Maximized;
 
+            }
+        }
+
+        private void btnNextAuto_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPauseAutoSub_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (this.currentSubTask != null && this.currentSubTask.Status == TaskStatus.Running)
+                {
+                    this.currentSubCancelationSource.Cancel();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnRsumeAutoSub_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.currentSubCancelationSource = new CancellationTokenSource();
+                //this.currentSubCancellationToken = this.currentSubCancelationSource.Token;
+                this.currentSubTask = Task.Run(PlaySub);
+                this.currentSubTask = Task.Run(() =>
+                {
+                    this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
+                    PlaySub();
+
+                }, this.currentSubCancelationSource.Token);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
