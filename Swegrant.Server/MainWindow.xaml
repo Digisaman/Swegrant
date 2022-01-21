@@ -110,7 +110,7 @@
                             <ComboBoxItem>SV</ComboBoxItem>
                         </ComboBox>
                         <TextBlock Margin="20">Scene :</TextBlock>
-                        <ComboBox x:Name="cmbthScence" Margin="20" SelectedIndex="0">
+                        <ComboBox x:Name="cmbthScence" SelectionChanged="cmbthScence_SelectionChanged" Margin="20" SelectedIndex="0">
                             <ComboBoxItem>01</ComboBoxItem>
                             <ComboBoxItem>02</ComboBoxItem>
                             <ComboBoxItem>03</ComboBoxItem>

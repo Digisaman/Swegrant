@@ -32,6 +32,8 @@ namespace Swegrant.Server
         private Mode CurrentMode;
         private volatile bool continueAutoLine;
         private System.Timers.Timer timer;
+        private int theaterSceneSelectedIndex = 0;
+
         public static IHubContext<ChatHub> HUB { get; set; }
 
         private List<Subtitle> currentSub;
@@ -553,22 +555,25 @@ namespace Swegrant.Server
         {
             try
             {
-                string text = "";
-                //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
-                string scence = this.cmbthScence.SelectionBoxItem.ToString();
-                string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Background";
-                string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
-                if (File.Exists(videoFilePath))
+                if (this.cmbthScence.SelectedIndex != this.theaterSceneSelectedIndex)
                 {
-                    //PLayVideo(videoFilePath);
-                    //Task.Run(PlaySub);
-                    _SecondaryWindow.Play(videoFilePath);
+                    string text = "";
+                    //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
+                    string scence = this.cmbthScence.SelectionBoxItem.ToString();
+                    string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Background";
+                    string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
+                    if (File.Exists(videoFilePath))
+                    {
+                        //PLayVideo(videoFilePath);
+                        //Task.Run(PlaySub);
+                        _SecondaryWindow.Play(videoFilePath);
+                        this.theaterSceneSelectedIndex = this.cmbthScence.SelectedIndex;
 
-
-                }
-                else
-                {
-                    MessageBox.Show("File Does NOT Exist");
+                    }
+                    else
+                    {
+                        MessageBox.Show("File Does NOT Exist");
+                    }
                 }
             }
             catch (Exception ex)
@@ -634,6 +639,11 @@ namespace Swegrant.Server
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void cmbthScence_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }
