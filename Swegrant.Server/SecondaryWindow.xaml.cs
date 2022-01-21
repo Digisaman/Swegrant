@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,6 @@ namespace Swegrant.Server
         public SecondaryWindow()
         {
             InitializeComponent();
-            this.WindowState = WindowState.Maximized;
-            this.WindowStyle = WindowStyle.None;
         }
 
         private void videoPlayer_MediaOpened(object sender, RoutedEventArgs e)
@@ -60,7 +59,7 @@ namespace Swegrant.Server
         }
 
         public void DisplayCurrentSub(string sub)
-        {   
+        {
             this.txtSub.Text = sub;
         }
 
@@ -71,6 +70,24 @@ namespace Swegrant.Server
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+
+            try
+            {
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = configFile.AppSettings.Settings;
+
+                settings["SecondaryLeft"].Value = this.Left.ToString();
+                settings["SecondaryTop"].Value = this.Top.ToString();
+                settings["SecondaryStyle"].Value = this.WindowStyle.ToString();
+                settings["SecondaryState"].Value = this.WindowState.ToString();
+
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error writing app settings");
+            }
 
         }
     }

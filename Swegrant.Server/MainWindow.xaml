@@ -16,6 +16,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" x:Name="btnStartServer" Content="Start Server" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="200" Click="btnStartServer_Click">
           
@@ -25,17 +26,23 @@
                  Height="30" Width="200" 
                  Text="http://localhost:5000/" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         
-            <Button x:Name="btnvdOpenSecondary" 
+        <Button x:Name="btnvdOpenSecondary" 
                     Grid.Row="0" Grid.Column="2" 
                     Height="30" Width="200"
-                    Content="Oprn Secondary Window" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnvdOpenSecondary_Click">
-            </Button>
-        <Button x:Name="btnvdCloseSecondary" Grid.Row="0" Grid.Column="3"  Content="Close Secondary Window" 
+                    Content="Open Secondary Window" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnvdOpenSecondary_Click">
+        </Button>
+        <StackPanel Orientation="Horizontal"
+            Grid.Row="0" Grid.Column="3" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Window Mode : " />
+            <RadioButton x:Name="rdSecondaryWindowNoraml" Content="Normal" IsChecked="True" Checked="rdSecondaryWindowNoraml_Checked"/>
+            <RadioButton x:Name="rdSecondaryWindowFull" Content="FullScreen" IsChecked="False" Checked="rdSecondaryWindowFull_Checked"/>
+        </StackPanel>
+        <Button x:Name="btnvdCloseSecondary" Grid.Row="0" Grid.Column="4"  Content="Close Secondary Window" 
                 Height="30" Width="200"
                 HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnvdCloseSecondary_Click">
-            </Button>
-        
-        <TabControl Grid.Row="1" Grid.ColumnSpan="4" SelectionChanged="TabControl_SelectionChanged">
+        </Button>
+        <TabControl Grid.Row="1" Grid.ColumnSpan="5" SelectionChanged="TabControl_SelectionChanged">
             <TabItem x:Name="tabTheater" Header="Theater Modde">
                 <Grid Margin="0,0,10,18">
                     <Grid.RowDefinitions>

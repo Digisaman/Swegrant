@@ -27,7 +27,7 @@ namespace Swegrant.Server
     /// </summary>
     public partial class MainWindow : Window
     {
-        private enum Mode {  Theater, Video}
+        private enum Mode { Theater, Video }
 
         private Mode CurrentMode;
         private volatile bool continueAutoLine;
@@ -39,28 +39,36 @@ namespace Swegrant.Server
         private Task autoLine;
 
         private SecondaryWindow _SecondaryWindow;
-        //public SecondaryWindow SecondaryWindow
-        //{
-        //    get
-        //    {
-        //        if (_SecondaryWindow == null)
-        //        {
-        //            _SecondaryWindow = new SecondaryWindow();
-        //        }
-        //        return _SecondaryWindow;
-        //    }
-        //}
-
 
         //private HttpSelfHostServer restService;
         //private IDisposable apiServer;
         public MainWindow()
         {
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
+
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
+
+            if ( settings["SecondaryStyle"] != null )
+            {
+                string windowStyle = settings["SecondaryStyle"].Value.ToString();
+                WindowStyle style = (WindowStyle)Enum.Parse(typeof(WindowStyle), windowStyle);
+                if (style == WindowStyle.None)
+                {
+                    rdSecondaryWindowFull.IsChecked = true;
+                }
+                else if (style == WindowStyle.SingleBorderWindow)
+                {
+                    rdSecondaryWindowNoraml.IsChecked = true;
+                }
+            }
+
+
             timer = new System.Timers.Timer();
             timer.Interval = TimeSpan.FromMilliseconds(1000).TotalMilliseconds;
             timer.Elapsed += Timer_Elapsed;
-            
+
         }
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -122,7 +130,7 @@ namespace Swegrant.Server
                 sub.Text = line;
                 currentSub.Add(sub);
             }
-            this.lstvdSub.ItemsSource = currentSub.Select( c=> c.Text).ToArray();
+            this.lstvdSub.ItemsSource = currentSub.Select(c => c.Text).ToArray();
             this.lstvdSub.SelectedIndex = 0;
         }
 
@@ -149,7 +157,7 @@ namespace Swegrant.Server
             {
                 //CreateWebHostBuilder(new string[] { }).Build().Run();
 
-                var host = CreateWebHostBuilder(new string[] { ip, port}).Build();
+                var host = CreateWebHostBuilder(new string[] { ip, port }).Build();
                 HUB = (IHubContext<ChatHub>)host.Services.GetService(typeof(IHubContext<ChatHub>));
 
                 HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", "Start");
@@ -246,9 +254,9 @@ namespace Swegrant.Server
         //    //}
         //    this.lstVideos.ItemsSource = Files.Select(c => c.Name).ToArray();
         //}
- 
 
-       
+
+
 
         private static void PLayVideo(string videoFilePath)
         {
@@ -270,7 +278,7 @@ namespace Swegrant.Server
                 string scence = this.cmbthScence.SelectionBoxItem.ToString();
                 string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Subtitle";
                 string subtitleFilePath = $"{subtitleDirectory}\\TH-SUB-{lang}-SC-{scence}.srt";
-                if ( File.Exists(subtitleFilePath) )
+                if (File.Exists(subtitleFilePath))
                 {
                     text = System.IO.File.ReadAllText(subtitleFilePath);
                     FillTHSbutitleListBox(text);
@@ -280,7 +288,7 @@ namespace Swegrant.Server
                     MessageBox.Show("File Does NOT Exist");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -374,7 +382,7 @@ namespace Swegrant.Server
         {
             TimeSpan initial = this.currentSub[0].StartTime;
             //Thread.Sleep(initial);
-            for (int i = 0; i < this.currentSub.Count-1; i++)
+            for (int i = 0; i < this.currentSub.Count - 1; i++)
             {
                 try
                 {
@@ -410,14 +418,14 @@ namespace Swegrant.Server
                             txtCurrentLine.Text = "";
                             //this.lstvdSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
                         }));
-                    }                                   
-                    
+                    }
+
                     HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", " ");
 
                     TimeSpan gap = currentSub[i + 1].StartTime - currentSub[i].EndTime;
                     Thread.Sleep(gap);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
 
                 }
@@ -426,11 +434,32 @@ namespace Swegrant.Server
 
         private void btnvdOpenSecondary_Click(object sender, RoutedEventArgs e)
         {
-            if ( _SecondaryWindow != null)
+            if (_SecondaryWindow != null)
             {
                 _SecondaryWindow.Close();
             }
             _SecondaryWindow = new SecondaryWindow();
+
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
+            if ( settings["SecondaryLeft"] != null && settings["SecondaryTop"] != null)
+            {
+                int left = Convert.ToInt32(settings["SecondaryLeft"].Value.ToString());
+                int top = Convert.ToInt32(settings["SecondaryTop"].Value.ToString());
+                _SecondaryWindow.Left = left;
+                _SecondaryWindow.Top = top;
+            }
+
+            if (rdSecondaryWindowFull.IsChecked == true)
+            {
+                _SecondaryWindow.WindowStyle = WindowStyle.None;
+                _SecondaryWindow.WindowState = WindowState.Maximized;
+            }
+            else if (rdSecondaryWindowNoraml.IsChecked == true)
+            {
+                _SecondaryWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+                _SecondaryWindow.WindowState = WindowState.Normal;
+            }
             _SecondaryWindow.Show();
         }
 
@@ -445,7 +474,7 @@ namespace Swegrant.Server
             {
                 TabControl tab = (TabControl)e.Source;
                 this.CurrentMode = (tab.SelectedIndex == 0 ? Mode.Theater : Mode.Video);
-                    
+
                 //do work when tab is changed
             }
         }
@@ -510,8 +539,27 @@ namespace Swegrant.Server
                     MessageBox.Show("File Does NOT Exist");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+
+            }
+        }
+
+        private void rdSecondaryWindowNoraml_Checked(object sender, RoutedEventArgs e)
+        {
+            if (_SecondaryWindow != null)
+            {
+                _SecondaryWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+                _SecondaryWindow.WindowState = WindowState.Normal;
+            }
+        }
+
+        private void rdSecondaryWindowFull_Checked(object sender, RoutedEventArgs e)
+        {
+            if (_SecondaryWindow != null)
+            {
+                _SecondaryWindow.WindowStyle = WindowStyle.None;
+                _SecondaryWindow.WindowState = WindowState.Maximized;
 
             }
         }
