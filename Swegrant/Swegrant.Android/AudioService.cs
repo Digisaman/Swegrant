@@ -58,7 +58,7 @@ namespace Swegrant.Droid
                 {
                     if (currentPosition != 0)
                     {
-                        player.SeekTo(currentPosition);
+                        player.SeekTo(currentPosition+100);
                     }
                     player.Start();
                 };

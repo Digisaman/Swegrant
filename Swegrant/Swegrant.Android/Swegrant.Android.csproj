@@ -77,6 +77,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\VD-LY-SUB-FA-SC-01.srt" />
+    <AndroidAsset Include="Assets\VD-LY-SUB-EN-SC-01.srt" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
