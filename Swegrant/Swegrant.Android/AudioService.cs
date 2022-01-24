@@ -78,6 +78,7 @@ namespace Swegrant.Droid
                 if (player != null)
                 {
                     player.Stop();
+                    player = new MediaPlayer();
                 }
             }
             catch (Exception ex)
