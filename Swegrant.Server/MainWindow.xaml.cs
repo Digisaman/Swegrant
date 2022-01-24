@@ -283,19 +283,23 @@ namespace Swegrant.Server
         {
             try
             {
-                string text = "";
-                string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
-                string scence = this.cmbthScence.SelectionBoxItem.ToString();
-                string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Subtitle";
-                string subtitleFilePath = $"{subtitleDirectory}\\TH-SUB-{lang}-SC-{scence}.srt";
-                if (File.Exists(subtitleFilePath))
+                MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
                 {
-                    text = System.IO.File.ReadAllText(subtitleFilePath);
-                    FillTHSbutitleListBox(text);
-                }
-                else
-                {
-                    MessageBox.Show("File Does NOT Exist");
+                    string text = "";
+                    string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
+                    string scence = this.cmbthScence.SelectionBoxItem.ToString();
+                    string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Subtitle";
+                    string subtitleFilePath = $"{subtitleDirectory}\\TH-SUB-{lang}-SC-{scence}.srt";
+                    if (File.Exists(subtitleFilePath))
+                    {
+                        text = System.IO.File.ReadAllText(subtitleFilePath);
+                        FillTHSbutitleListBox(text);
+                    }
+                    else
+                    {
+                        MessageBox.Show("File Does NOT Exist");
+                    }
                 }
             }
             catch (Exception ex)
@@ -433,6 +437,11 @@ namespace Swegrant.Server
                     HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", this.currentSub[i].Text);
 
                     Thread.Sleep(currentSub[i].Duration);
+                    if (this.currentSubCancelationSource.IsCancellationRequested)
+                    {
+                        this.currentSubCancellationToken.ThrowIfCancellationRequested();
+                        return;
+                    }
 
                     if (CurrentMode == Mode.Theater)
                     {
