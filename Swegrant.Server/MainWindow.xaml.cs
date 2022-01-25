@@ -203,7 +203,7 @@ namespace Swegrant.Server
                 string message = this.lstthSub.SelectedItem.ToString();
                 this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
                 _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
-                        _SecondaryWindow.DisplayCurrentSub(this.currentSub[this.currentSubIndex].Text) ));
+                        _SecondaryWindow.DisplayCurrentSub(this.currentSub[this.currentSubIndex].Text)));
                 HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
                 this.currentSubIndex++;
             }
@@ -323,10 +323,7 @@ namespace Swegrant.Server
                     string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
                     if (File.Exists(videoFilePath))
                     {
-                        //PLayVideo(videoFilePath);
                         this.currentSubCancelationSource = new CancellationTokenSource();
-                        //this.currentSubCancellationToken = this.currentSubCancelationSource.Token;
-                        //this.currentSubTask = Task.Run(PlaySub);
                         this.currentSubTask = Task.Run(() =>
                        {
                            this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
@@ -387,9 +384,19 @@ namespace Swegrant.Server
                 string videoFilePath = $"{VideoDirectory}\\VD-SC-{scence}.mp4";
                 if (File.Exists(videoFilePath))
                 {
+
+                    this.currentSubCancelationSource = new CancellationTokenSource();
+                    this.currentSubTask = Task.Run(() =>
+                    {
+                        this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
+                        PlaySub();
+
+                    }, this.currentSubCancelationSource.Token);
+                    _SecondaryWindow.Play(videoFilePath);
+
                     //PLayVideo(videoFilePath);
                     //Task.Run(PlaySub);
-                    _SecondaryWindow.Play(videoFilePath);
+                    //_SecondaryWindow.Play(videoFilePath);
 
 
                 }
@@ -652,7 +659,7 @@ namespace Swegrant.Server
 
         private void cmbthScence_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
     }
 }
