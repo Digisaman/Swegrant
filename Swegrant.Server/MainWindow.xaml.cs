@@ -27,8 +27,6 @@ namespace Swegrant.Server
     /// </summary>
     public partial class MainWindow : Window
     {
-        private enum Mode { Theater, Video }
-
         private Mode CurrentMode;
         private volatile bool continueAutoLine;
         private System.Timers.Timer timer;
@@ -385,6 +383,12 @@ namespace Swegrant.Server
                 if (File.Exists(videoFilePath))
                 {
 
+                    SendGroupMessage(new ServiceMessage
+                    {
+                        Scene = Convert.ToInt32(scence),
+                        Command = Command.Play,
+                        Mode = Mode.Video
+                    });
                     this.currentSubCancelationSource = new CancellationTokenSource();
                     this.currentSubTask = Task.Run(() =>
                     {
@@ -524,7 +528,11 @@ namespace Swegrant.Server
             {
                 TabControl tab = (TabControl)e.Source;
                 this.CurrentMode = (tab.SelectedIndex == 0 ? Mode.Theater : Mode.Video);
-
+                SendGroupMessage(new ServiceMessage
+                {    
+                      Command = Command.ChangeMode,
+                       Mode = this.CurrentMode,
+                });
                 //do work when tab is changed
             }
         }
@@ -660,6 +668,16 @@ namespace Swegrant.Server
         private void cmbthScence_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+
+        public void SendGroupMessage(ServiceMessage message)
+        {
+            string messageText = Newtonsoft.Json.JsonConvert.SerializeObject(message);
+            if (HUB != null)
+            {
+                HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", messageText);
+            }
         }
     }
 }

@@ -36,9 +36,9 @@ namespace Swegrant.ViewModels
         }
         
 
-        public Command SendMessageCommand { get; }
-        public Command ConnectCommand { get; }
-        public Command DisconnectCommand { get; }
+        public MvvmHelpers.Commands.Command SendMessageCommand { get; }
+        public MvvmHelpers.Commands.Command ConnectCommand { get; }
+        public MvvmHelpers.Commands.Command DisconnectCommand { get; }
 
         Random random;
         public ChatViewModel()
@@ -51,9 +51,9 @@ namespace Swegrant.ViewModels
             ChatMessage = new ChatMessage();
             Messages = new ObservableCollection<ChatMessage>();
             Users = new ObservableCollection<User>();
-            SendMessageCommand = new Command(async () => await SendMessage());
-            ConnectCommand = new Command(async () => await Connect());
-            DisconnectCommand = new Command(async () => await Disconnect());
+            SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
+            ConnectCommand = new MvvmHelpers.Commands.Command(async () => await Connect());
+            DisconnectCommand = new MvvmHelpers.Commands.Command(async () => await Disconnect());
             random = new Random();
 
             ChatService.Init(Settings.ServerIP, Settings.UseHttps);

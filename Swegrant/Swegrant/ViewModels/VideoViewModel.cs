@@ -6,6 +6,8 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using Swegrant.Models;
 using Swegrant.Helpers;
+using Newtonsoft.Json;
+using Swegrant.Interfaces;
 
 namespace Swegrant.ViewModels
 {
@@ -36,9 +38,9 @@ namespace Swegrant.ViewModels
         }
         
 
-        public Command SendMessageCommand { get; }
-        public Command ConnectCommand { get; }
-        public Command DisconnectCommand { get; }
+        public MvvmHelpers.Commands.Command SendMessageCommand { get; }
+        public MvvmHelpers.Commands.Command ConnectCommand { get; }
+        public MvvmHelpers.Commands.Command DisconnectCommand { get; }
 
         Random random;
         public VideoViewModel()
@@ -51,9 +53,9 @@ namespace Swegrant.ViewModels
             ChatMessage = new ChatMessage();
             Messages = new ObservableCollection<ChatMessage>();
             Users = new ObservableCollection<User>();
-            SendMessageCommand = new Command(async () => await SendMessage());
-            ConnectCommand = new Command(async () => await Connect());
-            DisconnectCommand = new Command(async () => await Disconnect());
+            SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
+            ConnectCommand = new MvvmHelpers.Commands.Command(async () => await Connect());
+            DisconnectCommand = new MvvmHelpers.Commands.Command(async () => await Disconnect());
             random = new Random();
 
             ChatService.Init(Settings.ServerIP, Settings.UseHttps);
@@ -139,19 +141,42 @@ namespace Swegrant.ViewModels
 
         private void SendLocalMessage(string message, string user)
         {
-            Device.BeginInvokeOnMainThread(() =>
+            try
             {
-                var first = Users.FirstOrDefault(u => u.Name == user);
-
-                Messages.Clear();
-                Messages.Insert(0, new ChatMessage
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    Message = message,
-                    User = user,
-                    Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
+                    var first = Users.FirstOrDefault(u => u.Name == user);
+
+                    Messages.Clear();
+                    if (message.StartsWith("{"))
+                    {
+                        ServiceMessage serviceMessage = JsonConvert.DeserializeObject<ServiceMessage>(message);
+                        if (serviceMessage != null)
+                        {
+                            switch (serviceMessage.Command)
+                            {
+                                case Models.Command.Play:
+                                    DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Messages.Insert(0, new ChatMessage
+                        {
+                            Message = message,
+                            User = user,
+                            Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
+                        });
+                    }
+
                 });
-                
-            });
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         void AddRemoveUser(string name, bool add)

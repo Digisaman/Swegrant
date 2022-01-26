@@ -33,11 +33,12 @@ namespace Swegrant.Views
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
+           
 
             try
             {
-                
+                base.OnAppearing();
+                VM.ConnectCommand.Execute(null);
             }
             catch(Exception ex)
             {
