@@ -372,7 +372,7 @@ namespace Swegrant.Server
 
         private void btnvdPlayVideo_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning");
+            MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
             {
                 string text = "";

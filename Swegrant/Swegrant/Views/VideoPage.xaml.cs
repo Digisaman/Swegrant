@@ -42,13 +42,20 @@ namespace Swegrant.Views
             }
             catch(Exception ex)
             {
-
+                DependencyService.Get<IAudio>().StopAudioFile();
             }
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
         }
 
         private void btnPlayEn_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
+            VM.CurrnetLanguage = Models.Language.English;
+            VM.ChangeAudioCommand.Execute(null);
+            //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
         }
 
         private void btnStopPlayback_Clicked(object sender, EventArgs e)
@@ -58,7 +65,9 @@ namespace Swegrant.Views
 
         private void btnPlayFa_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-FA-SC-01.mp3");
+            VM.CurrnetLanguage = Models.Language.Farsi;
+            VM.ChangeAudioCommand.Execute(null);
+            //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-FA-SC-01.mp3");
         }
     }
 }

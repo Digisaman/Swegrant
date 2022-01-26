@@ -63,9 +63,19 @@ namespace Swegrant.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] Test {
+        public static byte[] VD_LY_SUB_EN_SC_01 {
             get {
-                object obj = ResourceManager.GetObject("Test", resourceCulture);
+                object obj = ResourceManager.GetObject("VD_LY_SUB_EN_SC_01", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] VD_LY_SUB_FA_SC_01 {
+            get {
+                object obj = ResourceManager.GetObject("VD_LY_SUB_FA_SC_01", resourceCulture);
                 return ((byte[])(obj));
             }
         }

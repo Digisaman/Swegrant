@@ -24,6 +24,12 @@ namespace Swegrant.ViewModels
             }
         }
 
+        public Language CurrnetLanguage { get; set; }
+
+        public Charachter CurrentCharchter { get; set; }
+
+        public int CurrentScene { get; set; }
+
         bool isConnected;
         public bool IsConnected
         {
@@ -42,9 +48,15 @@ namespace Swegrant.ViewModels
         public MvvmHelpers.Commands.Command ConnectCommand { get; }
         public MvvmHelpers.Commands.Command DisconnectCommand { get; }
 
+        public MvvmHelpers.Commands.Command ChangeAudioCommand { get; }
+
         Random random;
         public VideoViewModel()
         {
+            this.CurrnetLanguage = Language.Farsi;
+            this.CurrentCharchter = Charachter.Leyla;
+            this.CurrentScene = 1;
+
             if (DesignMode.IsDesignModeEnabled)
                 return;
 
@@ -56,7 +68,8 @@ namespace Swegrant.ViewModels
             SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
             ConnectCommand = new MvvmHelpers.Commands.Command(async () => await Connect());
             DisconnectCommand = new MvvmHelpers.Commands.Command(async () => await Disconnect());
-            random = new Random();
+            ChangeAudioCommand = new MvvmHelpers.Commands.Command(async () => await PlayAudio())
+;            random = new Random();
 
             ChatService.Init(Settings.ServerIP, Settings.UseHttps);
 
@@ -75,6 +88,8 @@ namespace Swegrant.ViewModels
             {
                 SendLocalMessage(args.Message, args.User);  
             };
+
+          
         }
 
 
@@ -205,6 +220,47 @@ namespace Swegrant.ViewModels
                     });
                 }
             }
+        }
+
+        async Task PlayAudio()
+        {
+            string filename = "VD-";
+            
+            switch(CurrentCharchter)
+            {
+                case Charachter.Leyla:
+                    filename += "LY-";
+                    break;
+                case Charachter.Sina:
+                    filename += "SI-";
+                    break;
+                case Charachter.Tara:
+                    filename += "TA-";
+                    break;
+            }
+
+            filename += "AUD-";
+
+            switch (CurrnetLanguage)
+            {
+                case Language.English:
+                    filename += "EN-";
+                    break;
+                case Language.Farsi:
+                    filename += "FA-";
+                    break;
+                case Language.Swedish:
+                    filename += "SV-";
+                    break;
+            }
+
+            filename += "SC-";
+
+            filename += CurrentScene.ToString("00");
+
+            filename += ".mp3";
+
+            DependencyService.Get<IAudio>().PlayAudioFile(filename);
         }
     }
 }
