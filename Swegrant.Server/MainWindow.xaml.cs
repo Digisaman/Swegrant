@@ -411,6 +411,8 @@ namespace Swegrant.Server
             }
         }
 
+
+
         private void PlaySub()
         {
             if (this.currentSubIndex == 0)
@@ -678,6 +680,18 @@ namespace Swegrant.Server
             {
                 HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", messageText);
             }
+        }
+
+        private void btnvdprepareAudio_Click(object sender, RoutedEventArgs e)
+        {
+            string scence = this.cmbvdScence.SelectionBoxItem.ToString();
+            SendGroupMessage(new ServiceMessage
+            {
+                Command = Command.Prepapre,
+                Mode = Mode.Video,
+                Scene = Convert.ToInt32(scence)
+
+            });
         }
     }
 }

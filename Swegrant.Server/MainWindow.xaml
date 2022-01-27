@@ -194,7 +194,7 @@
                     </Grid.ColumnDefinitions>
  
                     <StackPanel  Grid.Row="0" Grid.Column="1">
-                        <Button x:Name="btnvdLoadSubTitle" Content="Load Subtitle" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="20" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnvdLoadSubTitle_Click">
+                        <Button x:Name="btnvdLoadSubTitle" Content="Load Subtitle" HorizontalAlignment="Left" Margin="5"  VerticalAlignment="Top" Height="20" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnvdLoadSubTitle_Click">
                             <Button.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -204,7 +204,17 @@
                                 </TransformGroup>
                             </Button.RenderTransform>
                         </Button>
-                        <Button x:Name="btnvdPlayVideo" Content="Play Video" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="20" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnvdPlayVideo_Click">
+                        <Button x:Name="btnvdprepareAudio" Content="Prepare Audio" HorizontalAlignment="Left"  Margin="5" VerticalAlignment="Top" Height="20" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnvdprepareAudio_Click">
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="-14.938"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="-4.135"/>
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
+                        <Button x:Name="btnvdPlayVideo" Content="Play Video" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Height="20" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnvdPlayVideo_Click">
                             <Button.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>

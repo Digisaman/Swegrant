@@ -5,6 +5,7 @@
         Init = 0,
         ChangeMode,
         Play,
+        Prepare,
         ShowSubt,
         HideSubt
     }

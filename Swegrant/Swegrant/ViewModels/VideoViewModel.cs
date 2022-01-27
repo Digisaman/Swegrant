@@ -68,7 +68,7 @@ namespace Swegrant.ViewModels
             SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
             ConnectCommand = new MvvmHelpers.Commands.Command(async () => await Connect());
             DisconnectCommand = new MvvmHelpers.Commands.Command(async () => await Disconnect());
-            ChangeAudioCommand = new MvvmHelpers.Commands.Command(async () => await PlayAudio())
+            ChangeAudioCommand = new MvvmHelpers.Commands.Command(async () => await PrepareAudio())
 ;            random = new Random();
 
             ChatService.Init(Settings.ServerIP, Settings.UseHttps);
@@ -171,7 +171,10 @@ namespace Swegrant.ViewModels
                             switch (serviceMessage.Command)
                             {
                                 case Models.Command.Play:
-                                    DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
+                                    DependencyService.Get<IAudio>().PlayAudioFile();
+                                    break;
+                                case Models.Command.Prepare:
+                                    PrepareAudio();
                                     break;
                             }
                         }
@@ -222,7 +225,7 @@ namespace Swegrant.ViewModels
             }
         }
 
-        async Task PlayAudio()
+        async Task PrepareAudio()
         {
             string filename = "VD-";
             
@@ -260,7 +263,7 @@ namespace Swegrant.ViewModels
 
             filename += ".mp3";
 
-            DependencyService.Get<IAudio>().PlayAudioFile(filename);
+            DependencyService.Get<IAudio>().PrepareAudioFile(filename);
         }
     }
 }

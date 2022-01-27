@@ -34,17 +34,20 @@ namespace Swegrant.Droid
         //        return _Player;
         //    }
         //}
+
+        private int currentPosition;
+
         private MediaPlayer player;
         public AudioService()
         {
             player = new MediaPlayer();
         }
-        public void PlayAudioFile(string fileName)
+        public void PrepareAudioFile(string fileName)
         {
             try
             {
 
-                int currentPosition = 0;
+                currentPosition = 0;
                 if (player.IsPlaying)
                 {
                     currentPosition = player.CurrentPosition;
@@ -54,16 +57,33 @@ namespace Swegrant.Droid
                 }
 
                 var fd = global::Android.App.Application.Context.Assets.OpenFd(fileName);
-                player.Prepared += (s, e) =>
-                {
-                    if (currentPosition != 0)
-                    {
-                        player.SeekTo(currentPosition+100);
-                    }
-                    player.Start();
-                };
+                //player.Prepared += (s, e) =>
+                //{
+                //    if (currentPosition != 0)
+                //    {
+                //        player.SeekTo(currentPosition+100);
+                //    }
+                //    player.Start();
+                //};
                 player.SetDataSource(fd.FileDescriptor, fd.StartOffset, fd.Length);
                 player.Prepare();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+        public void PlayAudioFile()
+        {
+            try
+            {
+                if (this.currentPosition != 0)
+                {
+                    player.SeekTo(currentPosition + 100);
+                }
+                player.Start();
             }
             catch (Exception ex)
             {
