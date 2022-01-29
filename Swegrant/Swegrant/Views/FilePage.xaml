@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Swegrant.Views.FilePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Picker x:Name="cmbCharachter"  
+                    Title="Select Charachter"
+                    SelectedIndex="0">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>LY</x:String>
+                        <x:String>TA</x:String>
+                        <x:String>SI</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Picker x:Name="cmbLanguage" 
+                    Title="Select Language"
+                    SelectedIndex="0">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>FA</x:String>
+                        <x:String>SV</x:String>
+                        <x:String>EN</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Picker x:Name="cmbScene" 
+                    Title="Select Scene"
+                    SelectedIndex="0">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>01</x:String>
+                        <x:String>02</x:String>
+                        <x:String>03</x:String>
+                        <x:String>04</x:String>
+                        <x:String>05</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Button x:Name="btnDownload" Text="Download Files"
+                    VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" Clicked="DownloadClicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

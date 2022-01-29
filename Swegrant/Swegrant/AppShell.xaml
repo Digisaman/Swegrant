@@ -93,11 +93,14 @@
     <FlyoutItem Title="Video" Icon="icon_feed.png">
         <ShellContent Route="VideoPage" ContentTemplate="{DataTemplate local:VideoPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Subtitle" Icon="icon_feed.png">
+    <!--<FlyoutItem Title="Subtitle" Icon="icon_feed.png">
         <ShellContent Route="ChatPage" ContentTemplate="{DataTemplate local:ChatPage}" />
-    </FlyoutItem>
+    </FlyoutItem>-->
     <FlyoutItem Title="Settings" Icon="icon_feed.png">
         <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Files" Icon="icon_feed.png">
+        <ShellContent Route="FilePage" ContentTemplate="{DataTemplate local:FilePage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

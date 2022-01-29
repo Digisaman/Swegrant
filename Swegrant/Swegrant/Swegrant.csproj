@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Remove="Services\IDataStore.cs" />
     <Compile Remove="Services\MockDataStore.cs" />
+    <Compile Remove="ViewModels\FileViewModel.cs" />
     <Compile Remove="ViewModels\ItemDetailViewModel.cs" />
     <Compile Remove="ViewModels\ItemsViewModel.cs" />
     <Compile Remove="ViewModels\NewItemViewModel.cs" />
@@ -52,6 +53,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ChatPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\FilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MainPage.xaml">

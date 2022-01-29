@@ -14,6 +14,7 @@ using Swegrant.Droid;
 using Android.Media;
 using Android.Content.Res;
 using Swegrant.Interfaces;
+using System.IO;
 
 [assembly: Dependency(typeof(AudioService))]
 namespace Swegrant.Droid
@@ -46,7 +47,9 @@ namespace Swegrant.Droid
         {
             try
             {
-
+                string externalStorageDirectory = Android.App.Application.Context.GetExternalFilesDir("").AbsolutePath;
+                string pathToAudioDirectory = Path.Combine(externalStorageDirectory, "Audio");
+                string pathToAudioFile = Path.Combine(pathToAudioDirectory, fileName);
                 currentPosition = 0;
                 if (player.IsPlaying)
                 {
@@ -55,8 +58,9 @@ namespace Swegrant.Droid
                     player = new MediaPlayer();
 
                 }
-
-                var fd = global::Android.App.Application.Context.Assets.OpenFd(fileName);
+                //using (FileStream stream = File.OpenRead(pathToAudioFile))
+                //{
+                //var fd = global::Android.App.Application.Context.Assets.OpenFd(fileName);
                 //player.Prepared += (s, e) =>
                 //{
                 //    if (currentPosition != 0)
@@ -65,8 +69,11 @@ namespace Swegrant.Droid
                 //    }
                 //    player.Start();
                 //};
-                player.SetDataSource(fd.FileDescriptor, fd.StartOffset, fd.Length);
+                player.SetDataSource(pathToAudioFile);
+
+                //player.SetDataSource(fd.FileDescriptor, fd.StartOffset, fd.Length);
                 player.Prepare();
+                //}
             }
             catch (Exception ex)
             {

@@ -5,13 +5,14 @@ namespace Swegrant.Helpers
 {
     public static class Settings
     {
+        
         public static string AppCenterAndroid = "AC_ANDROID";
 
 #if DEBUG
         //static readonly string defaultIP = DeviceInfo.Platform == DevicePlatform.Android ? "10.0.2.2" : "localhost";
         static readonly string defaultIP = "192.168.1.10";
 #else
-                static readonly string defaultIP = "Swegrantr.azurewebsites.net";
+                static readonly string defaultIP = "192.168.1.10";
 #endif
 
 
