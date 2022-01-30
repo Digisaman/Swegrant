@@ -33,7 +33,7 @@ namespace Swegrant.Views
             {
                 downloader = DependencyService.Get<IDownloader>();
                 downloader.OnFileDownloaded += Downloader_OnFileDownloaded;
-                urls = new string[0];
+                this.urls = new string[0];
             }
             catch (Exception ex)
             {
@@ -46,20 +46,25 @@ namespace Swegrant.Views
             if (e.FileSaved)
             {
                 //DisplayAlert("Swegrant", "File Saved Successfully", "Close");
-                this.currentIndex++;
-                progress += ((float)currentIndex / (float)urls.Length);
+                
+                progress = ((float) (currentIndex+1) / (float)this.urls.Length);
 
-                if (progress > 1)
+                if ((currentIndex + 1) == this.urls.Length)
                 {
-                    progress = 0;
+                    this.lblTitle.Text = "Download Complete";
                 }
 
                 // directly set the new progress value
                 defaultProgressBar.Progress = progress;
 
                 // animate to the new value over 750 milliseconds using Linear easing
-                await defaultProgressBar.ProgressTo(progress, 750, Easing.Linear);
-                downloader.DownloadFile(urls[this.currentIndex], "Audio");
+                await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
+
+                this.currentIndex++;
+                if (this.currentIndex < this.urls.Length)
+                {
+                    downloader.DownloadFile(urls[this.currentIndex], "Audio");
+                }
             }
             else
             {
@@ -79,15 +84,16 @@ namespace Swegrant.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            string[] urls = await GetFileUrls();
-
+            this.urls = await GetFileUrls();
+            this.currentIndex = 0;
+            this.lblTitle.Text = "Downloading files...";
             downloader.DownloadFile(urls[0], "Audio");
 
         }
 
         public async Task<string[]> GetFileUrls()
         {
-            string[] urls = new string[0];
+            string[] fileUrls = new string[0];
             try
             {
                 Uri uri = new Uri($"{(Helpers.Settings.UseHttps ? "https" : "http")}://{Helpers.Settings.ServerIP}:{Helpers.Settings.ServerPort}/api/media");
@@ -96,14 +102,14 @@ namespace Swegrant.Views
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    urls = JsonConvert.DeserializeObject<string[]>(content);
+                    fileUrls = JsonConvert.DeserializeObject<string[]>(content);
                 }
             }
             catch (Exception ex)
             {
                 return new List<string>().ToArray();
             }
-            return urls;
+            return fileUrls;
         }
     }
 }

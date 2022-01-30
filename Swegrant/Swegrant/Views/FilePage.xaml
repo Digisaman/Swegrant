@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Swegrant.Views.FilePage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout
+            VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand">
             <!--<Picker x:Name="cmbCharachter"  
                     Title="Select Charachter"
                     SelectedIndex="0">
@@ -43,8 +45,13 @@
                     VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" Clicked="DownloadClicked" />-->
 
-            <Label Text="Downloading Files...."></Label>
+            <Label x:Name="lblTitle" Text="Downloading Files...."
+                   HorizontalOptions="Center"
+                   FontSize="Large"
+                   Margin="20"></Label>
             <ProgressBar x:Name="defaultProgressBar"
+                         ScaleY="10"
+                         Margin="20"
                      WidthRequest="500"
                      VerticalOptions="CenterAndExpand"
                      HorizontalOptions="Fill" />
