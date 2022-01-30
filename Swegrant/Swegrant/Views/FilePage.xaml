@@ -4,7 +4,7 @@
              x:Class="Swegrant.Views.FilePage">
     <ContentPage.Content>
         <StackLayout>
-            <Picker x:Name="cmbCharachter"  
+            <!--<Picker x:Name="cmbCharachter"  
                     Title="Select Charachter"
                     SelectedIndex="0">
                 <Picker.ItemsSource>
@@ -41,7 +41,13 @@
             </Picker>
             <Button x:Name="btnDownload" Text="Download Files"
                     VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" Clicked="DownloadClicked" />
+                HorizontalOptions="CenterAndExpand" Clicked="DownloadClicked" />-->
+
+            <Label Text="Downloading Files...."></Label>
+            <ProgressBar x:Name="defaultProgressBar"
+                     WidthRequest="500"
+                     VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="Fill" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
