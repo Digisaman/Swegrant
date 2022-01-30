@@ -25,7 +25,7 @@ namespace Swegrant.Droid
 
         public void DownloadFile(string url, string folder)
         {
-            
+
 
             try
             {
@@ -39,6 +39,11 @@ namespace Swegrant.Droid
                     WebClient webClient = new WebClient();
                     webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
                     webClient.DownloadFileAsync(new Uri(url), pathToNewFile);
+                }
+                else
+                {
+                    if (OnFileDownloaded != null)
+                        OnFileDownloaded.Invoke(this, new DownloadEventArgs(true));
                 }
             }
             catch (Exception ex)
@@ -61,5 +66,7 @@ namespace Swegrant.Droid
                     OnFileDownloaded.Invoke(this, new DownloadEventArgs(true));
             }
         }
+
+
     }
 }
