@@ -38,6 +38,8 @@ namespace Swegrant.Droid
 
         private int currentPosition;
 
+        private DateTime changeAudioDateTime;
+
         private MediaPlayer player;
         public AudioService()
         {
@@ -56,6 +58,11 @@ namespace Swegrant.Droid
                     currentPosition = player.CurrentPosition;
                     player.Stop();
                     player = new MediaPlayer();
+                    this.changeAudioDateTime = DateTime.Now;
+                    player.Prepared += (s, e) =>
+                    {
+                        PlayAudioFile();
+                    };
 
                 }
                 //using (FileStream stream = File.OpenRead(pathToAudioFile))
@@ -88,7 +95,8 @@ namespace Swegrant.Droid
             {
                 if (this.currentPosition != 0)
                 {
-                    player.SeekTo(currentPosition + 100);
+                    int pauseTime = Convert.ToInt32((DateTime.Now - changeAudioDateTime).TotalMilliseconds);
+                    player.SeekTo(currentPosition + pauseTime);
                 }
                 player.Start();
             }
