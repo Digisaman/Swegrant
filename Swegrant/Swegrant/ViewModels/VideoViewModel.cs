@@ -56,15 +56,14 @@ namespace Swegrant.ViewModels
         private Task currentSubTask;
         private CancellationTokenSource currentSubCancelationSource;
         private CancellationToken currentSubCancellationToken;
-
         private int currentSubIndex;
+
         Random random;
         public VideoViewModel()
         {
             this.CurrnetLanguage = Language.Farsi;
             this.CurrentCharchter = Charachter.Leyla;
             this.CurrentScene = 1;
-            this.CurrentSub = new List<Subtitle>();
 
             if (DesignMode.IsDesignModeEnabled)
                 return;
@@ -276,6 +275,7 @@ namespace Swegrant.ViewModels
 
             DependencyService.Get<IAudio>().PrepareAudioFile(filename);
         }
+
 
         private void BeginPlaySub()
         {
