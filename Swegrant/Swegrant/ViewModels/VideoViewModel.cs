@@ -8,11 +8,14 @@ using Swegrant.Models;
 using Swegrant.Helpers;
 using Newtonsoft.Json;
 using Swegrant.Interfaces;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Swegrant.ViewModels
 {
     public class VideoViewModel : BaseViewModel
     {
+        public List<Subtitle> CurrentSub;
         public ChatMessage ChatMessage { get; }
 
         public ObservableCollection<ChatMessage> Messages { get; }
@@ -50,12 +53,18 @@ namespace Swegrant.ViewModels
 
         public MvvmHelpers.Commands.Command ChangeAudioCommand { get; }
 
+        private Task currentSubTask;
+        private CancellationTokenSource currentSubCancelationSource;
+        private CancellationToken currentSubCancellationToken;
+
+        private int currentSubIndex;
         Random random;
         public VideoViewModel()
         {
             this.CurrnetLanguage = Language.Farsi;
             this.CurrentCharchter = Charachter.Leyla;
             this.CurrentScene = 1;
+            this.CurrentSub = new List<Subtitle>();
 
             if (DesignMode.IsDesignModeEnabled)
                 return;
@@ -172,6 +181,7 @@ namespace Swegrant.ViewModels
                             {
                                 case Models.Command.Play:
                                     DependencyService.Get<IAudio>().PlayAudioFile();
+                                    BeginPlaySub();
                                     break;
                                 case Models.Command.Prepare:
                                     PrepareAudio();
@@ -267,6 +277,76 @@ namespace Swegrant.ViewModels
             DependencyService.Get<IAudio>().PrepareAudioFile(filename);
         }
 
+        private void BeginPlaySub()
+        {
+            this.currentSubCancelationSource = new CancellationTokenSource();
+            this.currentSubTask = Task.Run(() =>
+            {
+                this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
+                PlaySub();
+
+            }, this.currentSubCancelationSource.Token);
+        }
+
+        private void PlaySub()
+        {
+            if (this.currentSubIndex == 0)
+            {
+                TimeSpan initial = this.CurrentSub[this.currentSubIndex].StartTime;
+                Thread.Sleep(initial);
+            }
+            for (int i = this.currentSubIndex; i < this.CurrentSub.Count - 1; i++)
+            {
+                try
+                {
+                    Messages.Clear();
+                    if (this.currentSubCancelationSource.IsCancellationRequested)
+                    {
+                        this.currentSubCancellationToken.ThrowIfCancellationRequested();
+                        return;
+                    }
+
+                    this.currentSubIndex = i;
+
+
+
+                    Messages.Insert(0, new ChatMessage
+                    {
+                        Message = this.CurrentSub[this.currentSubIndex].Text,
+                        User = Helpers.Settings.UserName,
+                        Color = Color.FromRgba(0, 0, 0, 0)
+                    });
+
+
+
+                    Thread.Sleep(CurrentSub[i].Duration);
+                    if (this.currentSubCancelationSource.IsCancellationRequested)
+                    {
+                        this.currentSubCancellationToken.ThrowIfCancellationRequested();
+                        return;
+                    }
+
+
+
+                    Messages.Insert(0, new ChatMessage
+                    {
+                        Message = " ",
+                        User = Helpers.Settings.UserName,
+                        Color = Color.FromRgba(0, 0, 0, 0)
+                    });
+
+
+
+                    TimeSpan gap = CurrentSub[i + 1].StartTime - CurrentSub[i].EndTime;
+                    Thread.Sleep(gap);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+
 
         async Task PrepareSubtitle()
         {
@@ -307,6 +387,39 @@ namespace Swegrant.ViewModels
             filename += ".txt";
 
             string subtitleContent = DependencyService.Get<IFileservice>().ReadTextFile(MediaInfo.DownloadCategory.VDSUB, filename);
+            PopulateSubtitle(subtitleContent);
+            Messages.Insert(0, new ChatMessage
+            {
+                Message = "Prepared.",
+                User = Settings.UserName,
+                Color = Color.FromRgba(0, 0, 0, 0)
+            });
+        }
+
+        private void PopulateSubtitle(string text)
+        {
+            List<string> list = text.Split(new string[] { "\r\n" + "\r\n" },
+                               StringSplitOptions.RemoveEmptyEntries).ToList();
+            this.CurrentSub = new List<Subtitle>();
+
+            //List<string> subLine = new List<string>();
+            foreach (var item in list)
+            {
+                Subtitle sub = new Subtitle();
+                string[] parts = item.Split(new string[] { Environment.NewLine },
+                               StringSplitOptions.RemoveEmptyEntries).ToArray();
+                sub.Id = Convert.ToInt32(parts[0]);
+                string[] times = parts[1].Split(new string[] { "-->" }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+                sub.StartTime = TimeSpan.Parse(times[0].Replace(',', '.').Trim());
+                sub.EndTime = TimeSpan.Parse(times[1].Replace(',', '.').Trim());
+                string line = "";
+                for (int i = 2; i < parts.Length; i++)
+                {
+                    line += parts[i];
+                }
+                sub.Text = line;
+                this.CurrentSub.Add(sub);
+            }
         }
     }
 }

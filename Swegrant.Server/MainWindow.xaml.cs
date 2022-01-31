@@ -389,13 +389,15 @@ namespace Swegrant.Server
                         Command = Command.Play,
                         Mode = Mode.Video
                     });
-                    this.currentSubCancelationSource = new CancellationTokenSource();
-                    this.currentSubTask = Task.Run(() =>
-                    {
-                        this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
-                        PlaySub();
 
-                    }, this.currentSubCancelationSource.Token);
+                    //this.currentSubCancelationSource = new CancellationTokenSource();
+                    //this.currentSubTask = Task.Run(() =>
+                    //{
+                    //    this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
+                    //    PlaySub();
+
+                    //}, this.currentSubCancelationSource.Token);
+                    
                     _SecondaryWindow.Play(videoFilePath);
 
                     //PLayVideo(videoFilePath);

@@ -69,5 +69,12 @@ namespace Swegrant.Views
             VM.ChangeAudioCommand.Execute(null);
             //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-FA-SC-01.mp3");
         }
+
+        private void btnPlaySV_Clicked(object sender, EventArgs e)
+        {
+            VM.CurrnetLanguage = Models.Language.Swedish;
+            VM.ChangeAudioCommand.Execute(null);
+            //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
+        }
     }
 }

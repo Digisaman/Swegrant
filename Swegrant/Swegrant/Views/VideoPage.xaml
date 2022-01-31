@@ -178,8 +178,9 @@
             </Grid>
 
         </Frame>-->
-        <Button x:Name="btnPlayEn" Text="Switch EN Audio" Grid.Row="1" Grid.ColumnSpan="2" Clicked="btnPlayEn_Clicked"/>
-        <Button x:Name="btnPlayFa" Text="Play FA Audio" Grid.Row="2" Grid.ColumnSpan="2" Clicked="btnPlayFa_Clicked"/>
+        <!--<Button x:Name="btnPlayEn" Text="Switch SV Audio" Grid.Row="1" Grid.ColumnSpan="2" Clicked="btnPlayEn_Clicked"/>-->
+        <Button x:Name="btnPlaySv" Text="Switch SV Audio" Grid.Row="1" Grid.ColumnSpan="2" Clicked="btnPlaySV_Clicked"/>
+        <Button x:Name="btnPlayFa" Text="Switch FA Audio" Grid.Row="2" Grid.ColumnSpan="2" Clicked="btnPlayFa_Clicked"/>
         <Button x:Name="btnStopPlayback" Text="STOP" Grid.Row="3" Grid.ColumnSpan="2" Clicked="btnStopPlayback_Clicked"/>
 
         <ActivityIndicator
