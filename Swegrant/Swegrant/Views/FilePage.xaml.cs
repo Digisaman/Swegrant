@@ -86,8 +86,11 @@ namespace Swegrant.Views
             base.OnAppearing();
             this.urls = await GetFileUrls();
             this.currentIndex = 0;
-            this.lblTitle.Text = "Downloading files...";
-            downloader.DownloadFile(urls[0], "Audio");
+            if (this.urls.Length > 0)
+            {
+                this.lblTitle.Text = "Downloading files...";
+                downloader.DownloadFile(urls[0], "Audio");
+            }
 
         }
 
