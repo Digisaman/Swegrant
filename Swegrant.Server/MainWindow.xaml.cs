@@ -287,7 +287,7 @@ namespace Swegrant.Server
                     string text = "";
                     string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
                     string scence = this.cmbthScence.SelectionBoxItem.ToString();
-                    string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Subtitle";
+                    string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\THSUB";
                     string subtitleFilePath = $"{subtitleDirectory}\\TH-SUB-{lang}-SC-{scence}.srt";
                     if (File.Exists(subtitleFilePath))
                     {
@@ -317,7 +317,7 @@ namespace Swegrant.Server
                     string text = "";
                     //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
                     string scence = this.cmbthScence.SelectionBoxItem.ToString();
-                    string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Background";
+                    string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater";
                     string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
                     if (File.Exists(videoFilePath))
                     {
@@ -352,7 +352,7 @@ namespace Swegrant.Server
                 string charachter = this.cmbvdCharchter.SelectionBoxItem.ToString();
                 string lang = this.cmbvdLanguage.SelectionBoxItem.ToString();
                 string scence = this.cmbvdScence.SelectionBoxItem.ToString();
-                string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\Video\\Subtitle";
+                string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\VSDUB";
                 string subtitleFilePath = $"{subtitleDirectory}\\VD-{charachter}-SUB-{lang}-SC-{scence}.srt";
                 if (File.Exists(subtitleFilePath))
                 {
@@ -378,7 +378,7 @@ namespace Swegrant.Server
                 string text = "";
                 //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
                 string scence = this.cmbvdScence.SelectionBoxItem.ToString();
-                string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Video\\Background";
+                string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Video";
                 string videoFilePath = $"{VideoDirectory}\\VD-SC-{scence}.mp4";
                 if (File.Exists(videoFilePath))
                 {

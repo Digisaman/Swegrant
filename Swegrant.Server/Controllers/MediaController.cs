@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Swegrant.Server.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,34 +12,75 @@ namespace Swegrant.Server.Controllers
     [ApiController]
     public class MediaController : ControllerBase
     {
-        //[HttpGet, Route("api/media/GetCurrentTime")]
-        //public DateTime GetCurrentTime()
-        //{
-        //    return DateTime.Now;
-        //}
+        [HttpGet]
+        [Route(nameof(GetCurrentTime))]
+        public DateTime GetCurrentTime()
+        {
+            return DateTime.Now;
+        }
 
         [HttpGet]
-        public string[] GetFileURL()
+        [Route(nameof(GetMediaInfo))]
+        public MediaInfo GetMediaInfo()
         {
-            DirectoryInfo AudioDirectory = new DirectoryInfo($"{Directory.GetCurrentDirectory()}\\Video\\Audio");
-            //string[] files = Directory.GetFiles(AudioDirectory);
-            FileInfo[] Files = AudioDirectory.GetFiles();
+            DirectoryInfo mediaDirectory = new DirectoryInfo($"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA");
+
+            FileInfo[] files = mediaDirectory.GetFiles("*.*", SearchOption.AllDirectories);
+
+            MediaInfo mediaInfo = null;
+            string mediaInfoFilePath = $"{mediaDirectory}\\MediaInfo.json";
+            using (StreamReader streamReader = new StreamReader(mediaInfoFilePath))
+            {
+                string content = streamReader.ReadToEnd();
+                mediaInfo = JsonConvert.DeserializeObject<MediaInfo>(content);
+            }
 
             string localIP = Helpers.NetworkHelpers.GetLocalIPv4();
             string port = "5000";
+            string protocol = "http";
 
             List<string> urls = new List<string>();
-            foreach (FileInfo file in Files)
+            foreach (MediaFile mediafile in mediaInfo.AUDIO)
             {
-                
-                urls.Add(
-                $"http://{localIP}:{port}/Video/Audio/{file.Name}"
-                );
+                FileInfo file = files.FirstOrDefault(c => c.Name == mediafile.FileName);
+                if (file != null)
+                {
+                    mediafile.Url = $"{protocol}://{localIP}:{port}/MEDIA/AUDIO/{file.Name}";
+                    mediafile.IsAvailable = true;
+                }
             }
-            return urls.ToArray();
+
+            foreach (MediaFile mediafile in mediaInfo.THSUB)
+            {
+                FileInfo file = files.FirstOrDefault(c => c.Name == mediafile.FileName);
+                if (file != null)
+                {
+                    mediafile.Url = $"{protocol}://{localIP}:{port}/MEDIA/THSUB/{file.Name}";
+                    mediafile.IsAvailable = true;
+                }
+            }
+
+            foreach (MediaFile mediafile in mediaInfo.VDSUB)
+            {
+                FileInfo file = files.FirstOrDefault(c => c.Name == mediafile.FileName);
+                if (file != null)
+                {
+                    mediafile.Url = $"{protocol}://{localIP}:{port}/MEDIA/VDSUB/{file.Name}";
+                    mediafile.IsAvailable = true;
+                }
+            }
+
+            mediaInfo.AUDIO = mediaInfo.AUDIO.Where(c => c.IsAvailable).ToList();
+            mediaInfo.THSUB = mediaInfo.THSUB.Where(c => c.IsAvailable).ToList();
+            mediaInfo.VDSUB = mediaInfo.VDSUB.Where(c => c.IsAvailable).ToList();
+
+
+            return mediaInfo;
 
 
 
         }
+
+
     }
 }
