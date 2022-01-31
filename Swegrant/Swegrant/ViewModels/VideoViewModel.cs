@@ -304,7 +304,7 @@ namespace Swegrant.ViewModels
 
             filename += CurrentScene.ToString("00");
 
-            filename += ".srt";
+            filename += ".txt";
 
             string subtitleContent = DependencyService.Get<IFileservice>().ReadTextFile(MediaInfo.DownloadCategory.VDSUB, filename);
         }

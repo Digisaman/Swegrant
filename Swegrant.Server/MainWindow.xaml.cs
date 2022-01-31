@@ -288,7 +288,7 @@ namespace Swegrant.Server
                     string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
                     string scence = this.cmbthScence.SelectionBoxItem.ToString();
                     string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\THSUB";
-                    string subtitleFilePath = $"{subtitleDirectory}\\TH-SUB-{lang}-SC-{scence}.srt";
+                    string subtitleFilePath = $"{subtitleDirectory}\\TH-SUB-{lang}-SC-{scence}.txt";
                     if (File.Exists(subtitleFilePath))
                     {
                         text = System.IO.File.ReadAllText(subtitleFilePath);
@@ -353,7 +353,7 @@ namespace Swegrant.Server
                 string lang = this.cmbvdLanguage.SelectionBoxItem.ToString();
                 string scence = this.cmbvdScence.SelectionBoxItem.ToString();
                 string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\VDSUB";
-                string subtitleFilePath = $"{subtitleDirectory}\\VD-{charachter}-SUB-{lang}-SC-{scence}.srt";
+                string subtitleFilePath = $"{subtitleDirectory}\\VD-{charachter}-SUB-{lang}-SC-{scence}.txt";
                 if (File.Exists(subtitleFilePath))
                 {
                     text = System.IO.File.ReadAllText(subtitleFilePath);
