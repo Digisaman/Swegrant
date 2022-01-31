@@ -175,6 +175,7 @@ namespace Swegrant.ViewModels
                                     break;
                                 case Models.Command.Prepare:
                                     PrepareAudio();
+                                    PrepareSubtitle();
                                     break;
                             }
                         }
@@ -264,6 +265,48 @@ namespace Swegrant.ViewModels
             filename += ".mp3";
 
             DependencyService.Get<IAudio>().PrepareAudioFile(filename);
+        }
+
+
+        async Task PrepareSubtitle()
+        {
+            string filename = "VD-";
+
+            switch (CurrentCharchter)
+            {
+                case Charachter.Leyla:
+                    filename += "LY-";
+                    break;
+                case Charachter.Sina:
+                    filename += "SI-";
+                    break;
+                case Charachter.Tara:
+                    filename += "TA-";
+                    break;
+            }
+
+            filename += "SUB-";
+
+            switch (CurrnetLanguage)
+            {
+                case Language.English:
+                    filename += "EN-";
+                    break;
+                case Language.Farsi:
+                    filename += "FA-";
+                    break;
+                case Language.Swedish:
+                    filename += "SV-";
+                    break;
+            }
+
+            filename += "SC-";
+
+            filename += CurrentScene.ToString("00");
+
+            filename += ".srt";
+
+            string subtitleContent = DependencyService.Get<IFileservice>().ReadTextFile(MediaInfo.DownloadCategory.VDSUB, filename);
         }
     }
 }

@@ -352,7 +352,7 @@ namespace Swegrant.Server
                 string charachter = this.cmbvdCharchter.SelectionBoxItem.ToString();
                 string lang = this.cmbvdLanguage.SelectionBoxItem.ToString();
                 string scence = this.cmbvdScence.SelectionBoxItem.ToString();
-                string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\VSDUB";
+                string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\VDSUB";
                 string subtitleFilePath = $"{subtitleDirectory}\\VD-{charachter}-SUB-{lang}-SC-{scence}.srt";
                 if (File.Exists(subtitleFilePath))
                 {

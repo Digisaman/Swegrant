@@ -15,6 +15,7 @@ using Android.Media;
 using Android.Content.Res;
 using Swegrant.Interfaces;
 using System.IO;
+using static Swegrant.Models.MediaInfo;
 
 [assembly: Dependency(typeof(AudioService))]
 namespace Swegrant.Droid
@@ -50,7 +51,7 @@ namespace Swegrant.Droid
             try
             {
                 string externalStorageDirectory = Android.App.Application.Context.GetExternalFilesDir("").AbsolutePath;
-                string pathToAudioDirectory = Path.Combine(externalStorageDirectory, "Audio");
+                string pathToAudioDirectory = Path.Combine(externalStorageDirectory, DownloadCategory.AUDIO.ToString());
                 string pathToAudioFile = Path.Combine(pathToAudioDirectory, fileName);
                 currentPosition = 0;
                 if (player.IsPlaying)
