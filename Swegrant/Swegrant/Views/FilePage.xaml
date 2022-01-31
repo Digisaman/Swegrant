@@ -47,7 +47,7 @@
 
             <Label x:Name="lblTitle" Text="Downloading Files...."
                    HorizontalOptions="Center"
-                   FontSize="Large"
+                   FontSize="Medium"
                    Margin="20"></Label>
             <ProgressBar x:Name="defaultProgressBar"
                          ScaleY="10"

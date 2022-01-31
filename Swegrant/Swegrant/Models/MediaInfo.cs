@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swegrant.Server.Models
+namespace Swegrant.Models
 {
-    public class MediaInfo
+    public partial class MediaInfo
     {
         public MediaInfo()
         {
@@ -19,6 +19,8 @@ namespace Swegrant.Server.Models
         public List<MediaFile> THSUB { get; set; }
 
         public List<MediaFile> VDSUB { get; set; }
+
+        public DownloadCategory CurrentCategory { get; set; }
     }
 
     public class MediaFile

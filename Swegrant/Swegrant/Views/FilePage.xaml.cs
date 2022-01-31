@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Swegrant.Interfaces;
+using Swegrant.Models;
 using Swegrant.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace Swegrant.Views
         //{
         //    get => vm ?? (vm = (FileViewModel)BindingContext);
         //}
-        private string[] urls;
+        private MediaInfo mediaInfo;
         private int currentIndex;
         private IDownloader downloader = null;
         private float progress;
@@ -33,7 +34,7 @@ namespace Swegrant.Views
             {
                 downloader = DependencyService.Get<IDownloader>();
                 downloader.OnFileDownloaded += Downloader_OnFileDownloaded;
-                this.urls = new string[0];
+                this.mediaInfo = new MediaInfo();
             }
             catch (Exception ex)
             {
@@ -46,24 +47,75 @@ namespace Swegrant.Views
             if (e.FileSaved)
             {
                 //DisplayAlert("Swegrant", "File Saved Successfully", "Close");
-                
-                progress = ((float) (currentIndex+1) / (float)this.urls.Length);
-
-                if ((currentIndex + 1) == this.urls.Length)
+                if (mediaInfo.CurrentCategory == MediaInfo.DownloadCategory.AUDIO)
                 {
-                    this.lblTitle.Text = "Download Complete";
+                    if ((currentIndex+1) < mediaInfo.AUDIO.Count)
+                    {
+                        progress = ((float)(currentIndex + 1) / (float)mediaInfo.AUDIO.Count);
+                        // directly set the new progress value
+                        defaultProgressBar.Progress = progress;
+
+                        // animate to the new value over 750 milliseconds using Linear easing
+                        await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
+
+                        this.currentIndex++;
+                        downloader.DownloadFile(mediaInfo.AUDIO[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
+                    }
+                    else
+                    {
+                        await defaultProgressBar.ProgressTo(1, 500, Easing.Linear);
+                        mediaInfo.CurrentCategory = MediaInfo.DownloadCategory.THSUB;
+                        currentIndex = 0;
+                        downloader.DownloadFile(mediaInfo.THSUB[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
+                        this.lblTitle.Text = "Downloading Theater Subtitles...";
+                    }
                 }
-
-                // directly set the new progress value
-                defaultProgressBar.Progress = progress;
-
-                // animate to the new value over 750 milliseconds using Linear easing
-                await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
-
-                this.currentIndex++;
-                if (this.currentIndex < this.urls.Length)
+                else if (mediaInfo.CurrentCategory == MediaInfo.DownloadCategory.THSUB)
                 {
-                    downloader.DownloadFile(urls[this.currentIndex], "Audio");
+                    if ((currentIndex + 1) < mediaInfo.THSUB.Count)
+                    {
+                        progress = ((float)(currentIndex + 1) / (float)mediaInfo.THSUB.Count);
+                        // directly set the new progress value
+                        defaultProgressBar.Progress = progress;
+
+                        // animate to the new value over 750 milliseconds using Linear easing
+                        await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
+
+                        this.currentIndex++;
+                        downloader.DownloadFile(mediaInfo.THSUB[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
+                    }
+                    else
+                    {
+                        await defaultProgressBar.ProgressTo(1, 500, Easing.Linear);
+                        mediaInfo.CurrentCategory = MediaInfo.DownloadCategory.VDSUB;
+                        currentIndex = 0;
+                        downloader.DownloadFile(mediaInfo.VDSUB[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
+                        this.lblTitle.Text = "Downloading Video Subtitles...";
+                    }
+
+                }
+                else if (mediaInfo.CurrentCategory == MediaInfo.DownloadCategory.VDSUB)
+                {
+                    if ((currentIndex + 1) < mediaInfo.VDSUB.Count)
+                    {
+                        progress = ((float)(currentIndex + 1) / (float)mediaInfo.VDSUB.Count);
+                        // directly set the new progress value
+                        defaultProgressBar.Progress = progress;
+
+                        // animate to the new value over 750 milliseconds using Linear easing
+                        await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
+
+                        this.currentIndex++;
+                        downloader.DownloadFile(mediaInfo.VDSUB[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
+                    }
+                    else
+                    {
+                        progress = 1;
+                        currentIndex = 0;
+                        
+                        await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
+                        this.lblTitle.Text = "Download Completed";
+                    }
                 }
             }
             else
@@ -84,19 +136,19 @@ namespace Swegrant.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            this.urls = await GetFileUrls();
+            this.mediaInfo = await GetFileUrls();
             this.currentIndex = 0;
-            if (this.urls.Length > 0)
+            if (this.mediaInfo.AUDIO.Count > 0)
             {
-                this.lblTitle.Text = "Downloading files...";
-                downloader.DownloadFile(urls[0], "Audio");
+                this.lblTitle.Text = "Downloading Audio files...";
+                downloader.DownloadFile(mediaInfo.AUDIO[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
             }
 
         }
 
-        public async Task<string[]> GetFileUrls()
+        public async Task<MediaInfo> GetFileUrls()
         {
-            string[] fileUrls = new string[0];
+            MediaInfo info = null;
             try
             {
                 Uri uri = new Uri($"{(Helpers.Settings.UseHttps ? "https" : "http")}://{Helpers.Settings.ServerIP}:{Helpers.Settings.ServerPort}/api/media/GetMediaInfo");
@@ -105,14 +157,14 @@ namespace Swegrant.Views
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    fileUrls = JsonConvert.DeserializeObject<string[]>(content);
+                    info = JsonConvert.DeserializeObject<MediaInfo>(content);
                 }
             }
             catch (Exception ex)
             {
-                return new List<string>().ToArray();
+                return null;
             }
-            return fileUrls;
+            return info;
         }
     }
 }

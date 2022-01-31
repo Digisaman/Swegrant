@@ -47,6 +47,7 @@ namespace Swegrant.Server.Controllers
                 {
                     mediafile.Url = $"{protocol}://{localIP}:{port}/MEDIA/AUDIO/{file.Name}";
                     mediafile.IsAvailable = true;
+                    mediafile.FileSize = file.Length;
                 }
             }
 
@@ -57,6 +58,7 @@ namespace Swegrant.Server.Controllers
                 {
                     mediafile.Url = $"{protocol}://{localIP}:{port}/MEDIA/THSUB/{file.Name}";
                     mediafile.IsAvailable = true;
+                    mediafile.FileSize = file.Length;
                 }
             }
 
@@ -67,6 +69,7 @@ namespace Swegrant.Server.Controllers
                 {
                     mediafile.Url = $"{protocol}://{localIP}:{port}/MEDIA/VDSUB/{file.Name}";
                     mediafile.IsAvailable = true;
+                    mediafile.FileSize = file.Length;
                 }
             }
 
