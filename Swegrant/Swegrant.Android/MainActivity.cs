@@ -15,7 +15,7 @@ namespace Swegrant.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            CheckAppPermissions();
+            //CheckAppPermissions();
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
@@ -28,21 +28,21 @@ namespace Swegrant.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        private void CheckAppPermissions()
-        {
-            if ((int)Build.VERSION.SdkInt < 23)
-            {
-                return;
-            }
-            else
-            {
-                if (PackageManager.CheckPermission(Manifest.Permission.ReadExternalStorage, PackageName) != Permission.Granted
-                    && PackageManager.CheckPermission(Manifest.Permission.WriteExternalStorage, PackageName) != Permission.Granted)
-                {
-                    var permissions = new string[] { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage };
-                    RequestPermissions(permissions, 1);
-                }
-            }
-        }
+        //private void CheckAppPermissions()
+        //{
+        //    if ((int)Build.VERSION.SdkInt < 23)
+        //    {
+        //        return;
+        //    }
+        //    else
+        //    {
+        //        if (PackageManager.CheckPermission(Manifest.Permission.ReadExternalStorage, PackageName) != Permission.Granted
+        //            && PackageManager.CheckPermission(Manifest.Permission.WriteExternalStorage, PackageName) != Permission.Granted)
+        //        {
+        //            var permissions = new string[] { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage };
+        //            RequestPermissions(permissions, 1);
+        //        }
+        //    }
+        //}
     }
 }

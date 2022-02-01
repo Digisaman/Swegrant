@@ -10,9 +10,29 @@ namespace Swegrant.ViewModels
         public AboutViewModel()
         {
             Title = "About";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://www.chaharsoo.se/"));
+            OpenOwnerCommand = new Command(async () => await Browser.OpenAsync("https://www.chaharsoo.se/"));
+            OpenDeveloperCommand = new Command(async () => await Browser.OpenAsync("http://samanpirooz.com/swegrant"));
+            VersionTracking.Track();
         }
 
-        public ICommand OpenWebCommand { get; }
+        public ICommand OpenOwnerCommand { get; }
+        public ICommand OpenDeveloperCommand { get; }
+
+
+        public string CurrentVersion
+        {
+            get
+            {
+                return VersionTracking.CurrentVersion; 
+            }
+        }
+
+        public string CurrentBuild
+        {
+            get
+            {
+                return VersionTracking.CurrentBuild;
+            }
+        }
     }
 }
