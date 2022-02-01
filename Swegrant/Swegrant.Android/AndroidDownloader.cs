@@ -30,8 +30,8 @@ namespace Swegrant.Droid
             try
             {
 
-                string externalStorageDirectory = Android.App.Application.Context.GetExternalFilesDir("").AbsolutePath;
-                string pathToNewFolder = Path.Combine(externalStorageDirectory, folder);
+                string appDataDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+                string pathToNewFolder = Path.Combine(appDataDirectory, folder);
                 string pathToNewFile = Path.Combine(pathToNewFolder, Path.GetFileName(url));
                 if (!File.Exists(pathToNewFile))
                 {

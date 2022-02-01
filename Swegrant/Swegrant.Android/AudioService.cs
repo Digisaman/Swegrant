@@ -49,9 +49,9 @@ namespace Swegrant.Droid
         public void PrepareAudioFile(string fileName)
         {
             try
-            {
-                string externalStorageDirectory = Android.App.Application.Context.GetExternalFilesDir("").AbsolutePath;
-                string pathToAudioDirectory = Path.Combine(externalStorageDirectory, DownloadCategory.AUDIO.ToString());
+            {   
+                string appDataDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+                string pathToAudioDirectory = Path.Combine(appDataDirectory, DownloadCategory.AUDIO.ToString());
                 string pathToAudioFile = Path.Combine(pathToAudioDirectory, fileName);
                 currentPosition = 0;
                 if (player.IsPlaying)

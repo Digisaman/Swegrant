@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using Swegrant.Interfaces;
 using System.Collections.Generic;
 using System.Threading;
+using static Swegrant.Models.MediaInfo;
+using System.IO;
 
 namespace Swegrant.ViewModels
 {
@@ -350,54 +352,62 @@ namespace Swegrant.ViewModels
 
         async Task PrepareSubtitle()
         {
-            string filename = "VD-";
-
-            switch (CurrentCharchter)
+            try
             {
-                case Charachter.Leyla:
-                    filename += "LY-";
-                    break;
-                case Charachter.Sina:
-                    filename += "SI-";
-                    break;
-                case Charachter.Tara:
-                    filename += "TA-";
-                    break;
+                string filename = "VD-";
+
+                switch (CurrentCharchter)
+                {
+                    case Charachter.Leyla:
+                        filename += "LY-";
+                        break;
+                    case Charachter.Sina:
+                        filename += "SI-";
+                        break;
+                    case Charachter.Tara:
+                        filename += "TA-";
+                        break;
+                }
+
+                filename += "SUB-";
+
+                switch (CurrnetLanguage)
+                {
+                    case Language.English:
+                        filename += "EN-";
+                        break;
+                    case Language.Farsi:
+                        filename += "FA-";
+                        break;
+                    case Language.Swedish:
+                        filename += "SV-";
+                        break;
+                }
+
+                filename += "SC-";
+
+                filename += CurrentScene.ToString("00");
+
+                filename += ".txt";
+
+                string subtitleContent = ReadSubtitleFile(filename);
+                PopulateSubtitle(subtitleContent);
+                Messages.Insert(0, new ChatMessage
+                {
+                    Message = "Prepared.",
+                    User = Settings.UserName,
+                    Color = Color.FromRgba(0, 0, 0, 0)
+                });
             }
-
-            filename += "SUB-";
-
-            switch (CurrnetLanguage)
+            catch(Exception ex)
             {
-                case Language.English:
-                    filename += "EN-";
-                    break;
-                case Language.Farsi:
-                    filename += "FA-";
-                    break;
-                case Language.Swedish:
-                    filename += "SV-";
-                    break;
+
             }
-
-            filename += "SC-";
-
-            filename += CurrentScene.ToString("00");
-
-            filename += ".txt";
-
-            string subtitleContent = DependencyService.Get<IFileservice>().ReadTextFile(MediaInfo.DownloadCategory.VDSUB, filename);
-            PopulateSubtitle(subtitleContent);
-            Messages.Insert(0, new ChatMessage
-            {
-                Message = "Prepared.",
-                User = Settings.UserName,
-                Color = Color.FromRgba(0, 0, 0, 0)
-            });
         }
 
         private void PopulateSubtitle(string text)
         {
+            this.CurrentSub = new List<Subtitle>();
             List<string> list = text.Split(new string[] { "\r\n" + "\r\n" },
                                StringSplitOptions.RemoveEmptyEntries).ToList();
             this.CurrentSub = new List<Subtitle>();
@@ -420,6 +430,23 @@ namespace Swegrant.ViewModels
                 sub.Text = line;
                 this.CurrentSub.Add(sub);
             }
+        }
+
+        private string ReadSubtitleFile(string filename)
+        {
+            string content = "";
+            try
+            {
+                string subtitleDirectoty = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DownloadCategory.VDSUB.ToString());
+                string fileName = Path.Combine(subtitleDirectoty, filename);
+                content = File.ReadAllText(fileName);
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return content;
+
         }
     }
 }
