@@ -23,7 +23,9 @@ namespace Swegrant.ViewModels
         public ObservableCollection<ChatMessage> Messages { get; }
         public ObservableCollection<User> Users { get; }
 
-        public ChatMessage LastReceivedMessage { get
+        public ChatMessage LastReceivedMessage
+        {
+            get
             {
                 return Messages.FirstOrDefault();
             }
@@ -47,7 +49,7 @@ namespace Swegrant.ViewModels
                 });
             }
         }
-        
+
 
         public MvvmHelpers.Commands.Command SendMessageCommand { get; }
         public MvvmHelpers.Commands.Command ConnectCommand { get; }
@@ -78,8 +80,8 @@ namespace Swegrant.ViewModels
             SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
             ConnectCommand = new MvvmHelpers.Commands.Command(async () => await Connect());
             DisconnectCommand = new MvvmHelpers.Commands.Command(async () => await Disconnect());
-            ChangeAudioCommand = new MvvmHelpers.Commands.Command(async () => await PrepareAudio())
-;            random = new Random();
+            ChangeAudioCommand = new MvvmHelpers.Commands.Command(async () => await PlayAudio())
+; random = new Random();
 
             ChatService.Init(Settings.ServerIP, Settings.UseHttps);
 
@@ -96,10 +98,10 @@ namespace Swegrant.ViewModels
 
             ChatService.OnConnectionClosed += (sender, args) =>
             {
-                SendLocalMessage(args.Message, args.User);  
+                SendLocalMessage(args.Message, args.User);
             };
 
-          
+
         }
 
 
@@ -140,7 +142,7 @@ namespace Swegrant.ViewModels
 
         async Task SendMessage()
         {
-            if(!IsConnected)
+            if (!IsConnected)
             {
                 await DialogService.DisplayAlert("Not connected", "Please connect to the server and try again.", "OK");
                 return;
@@ -181,11 +183,11 @@ namespace Swegrant.ViewModels
                             switch (serviceMessage.Command)
                             {
                                 case Models.Command.Play:
-                                    DependencyService.Get<IAudio>().PlayAudioFile();
+                                    PlayAudio();
                                     BeginPlaySub();
                                     break;
                                 case Models.Command.Prepare:
-                                    PrepareAudio();
+                                    BeginPrepareAudio();
                                     PrepareSubtitle();
                                     break;
                             }
@@ -203,7 +205,7 @@ namespace Swegrant.ViewModels
 
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -237,11 +239,34 @@ namespace Swegrant.ViewModels
             }
         }
 
-        async Task PrepareAudio()
+        private async Task PlayAudio()
+        {
+            DependencyService.Get<IAudio>().PlayAudioFile(CurrnetLanguage);
+        }
+
+
+            private async void BeginPrepareAudio()
+        {
+            await Task.Run(() =>
+           {
+
+               PrepareAudio(Language.Farsi);
+               PrepareAudio(Language.Swedish);
+           });
+
+            Messages.Insert(0, new ChatMessage
+            {
+                Message = "Audio Files Preapred",
+                User = Helpers.Settings.UserName,
+                Color = Color.FromRgba(0, 0, 0, 0)
+            });
+        }
+
+        private async Task PrepareAudio(Language language)
         {
             string filename = "VD-";
-            
-            switch(CurrentCharchter)
+
+            switch (CurrentCharchter)
             {
                 case Charachter.Leyla:
                     filename += "LY-";
@@ -256,7 +281,7 @@ namespace Swegrant.ViewModels
 
             filename += "AUD-";
 
-            switch (CurrnetLanguage)
+            switch (language)
             {
                 case Language.English:
                     filename += "EN-";
@@ -275,7 +300,7 @@ namespace Swegrant.ViewModels
 
             filename += ".mp3";
 
-            DependencyService.Get<IAudio>().PrepareAudioFile(filename);
+            DependencyService.Get<IAudio>().PrepareAudioFile(language, filename);
         }
 
 
@@ -392,14 +417,9 @@ namespace Swegrant.ViewModels
 
                 string subtitleContent = ReadSubtitleFile(filename);
                 PopulateSubtitle(subtitleContent);
-                Messages.Insert(0, new ChatMessage
-                {
-                    Message = "Prepared.",
-                    User = Settings.UserName,
-                    Color = Color.FromRgba(0, 0, 0, 0)
-                });
+              
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -441,7 +461,7 @@ namespace Swegrant.ViewModels
                 string fileName = Path.Combine(subtitleDirectoty, filename);
                 content = File.ReadAllText(fileName);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

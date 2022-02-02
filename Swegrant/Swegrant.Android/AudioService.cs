@@ -16,71 +16,67 @@ using Android.Content.Res;
 using Swegrant.Interfaces;
 using System.IO;
 using static Swegrant.Models.MediaInfo;
+using Swegrant.Models;
 
 [assembly: Dependency(typeof(AudioService))]
 namespace Swegrant.Droid
 {
     public class AudioService : IAudio
     {
-        //private static MediaPlayer _Player;
-        //public static MediaPlayer Player
-        //{
-        //    get
-        //    {
-        //        MediaPlayer mediaPlayer = new MediaPlayer();
-        //        MediaPlayer.
-        //        if (_Player == null)
-        //        {
-        //            _Player = new MediaPlayer();
-        //        }
-        //        return _Player;
-        //    }
-        //}
+        private Language currentLanguage;
+
+        private Dictionary<Language, MediaPlayer> mediaPlayers;
 
         private int currentPosition;
 
         private DateTime changeAudioDateTime;
 
-        private MediaPlayer player;
+        //private MediaPlayer player;
+
         public AudioService()
         {
-            player = new MediaPlayer();
+            mediaPlayers = new Dictionary<Language, MediaPlayer>();
+            if (!mediaPlayers.ContainsKey(Language.Farsi))
+            {
+                mediaPlayers.Add(Language.Farsi,
+                    new MediaPlayer());
+            }
+            if (!mediaPlayers.ContainsKey(Language.Swedish))
+            {
+                mediaPlayers.Add(Language.Swedish,
+                    new MediaPlayer());
+            }
         }
-        public void PrepareAudioFile(string fileName)
+        public void PrepareAudioFile(Language selectedLanguage, string fileName)
         {
             try
-            {   
+            {
+
                 string appDataDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
                 string pathToAudioDirectory = Path.Combine(appDataDirectory, DownloadCategory.AUDIO.ToString());
                 string pathToAudioFile = Path.Combine(pathToAudioDirectory, fileName);
                 currentPosition = 0;
-                if (player.IsPlaying)
-                {
-                    currentPosition = player.CurrentPosition;
-                    player.Stop();
-                    player = new MediaPlayer();
-                    this.changeAudioDateTime = DateTime.Now;
-                    player.Prepared += (s, e) =>
-                    {
-                        PlayAudioFile();
-                    };
+                //if (mediaPlayers[currentLanguage].IsPlaying)
+                //{
+                //    currentPosition = mediaPlayers[currentLanguage].CurrentPosition;
+                //    mediaPlayers[currentLanguage].Stop();
 
-                }
-                //using (FileStream stream = File.OpenRead(pathToAudioFile))
-                //{
-                //var fd = global::Android.App.Application.Context.Assets.OpenFd(fileName);
-                //player.Prepared += (s, e) =>
-                //{
-                //    if (currentPosition != 0)
+                //   // mediaPlayers[currentLanguage] = new MediaPlayer();
+
+                //    this.changeAudioDateTime = DateTime.Now;
+                //    mediaPlayers[currentLanguage].Prepared += (s, e) =>
                 //    {
-                //        player.SeekTo(currentPosition+100);
-                //    }
-                //    player.Start();
-                //};
-                player.SetDataSource(pathToAudioFile);
+                //        PlayAudioFile();
+                //    };
+                //}
 
-                //player.SetDataSource(fd.FileDescriptor, fd.StartOffset, fd.Length);
-                player.Prepare();
+
+
+                mediaPlayers[selectedLanguage].SetDataSource(pathToAudioFile);
+
+                mediaPlayers[selectedLanguage].Prepare();
+
+                //this.currentLanguage = selectedLanguage;
                 //}
             }
             catch (Exception ex)
@@ -90,16 +86,35 @@ namespace Swegrant.Droid
         }
 
 
-        public void PlayAudioFile()
+        public void PlayAudioFile(Language selectedLanguage)
         {
             try
             {
+
+                if (mediaPlayers[currentLanguage].IsPlaying)
+                {
+                    this.changeAudioDateTime = DateTime.Now;
+                    currentPosition = mediaPlayers[currentLanguage].CurrentPosition;
+                    mediaPlayers[currentLanguage].Stop();
+
+                    // mediaPlayers[currentLanguage] = new MediaPlayer();
+
+
+                    //mediaPlayers[currentLanguage].Prepared += (s, e) =>
+                    //{
+                    //    PlayAudioFile();
+                    //};
+                }
+
+
                 if (this.currentPosition != 0)
                 {
                     int pauseTime = Convert.ToInt32((DateTime.Now - changeAudioDateTime).TotalMilliseconds);
-                    player.SeekTo(currentPosition + pauseTime);
+                    mediaPlayers[selectedLanguage].SeekTo(currentPosition + pauseTime);
                 }
-                player.Start();
+                currentLanguage = selectedLanguage;
+                mediaPlayers[currentLanguage].Start();
+                
             }
             catch (Exception ex)
             {
@@ -111,10 +126,10 @@ namespace Swegrant.Droid
         {
             try
             {
-                if (player != null)
+                if (mediaPlayers[currentLanguage] != null)
                 {
-                    player.Stop();
-                    player = new MediaPlayer();
+                    mediaPlayers[currentLanguage].Stop();
+                    mediaPlayers[currentLanguage] = new MediaPlayer();
                 }
             }
             catch (Exception ex)
