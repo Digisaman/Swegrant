@@ -52,6 +52,7 @@ namespace Swegrant.Droid
             try
             {
 
+
                 string appDataDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
                 string pathToAudioDirectory = Path.Combine(appDataDirectory, DownloadCategory.AUDIO.ToString());
                 string pathToAudioFile = Path.Combine(pathToAudioDirectory, fileName);
@@ -69,7 +70,7 @@ namespace Swegrant.Droid
                 //        PlayAudioFile();
                 //    };
                 //}
-
+                
 
 
                 mediaPlayers[selectedLanguage].SetDataSource(pathToAudioFile);
@@ -91,11 +92,12 @@ namespace Swegrant.Droid
             try
             {
 
+
                 if (mediaPlayers[currentLanguage].IsPlaying)
                 {
                     this.changeAudioDateTime = DateTime.Now;
                     currentPosition = mediaPlayers[currentLanguage].CurrentPosition;
-                    mediaPlayers[currentLanguage].Stop();
+                    mediaPlayers[currentLanguage].Pause();
 
                     // mediaPlayers[currentLanguage] = new MediaPlayer();
 
@@ -105,7 +107,6 @@ namespace Swegrant.Droid
                     //    PlayAudioFile();
                     //};
                 }
-
 
                 if (this.currentPosition != 0)
                 {
@@ -137,5 +138,7 @@ namespace Swegrant.Droid
 
             }
         }
+
+
     }
 }
