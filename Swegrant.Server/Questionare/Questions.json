@@ -1,0 +1,18 @@
+{
+  "Questions": [
+    {
+      "Title": "wihch is your favorite charchter?",
+      "Answers": [
+          {
+            "Id": 1,
+            "Value": "TARA"
+          },
+          {
+            "Id": 2,
+            "Value": "Layla"
+          }
+      ]
+    }
+  ]
+
+}

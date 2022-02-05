@@ -241,7 +241,11 @@ namespace Swegrant.ViewModels
 
         private async Task PlayAudio()
         {
-            DependencyService.Get<IAudio>().PlayAudioFile(CurrnetLanguage);
+            Task.Run(() =>
+            {
+                DependencyService.Get<IAudio>().PlayAudioFile(CurrnetLanguage);
+            });
+            
         }
 
 
