@@ -7,9 +7,9 @@ namespace Swegrant.Interfaces
 {
     public interface IAudio
     {
-        void PrepareAudioFile(Language currentLanguage, string fileName);
+        void PrepareAudioFile(Language selectedLanguage, string fileName);
 
-        void PlayAudioFile(Language currentLanguage);
+        void PlayAudioFile(Language selectedLanguage);
 
         void StopAudioFile();
     }

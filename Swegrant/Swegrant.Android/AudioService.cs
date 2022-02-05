@@ -70,7 +70,7 @@ namespace Swegrant.Droid
                 //        PlayAudioFile();
                 //    };
                 //}
-                
+
 
 
                 mediaPlayers[selectedLanguage].SetDataSource(pathToAudioFile);
@@ -115,7 +115,7 @@ namespace Swegrant.Droid
                 }
                 currentLanguage = selectedLanguage;
                 mediaPlayers[currentLanguage].Start();
-                
+
             }
             catch (Exception ex)
             {
