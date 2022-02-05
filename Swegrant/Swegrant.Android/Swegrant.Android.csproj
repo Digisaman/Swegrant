@@ -104,6 +104,10 @@
     <AndroidResource Include="Resources\drawable\icon_feed.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Swegrant.Shared\Swegrant.Shared.csproj">
+      <Project>{C0D3EC5D-1F9A-48F1-98EC-AB0669E696A3}</Project>
+      <Name>Swegrant.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Swegrant\Swegrant.csproj">
       <Project>{C2583B3B-A3AA-4E87-ADD0-56D7FB8D0872}</Project>
       <Name>Swegrant</Name>

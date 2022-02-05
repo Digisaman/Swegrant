@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Charachter.cs" />
+    <Compile Remove="Models\Command.cs" />
+    <Compile Remove="Models\DownloadCategory.cs" />
+    <Compile Remove="Models\Language.cs" />
+    <Compile Remove="Models\MediaInfo.cs" />
+    <Compile Remove="Models\ServiceMessage.cs" />
+    <Compile Remove="Models\Subtitle.cs" />
     <Compile Remove="Services\IDataStore.cs" />
     <Compile Remove="Services\MockDataStore.cs" />
     <Compile Remove="ViewModels\FileViewModel.cs" />
@@ -32,6 +39,10 @@
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Swegrant.Shared\Swegrant.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

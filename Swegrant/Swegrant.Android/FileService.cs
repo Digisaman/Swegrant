@@ -15,7 +15,7 @@ using Android.Media;
 using Android.Content.Res;
 using Swegrant.Interfaces;
 using System.IO;
-using static Swegrant.Models.MediaInfo;
+using Swegrant.Shared.Models;
 
 [assembly: Dependency(typeof(FileService))]
 namespace Swegrant.Droid

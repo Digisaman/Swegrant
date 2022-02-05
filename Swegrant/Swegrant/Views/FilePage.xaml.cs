@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Swegrant.Interfaces;
 using Swegrant.Models;
+using Swegrant.Shared.Models;
 using Swegrant.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace Swegrant.Views
             if (e.FileSaved)
             {
                 //DisplayAlert("Swegrant", "File Saved Successfully", "Close");
-                if (mediaInfo.CurrentCategory == MediaInfo.DownloadCategory.AUDIO)
+                if (mediaInfo.CurrentCategory == DownloadCategory.AUDIO)
                 {
                     if ((currentIndex+1) < mediaInfo.AUDIO.Count)
                     {
@@ -64,13 +65,13 @@ namespace Swegrant.Views
                     else
                     {
                         await defaultProgressBar.ProgressTo(1, 500, Easing.Linear);
-                        mediaInfo.CurrentCategory = MediaInfo.DownloadCategory.THSUB;
+                        mediaInfo.CurrentCategory = DownloadCategory.THSUB;
                         currentIndex = 0;
                         downloader.DownloadFile(mediaInfo.THSUB[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
                         this.lblTitle.Text = "Downloading Theater Subtitles...";
                     }
                 }
-                else if (mediaInfo.CurrentCategory == MediaInfo.DownloadCategory.THSUB)
+                else if (mediaInfo.CurrentCategory == DownloadCategory.THSUB)
                 {
                     if ((currentIndex + 1) < mediaInfo.THSUB.Count)
                     {
@@ -87,14 +88,14 @@ namespace Swegrant.Views
                     else
                     {
                         await defaultProgressBar.ProgressTo(1, 500, Easing.Linear);
-                        mediaInfo.CurrentCategory = MediaInfo.DownloadCategory.VDSUB;
+                        mediaInfo.CurrentCategory = DownloadCategory.VDSUB;
                         currentIndex = 0;
                         downloader.DownloadFile(mediaInfo.VDSUB[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
                         this.lblTitle.Text = "Downloading Video Subtitles...";
                     }
 
                 }
-                else if (mediaInfo.CurrentCategory == MediaInfo.DownloadCategory.VDSUB)
+                else if (mediaInfo.CurrentCategory == DownloadCategory.VDSUB)
                 {
                     if ((currentIndex + 1) < mediaInfo.VDSUB.Count)
                     {

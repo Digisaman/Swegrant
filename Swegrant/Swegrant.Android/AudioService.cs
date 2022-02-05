@@ -1,22 +1,12 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Xamarin.Forms;
 using Swegrant.Droid;
 using Android.Media;
-using Android.Content.Res;
 using Swegrant.Interfaces;
 using System.IO;
-using static Swegrant.Models.MediaInfo;
-using Swegrant.Models;
+using Swegrant.Shared.Models;
 
 [assembly: Dependency(typeof(AudioService))]
 namespace Swegrant.Droid

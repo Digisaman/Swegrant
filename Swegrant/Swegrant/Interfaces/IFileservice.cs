@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Swegrant.Shared.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using static Swegrant.Models.MediaInfo;
+
 
 namespace Swegrant.Interfaces
 {

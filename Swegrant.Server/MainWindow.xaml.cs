@@ -17,8 +17,8 @@ using Microsoft.AspNetCore.SignalR;
 using Swegrant.Server.Hubs;
 using System.Threading;
 using System.Diagnostics;
-using Swegrant.Server.Models;
 using System.Windows.Controls;
+using Swegrant.Shared.Models;
 
 namespace Swegrant.Server
 {
@@ -689,7 +689,7 @@ namespace Swegrant.Server
             string scence = this.cmbvdScence.SelectionBoxItem.ToString();
             SendGroupMessage(new ServiceMessage
             {
-                Command = Command.Prepapre,
+                Command = Command.Prepare,
                 Mode = Mode.Video,
                 Scene = Convert.ToInt32(scence)
 

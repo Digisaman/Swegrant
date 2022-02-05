@@ -10,8 +10,8 @@ using Newtonsoft.Json;
 using Swegrant.Interfaces;
 using System.Collections.Generic;
 using System.Threading;
-using static Swegrant.Models.MediaInfo;
 using System.IO;
+using Swegrant.Shared.Models;
 
 namespace Swegrant.ViewModels
 {
@@ -182,11 +182,11 @@ namespace Swegrant.ViewModels
                         {
                             switch (serviceMessage.Command)
                             {
-                                case Models.Command.Play:
+                                case Swegrant.Shared.Models.Command.Play:
                                     PlayAudio();
                                     BeginPlaySub();
                                     break;
-                                case Models.Command.Prepare:
+                                case Swegrant.Shared.Models.Command.Prepare:
                                     BeginPrepareAudio();
                                     PrepareSubtitle();
                                     break;
