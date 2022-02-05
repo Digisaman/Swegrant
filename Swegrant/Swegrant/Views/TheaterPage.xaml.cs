@@ -24,13 +24,11 @@ namespace Swegrant.Views
         public TheaterPage()
         {
             InitializeComponent();
-
-            this.BindingContext = new TheaterViewModel();
         }
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
+           
 
             base.OnAppearing();
 

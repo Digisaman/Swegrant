@@ -7,6 +7,10 @@
         Play,
         Prepare,
         ShowSubtitle,
-        HideSubtitle
+        HideSubtitle,
+        PauseAutoSub,
+        ResumeAutoSub,
+        DisplayManualSub,
+        SelectCharacter
     }
 }

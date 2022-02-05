@@ -1,10 +1,15 @@
-﻿using Swegrant.Helpers;
+﻿using MvvmHelpers;
+using Newtonsoft.Json;
+using Swegrant.Helpers;
 using Swegrant.Models;
+using Swegrant.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -16,6 +21,9 @@ namespace Swegrant.ViewModels
         public ChatMessage ChatMessage { get; }
 
         public ObservableCollection<ChatMessage> Messages { get; }
+
+        
+
         public ObservableCollection<User> Users { get; }
 
         bool isConnected;
@@ -37,8 +45,41 @@ namespace Swegrant.ViewModels
         public MvvmHelpers.Commands.Command DisconnectCommand { get; }
 
         Random random;
+
+        #region Subtitle
+        public Dictionary<Language, Subtitle[]> MultiSub;
+
+        public Subtitle[] CurrentSub
+        {
+            get
+            {
+                if ( MultiSub.ContainsKey(CurrnetLanguage))
+                {
+                    return MultiSub[CurrnetLanguage];
+                }
+                return null;
+            }
+        }
+
+        public Language CurrnetLanguage { get; set; }
+
+        public Character CurrentCharchter { get; set; }
+
+        public int CurrentScene { get; set; }
+
+        private Task currentSubTask;
+        private CancellationTokenSource currentSubCancelationSource;
+        private CancellationToken currentSubCancellationToken;
+        private int currentSubIndex;
+        #endregion
+
         public TheaterViewModel()
         {
+            this.CurrnetLanguage = Helpers.Settings.CurrentLanguage;
+            this.CurrentCharchter = Helpers.Settings.CurrentCharachter;
+            this.CurrentScene = 1;
+            this.MultiSub = new Dictionary<Language, Subtitle[]>();
+
             if (DesignMode.IsDesignModeEnabled)
                 return;
 
@@ -138,14 +179,57 @@ namespace Swegrant.ViewModels
             Device.BeginInvokeOnMainThread(() =>
             {
                 var first = Users.FirstOrDefault(u => u.Name == user);
-
-                Messages.Insert(0, new ChatMessage
+                
+                
+                if (message.StartsWith("{"))
                 {
-                    Message = message,
-                    User = user,
-                    Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
-                });
+                    ServiceMessage serviceMessage = JsonConvert.DeserializeObject<ServiceMessage>(message);
+                    if (serviceMessage != null)
+                    {
+                        switch (serviceMessage.Command)
+                        {   
+                            case Swegrant.Shared.Models.Command.Prepare:
+                                Task.Run(() => PrepareSubtitle());
+                                break;
+                            case Swegrant.Shared.Models.Command.Play:
+                            case Swegrant.Shared.Models.Command.ResumeAutoSub:
+                                ResumeAutoSub();
+                                break;
+                            case Swegrant.Shared.Models.Command.ShowSubtitle:
+                                Task.Run(() => ShowSubtitle());
+                                break;
+                            case Swegrant.Shared.Models.Command.HideSubtitle:
+                                Task.Run(() => HideSubtitle());
+                                break;
+                            case Swegrant.Shared.Models.Command.PauseAutoSub:
+                                Task.Run(() => PauseAutoSub());
+                                break;
+                            case Swegrant.Shared.Models.Command.DisplayManualSub:
+                                Task.Run(() => DisplayManualSub(serviceMessage.Index));
+                                break;
+                            case Swegrant.Shared.Models.Command.SelectCharacter:
+                                Task.Run(() => SelectCharchter());
+                                break;
+
+                        }
+                    }
+                }
+                else
+                {
+                    Messages.Clear();
+                    Messages.Insert(0, new ChatMessage
+                    {
+                        Message = message,
+                        User = user,
+                        Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
+                    });
+                }
             });
+        }
+
+        private void SelectCharchter()
+        {
+            throw new NotImplementedException();
         }
 
         void AddRemoveUser(string name, bool add)
@@ -175,5 +259,191 @@ namespace Swegrant.ViewModels
                 }
             }
         }
+
+        private void BeginPauseAutoSub()
+        {
+
+        }
+
+        private void ResumeAutoSub()
+        {
+            this.currentSubCancelationSource = new CancellationTokenSource();
+            this.currentSubTask = Task.Run(() =>
+            {
+                this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
+                PlaySub();
+
+            }, this.currentSubCancelationSource.Token);
+        }
+
+        private void PlaySub()
+        {
+            if (this.currentSubIndex == 0)
+            {
+                TimeSpan initial = this.CurrentSub[this.currentSubIndex].StartTime;
+                Thread.Sleep(initial);
+            }
+            for (int i = this.currentSubIndex; i < this.CurrentSub.Length - 1; i++)
+            {
+                try
+                {
+                    Messages.Clear();
+                    if (this.currentSubCancelationSource.IsCancellationRequested)
+                    {
+                        this.currentSubCancellationToken.ThrowIfCancellationRequested();
+                        return;
+                    }
+
+                    this.currentSubIndex = i;
+
+
+
+                    Messages.Insert(0, new ChatMessage
+                    {
+                        Message = this.CurrentSub[this.currentSubIndex].Text,
+                        User = Helpers.Settings.UserName,
+                        Color = Color.FromRgba(0, 0, 0, 0)
+                    });
+
+
+
+                    Thread.Sleep(CurrentSub[i].Duration);
+                    if (this.currentSubCancelationSource.IsCancellationRequested)
+                    {
+                        this.currentSubCancellationToken.ThrowIfCancellationRequested();
+                        return;
+                    }
+
+
+
+                    Messages.Insert(0, new ChatMessage
+                    {
+                        Message = " ",
+                        User = Helpers.Settings.UserName,
+                        Color = Color.FromRgba(0, 0, 0, 0)
+                    });
+
+
+
+                    TimeSpan gap = CurrentSub[i + 1].StartTime - CurrentSub[i].EndTime;
+                    Thread.Sleep(gap);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+
+
+        private void PrepareSubtitle()
+        {
+            try
+            {
+                
+
+                //filename += "SUB-";
+
+                //switch (CurrnetLanguage)
+                //{
+                //    case Language.English:
+                //        filename += "EN-";
+                //        break;
+                //    case Language.Farsi:
+                //        filename += "FA-";
+                //        break;
+                //    case Language.Swedish:
+                //        filename += "SV-";
+                //        break;
+                //}
+
+                //filename += "SC-";
+
+                //filename += CurrentScene.ToString("00");
+
+                //filename += ".txt";
+                string subtitleContent = "";
+                
+                if ( !MultiSub.ContainsKey(Language.Farsi))
+                {
+                    string filename = $"TH-SUB-FA-SC-{CurrentScene.ToString("00")}.txt";
+                    subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Theater, filename);
+                    MultiSub.Add(Language.Farsi, Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent));
+                }
+
+                if (!MultiSub.ContainsKey(Language.Swedish))
+                {
+                    string filename = $"TH-SUB-SV-SC-{CurrentScene.ToString("00")}.txt";
+                    subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Theater, filename);
+                    MultiSub.Add(Language.Swedish, Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent));
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void PauseAutoSub()
+        {
+            try
+            {
+                if (this.currentSubTask != null && this.currentSubTask.Status == TaskStatus.Running)
+                {
+                    this.currentSubCancelationSource.Cancel();
+                }
+            }
+            catch (Exception ex)
+            {
+             
+            }
+        }
+
+        private void HideSubtitle()
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+        private void ShowSubtitle()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void DisplayManualSub(int index)
+        {
+            try
+            {
+                currentSubIndex = index;
+                Messages.Clear();
+
+                Messages.Insert(0, new ChatMessage
+                {
+                    Message = this.CurrentSub[this.currentSubIndex].Text,
+                    User = Helpers.Settings.UserName,
+                    Color = Color.FromRgba(0, 0, 0, 0)
+                });
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
     }
 }

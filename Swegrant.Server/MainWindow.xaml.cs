@@ -29,7 +29,7 @@ namespace Swegrant.Server
     {
         private Mode CurrentMode;
         private volatile bool continueAutoLine;
-        private System.Timers.Timer timer;
+        
         private int theaterSceneSelectedIndex = 0;
 
         public static IHubContext<ChatHub> HUB { get; set; }
@@ -69,19 +69,8 @@ namespace Swegrant.Server
             }
 
 
-            timer = new System.Timers.Timer();
-            timer.Interval = TimeSpan.FromMilliseconds(1000).TotalMilliseconds;
-            timer.Elapsed += Timer_Elapsed;
-
         }
-
-        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            string message = this.lstthSub.SelectedItem.ToString();
-            this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
-            HUB.Clients.Group(ChatSettings.ChatGroup).SendAsync(ChatSettings.RecieveCommand, ChatSettings.ServerUser, message);
-        }
-
+     
         private void FillTHSbutitleListBox(string text)
         {
             List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
@@ -142,7 +131,7 @@ namespace Swegrant.Server
         private async void btnStartServer_Click(object sender, RoutedEventArgs e)
         {
             string localIP = Helpers.NetworkHelpers.GetLocalIPv4();
-            string port = "5000";
+            string port = Swegrant.Shared.Models.ChatSettings.DefaultPort;
             if (!string.IsNullOrEmpty(localIP))
             {
                 txtServerAddress.Text = $"{localIP}:{port}";
@@ -165,7 +154,7 @@ namespace Swegrant.Server
                 var host = CreateWebHostBuilder(new string[] { ip, port }).Build();
                 HUB = (IHubContext<ChatHub>)host.Services.GetService(typeof(IHubContext<ChatHub>));
 
-                HUB.Clients.Group(Swegrant.Shared.Models.ChatSettings.ChatGroup).SendAsync(Swegrant.Shared.Models.ChatSettings.RecieveCommand, Swegrant.Shared.Models.ChatSettings.ServerUser, "Start");
+                HUB.Clients.Group(ChatSettings.ChatGroup).SendAsync(ChatSettings.RecieveCommand, ChatSettings.ServerUser, "Start");
                 host.Run();
 
 
@@ -198,11 +187,19 @@ namespace Swegrant.Server
         {
             try
             {
+                
                 string message = this.lstthSub.SelectedItem.ToString();
                 this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
-                _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
-                        _SecondaryWindow.DisplayCurrentSub(this.currentSub[this.currentSubIndex].Text)));
-                HUB.Clients.Group(ChatSettings.ChatGroup).SendAsync(ChatSettings.RecieveCommand, ChatSettings.ServerUser, message);
+                Task.Run(() =>
+                {
+                    _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                            _SecondaryWindow.DisplayCurrentSub(this.currentSub[this.currentSubIndex].Text)));
+                    SendGroupMessage(new ServiceMessage
+                    {
+                        Command = Command.DisplayManualSub,
+                        Index = currentSubIndex
+                    });
+                });
                 this.currentSubIndex++;
             }
             catch (Exception ex)
@@ -293,6 +290,14 @@ namespace Swegrant.Server
                     {
                         text = System.IO.File.ReadAllText(subtitleFilePath);
                         FillTHSbutitleListBox(text);
+                        Task.Run(() =>
+                        {
+                            SendGroupMessage(new ServiceMessage
+                            {
+                                Command = Command.Prepare,
+                                Mode = Mode.Theater
+                            });
+                        });
                     }
                     else
                     {
@@ -321,6 +326,11 @@ namespace Swegrant.Server
                     string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
                     if (File.Exists(videoFilePath))
                     {
+                        SendGroupMessage(new ServiceMessage
+                        {
+                            Command = Command.Play,
+                            Mode = Mode.Theater
+                        });
                         this.currentSubCancelationSource = new CancellationTokenSource();
                         this.currentSubTask = Task.Run(() =>
                        {
@@ -418,7 +428,7 @@ namespace Swegrant.Server
         private void PlaySub()
         {
             if (this.currentSubIndex == 0)
-            {
+            { 
                 TimeSpan initial = this.currentSub[this.currentSubIndex].StartTime;
                 Thread.Sleep(initial);
             }
@@ -449,7 +459,7 @@ namespace Swegrant.Server
                         }));
                     }
 
-                    HUB.Clients.Group(Swegrant.Shared.Models.ChatSettings.ChatGroup).SendAsync(Swegrant.Shared.Models.ChatSettings.RecieveCommand, Swegrant.Shared.Models.ChatSettings.ServerUser, this.currentSub[i].Text);
+                    //HUB.Clients.Group(ChatSettings.ChatGroup).SendAsync(ChatSettings.RecieveCommand, ChatSettings.ServerUser, this.currentSub[i].Text);
 
                     Thread.Sleep(currentSub[i].Duration);
                     if (this.currentSubCancelationSource.IsCancellationRequested)
@@ -478,7 +488,7 @@ namespace Swegrant.Server
                         ));
                     }
 
-                    HUB.Clients.Group(Swegrant.Shared.Models.ChatSettings.ChatGroup).SendAsync(Swegrant.Shared.Models.ChatSettings.RecieveCommand, Swegrant.Shared.Models.ChatSettings.ServerUser, " ");
+                    //HUB.Clients.Group(ChatSettings.ChatGroup).SendAsync(ChatSettings.RecieveCommand, ChatSettings.ServerUser, " ");
 
                     TimeSpan gap = currentSub[i + 1].StartTime - currentSub[i].EndTime;
                     Thread.Sleep(gap);
@@ -542,15 +552,34 @@ namespace Swegrant.Server
         }
 
         private void btnthShowSub_Click(object sender, RoutedEventArgs e)
-        {
-            _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
-                          _SecondaryWindow.ToggleSubVisibility(true)));
+        {   
+
+            Task.Run(() =>
+            {
+
+                _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                              _SecondaryWindow.ToggleSubVisibility(true)));
+                SendGroupMessage(new ServiceMessage
+                {
+                    Command = Command.ShowSubtitle,
+                    Mode = Mode.Theater
+                });
+            });
         }
 
         private void btnthHideSub_Click(object sender, RoutedEventArgs e)
         {
-            _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
-                          _SecondaryWindow.ToggleSubVisibility(false)));
+            Task.Run(() =>
+            {
+
+                _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                              _SecondaryWindow.ToggleSubVisibility(false)));
+                SendGroupMessage(new ServiceMessage
+                {
+                    Command = Command.HideSubtitle,
+                    Mode = Mode.Theater
+                });
+            });
         }
 
         private void btnthPlayVideo_Click_1(object sender, RoutedEventArgs e)
@@ -636,12 +665,22 @@ namespace Swegrant.Server
 
         private void btnPauseAutoSub_Click(object sender, RoutedEventArgs e)
         {
+            
             try
             {
-                if (this.currentSubTask != null && this.currentSubTask.Status == TaskStatus.Running)
+
+                Task.Run(() =>
                 {
-                    this.currentSubCancelationSource.Cancel();
-                }
+                    SendGroupMessage(new ServiceMessage
+                    {
+                        Command = Command.PauseAutoSub,
+                        Mode = Mode.Theater
+                    });
+                    if (this.currentSubTask != null && this.currentSubTask.Status == TaskStatus.Running)
+                    {
+                        this.currentSubCancelationSource.Cancel();
+                    }
+                });
             }
             catch (Exception ex)
             {
@@ -655,11 +694,18 @@ namespace Swegrant.Server
             {
                 this.currentSubCancelationSource = new CancellationTokenSource();
                 //this.currentSubCancellationToken = this.currentSubCancelationSource.Token;
-                this.currentSubTask = Task.Run(PlaySub);
+                //this.currentSubTask = Task.Run(PlaySub);
                 this.currentSubTask = Task.Run(() =>
                 {
+                    SendGroupMessage(new ServiceMessage
+                    {
+                        Command = Command.ResumeAutoSub,
+                        Mode = Mode.Theater
+                    });
+
                     this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
                     PlaySub();
+
 
                 }, this.currentSubCancelationSource.Token);
             }
@@ -680,7 +726,7 @@ namespace Swegrant.Server
             string messageText = Newtonsoft.Json.JsonConvert.SerializeObject(message);
             if (HUB != null)
             {
-                HUB.Clients.Group(Swegrant.Shared.Models.ChatSettings.ChatGroup).SendAsync(Swegrant.Shared.Models.ChatSettings.RecieveCommand, Swegrant.Shared.Models.ChatSettings.ServerUser, messageText);
+                HUB.Clients.Group(ChatSettings.ChatGroup).SendAsync(ChatSettings.RecieveCommand, ChatSettings.ServerUser, messageText);
             }
         }
 

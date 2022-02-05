@@ -58,7 +58,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel  Grid.Row="0" Grid.Column="0">
-                        <Button x:Name="btnLoadSubTitle" Content="Load Subtitle" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnLoadSubTitle_Click">
+                        <Button x:Name="btnLoadSubTitle" Content="Load/Prepare Subtitle" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnLoadSubTitle_Click">
                             <Button.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -204,7 +204,7 @@
                                 </TransformGroup>
                             </Button.RenderTransform>
                         </Button>
-                        <Button x:Name="btnvdprepareAudio" Content="Prepare Audio" HorizontalAlignment="Left"  Margin="5" VerticalAlignment="Top" Height="20" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnvdprepareAudio_Click">
+                        <Button x:Name="btnvdprepareAudio" Content="Prepare Audio/Subtitle" HorizontalAlignment="Left"  Margin="5" VerticalAlignment="Top" Height="20" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnvdprepareAudio_Click">
                             <Button.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>

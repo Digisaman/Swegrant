@@ -99,21 +99,6 @@
                             <ColumnDefinition Width="40" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <!--<Frame
-                            Grid.Column="0"
-                            Padding="0"
-                            BackgroundColor="{Binding Color}"
-                            CornerRadius="20"
-                            HasShadow="True"
-                            HeightRequest="40"
-                            VerticalOptions="CenterAndExpand"
-                            Visual="Material"
-                            WidthRequest="40">
-                            <Label
-                                HorizontalOptions="Center"
-                                Text="{Binding FirstLetter}"
-                                VerticalOptions="Center" />
-                        </Frame>-->
                         <Frame
                             VerticalOptions="CenterAndExpand"
                             HorizontalOptions="CenterAndExpand"
