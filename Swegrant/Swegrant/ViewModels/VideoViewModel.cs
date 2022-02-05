@@ -221,9 +221,9 @@ namespace Swegrant.ViewModels
                 {
                     var color = Messages.FirstOrDefault(m => m.User == name)?.Color ?? Color.FromRgba(0, 0, 0, 0);
                     Device.BeginInvokeOnMainThread(() =>
-                        {
-                            Users.Add(new User { Name = name, Color = color });
-                        });
+                    {
+                        Users.Add(new User { Name = name, Color = color });
+                    });
                 }
             }
             else
@@ -245,18 +245,18 @@ namespace Swegrant.ViewModels
             {
                 DependencyService.Get<IAudio>().PlayAudioFile(CurrnetLanguage);
             });
-            
+
         }
 
 
-            private async void BeginPrepareAudio()
+        private async void BeginPrepareAudio()
         {
             await Task.Run(() =>
-           {
+            {
 
-               PrepareAudio(Language.Farsi);
-               PrepareAudio(Language.Swedish);
-           });
+                PrepareAudio(Language.Farsi);
+                PrepareAudio(Language.Swedish);
+            });
 
             Messages.Insert(0, new ChatMessage
             {
@@ -421,7 +421,7 @@ namespace Swegrant.ViewModels
 
                 string subtitleContent = ReadSubtitleFile(filename);
                 PopulateSubtitle(subtitleContent);
-              
+
             }
             catch (Exception ex)
             {
