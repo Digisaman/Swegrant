@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Swegrant.Server.Models;
+using Swegrant.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;

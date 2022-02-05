@@ -1,6 +1,6 @@
-﻿namespace Swegrant.Server.Models
+﻿namespace Swegrant.Shared.Models
 {
-    public enum Charachter
+    public enum Character
     {
         None = 0,
         Leyla,

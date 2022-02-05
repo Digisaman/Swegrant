@@ -79,7 +79,7 @@ namespace Swegrant.Server
         {
             string message = this.lstthSub.SelectedItem.ToString();
             this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
-            HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
+            HUB.Clients.Group(ChatSettings.ChatGroup).SendAsync(ChatSettings.RecieveCommand, ChatSettings.ServerUser, message);
         }
 
         private void FillTHSbutitleListBox(string text)
@@ -165,7 +165,7 @@ namespace Swegrant.Server
                 var host = CreateWebHostBuilder(new string[] { ip, port }).Build();
                 HUB = (IHubContext<ChatHub>)host.Services.GetService(typeof(IHubContext<ChatHub>));
 
-                HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", "Start");
+                HUB.Clients.Group(Swegrant.Shared.Models.ChatSettings.ChatGroup).SendAsync(Swegrant.Shared.Models.ChatSettings.RecieveCommand, Swegrant.Shared.Models.ChatSettings.ServerUser, "Start");
                 host.Run();
 
 
@@ -202,7 +202,7 @@ namespace Swegrant.Server
                 this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
                 _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
                         _SecondaryWindow.DisplayCurrentSub(this.currentSub[this.currentSubIndex].Text)));
-                HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
+                HUB.Clients.Group(ChatSettings.ChatGroup).SendAsync(ChatSettings.RecieveCommand, ChatSettings.ServerUser, message);
                 this.currentSubIndex++;
             }
             catch (Exception ex)
@@ -221,7 +221,7 @@ namespace Swegrant.Server
             {
                 string message = this.lstthSub.SelectedItem.ToString();
                 this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
-                HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
+                HUB.Clients.Group(ChatSettings.ChatGroup).SendAsync(ChatSettings.RecieveCommand, Swegrant.Shared.Models.ChatSettings.ServerUser, message);
                 int delay = message.Length * 70;
                 Thread.Sleep(delay);
             }
@@ -234,7 +234,7 @@ namespace Swegrant.Server
             {
                 string message = this.lstthSub.SelectedItem.ToString();
                 this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
-                HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", message);
+                HUB.Clients.Group(ChatSettings.ChatGroup).SendAsync(ChatSettings.RecieveCommand, Swegrant.Shared.Models.ChatSettings.ServerUser, message);
                 int delay = message.Length * 70;
                 Thread.Sleep(delay);
             }
@@ -449,7 +449,7 @@ namespace Swegrant.Server
                         }));
                     }
 
-                    HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", this.currentSub[i].Text);
+                    HUB.Clients.Group(Swegrant.Shared.Models.ChatSettings.ChatGroup).SendAsync(Swegrant.Shared.Models.ChatSettings.RecieveCommand, Swegrant.Shared.Models.ChatSettings.ServerUser, this.currentSub[i].Text);
 
                     Thread.Sleep(currentSub[i].Duration);
                     if (this.currentSubCancelationSource.IsCancellationRequested)
@@ -478,7 +478,7 @@ namespace Swegrant.Server
                         ));
                     }
 
-                    HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", " ");
+                    HUB.Clients.Group(Swegrant.Shared.Models.ChatSettings.ChatGroup).SendAsync(Swegrant.Shared.Models.ChatSettings.RecieveCommand, Swegrant.Shared.Models.ChatSettings.ServerUser, " ");
 
                     TimeSpan gap = currentSub[i + 1].StartTime - currentSub[i].EndTime;
                     Thread.Sleep(gap);
@@ -680,7 +680,7 @@ namespace Swegrant.Server
             string messageText = Newtonsoft.Json.JsonConvert.SerializeObject(message);
             if (HUB != null)
             {
-                HUB.Clients.Group("Xamarin").SendAsync("ReceiveMessage", "User1", messageText);
+                HUB.Clients.Group(Swegrant.Shared.Models.ChatSettings.ChatGroup).SendAsync(Swegrant.Shared.Models.ChatSettings.RecieveCommand, Swegrant.Shared.Models.ChatSettings.ServerUser, messageText);
             }
         }
 

@@ -33,7 +33,7 @@ namespace Swegrant.ViewModels
 
         public Language CurrnetLanguage { get; set; }
 
-        public Charachter CurrentCharchter { get; set; }
+        public Character CurrentCharchter { get; set; }
 
         public int CurrentScene { get; set; }
 
@@ -66,7 +66,7 @@ namespace Swegrant.ViewModels
         public VideoViewModel()
         {
             this.CurrnetLanguage = Language.Farsi;
-            this.CurrentCharchter = Charachter.Leyla;
+            this.CurrentCharchter = Character.Leyla;
             this.CurrentScene = 1;
 
             if (DesignMode.IsDesignModeEnabled)
@@ -272,13 +272,13 @@ namespace Swegrant.ViewModels
 
             switch (CurrentCharchter)
             {
-                case Charachter.Leyla:
+                case Character.Leyla:
                     filename += "LY-";
                     break;
-                case Charachter.Sina:
+                case Character.Sina:
                     filename += "SI-";
                     break;
-                case Charachter.Tara:
+                case Character.Tara:
                     filename += "TA-";
                     break;
             }
@@ -387,13 +387,13 @@ namespace Swegrant.ViewModels
 
                 switch (CurrentCharchter)
                 {
-                    case Charachter.Leyla:
+                    case Character.Leyla:
                         filename += "LY-";
                         break;
-                    case Charachter.Sina:
+                    case Character.Sina:
                         filename += "SI-";
                         break;
-                    case Charachter.Tara:
+                    case Character.Tara:
                         filename += "TA-";
                         break;
                 }

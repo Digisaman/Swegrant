@@ -25,9 +25,9 @@ namespace Swegrant.Server.Hubs
         public async Task SendMessageGroup(string groupName, string user, string message)
         {
 
-            await Clients.Group(groupName).SendAsync("ReceiveMessage", user, message);
+            await Clients.Group(groupName).SendAsync(Swegrant.Shared.Models.ChatSettings.RecieveCommand, user, message);
 
-            //await Clients.Group(groupName).SendAsync("ReceiveMessage", user, "Recievesd");
+            //await Clients.Group(groupName).SendAsync(Swegrant.Shared.Models.ChatSettings.RecieveCommand, user, "Recievesd");
 
 
         }

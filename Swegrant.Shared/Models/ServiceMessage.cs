@@ -7,5 +7,7 @@
         public Mode Mode { get; set; }
         public int Scene { get; set; }
         public string Text { get; set; }
+
+        public int Index { get; set; }
     }
 }

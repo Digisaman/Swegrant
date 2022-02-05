@@ -51,7 +51,7 @@ namespace Swegrant
                  }
              };
 
-            hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+            hubConnection.On<string, string>(Swegrant.Shared.Models.ChatSettings.RecieveCommand, (user, message) =>
             {
                 OnReceivedMessage?.Invoke(this, new MessageEventArgs(message, user));
             });
@@ -138,7 +138,7 @@ namespace Swegrant
                         {
                                 ".NET",
                                 "ASP.NET",
-                                "Xamarin"
+                                Swegrant.Shared.Models.ChatSettings.ChatGroup
                         };
         }
     }

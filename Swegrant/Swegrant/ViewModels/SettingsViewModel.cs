@@ -13,6 +13,7 @@ namespace Swegrant.ViewModels
         {
             SaveSettingsCommand = new Command(() => SaveSettings());
             serverIP = Helpers.Settings.ServerIP;
+            serverPort = Helpers.Settings.ServerPort;
         }
 
 
@@ -23,9 +24,17 @@ namespace Swegrant.ViewModels
             set { SetProperty(ref this.serverIP, value); }
         }
 
+        string serverPort = "";
+        public string ServerPort
+        {
+            get { return this.serverPort; }
+            set { SetProperty(ref this.serverPort, value); }
+        }
+
         private void SaveSettings()
         {
             Helpers.Settings.ServerIP = this.ServerIP;
+            Helpers.Settings.ServerPort = this.ServerPort;  
         }
 
         

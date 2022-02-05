@@ -2,10 +2,11 @@
 {
     public enum Language
     {
-        Original = 0,
+        None  = 0,  
         Farsi,
         Swedish,
         English,
-        
+        Original
+
     }
 }
