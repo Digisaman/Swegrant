@@ -86,5 +86,14 @@ namespace Swegrant.Helpers
 
             set => Preferences.Set(nameof(CurrentLanguage), value.ToString());
         }
+
+        private static string mediaInfo = "";
+
+        public static string MediaInfo
+        {
+            get => Preferences.Get(nameof(ServerIP), defaultIP);
+            set => Preferences.Set(nameof(ServerIP), value);
+        }
+
     }
 }

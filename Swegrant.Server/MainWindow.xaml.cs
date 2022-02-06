@@ -547,6 +547,14 @@ namespace Swegrant.Server
         {
             if (e.Source is TabControl)
             {
+
+                if (this.currentSubTask != null && this.currentSubTask.Status == TaskStatus.Running)
+                {
+                    this.currentSubCancelationSource.Cancel();
+                }
+                this.currentSubIndex = 0;
+
+
                 TabControl tab = (TabControl)e.Source;
                 this.CurrentMode = (tab.SelectedIndex == 0 ? Mode.Theater : Mode.Video);
                 SendGroupMessage(new ServiceMessage

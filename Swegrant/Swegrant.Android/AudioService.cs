@@ -67,7 +67,7 @@ namespace Swegrant.Droid
 
                 mediaPlayers[selectedLanguage].Prepare();
 
-                //this.currentLanguage = selectedLanguage;
+                this.currentLanguage = selectedLanguage;
                 //}
             }
             catch (Exception ex)
