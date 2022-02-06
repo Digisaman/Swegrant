@@ -16,7 +16,7 @@ namespace Swegrant.Helpers
                 static readonly string defaultIP = "192.168.0.10";
 #endif
 
-        static readonly string defaultPort = "192.168.0.10";
+        static readonly string defaultPort = "5000";
 
         static readonly string defaultLanguage = Language.None.ToString();
 
