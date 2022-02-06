@@ -5,8 +5,8 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="Swegrant.Views.TheaterPage"
              xmlns:model="clr-namespace:Swegrant.Models"
-    xmlns:viewmodel="clr-namespace:Swegrant.ViewModels"
-        Title="{Binding Title}"
+    xmlns:viewmodel="clr-namespace:Swegrant.ViewModels" xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
+             Title="{Binding Title}"
     mc:Ignorable="d"
              BackgroundColor="{StaticResource PrimaryBackColor}">
     <ContentPage.BindingContext>
@@ -17,8 +17,8 @@
     </ContentPage.ToolbarItems>-->
     <Grid ColumnSpacing="0" RowSpacing="0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="7*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <CollectionView
             Grid.Row="0"
@@ -66,7 +66,45 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <StackLayout Grid.Row="1"
+                     HorizontalOptions="FillAndExpand"
+                     IsVisible="{Binding IsCharchterVisible}">
+            <Label Text="Select Chrachter"
+                      IsVisible="{Binding IsCharchterVisible}"
+                   HorizontalOptions="CenterAndExpand"
+                       TextColor="White"
+               FontAttributes="Bold"
+               FontSize="Medium" />
+            <Picker HorizontalOptions="FillAndExpand" 
+                       IsVisible="{Binding IsCharchterVisible}"
+                    SelectedItem="{Binding SelectedCharchter}" BackgroundColor="White" TextColor="White">
+                <Picker.Items>
+                    <x:String>Leyla</x:String>
+                    <x:String>Tara</x:String>
+                    <x:String>Sina</x:String>
+                </Picker.Items>
+            </Picker>
+        </StackLayout>
 
+        <!--<extensions:Expander Grid.Row="1" >
+
+            <extensions:Expander.Header>
+                <Label Text="Select your chrachter"
+                       TextColor="White"
+               FontAttributes="Bold"
+               FontSize="Medium" />
+            </extensions:Expander.Header>
+            <Grid Padding="10">
+                <Grid.RowDefinitions/>
+                <Picker SelectedItem="{Binding SelectedCharchter}"  TextColor="White">
+                    <Picker.Items>
+                        <x:String>Leyla</x:String>
+                        <x:String>Tara</x:String>
+                        <x:String>Sina</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Grid>
+        </extensions:Expander>-->
 
         <ActivityIndicator x:Name="activityIndicator"
             Grid.ColumnSpan="2"

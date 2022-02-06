@@ -22,7 +22,7 @@ namespace Swegrant.ViewModels
 
         public ObservableCollection<ChatMessage> Messages { get; }
 
-        
+
 
         public ObservableCollection<User> Users { get; }
 
@@ -46,6 +46,42 @@ namespace Swegrant.ViewModels
 
         Random random;
 
+        #region Charchter
+        bool ischarchterVisible = false;
+        public bool IsCharchterVisible
+        {
+            get { return ischarchterVisible; }
+            set { SetProperty(ref ischarchterVisible, value); }
+        }
+
+
+        string selectedCharchter = "";
+        public string SelectedCharchter
+        {
+            get { return selectedCharchter; }
+            set 
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    CurrentCharchter = (Character)Enum.Parse(typeof(Character), value);
+                    SetProperty(ref selectedCharchter, value); 
+                }
+            }
+        }
+        public string[] Charcters
+        {
+            get
+            {
+                return new string[]
+                {
+                    Character.Leyla.ToString(),
+                    Character.Tara.ToString(),
+                    Character.Sina.ToString()
+                };
+            }
+        }
+        #endregion
+
         #region Subtitle
         public Dictionary<Language, Subtitle[]> MultiSub;
 
@@ -53,7 +89,7 @@ namespace Swegrant.ViewModels
         {
             get
             {
-                if ( MultiSub.ContainsKey(CurrnetLanguage))
+                if (MultiSub.ContainsKey(CurrnetLanguage))
                 {
                     return MultiSub[CurrnetLanguage];
                 }
@@ -63,7 +99,20 @@ namespace Swegrant.ViewModels
 
         public Language CurrnetLanguage { get; set; }
 
-        public Character CurrentCharchter { get; set; }
+        private Character _CurnetCharcter;
+        public Character CurrentCharchter 
+        { 
+            get
+            {
+                _CurnetCharcter = Helpers.Settings.CurrentCharachter;
+                return _CurnetCharcter;
+            }
+            set
+            {
+                _CurnetCharcter = value;
+                Helpers.Settings.CurrentCharachter = _CurnetCharcter;
+            }
+        }
 
         public int CurrentScene { get; set; }
 
@@ -72,7 +121,7 @@ namespace Swegrant.ViewModels
         private CancellationToken currentSubCancellationToken;
         private int currentSubIndex;
 
-      
+
 
         bool isSubtitleVisible = false;
         public bool IsSubtitleVisible
@@ -189,15 +238,15 @@ namespace Swegrant.ViewModels
             Device.BeginInvokeOnMainThread(() =>
             {
                 var first = Users.FirstOrDefault(u => u.Name == user);
-                
-                
+
+
                 if (message.StartsWith("{"))
                 {
                     ServiceMessage serviceMessage = JsonConvert.DeserializeObject<ServiceMessage>(message);
                     if (serviceMessage != null)
                     {
                         switch (serviceMessage.Command)
-                        {   
+                        {
                             case Swegrant.Shared.Models.Command.Prepare:
                                 Task.Run(() => PrepareSubtitle());
                                 break;
@@ -217,10 +266,13 @@ namespace Swegrant.ViewModels
                             case Swegrant.Shared.Models.Command.DisplayManualSub:
                                 Task.Run(() => DisplayManualSub(serviceMessage.Index));
                                 break;
-                            case Swegrant.Shared.Models.Command.SelectCharacter:
-                                Task.Run(() => SelectCharchter());
+                            case Swegrant.Shared.Models.Command.ShowSelectCharacter:
+                                Task.Run(() => SelectCharchter(true));
                                 break;
 
+                            case Swegrant.Shared.Models.Command.HideSelectCharchter:
+                                Task.Run(() => SelectCharchter(false));
+                                break;
                         }
                     }
                 }
@@ -237,9 +289,9 @@ namespace Swegrant.ViewModels
             });
         }
 
-        private void SelectCharchter()
+        private void SelectCharchter(bool isVisible)
         {
-            throw new NotImplementedException();
+            IsCharchterVisible = isVisible;
         }
 
         void AddRemoveUser(string name, bool add)
@@ -341,7 +393,7 @@ namespace Swegrant.ViewModels
         {
             try
             {
-                
+
 
                 //filename += "SUB-";
 
@@ -364,8 +416,8 @@ namespace Swegrant.ViewModels
 
                 //filename += ".txt";
                 string subtitleContent = "";
-                
-                if ( !MultiSub.ContainsKey(Language.Farsi))
+
+                if (!MultiSub.ContainsKey(Language.Farsi))
                 {
                     string filename = $"TH-SUB-FA-SC-{CurrentScene.ToString("00")}.txt";
                     subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Theater, filename);
@@ -405,7 +457,7 @@ namespace Swegrant.ViewModels
             }
             catch (Exception ex)
             {
-             
+
             }
         }
 

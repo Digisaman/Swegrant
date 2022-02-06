@@ -752,5 +752,27 @@ namespace Swegrant.Server
 
             });
         }
+
+        private void btnthSelectCharchter_Click(object sender, RoutedEventArgs e)
+        {   
+            SendGroupMessage(new ServiceMessage
+            {
+                Command = Command.ShowSelectCharacter,
+                Mode = Mode.Theater,
+                Scene = this.currentScene
+
+            });
+        }
+
+        private void btnthHideSelectCharchter_Click(object sender, RoutedEventArgs e)
+        {
+            SendGroupMessage(new ServiceMessage
+            {
+                Command = Command.HideSelectCharchter,
+                Mode = Mode.Theater,
+                Scene = this.currentScene
+
+            });
+        }
     }
 }

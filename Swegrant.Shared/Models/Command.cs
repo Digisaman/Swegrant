@@ -11,6 +11,7 @@
         PauseAutoSub,
         ResumeAutoSub,
         DisplayManualSub,
-        SelectCharacter
+        ShowSelectCharacter,
+        HideSelectCharchter
     }
 }

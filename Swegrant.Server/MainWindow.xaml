@@ -50,6 +50,7 @@
                         <RowDefinition  />
                         <RowDefinition />
                         <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -90,18 +91,11 @@
                                 </Button.RenderTransform>
                             </Button>
                         </StackPanel>
-                        
-                        <Button x:Name="btnthStopVideo" Content="Hide Video" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnthStopVideo_Click">
-                            <Button.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform AngleX="-14.938"/>
-                                    <RotateTransform/>
-                                    <TranslateTransform X="-4.135"/>
-                                </TransformGroup>
-                            </Button.RenderTransform>
-                        </Button>
+
+
+                     
                     </StackPanel>
+                    
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                         <TextBlock Margin="20">Language :</TextBlock>
                         <ComboBox x:Name="cmbthLanguage" Margin="20" SelectedIndex="0">
@@ -118,11 +112,20 @@
                             <ComboBoxItem>05</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
-                    
-                    
+
+                    <Button x:Name="btnthStopVideo"  Grid.Row="1" Grid.Column="0" Content="Hide Video" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnthStopVideo_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="-14.938"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="-4.135"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
 
 
-                    <Button x:Name="btnNextSub" Grid.Row="1" Grid.ColumnSpan="2" Content="Next Subtitle Line" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNext_Click">
+                    <Button x:Name="btnNextSub" Grid.Row="1" Grid.Column="1" Content="Next Subtitle Line" HorizontalAlignment="Left" Margin="98,24,0,0" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnNext_Click">
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -174,6 +177,31 @@
                             </TransformGroup>
                         </Button.RenderTransform>
                     </Button>
+
+
+
+                    <Button x:Name="btnthSelectCharchter"  Grid.Row="4" Grid.Column="0" Content="Show Select Charchter" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnthSelectCharchter_Click">
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="-14.938"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="-4.135"/>
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
+
+                    <Button x:Name="btnthHideSelectCharchter"  Grid.Row="4" Grid.Column="1" Content="Hide Select Charchter" HorizontalAlignment="Left" VerticalAlignment="Top" Height="31" Width="207" RenderTransformOrigin="0.5,0.5" Click="btnthHideSelectCharchter_Click">
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="-14.938"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="-4.135"/>
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                        </Button>
+
 
                     <ListBox Grid.RowSpan="4" Grid.Column="3" x:Name="lstthSub">
 
