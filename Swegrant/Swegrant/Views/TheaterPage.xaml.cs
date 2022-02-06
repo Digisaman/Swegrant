@@ -28,10 +28,8 @@ namespace Swegrant.Views
 
         protected override void OnAppearing()
         {
-           
-
             base.OnAppearing();
-
+            
             if (!DesignMode.IsDesignModeEnabled)
                 VM.ConnectCommand.Execute(null);
         }

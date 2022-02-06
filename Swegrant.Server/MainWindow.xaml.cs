@@ -29,13 +29,14 @@ namespace Swegrant.Server
     {
         private Mode CurrentMode;
         private volatile bool continueAutoLine;
-        
+
         private int theaterSceneSelectedIndex = 0;
 
         public static IHubContext<ChatHub> HUB { get; set; }
 
         private List<Subtitle> currentSub;
         private int currentSubIndex = 0;
+        private int currentScene = 0;
         private Task currentSubTask;
         private CancellationTokenSource currentSubCancelationSource;
         private CancellationToken currentSubCancellationToken;
@@ -70,7 +71,7 @@ namespace Swegrant.Server
 
 
         }
-     
+
         private void FillTHSbutitleListBox(string text)
         {
             List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
@@ -187,7 +188,7 @@ namespace Swegrant.Server
         {
             try
             {
-                
+
                 string message = this.lstthSub.SelectedItem.ToString();
                 this.lstthSub.SelectedIndex = this.lstthSub.SelectedIndex + 1;
                 Task.Run(() =>
@@ -197,7 +198,8 @@ namespace Swegrant.Server
                     SendGroupMessage(new ServiceMessage
                     {
                         Command = Command.DisplayManualSub,
-                        Index = currentSubIndex
+                        Index = currentSubIndex,
+                        Scene = this.currentScene
                     });
                 });
                 this.currentSubIndex++;
@@ -284,6 +286,7 @@ namespace Swegrant.Server
                     string text = "";
                     string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
                     string scence = this.cmbthScence.SelectionBoxItem.ToString();
+                    this.currentScene = Convert.ToInt32(scence);
                     string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\THSUB";
                     string subtitleFilePath = $"{subtitleDirectory}\\TH-SUB-{lang}-SC-{scence}.txt";
                     if (File.Exists(subtitleFilePath))
@@ -295,7 +298,8 @@ namespace Swegrant.Server
                             SendGroupMessage(new ServiceMessage
                             {
                                 Command = Command.Prepare,
-                                Mode = Mode.Theater
+                                Mode = Mode.Theater,
+                                Scene = this.currentScene
                             });
                         });
                     }
@@ -322,6 +326,7 @@ namespace Swegrant.Server
                     string text = "";
                     //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
                     string scence = this.cmbthScence.SelectionBoxItem.ToString();
+                    this.currentScene = Convert.ToInt32(scence);
                     string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater";
                     string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
                     if (File.Exists(videoFilePath))
@@ -329,7 +334,8 @@ namespace Swegrant.Server
                         SendGroupMessage(new ServiceMessage
                         {
                             Command = Command.Play,
-                            Mode = Mode.Theater
+                            Mode = Mode.Theater,
+                            Scene = this.currentScene
                         });
                         this.currentSubCancelationSource = new CancellationTokenSource();
                         this.currentSubTask = Task.Run(() =>
@@ -388,6 +394,7 @@ namespace Swegrant.Server
                 string text = "";
                 //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
                 string scence = this.cmbvdScence.SelectionBoxItem.ToString();
+                this.currentScene = Convert.ToInt32(scence);
                 string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Video";
                 string videoFilePath = $"{VideoDirectory}\\VD-SC-{scence}.mp4";
                 if (File.Exists(videoFilePath))
@@ -395,9 +402,9 @@ namespace Swegrant.Server
 
                     SendGroupMessage(new ServiceMessage
                     {
-                        Scene = Convert.ToInt32(scence),
                         Command = Command.Play,
-                        Mode = Mode.Video
+                        Mode = Mode.Video,
+                        Scene = this.currentScene
                     });
 
                     //this.currentSubCancelationSource = new CancellationTokenSource();
@@ -407,7 +414,7 @@ namespace Swegrant.Server
                     //    PlaySub();
 
                     //}, this.currentSubCancelationSource.Token);
-                    
+
                     _SecondaryWindow.Play(videoFilePath);
 
                     //PLayVideo(videoFilePath);
@@ -428,7 +435,7 @@ namespace Swegrant.Server
         private void PlaySub()
         {
             if (this.currentSubIndex == 0)
-            { 
+            {
                 TimeSpan initial = this.currentSub[this.currentSubIndex].StartTime;
                 Thread.Sleep(initial);
             }
@@ -543,16 +550,16 @@ namespace Swegrant.Server
                 TabControl tab = (TabControl)e.Source;
                 this.CurrentMode = (tab.SelectedIndex == 0 ? Mode.Theater : Mode.Video);
                 SendGroupMessage(new ServiceMessage
-                {    
-                      Command = Command.ChangeMode,
-                       Mode = this.CurrentMode,
+                {
+                    Command = Command.ChangeMode,
+                    Mode = this.CurrentMode,
                 });
                 //do work when tab is changed
             }
         }
 
         private void btnthShowSub_Click(object sender, RoutedEventArgs e)
-        {   
+        {
 
             Task.Run(() =>
             {
@@ -562,7 +569,8 @@ namespace Swegrant.Server
                 SendGroupMessage(new ServiceMessage
                 {
                     Command = Command.ShowSubtitle,
-                    Mode = Mode.Theater
+                    Mode = Mode.Theater,
+                    Scene = currentScene
                 });
             });
         }
@@ -665,7 +673,7 @@ namespace Swegrant.Server
 
         private void btnPauseAutoSub_Click(object sender, RoutedEventArgs e)
         {
-            
+
             try
             {
 
@@ -674,7 +682,8 @@ namespace Swegrant.Server
                     SendGroupMessage(new ServiceMessage
                     {
                         Command = Command.PauseAutoSub,
-                        Mode = Mode.Theater
+                        Mode = Mode.Theater,
+                        Scene = this.currentScene
                     });
                     if (this.currentSubTask != null && this.currentSubTask.Status == TaskStatus.Running)
                     {
@@ -700,7 +709,9 @@ namespace Swegrant.Server
                     SendGroupMessage(new ServiceMessage
                     {
                         Command = Command.ResumeAutoSub,
-                        Mode = Mode.Theater
+                        Mode = Mode.Theater,
+                        Scene = this.currentScene
+
                     });
 
                     this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();

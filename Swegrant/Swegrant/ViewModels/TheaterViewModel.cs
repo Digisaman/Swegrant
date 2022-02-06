@@ -71,10 +71,20 @@ namespace Swegrant.ViewModels
         private CancellationTokenSource currentSubCancelationSource;
         private CancellationToken currentSubCancellationToken;
         private int currentSubIndex;
+
+      
+
+        bool isSubtitleVisible = false;
+        public bool IsSubtitleVisible
+        {
+            get { return isSubtitleVisible; }
+            set { SetProperty(ref isSubtitleVisible, value); }
+        }
         #endregion
 
         public TheaterViewModel()
         {
+            this.IsSubtitleVisible = true;
             this.CurrnetLanguage = Helpers.Settings.CurrentLanguage;
             this.CurrentCharchter = Helpers.Settings.CurrentCharachter;
             this.CurrentScene = 1;
@@ -314,16 +324,7 @@ namespace Swegrant.ViewModels
                         return;
                     }
 
-
-
-                    Messages.Insert(0, new ChatMessage
-                    {
-                        Message = " ",
-                        User = Helpers.Settings.UserName,
-                        Color = Color.FromRgba(0, 0, 0, 0)
-                    });
-
-
+                    Messages.Clear();
 
                     TimeSpan gap = CurrentSub[i + 1].StartTime - CurrentSub[i].EndTime;
                     Thread.Sleep(gap);
@@ -377,6 +378,14 @@ namespace Swegrant.ViewModels
                     subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Theater, filename);
                     MultiSub.Add(Language.Swedish, Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent));
                 }
+                Messages.Clear();
+
+                Messages.Insert(0, new ChatMessage
+                {
+                    Message = "Subtitles Loaded",
+                    User = Helpers.Settings.UserName,
+                    Color = Color.FromRgba(0, 0, 0, 0)
+                });
 
             }
             catch (Exception ex)
@@ -404,7 +413,7 @@ namespace Swegrant.ViewModels
         {
             try
             {
-                
+                IsSubtitleVisible = false;
             }
             catch (Exception ex)
             {
@@ -417,7 +426,7 @@ namespace Swegrant.ViewModels
         {
             try
             {
-
+                IsSubtitleVisible = true;
             }
             catch (Exception ex)
             {
