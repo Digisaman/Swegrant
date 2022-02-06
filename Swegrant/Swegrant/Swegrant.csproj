@@ -22,10 +22,12 @@
     <Compile Remove="ViewModels\FileViewModel.cs" />
     <Compile Remove="ViewModels\ItemDetailViewModel.cs" />
     <Compile Remove="ViewModels\ItemsViewModel.cs" />
+    <Compile Remove="ViewModels\LoginViewModel.cs" />
     <Compile Remove="ViewModels\NewItemViewModel.cs" />
     <Compile Remove="Views\ChatPage.xaml.cs" />
     <Compile Remove="Views\ItemDetailPage.xaml.cs" />
     <Compile Remove="Views\ItemsPage.xaml.cs" />
+    <Compile Remove="Views\LoginPage.xaml.cs" />
     <Compile Remove="Views\NewItemPage.xaml.cs" />
   </ItemGroup>
 
@@ -33,6 +35,7 @@
     <EmbeddedResource Remove="Views\ChatPage.xaml" />
     <EmbeddedResource Remove="Views\ItemDetailPage.xaml" />
     <EmbeddedResource Remove="Views\ItemsPage.xaml" />
+    <EmbeddedResource Remove="Views\LoginPage.xaml" />
     <EmbeddedResource Remove="Views\NewItemPage.xaml" />
   </ItemGroup>
 

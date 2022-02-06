@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Swegrant.Helpers;
 using Swegrant.Models;
 using Swegrant.Shared.Models;
+using Swegrant.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -185,7 +186,7 @@ namespace Swegrant.ViewModels
 
                 AddRemoveUser(Settings.UserName, true);
                 await Task.Delay(500);
-                SendLocalMessage("Connected...", Settings.UserName);
+                SendLocalMessage("Remove your HeadPhones", Settings.UserName);
             }
             catch (Exception ex)
             {
@@ -247,6 +248,12 @@ namespace Swegrant.ViewModels
                     {
                         switch (serviceMessage.Command)
                         {
+                            //case Shared.Models.Command.ChangeMode:
+                            //    if ( serviceMessage.Mode == Shared.Models.Mode.Video)
+                            //    {
+                            //        Task.Run(() => NavigateVideo());
+                            //    }
+                            //    break;
                             case Swegrant.Shared.Models.Command.Prepare:
                                 Task.Run(() => PrepareSubtitle());
                                 break;
@@ -288,6 +295,13 @@ namespace Swegrant.ViewModels
                 }
             });
         }
+
+        private async void NavigateVideo()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(VideoPage)}");
+        }
+
+        
 
         private void SelectCharchter(bool isVisible)
         {

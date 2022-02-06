@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.IO;
 using Swegrant.Shared.Models;
+using Swegrant.Views;
 
 namespace Swegrant.ViewModels
 {
@@ -182,6 +183,12 @@ namespace Swegrant.ViewModels
                         {
                             switch (serviceMessage.Command)
                             {
+                                //case Shared.Models.Command.ChangeMode:
+                                //    if (serviceMessage.Mode == Shared.Models.Mode.Theater)
+                                //    {
+                                //        Task.Run(() => NavigatTheater());
+                                //    }
+                                //    break;
                                 case Swegrant.Shared.Models.Command.Play:
                                     PlayAudio();
                                     BeginPlaySub();
@@ -471,6 +478,11 @@ namespace Swegrant.ViewModels
             }
             return content;
 
+        }
+
+        private async void NavigatTheater()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(TheaterPage)}");
         }
     }
 }

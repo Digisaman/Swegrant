@@ -27,5 +27,15 @@ namespace Swegrant.Views
 
 
         }
+
+        private void btnNext_Clicked(object sender, EventArgs e)
+        {
+            NavigateTheater();
+        }
+        private async void NavigateTheater()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(TheaterPage)}");
+        }
+
     }
 }

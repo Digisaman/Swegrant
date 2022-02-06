@@ -16,9 +16,15 @@ namespace Swegrant
             //Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         }
 
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            await Shell.Current.GoToAsync($"//{nameof(SettingsPage)}");
+        }
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
+            await Shell.Current.GoToAsync($"//{nameof(SettingsPage)}");
         }
     }
 }

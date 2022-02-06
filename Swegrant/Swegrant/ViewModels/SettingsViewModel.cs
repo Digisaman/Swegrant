@@ -1,17 +1,19 @@
 ﻿using MvvmHelpers.Commands;
+using Swegrant.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Swegrant.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        public Command SaveSettingsCommand { get; }
+        public MvvmHelpers.Commands.Command SaveSettingsCommand { get; }
 
         public SettingsViewModel()
         {
-            SaveSettingsCommand = new Command(() => SaveSettings());
+            SaveSettingsCommand = new MvvmHelpers.Commands.Command(() => SaveSettings());
             serverIP = Helpers.Settings.ServerIP;
             serverPort = Helpers.Settings.ServerPort;
         }
@@ -34,9 +36,15 @@ namespace Swegrant.ViewModels
         private void SaveSettings()
         {
             Helpers.Settings.ServerIP = this.ServerIP;
-            Helpers.Settings.ServerPort = this.ServerPort;  
+            Helpers.Settings.ServerPort = this.ServerPort;
+            NavigatFile();
         }
 
-        
+        private async void NavigatFile()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(FilePage)}");
+        }
+
+
     }
 }

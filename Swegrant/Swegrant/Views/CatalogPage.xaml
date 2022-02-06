@@ -4,12 +4,13 @@
              x:Class="Swegrant.Views.CatalogPage">
     <ContentPage.Content>
         <StackLayout 
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="FillAndExpand"
             HorizontalOptions="CenterAndExpand">
             <!--<Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />-->
             <WebView x:Name="webBrowser" />
+            <Button x:Name="btnNext" Text="NEXT" Clicked="btnNext_Clicked"/>
 
 
         </StackLayout>

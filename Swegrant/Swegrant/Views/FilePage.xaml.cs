@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -116,6 +117,8 @@ namespace Swegrant.Views
                         
                         await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
                         this.lblTitle.Text = "Download Completed";
+                        Thread.Sleep(1000);
+                        NavigateMain();
                     }
                 }
             }
@@ -166,6 +169,11 @@ namespace Swegrant.Views
                 return null;
             }
             return info;
+        }
+
+        private async void NavigateMain()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
         }
     }
 }

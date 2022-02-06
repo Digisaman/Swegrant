@@ -34,7 +34,7 @@
                VerticalOptions="Center"/>
         <Entry Text="{Binding ServerPort}" Grid.Row="1" Grid.Column="1"></Entry>
         <Button  Grid.Row="2" Grid.ColumnSpan="2"
-                 Text="Save Settings"
+                 Text="NEXT"
                         Command="{Binding SaveSettingsCommand}"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="Start" />
