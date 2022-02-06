@@ -67,7 +67,7 @@ namespace Swegrant.ViewModels
         public VideoViewModel()
         {
             this.CurrnetLanguage = Language.Farsi;
-            this.CurrentCharchter = Character.Leyla;
+            this.CurrentCharchter = Helpers.Settings.CurrentCharachter;
             this.CurrentScene = 1;
 
             if (DesignMode.IsDesignModeEnabled)
