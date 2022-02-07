@@ -633,7 +633,7 @@ namespace Swegrant.Server
                     string text = "";
                     //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
                     string scence = this.cmbthScence.SelectionBoxItem.ToString();
-                    string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater\\Background";
+                    string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater";
                     string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
                     if (File.Exists(videoFilePath))
                     {
