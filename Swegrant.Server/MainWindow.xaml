@@ -24,7 +24,7 @@
         <TextBox Grid.Row="0" Grid.Column="1" 
                  x:Name="txtServerAddress"
                  Height="30" Width="200" 
-                 Text="http://localhost:5000/" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                 Text="192.168.0.10:5000" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         
         <Button x:Name="btnvdOpenSecondary" 
                     Grid.Row="0" Grid.Column="2" 
