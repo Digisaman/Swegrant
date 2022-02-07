@@ -1,4 +1,5 @@
-﻿using System.Net.NetworkInformation;
+﻿using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
 namespace Swegrant.Server.Helpers
@@ -7,10 +8,10 @@ namespace Swegrant.Server.Helpers
     {
         public static string GetLocalIPv4()
         {
-            string ip = GetLocalIPv4(NetworkInterfaceType.Wireless80211);
+            string ip = GetLocalIPv4(NetworkInterfaceType.Ethernet) ;
             if (string.IsNullOrEmpty(ip))
             {
-                ip = GetLocalIPv4(NetworkInterfaceType.Ethernet);
+                ip = GetLocalIPv4(NetworkInterfaceType.Wireless80211);
             }
             return ip;
         }
@@ -31,6 +32,25 @@ namespace Swegrant.Server.Helpers
                 }
             }
             return output;
+        }
+
+        public static string[] GetAllIPs()
+        {
+            List<string> ips = new List<string>();
+            foreach (NetworkInterface item in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (item.OperationalStatus == OperationalStatus.Up)
+                {
+                    foreach (UnicastIPAddressInformation ip in item.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            ips.Add(ip.Address.ToString());
+                        }
+                    }
+                }
+            }
+            return ips.ToArray();
         }
     }
 }
