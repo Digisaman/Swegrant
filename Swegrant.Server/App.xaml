@@ -4,6 +4,38 @@
              xmlns:local="clr-namespace:Swegrant.Server"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Button" x:Key="ButtonStyle" >
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="240"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="ComboBox" x:Key="ComboBoxStyle">
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="TextBoxStyle">
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="RadioButton" x:Key="RadioButtonStyle">
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="CheckBox"  x:Key="CheckBoxStyle">
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="TabItem"  x:Key="TabItemStyle">
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
     </Application.Resources>
 </Application>
