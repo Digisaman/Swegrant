@@ -32,7 +32,7 @@ namespace Swegrant.Views
             bool answer = await DisplayAlert("Question?", "All subtitles will be displayed in the selected language", "Yes", "No");
             if (answer)
             {
-                Helpers.Settings.CurrentLanguage = Shared.Models.Language.Swedish;
+                Helpers.Settings.CurrentLanguage = Shared.Models.Language.Svenska;
                 await Shell.Current.GoToAsync($"//{nameof(CatalogPage)}");
             }
         }

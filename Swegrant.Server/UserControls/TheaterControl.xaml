@@ -31,8 +31,8 @@
                       SelectedIndex="0"
                       Style="{StaticResource ComboBoxStyle}"
                       SelectionChanged="cmbLanguage_SelectionChanged">
-                <ComboBoxItem>FA</ComboBoxItem>
-                <ComboBoxItem>SV</ComboBoxItem>
+                <ComboBoxItem>Farsi</ComboBoxItem>
+                <ComboBoxItem>Svenska</ComboBoxItem>
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal"

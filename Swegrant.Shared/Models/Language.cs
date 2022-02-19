@@ -4,7 +4,7 @@
     {
         None  = 0,  
         Farsi,
-        Swedish,
+        Svenska,
         English,
         Original
 

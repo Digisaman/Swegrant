@@ -24,10 +24,11 @@ namespace Swegrant.Server.UserControls
     public partial class TheaterControl : UserControl
     {
         #region Properties
+        private int currentScene = 1;
+        private Language currentLanguage = Shared.Models.Language.Farsi;
+        //private Character currentCharacter = Character.None;
         private List<Subtitle> currentSub;
         private int currentSubIndex = 0;
-        private int currentScene = 0;
-        private string currentLang = "";
         private Task currentSubTask;
         private CancellationTokenSource currentSubCancelationSource;
         private CancellationToken currentSubCancellationToken;
@@ -82,9 +83,7 @@ namespace Swegrant.Server.UserControls
         {
             try
             {
-                string lang = this.cmbLanguage.SelectionBoxItem.ToString();
-                this.currentScene = Convert.ToInt32(this.cmbScence.SelectionBoxItem.ToString());
-                await LoadSubtitle(lang);
+                await LoadSubtitle();
             }
             catch (Exception ex)
             {
@@ -201,7 +200,7 @@ namespace Swegrant.Server.UserControls
             string lang = this.cmbLanguage.SelectionBoxItem.ToString();
             if (!string.IsNullOrEmpty(lang))
             {
-                this.currentLang = lang;
+                currentLanguage = (Language)Enum.Parse(typeof(Language), lang);
             }
         }
 
@@ -210,7 +209,7 @@ namespace Swegrant.Server.UserControls
         #endregion
 
         #region Methods
-        private async Task LoadSubtitle(string lang)
+        private async Task LoadSubtitle()
         {
             MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
@@ -218,12 +217,13 @@ namespace Swegrant.Server.UserControls
 
                 try
                 {
+                    string lang = currentLanguage.ToString().Substring(0, 2).ToUpper();
                     string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\THSUB";
                     string subtitleFilePath = $"{subtitleDirectory}\\TH-SUB-{lang}-SC-{this.currentScene.ToString("00")}.txt";
                     if (File.Exists(subtitleFilePath))
                     {
                         string text = System.IO.File.ReadAllText(subtitleFilePath);
-                        FillSbutitleListBox(text);
+                        FillSubtitleListBox(text);
                         await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
                         {
                             Command = Command.Prepare,
@@ -243,7 +243,7 @@ namespace Swegrant.Server.UserControls
             }
         }
 
-        private void FillSbutitleListBox(string text)
+        private void FillSubtitleListBox(string text)
         {
             List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
                               StringSplitOptions.RemoveEmptyEntries).ToList();

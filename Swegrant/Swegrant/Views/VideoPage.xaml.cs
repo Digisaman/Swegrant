@@ -73,7 +73,7 @@ namespace Swegrant.Views
 
         private void btnPlaySV_Clicked(object sender, EventArgs e)
         {
-            VM.CurrnetLanguage = Swegrant.Shared.Models.Language.Swedish;
+            VM.CurrnetLanguage = Swegrant.Shared.Models.Language.Svenska;
             VM.ChangeAudioCommand.Execute(null);
             //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
         }

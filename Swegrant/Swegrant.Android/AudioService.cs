@@ -31,9 +31,9 @@ namespace Swegrant.Droid
                 mediaPlayers.Add(Language.Farsi,
                     new MediaPlayer());
             }
-            if (!mediaPlayers.ContainsKey(Language.Swedish))
+            if (!mediaPlayers.ContainsKey(Language.Svenska))
             {
-                mediaPlayers.Add(Language.Swedish,
+                mediaPlayers.Add(Language.Svenska,
                     new MediaPlayer());
             }
         }

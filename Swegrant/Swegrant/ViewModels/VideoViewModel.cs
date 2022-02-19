@@ -269,7 +269,7 @@ namespace Swegrant.ViewModels
             {
 
                 PrepareAudio(Language.Farsi);
-                PrepareAudio(Language.Swedish);
+                PrepareAudio(Language.Svenska);
             });
 
             Messages.Insert(0, new ChatMessage
@@ -307,7 +307,7 @@ namespace Swegrant.ViewModels
                 case Language.Farsi:
                     filename += "FA-";
                     break;
-                case Language.Swedish:
+                case Language.Svenska:
                     filename += "SV-";
                     break;
             }
@@ -422,7 +422,7 @@ namespace Swegrant.ViewModels
                     case Language.Farsi:
                         filename += "FA-";
                         break;
-                    case Language.Swedish:
+                    case Language.Svenska:
                         filename += "SV-";
                         break;
                 }

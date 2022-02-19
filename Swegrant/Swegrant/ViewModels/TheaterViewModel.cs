@@ -438,11 +438,11 @@ namespace Swegrant.ViewModels
                     MultiSub.Add(Language.Farsi, Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent));
                 }
 
-                if (!MultiSub.ContainsKey(Language.Swedish))
+                if (!MultiSub.ContainsKey(Language.Svenska))
                 {
                     string filename = $"TH-SUB-SV-SC-{CurrentScene.ToString("00")}.txt";
                     subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Theater, filename);
-                    MultiSub.Add(Language.Swedish, Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent));
+                    MultiSub.Add(Language.Svenska, Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent));
                 }
                 Messages.Clear();
 
