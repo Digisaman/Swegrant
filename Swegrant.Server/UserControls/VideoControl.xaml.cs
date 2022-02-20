@@ -289,9 +289,19 @@ namespace Swegrant.Server.UserControls
             }
         }
 
-        private void btnSwitchVideo_Click(object sender, RoutedEventArgs e)
+        private async void btnSwitchVideo_Click(object sender, RoutedEventArgs e)
         {
+            await SwitchToVideo();
+        }
 
+        private async Task SwitchToVideo()
+        {
+            await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+            {
+                Command = Command.ChangeMode,
+                Mode = Mode.Video,
+                Scene = currentScene
+            });
         }
     }
 }

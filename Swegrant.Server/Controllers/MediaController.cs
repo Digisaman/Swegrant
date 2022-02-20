@@ -35,7 +35,7 @@ namespace Swegrant.Server.Controllers
                 mediaInfo = JsonConvert.DeserializeObject<MediaInfo>(content);
             }
 
-            string localIP = Helpers.NetworkHelpers.GetLocalIPv4();
+            string localIP = Helpers.AppConfigHelpers.LoadConfig("ServerIP").ToString();
             string port = "5000";
             string protocol = "http";
 

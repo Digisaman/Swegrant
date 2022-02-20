@@ -18,7 +18,7 @@ namespace Swegrant.ViewModels
 {
     public class VideoViewModel : BaseViewModel
     {
-        public List<Subtitle> CurrentSub;
+        public Subtitle[] CurrentSub;
         public ChatMessage ChatMessage { get; }
 
         public ObservableCollection<ChatMessage> Messages { get; }
@@ -340,7 +340,7 @@ namespace Swegrant.ViewModels
                 TimeSpan initial = this.CurrentSub[this.currentSubIndex].StartTime;
                 Thread.Sleep(initial);
             }
-            for (int i = this.currentSubIndex; i < this.CurrentSub.Count - 1; i++)
+            for (int i = this.currentSubIndex; i < this.CurrentSub.Length - 1; i++)
             {
                 try
                 {
@@ -433,8 +433,8 @@ namespace Swegrant.ViewModels
 
                 filename += ".txt";
 
-                string subtitleContent = ReadSubtitleFile(filename);
-                PopulateSubtitle(subtitleContent);
+                string subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Video, filename);
+                this.CurrentSub = Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent);
 
             }
             catch (Exception ex)
@@ -443,49 +443,53 @@ namespace Swegrant.ViewModels
             }
         }
 
-        private void PopulateSubtitle(string text)
-        {
-            this.CurrentSub = new List<Subtitle>();
-            List<string> list = text.Split(new string[] { "\r\n" + "\r\n" },
-                               StringSplitOptions.RemoveEmptyEntries).ToList();
-            this.CurrentSub = new List<Subtitle>();
+        //private void PopulateSubtitle(string text)
+        //{
+        //    this.CurrentSub = new List<Subtitle>();
+        //    List<string> list = text.Split(new string[] { "\r\n" + "\r\n" },
+        //                       StringSplitOptions.RemoveEmptyEntries).ToList();
+        //    this.CurrentSub = new List<Subtitle>();
 
-            //List<string> subLine = new List<string>();
-            foreach (var item in list)
-            {
-                Subtitle sub = new Subtitle();
-                string[] parts = item.Split(new string[] { Environment.NewLine },
-                               StringSplitOptions.RemoveEmptyEntries).ToArray();
-                sub.Id = Convert.ToInt32(parts[0]);
-                string[] times = parts[1].Split(new string[] { "-->" }, StringSplitOptions.RemoveEmptyEntries).ToArray();
-                sub.StartTime = TimeSpan.Parse(times[0].Replace(',', '.').Trim());
-                sub.EndTime = TimeSpan.Parse(times[1].Replace(',', '.').Trim());
-                string line = "";
-                for (int i = 2; i < parts.Length; i++)
-                {
-                    line += parts[i];
-                }
-                sub.Text = line;
-                this.CurrentSub.Add(sub);
-            }
-        }
+        //    //List<string> subLine = new List<string>();
+        //    foreach (var item in list)
+        //    {
+        //        Subtitle sub = new Subtitle();
+        //        string[] parts = item.Split(new string[] { Environment.NewLine },
+        //                       StringSplitOptions.RemoveEmptyEntries).ToArray();
+        //        sub.Id = Convert.ToInt32(parts[0]);
+        //        string[] times = parts[1].Split(new string[] { "-->" }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+        //        sub.StartTime = TimeSpan.Parse(times[0].Replace(',', '.').Trim());
+        //        sub.EndTime = TimeSpan.Parse(times[1].Replace(',', '.').Trim());
+        //        string line = "";
+        //        for (int i = 2; i < parts.Length; i++)
+        //        {
+        //            line += parts[i];
+        //            if ( i < parts.Length-1)
+        //            {
+        //                line += Environment.NewLine;
+        //            }
+        //        }
+        //        sub.Text = line;
+        //        this.CurrentSub.Add(sub);
+        //    }
+        //}
 
-        private string ReadSubtitleFile(string filename)
-        {
-            string content = "";
-            try
-            {
-                string subtitleDirectoty = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DownloadCategory.VDSUB.ToString());
-                string fileName = Path.Combine(subtitleDirectoty, filename);
-                content = File.ReadAllText(fileName);
-            }
-            catch (Exception ex)
-            {
+        //private string ReadSubtitleFile(string filename)
+        //{
+        //    string content = "";
+        //    try
+        //    {
+        //        string subtitleDirectoty = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DownloadCategory.VDSUB.ToString());
+        //        string fileName = Path.Combine(subtitleDirectoty, filename);
+        //        content = File.ReadAllText(fileName);
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-            }
-            return content;
+        //    }
+        //    return content;
 
-        }
+        //}
 
         private async void NavigatTheater()
         {

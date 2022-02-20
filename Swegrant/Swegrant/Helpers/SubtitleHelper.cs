@@ -32,6 +32,10 @@ namespace Swegrant.Helpers
                     for (int i = 2; i < parts.Length; i++)
                     {
                         line += parts[i];
+                        if (i < parts.Length - 1)
+                        {
+                            line += Environment.NewLine;
+                        }
                     }
                     sub.Text = line;
                     subtitles.Add(sub);

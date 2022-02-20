@@ -37,5 +37,14 @@ namespace Swegrant.Views
             await Shell.Current.GoToAsync($"//{nameof(TheaterPage)}");
         }
 
+        private void webBrowser_Navigated(object sender, WebNavigatedEventArgs e)
+        {
+            this.progressBar.IsVisible = false;
+        }
+
+        private void webBrowser_Navigating(object sender, WebNavigatingEventArgs e)
+        {
+            this.progressBar.IsVisible = true;
+        }
     }
 }

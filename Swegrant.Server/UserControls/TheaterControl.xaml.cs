@@ -264,6 +264,10 @@ namespace Swegrant.Server.UserControls
                 for (int i = 2; i < parts.Length; i++)
                 {
                     line += parts[i];
+                    if (i != parts.Length - 1)
+                    {
+                        line += Environment.NewLine;
+                    }
                 }
                 sub.Text = line;
                 currentSub.Add(sub);
@@ -375,8 +379,8 @@ namespace Swegrant.Server.UserControls
         {
             await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
             {
-                Command = Command.DisplayManualSub,
-                Index = currentSubIndex,
+                Command = Command.PauseAutoSub,
+                Mode = Mode.Theater,
                 Scene = this.currentScene
             });
             if (this.currentSubTask != null && this.currentSubTask.Status == TaskStatus.Running)

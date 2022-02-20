@@ -186,7 +186,7 @@ namespace Swegrant.ViewModels
 
                 AddRemoveUser(Settings.UserName, true);
                 await Task.Delay(500);
-                SendLocalMessage("Remove your HeadPhones", Settings.UserName);
+                SendLocalMessage("Connected", Settings.UserName);
             }
             catch (Exception ex)
             {
@@ -248,12 +248,23 @@ namespace Swegrant.ViewModels
                     {
                         switch (serviceMessage.Command)
                         {
-                            //case Shared.Models.Command.ChangeMode:
-                            //    if ( serviceMessage.Mode == Shared.Models.Mode.Video)
-                            //    {
-                            //        Task.Run(() => NavigateVideo());
-                            //    }
-                            //    break;
+                            case Shared.Models.Command.ChangeMode:
+                                if (serviceMessage.Mode == Shared.Models.Mode.Video)
+                                {
+                                    Shell.Current.GoToAsync($"//{nameof(VideoPage)}");
+                                    return;
+                                }
+                                else
+                                {
+                                    Messages.Clear();
+                                    Messages.Insert(0, new ChatMessage
+                                    {
+                                        Message = "Remove your Headphones.",
+                                        User = user,
+                                        Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
+                                    });
+                                }
+                                break;
                             case Swegrant.Shared.Models.Command.Prepare:
                                 Task.Run(() => PrepareSubtitle());
                                 break;
@@ -359,7 +370,7 @@ namespace Swegrant.ViewModels
                 TimeSpan initial = this.CurrentSub[this.currentSubIndex].StartTime;
                 Thread.Sleep(initial);
             }
-            for (int i = this.currentSubIndex; i < this.CurrentSub.Length - 1; i++)
+            for (int i = this.currentSubIndex; i < this.CurrentSub.Length; i++)
             {
                 try
                 {
@@ -392,8 +403,11 @@ namespace Swegrant.ViewModels
 
                     Messages.Clear();
 
-                    TimeSpan gap = CurrentSub[i + 1].StartTime - CurrentSub[i].EndTime;
-                    Thread.Sleep(gap);
+                    if (this.currentSubIndex < CurrentSub.Length - 1)
+                    {
+                        TimeSpan gap = CurrentSub[i + 1].StartTime - CurrentSub[i].EndTime;
+                        Thread.Sleep(gap);
+                    }
                 }
                 catch (Exception ex)
                 {
