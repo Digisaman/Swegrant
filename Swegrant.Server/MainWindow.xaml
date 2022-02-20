@@ -31,6 +31,11 @@
                  Text="192.168.0.10:5000" 
                  TextWrapping="Wrap"
                  Style="{StaticResource TextBoxStyle}"/>
+        <ComboBox x:Name="cmbServerIP"
+                  Grid.Row="0" Grid.Column="1"
+                  Style="{StaticResource ComboBoxStyle}">
+            
+        </ComboBox>
         
         <Button x:Name="btnvdOpenSecondary" 
                     Grid.Row="0" Grid.Column="2" 
