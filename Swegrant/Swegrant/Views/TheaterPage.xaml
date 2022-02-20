@@ -67,7 +67,7 @@
         </CollectionView>
 
         <StackLayout Grid.Row="1"
-                     HorizontalOptions="FillAndExpand"
+                     HorizontalOptions="CenterAndExpand"
                      IsVisible="{Binding IsCharchterVisible}">
             <Label Text="Select Chrachter"
                       IsVisible="{Binding IsCharchterVisible}"
@@ -75,7 +75,7 @@
                        TextColor="White"
                FontAttributes="Bold"
                FontSize="Medium" />
-            <Picker HorizontalOptions="FillAndExpand" 
+            <!--<Picker HorizontalOptions="FillAndExpand" 
                        IsVisible="{Binding IsCharchterVisible}"
                     SelectedItem="{Binding SelectedCharchter}" BackgroundColor="White" TextColor="White">
                 <Picker.Items>
@@ -83,7 +83,29 @@
                     <x:String>Tara</x:String>
                     <x:String>Sina</x:String>
                 </Picker.Items>
-            </Picker>
+            </Picker>-->
+            <StackLayout Orientation="Vertical"
+                         HorizontalOptions="CenterAndExpand">
+                
+            <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         FontSize="Large" 
+                         FontAttributes="Bold"
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsLeylaSelected}" Content="Leyla"/>
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         FontSize="Large" 
+                         FontAttributes="Bold" 
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsSinaSelected}" Content="Sina"/>
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                             HorizontalOptions="Fill"
+                         FontSize="Large" 
+                         FontAttributes="Bold" 
+                         TextColor="{StaticResource 
+                SecondaryTextColor}" IsChecked="{Binding IsTaraSelected}" Content="Tara"/>
+
+            </StackLayout>
+
         </StackLayout>
 
         <!--<extensions:Expander Grid.Row="1" >

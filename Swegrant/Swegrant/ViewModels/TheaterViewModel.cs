@@ -55,32 +55,71 @@ namespace Swegrant.ViewModels
             set { SetProperty(ref ischarchterVisible, value); }
         }
 
-
-        string selectedCharchter = "";
-        public string SelectedCharchter
+        bool isLeylaSelected = false;
+        public bool IsLeylaSelected
         {
-            get { return selectedCharchter; }
-            set 
-            {
-                if (!string.IsNullOrEmpty(value))
+            get { return isLeylaSelected; }
+            set { 
+                SetProperty(ref isLeylaSelected, value); 
+                if (value)
                 {
-                    CurrentCharchter = (Character)Enum.Parse(typeof(Character), value);
-                    SetProperty(ref selectedCharchter, value); 
+                    CurrentCharchter = Character.Lyla;
                 }
             }
         }
-        public string[] Charcters
+
+        bool isSinaSelected = false;
+        public bool IsSinaSelected
         {
-            get
-            {
-                return new string[]
+            get { return isSinaSelected; }
+            set { 
+                SetProperty(ref isSinaSelected, value);
+                if (value)
                 {
-                    Character.Lyla.ToString(),
-                    Character.Tara.ToString(),
-                    Character.Sina.ToString()
-                };
+                    CurrentCharchter = Character.Sina;
+                }
             }
         }
+
+        bool isTaraSelected = false;
+        public bool IsTaraSelected
+        {
+            get { return isTaraSelected; }
+            set { 
+                SetProperty(ref isTaraSelected, value);
+                if (value)
+                {
+                    CurrentCharchter = Character.Tara;
+                }
+            }
+        }
+
+
+        //string selectedCharchter = "";
+        //public string SelectedCharchter
+        //{
+        //    get { return selectedCharchter; }
+        //    set 
+        //    {
+        //        if (!string.IsNullOrEmpty(value))
+        //        {
+        //            CurrentCharchter = (Character)Enum.Parse(typeof(Character), value);
+        //            SetProperty(ref selectedCharchter, value); 
+        //        }
+        //    }
+        //}
+        //public string[] Charcters
+        //{
+        //    get
+        //    {
+        //        return new string[]
+        //        {
+        //            Character.Lyla.ToString(),
+        //            Character.Tara.ToString(),
+        //            Character.Sina.ToString()
+        //        };
+        //    }
+        //}
         #endregion
 
         #region Subtitle
@@ -128,7 +167,9 @@ namespace Swegrant.ViewModels
         public bool IsSubtitleVisible
         {
             get { return isSubtitleVisible; }
-            set { SetProperty(ref isSubtitleVisible, value); }
+            set { 
+                SetProperty(ref isSubtitleVisible, value); 
+            }
         }
         #endregion
 
@@ -137,6 +178,10 @@ namespace Swegrant.ViewModels
             this.IsSubtitleVisible = true;
             this.CurrnetLanguage = Helpers.Settings.CurrentLanguage;
             this.CurrentCharchter = Helpers.Settings.CurrentCharachter;
+            IsLeylaSelected = (CurrentCharchter == Character.Lyla);
+            IsSinaSelected = (CurrentCharchter == Character.Sina);
+            IsTaraSelected = (CurrentCharchter == Character.Tara);
+
             this.CurrentScene = 1;
             this.MultiSub = new Dictionary<Language, Subtitle[]>();
 
