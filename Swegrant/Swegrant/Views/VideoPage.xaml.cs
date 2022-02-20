@@ -54,7 +54,7 @@ namespace Swegrant.Views
 
         private void btnPlayEn_Clicked(object sender, EventArgs e)
         {
-            VM.CurrnetLanguage = Language.English;
+            VM.CurrnetAudioLanguage = Language.English;
             VM.ChangeAudioCommand.Execute(null);
             //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
         }
@@ -66,14 +66,14 @@ namespace Swegrant.Views
 
         private void btnPlayFa_Clicked(object sender, EventArgs e)
         {
-            VM.CurrnetLanguage = Swegrant.Shared.Models.Language.Farsi;
+            VM.CurrnetAudioLanguage = Swegrant.Shared.Models.Language.Farsi;
             VM.ChangeAudioCommand.Execute(null);
             //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-FA-SC-01.mp3");
         }
 
         private void btnPlaySV_Clicked(object sender, EventArgs e)
         {
-            VM.CurrnetLanguage = Swegrant.Shared.Models.Language.Svenska;
+            VM.CurrnetAudioLanguage = Swegrant.Shared.Models.Language.Svenska;
             VM.ChangeAudioCommand.Execute(null);
             //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
         }

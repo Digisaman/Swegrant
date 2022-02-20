@@ -58,6 +58,8 @@
                             <Label
                                 Margin="10,5"
                                 Text="{Binding Message}"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="End"
                                 TextColor="White"
                                 FontSize="36"/>
                         </Frame>
@@ -84,7 +86,7 @@
                     <x:String>Sina</x:String>
                 </Picker.Items>
             </Picker>-->
-            <StackLayout Orientation="Vertical"
+            <StackLayout Orientation="Horizontal"
                          HorizontalOptions="CenterAndExpand">
                 
             <RadioButton BackgroundColor="{StaticResource Primary}" 

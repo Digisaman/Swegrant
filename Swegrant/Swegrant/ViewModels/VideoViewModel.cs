@@ -32,7 +32,10 @@ namespace Swegrant.ViewModels
             }
         }
 
-        public Language CurrnetLanguage { get; set; }
+        public Language CurrnetAudioLanguage { get; set; }
+
+        public Language CurrnetSubtitleLanguage { get; set; }
+
 
         public Character CurrentCharchter { get; set; }
 
@@ -51,13 +54,71 @@ namespace Swegrant.ViewModels
             }
         }
 
+        #region Language
+        bool isAudioSV = false;
+        public bool IsAudioSV
+        {
+            get { return isAudioSV; }
+            set {
+                SetProperty(ref isAudioSV, value);
+                if (value)
+                {
+                    CurrnetAudioLanguage = Language.Svenska;
+                }
+            }
+        }
 
+        bool isAudioFA = false;
+        public bool IsAudioFA
+        {
+            get { return isAudioFA; }
+            set { 
+                SetProperty(ref isAudioFA, value);
+                if (value)
+                {
+                    CurrnetAudioLanguage = Language.Farsi;
+                }
+            }
+        }
+
+
+        bool isSubSV = false;
+        public bool IsSubSV
+        {
+            get { return isSubSV; }
+            set
+            {
+                SetProperty(ref isSubSV, value);
+                if (value)
+                {
+                    CurrnetSubtitleLanguage = Language.Farsi;
+                }
+            }
+        }
+
+        bool isSubFA = false;
+        public bool IsSubFA
+        {
+            get { return isSubFA; }
+            set
+            {
+                SetProperty(ref isSubFA, value);
+                if (value)
+                {
+                    CurrnetSubtitleLanguage = Language.Svenska;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Commands
         public MvvmHelpers.Commands.Command SendMessageCommand { get; }
         public MvvmHelpers.Commands.Command ConnectCommand { get; }
         public MvvmHelpers.Commands.Command DisconnectCommand { get; }
 
         public MvvmHelpers.Commands.Command ChangeAudioCommand { get; }
-
+        #endregion
         private Task currentSubTask;
         private CancellationTokenSource currentSubCancelationSource;
         private CancellationToken currentSubCancellationToken;
@@ -66,7 +127,16 @@ namespace Swegrant.ViewModels
         Random random;
         public VideoViewModel()
         {
-            this.CurrnetLanguage = Language.Farsi;
+            if (Helpers.Settings.CurrentLanguage != Language.None)
+            {
+                this.CurrnetAudioLanguage = Helpers.Settings.CurrentLanguage;
+                this.CurrnetSubtitleLanguage = Helpers.Settings.CurrentLanguage;
+            }
+            else
+            {
+                this.CurrnetAudioLanguage = Language.Farsi;
+                this.CurrnetSubtitleLanguage = Language.Farsi;
+            }
             if (Helpers.Settings.CurrentCharachter != Character.None)
             {
                 this.CurrentCharchter = Helpers.Settings.CurrentCharachter;
@@ -76,6 +146,11 @@ namespace Swegrant.ViewModels
                 this.CurrentCharchter = Character.Lyla;
             }
             this.CurrentScene = 1;
+
+            isAudioFA = (this.CurrnetAudioLanguage == Language.Farsi);
+            isAudioSV = (this.CurrnetAudioLanguage == Language.Svenska);
+            isSubFA = (this.CurrnetSubtitleLanguage == Language.Farsi);
+            isSubSV = (this.CurrnetSubtitleLanguage == Language.Svenska);
 
             if (DesignMode.IsDesignModeEnabled)
                 return;
@@ -88,8 +163,8 @@ namespace Swegrant.ViewModels
             SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
             ConnectCommand = new MvvmHelpers.Commands.Command(async () => await Connect());
             DisconnectCommand = new MvvmHelpers.Commands.Command(async () => await Disconnect());
-            ChangeAudioCommand = new MvvmHelpers.Commands.Command(async () => await PlayAudio())
-; random = new Random();
+            ChangeAudioCommand = new MvvmHelpers.Commands.Command(async () => await PlayAudio()); 
+            random = new Random();
 
             ChatService.Init(Settings.ServerIP, Settings.UseHttps);
 
@@ -257,7 +332,7 @@ namespace Swegrant.ViewModels
         {
             Task.Run(() =>
             {
-                DependencyService.Get<IAudio>().PlayAudioFile(CurrnetLanguage);
+                DependencyService.Get<IAudio>().PlayAudioFile(CurrnetAudioLanguage);
             });
 
         }
@@ -416,7 +491,7 @@ namespace Swegrant.ViewModels
 
                 filename += "SUB-";
 
-                switch (CurrnetLanguage)
+                switch (CurrnetSubtitleLanguage)
                 {
                     case Language.English:
                         filename += "EN-";

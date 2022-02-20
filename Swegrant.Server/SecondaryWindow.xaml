@@ -19,9 +19,11 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock x:Name="txtSub"
-                    Grid.Row="0" Grid.Column="0" 
-                   TextWrapping="WrapWithOverflow"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Grid.Row="0" Grid.Column="0"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                   Margin="10"
                    FontSize="24" Foreground="White" >
             <!--<TextBlock.RenderTransform>
                 <ScaleTransform ScaleX="-1" />

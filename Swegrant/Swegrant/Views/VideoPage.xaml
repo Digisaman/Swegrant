@@ -5,74 +5,24 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:Swegrant.Models"
-    xmlns:viewmodel="clr-namespace:Swegrant.ViewModels"
-    Title="{Binding Title}"
+    xmlns:viewmodel="clr-namespace:Swegrant.ViewModels" xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
+             Title="{Binding Title}"
     mc:Ignorable="d" BackgroundColor="{StaticResource PrimaryBackColor}">
     <ContentPage.BindingContext>
         <viewmodel:VideoViewModel />
     </ContentPage.BindingContext>
     <Grid ColumnSpacing="0" RowSpacing="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <!--<Frame
-            Grid.ColumnSpan="2"
-            Margin="0"
-            Padding="0"
-            HasShadow="True"
-            HorizontalOptions="FillAndExpand"
-            Visual="Material">
-            <CollectionView
-                Grid.Row="0"
-                ItemsLayout="HorizontalList"
-                ItemsSource="{Binding Users}">
-                <d:CollectionView.ItemsSource>
-                    <x:Array Type="{x:Type model:User}">
-                        <model:User Name="James" FirstLetter="J" Color="Red" />
-                        <model:User Name="Heather" FirstLetter="H" Color="Pink" />
-                        <model:User Name="Motz" FirstLetter="M" Color="Orange" />
-                    </x:Array>
-                </d:CollectionView.ItemsSource>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout
-                            Padding="10"
-                            Orientation="Vertical"
-                            Spacing="0">
-                            <Frame
-                                Grid.Column="0"
-                                Padding="0"
-                                BackgroundColor="{Binding Color}"
-                                CornerRadius="20"
-                                HasShadow="True"
-                                HeightRequest="40"
-                                VerticalOptions="CenterAndExpand"
-                                Visual="Material"
-                                WidthRequest="40">
-                                <Label
-                                    HorizontalOptions="Center"
-                                    Text="{Binding FirstLetter}"
-                                    VerticalOptions="Center" />
-                            </Frame>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Frame>-->
-        <!--<StackLayout Grid.Row="1" Grid.ColumnSpan="2">
-
-            <Label Text="{Binding LastReceivedMessage.Message}" 
-                TextColor="White"
-                FontSize="48"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
     
-
-
-        </StackLayout>-->
         <CollectionView
             Grid.Row="0"
             Grid.ColumnSpan="2"
@@ -118,55 +68,122 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <!--<Frame
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-            Margin="10,0,10,10"
-            Padding="20,0,10,0"
-            CornerRadius="25"
-            HorizontalOptions="FillAndExpand"
-            Visual="Material">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="40" />
-                </Grid.ColumnDefinitions>
-                <Entry
-                    Grid.Column="0"
-                    BackgroundColor="Transparent"
-                    Placeholder="Message"
-                    ReturnCommand="{Binding SendMessageCommand}"
-                    ReturnType="Send"
-                    Text="{Binding ChatMessage.Message, Mode=TwoWay}"
-                    Visual="Material" />
-                <Frame
-                    Grid.Column="1"
-                    Padding="0"
-                    BackgroundColor="Red"
-                    CornerRadius="20"
-                    HasShadow="True"
-                    HeightRequest="40"
-                    HorizontalOptions="End"
-                    VerticalOptions="CenterAndExpand"
-                    Visual="Material"
-                    WidthRequest="40">
-                    <ImageButton
-                        BackgroundColor="Transparent"
-                        Command="{Binding SendMessageCommand}"
-                        HorizontalOptions="Center"
-                        IsEnabled="{Binding IsNotBusy}"
-                        Source="{OnPlatform Android='ic_send.png',
-                                            iOS='ic_send.png',
-                                            UWP='Assets/ic_send.png'}"
-                        VerticalOptions="Center" />
-                </Frame>
-            </Grid>
+       
+        <!--<Button x:Name="btnPlaySv" Text="Switch SV Audio" Grid.Row="1" Grid.ColumnSpan="2" Clicked="btnPlaySV_Clicked"/>
+        <Button x:Name="btnPlayFa" Text="Switch FA Audio" Grid.Row="2" Grid.ColumnSpan="2" Clicked="btnPlayFa_Clicked"/>-->
+        <!--<Button x:Name="btnStopPlayback" Text="STOP" Grid.Row="3" Grid.ColumnSpan="2" Clicked="btnStopPlayback_Clicked"/>-->
+        
+        <!--<Button x:Name="btnEnglish" Text="English" Clicked="btnEnglish_Clicked" />-->
 
-        </Frame>-->
-        <!--<Button x:Name="btnPlayEn" Text="Switch SV Audio" Grid.Row="1" Grid.ColumnSpan="2" Clicked="btnPlayEn_Clicked"/>-->
-        <Button x:Name="btnPlaySv" Text="Switch SV Audio" Grid.Row="1" Grid.ColumnSpan="2" Clicked="btnPlaySV_Clicked"/>
-        <Button x:Name="btnPlayFa" Text="Switch FA Audio" Grid.Row="2" Grid.ColumnSpan="2" Clicked="btnPlayFa_Clicked"/>
-        <Button x:Name="btnStopPlayback" Text="STOP" Grid.Row="3" Grid.ColumnSpan="2" Clicked="btnStopPlayback_Clicked"/>
+
+        <extensions:Expander Grid.Row="2" Grid.Column="0" >
+
+            <extensions:Expander.Header>
+                <Label Text="Select Audio language"
+                       TextColor="White"
+               FontAttributes="Bold"
+               FontSize="Medium" />
+            </extensions:Expander.Header>
+            <StackLayout Orientation="Vertical"
+                         HorizontalOptions="CenterAndExpand">
+
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         FontSize="Large" 
+                         FontAttributes="Bold"
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsAudioFA}" 
+                         Content="فارسی"/>
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         FontSize="Large" 
+                         FontAttributes="Bold" 
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsAudioSV}" 
+                         Content="Svenska"/>
+             
+
+            </StackLayout>
+
+        </extensions:Expander>
+
+        <extensions:Expander Grid.Row="2" Grid.Column="1" >
+
+            <extensions:Expander.Header>
+                <Label Text="Select Subtitle language"
+                       TextColor="White"
+               FontAttributes="Bold"
+               FontSize="Medium" />
+            </extensions:Expander.Header>
+            <StackLayout Orientation="Vertical"
+                         HorizontalOptions="CenterAndExpand">
+
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         FontSize="Large" 
+                         FontAttributes="Bold"
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsSubFA}" 
+                         Content="فارسی"/>
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         FontSize="Large" 
+                         FontAttributes="Bold" 
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsSubSV}" 
+                         Content="Svenska"/>
+
+
+            </StackLayout>
+
+        </extensions:Expander>
+
+
+
+
+        <!--<StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="0"
+                         HorizontalOptions="CenterAndExpand">
+            <Label Text="Select Audio language"
+                       TextColor="White"
+               FontAttributes="Bold"
+               FontSize="Medium" />
+
+
+            <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         FontSize="Large" 
+                         FontAttributes="Bold"
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsAudioFA}" 
+                         Content="فارسی"/>
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         FontSize="Large" 
+                         FontAttributes="Bold" 
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsAudioSV}" 
+                         Content="Svenska"/>
+
+
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical"
+                         Grid.Row="2" Grid.Column="1"
+                         HorizontalOptions="CenterAndExpand">
+            <Label Text="Select Subtitle language"
+                       TextColor="White"/>
+
+            <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         FontSize="Large" 
+                         FontAttributes="Bold"
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsSubFA}" 
+                         Content="فارسی"/>
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         FontSize="Large" 
+                         FontAttributes="Bold" 
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsSubSV}" 
+                         Content="Svenska"/>
+
+
+            </StackLayout>-->
+
+   
 
         <ActivityIndicator
             Grid.ColumnSpan="2"
