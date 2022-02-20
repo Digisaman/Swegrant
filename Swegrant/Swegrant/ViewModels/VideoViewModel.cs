@@ -340,7 +340,7 @@ namespace Swegrant.ViewModels
                 TimeSpan initial = this.CurrentSub[this.currentSubIndex].StartTime;
                 Thread.Sleep(initial);
             }
-            for (int i = this.currentSubIndex; i < this.CurrentSub.Length - 1; i++)
+            for (int i = this.currentSubIndex; i < this.CurrentSub.Length; i++)
             {
                 try
                 {
@@ -381,9 +381,11 @@ namespace Swegrant.ViewModels
                     });
 
 
-
-                    TimeSpan gap = CurrentSub[i + 1].StartTime - CurrentSub[i].EndTime;
-                    Thread.Sleep(gap);
+                    if (this.currentSubIndex < CurrentSub.Length - 1)
+                    {
+                        TimeSpan gap = CurrentSub[i + 1].StartTime - CurrentSub[i].EndTime;
+                        Thread.Sleep(gap);
+                    }
                 }
                 catch (Exception ex)
                 {
