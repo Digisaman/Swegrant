@@ -60,16 +60,9 @@ namespace Swegrant.Server.UserControls
             try
             {
 
-                await LoadSubtitle(Character.Lyla);
-                await LoadSubtitle(Character.Sina);
-                await LoadSubtitle(Character.Tara);
-                this.lstSubLeyla.ItemsSource = currentSub[Character.Lyla].Select(c => c.Text).ToArray();
-                this.lstSubLeyla.SelectedIndex = 0;
-                this.lstSubSina.ItemsSource = currentSub[Character.Sina].Select(c => c.Text).ToArray();
-                this.lstSubSina.SelectedIndex = 0;
-                this.lstSubTara.ItemsSource = currentSub[Character.Tara].Select(c => c.Text).ToArray();
-                this.lstSubTara.SelectedIndex = 0;
-
+                subLeyla.LoadSubtitle(Mode.Video, Character.Lyla, currentLanguage, currentScene);
+                subSina.LoadSubtitle(Mode.Video, Character.Sina, currentLanguage, currentScene);
+                subTara.LoadSubtitle(Mode.Video, Character.Tara, currentLanguage, currentScene);
             }
             catch (Exception ex)
             {
@@ -126,125 +119,125 @@ namespace Swegrant.Server.UserControls
         #endregion
 
         #region Methods
-        private async Task LoadSubtitle(Character currentCharacter)
-        {
+        //private async Task LoadSubtitle(Character currentCharacter)
+        //{
 
 
-            try
-            {
-                string lang = currentLanguage.ToString().Substring(0, 2).ToUpper();
-                string charachter = currentCharacter.ToString().Substring(0, 2).ToUpper();
-                string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\VDSUB";
-                string subtitleFilePath = $"{subtitleDirectory}\\VD-{charachter}-SUB-{lang}-SC-{this.currentScene.ToString("00")}.txt";
-                string text = "";
-                if (File.Exists(subtitleFilePath))
-                {
-                    text = System.IO.File.ReadAllText(subtitleFilePath);
-                    Subtitle[] subtitles = FillSubtitleListBox(text);
-                    if (currentSub.ContainsKey(currentCharacter))
-                    {
-                        currentSub[currentCharacter] = subtitles;
-                    }
-                    else
-                    {
-                        currentSub.Add(currentCharacter, subtitles);
-                    }
-                    await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
-                    {
-                        Command = Command.Prepare,
-                        Mode = Mode.Theater,
-                        Scene = this.currentScene
-                    });
-                }
-                else
-                {
-                    MessageBox.Show("File Does NOT Exist");
-                }
+        //    try
+        //    {
+        //        string lang = currentLanguage.ToString().Substring(0, 2).ToUpper();
+        //        string charachter = currentCharacter.ToString().Substring(0, 2).ToUpper();
+        //        string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\VDSUB";
+        //        string subtitleFilePath = $"{subtitleDirectory}\\VD-{charachter}-SUB-{lang}-SC-{this.currentScene.ToString("00")}.txt";
+        //        string text = "";
+        //        if (File.Exists(subtitleFilePath))
+        //        {
+        //            text = System.IO.File.ReadAllText(subtitleFilePath);
+        //            Subtitle[] subtitles = FillSubtitleListBox(text);
+        //            if (currentSub.ContainsKey(currentCharacter))
+        //            {
+        //                currentSub[currentCharacter] = subtitles;
+        //            }
+        //            else
+        //            {
+        //                currentSub.Add(currentCharacter, subtitles);
+        //            }
+        //            await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+        //            {
+        //                Command = Command.Prepare,
+        //                Mode = Mode.Theater,
+        //                Scene = this.currentScene
+        //            });
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("File Does NOT Exist");
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Load Subtitle error", ex);
-            }
-        }
-        private Subtitle[] FillSubtitleListBox(string text)
-        {
-            List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
-                              StringSplitOptions.RemoveEmptyEntries).ToList();
-            List<Subtitle> subList = new List<Subtitle>();
-            //this.currentSubIndex = 0;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Load Subtitle error", ex);
+        //    }
+        //}
+        //private Subtitle[] FillSubtitleListBox(string text)
+        //{
+        //    List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
+        //                      StringSplitOptions.RemoveEmptyEntries).ToList();
+        //    List<Subtitle> subList = new List<Subtitle>();
+        //    //this.currentSubIndex = 0;
 
-            //List<string> subLine = new List<string>();
-            foreach (var item in list)
-            {
-                Subtitle sub = new Subtitle();
-                string[] parts = item.Split(new string[] { Environment.NewLine },
-                               StringSplitOptions.RemoveEmptyEntries).ToArray();
-                sub.Id = Convert.ToInt32(parts[0]);
-                string[] times = parts[1].Split("-->", StringSplitOptions.RemoveEmptyEntries).ToArray();
-                sub.StartTime = TimeSpan.Parse(times[0].Replace(',', '.').Trim());
-                sub.EndTime = TimeSpan.Parse(times[1].Replace(',', '.').Trim());
-                string line = "";
-                for (int i = 2; i < parts.Length; i++)
-                {
-                    line += parts[i];
-                }
-                sub.Text = line;
-                subList.Add(sub);
-            }
-            return subList.ToArray();
-        }
+        //    //List<string> subLine = new List<string>();
+        //    foreach (var item in list)
+        //    {
+        //        Subtitle sub = new Subtitle();
+        //        string[] parts = item.Split(new string[] { Environment.NewLine },
+        //                       StringSplitOptions.RemoveEmptyEntries).ToArray();
+        //        sub.Id = Convert.ToInt32(parts[0]);
+        //        string[] times = parts[1].Split("-->", StringSplitOptions.RemoveEmptyEntries).ToArray();
+        //        sub.StartTime = TimeSpan.Parse(times[0].Replace(',', '.').Trim());
+        //        sub.EndTime = TimeSpan.Parse(times[1].Replace(',', '.').Trim());
+        //        string line = "";
+        //        for (int i = 2; i < parts.Length; i++)
+        //        {
+        //            line += parts[i];
+        //        }
+        //        sub.Text = line;
+        //        subList.Add(sub);
+        //    }
+        //    return subList.ToArray();
+        //}
 
-        private void PlaySub(Character currentCharacter)
-        {
-            //int currentSubIndex = 0;
+        //private void PlaySub(Character currentCharacter)
+        //{
+        //    //int currentSubIndex = 0;
 
-            TimeSpan initial = this.currentSub[currentCharacter][0].StartTime;
-            Thread.Sleep(initial);
-            for (int i = 0; i < this.currentSub.Count; i++)
-            {
-                try
-                {
-                    if (this.currentSubCancelationSource.IsCancellationRequested)
-                    {
-                        this.currentSubCancellationToken.ThrowIfCancellationRequested();
-                        return;
-                    }
+        //    TimeSpan initial = this.currentSub[currentCharacter][0].StartTime;
+        //    Thread.Sleep(initial);
+        //    for (int i = 0; i < this.currentSub.Count; i++)
+        //    {
+        //        try
+        //        {
+        //            if (this.currentSubCancelationSource.IsCancellationRequested)
+        //            {
+        //                this.currentSubCancellationToken.ThrowIfCancellationRequested();
+        //                return;
+        //            }
 
-                    Thread.Sleep(this.currentSub[currentCharacter][i].Duration);
-                    if (this.currentSubCancelationSource.IsCancellationRequested)
-                    {
-                        this.currentSubCancellationToken.ThrowIfCancellationRequested();
-                        return;
-                    }
-                    switch (currentCharacter)
-                    {
-                        case Character.Lyla:
-                            this.Dispatcher.BeginInvoke(new Action(() =>
-                                this.lstSubLeyla.SelectedIndex = this.lstSubLeyla.SelectedIndex + 1));
-                            break;
-                        case Character.Sina:
-                            this.Dispatcher.BeginInvoke(new Action(() =>
-                                this.lstSubSina.SelectedIndex = this.lstSubSina.SelectedIndex + 1));
-                            break;
-                        case Character.Tara:
-                            this.Dispatcher.BeginInvoke(new Action(() =>
-                                this.lstSubTara.SelectedIndex = this.lstSubTara.SelectedIndex + 1));
-                            break;
-                    }
+        //            Thread.Sleep(this.currentSub[currentCharacter][i].Duration);
+        //            if (this.currentSubCancelationSource.IsCancellationRequested)
+        //            {
+        //                this.currentSubCancellationToken.ThrowIfCancellationRequested();
+        //                return;
+        //            }
+        //            switch (currentCharacter)
+        //            {
+        //                case Character.Lyla:
+        //                    this.Dispatcher.BeginInvoke(new Action(() =>
+        //                        this.lstSubLeyla.SelectedIndex = this.lstSubLeyla.SelectedIndex + 1));
+        //                    break;
+        //                case Character.Sina:
+        //                    this.Dispatcher.BeginInvoke(new Action(() =>
+        //                        this.lstSubSina.SelectedIndex = this.lstSubSina.SelectedIndex + 1));
+        //                    break;
+        //                case Character.Tara:
+        //                    this.Dispatcher.BeginInvoke(new Action(() =>
+        //                        this.lstSubTara.SelectedIndex = this.lstSubTara.SelectedIndex + 1));
+        //                    break;
+        //            }
 
-                    if (i < this.currentSub.Count - 1)
-                    {
-                        TimeSpan gap = this.currentSub[currentCharacter][i + 1].StartTime - this.currentSub[currentCharacter][i].EndTime;
-                        Thread.Sleep(gap);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("SubtitleProcessing", ex);
-                }
-            }
-        }
+        //            if (i < this.currentSub.Count - 1)
+        //            {
+        //                TimeSpan gap = this.currentSub[currentCharacter][i + 1].StartTime - this.currentSub[currentCharacter][i].EndTime;
+        //                Thread.Sleep(gap);
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception("SubtitleProcessing", ex);
+        //        }
+        //    }
+        //}
         #endregion
 
         private async void btnPlayVideo_Click(object sender, RoutedEventArgs e)
@@ -273,9 +266,10 @@ namespace Swegrant.Server.UserControls
                     this.currentSubTask = Task.Run(() =>
                     {
                         this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
-                        //PlaySub(Character.Lyla);
-                        //PlaySub(Character.Sina);
-                        //PlaySub(Character.Tara);
+
+                        this.subLeyla.PlaySub();
+                        this.subSina.PlaySub();
+                        this.subTara.PlaySub();
                         MainWindow.Singleton.DisplaySecondaryVideo(videoFilePath);
 
                     }, this.currentSubCancelationSource.Token);

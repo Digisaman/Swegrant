@@ -37,8 +37,9 @@ namespace Swegrant.Server
                 this.videoPlayer.Visibility = Visibility.Visible;
                 videoFilePath = videoFilePath.Replace("\\", "/");
                 this.videoPlayer.Source = new Uri(videoFilePath, UriKind.Absolute);
-                this.videoPlayer.Play();
                 this.videoPlayer.IsMuted = true;
+                this.videoPlayer.Play();
+                
             }
             catch (Exception ex)
             {
