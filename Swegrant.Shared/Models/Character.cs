@@ -3,7 +3,7 @@
     public enum Character
     {
         None = 0,
-        Leyla,
+        Lyla,
         Sina,
         Tara
     }

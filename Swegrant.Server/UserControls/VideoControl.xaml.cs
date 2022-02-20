@@ -26,9 +26,9 @@ namespace Swegrant.Server.UserControls
         #region Properties
         private int currentScene = 1;
         private Language currentLanguage = Shared.Models.Language.Farsi;
-        private Character currentCharacter = Shared.Models.Character.Leyla;
-        private List<Subtitle> currentSub;
-        private int currentSubIndex = 0;
+        //private Character currentCharacter = Shared.Models.Character.Leyla;
+        private Dictionary<Character, Subtitle[]> currentSub;
+        //private int currentSubIndex = 0;
         private Task currentSubTask;
         private CancellationTokenSource currentSubCancelationSource;
         private CancellationToken currentSubCancellationToken;
@@ -38,6 +38,20 @@ namespace Swegrant.Server.UserControls
         public VideoControl()
         {
             InitializeComponent();
+            this.currentSub = new Dictionary<Character, Subtitle[]>();
+            this.cmbLanguage.ItemsSource = new Language[]
+            {
+                Shared.Models.Language.Farsi,
+                Shared.Models.Language.Svenska
+            };
+            this.cmbScence.ItemsSource = new int[]
+            {
+                1,
+                2,
+                3,
+                4,
+                5
+            };
         }
 
         #region EventHandlers
@@ -45,7 +59,17 @@ namespace Swegrant.Server.UserControls
         {
             try
             {
-                await LoadSubtitle();
+
+                await LoadSubtitle(Character.Lyla);
+                await LoadSubtitle(Character.Sina);
+                await LoadSubtitle(Character.Tara);
+                this.lstSubLeyla.ItemsSource = currentSub[Character.Lyla].Select(c => c.Text).ToArray();
+                this.lstSubLeyla.SelectedIndex = 0;
+                this.lstSubSina.ItemsSource = currentSub[Character.Sina].Select(c => c.Text).ToArray();
+                this.lstSubSina.SelectedIndex = 0;
+                this.lstSubTara.ItemsSource = currentSub[Character.Tara].Select(c => c.Text).ToArray();
+                this.lstSubTara.SelectedIndex = 0;
+
             }
             catch (Exception ex)
             {
@@ -53,13 +77,19 @@ namespace Swegrant.Server.UserControls
             }
         }
 
-        
+
 
         private async void btnPrepareAudio_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                await LoadSubtitle();
+                await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+                {
+                    Command = Command.Prepare,
+                    Mode = Mode.Video,
+                    Scene = currentScene
+
+                });
             }
             catch (Exception ex)
             {
@@ -68,77 +98,81 @@ namespace Swegrant.Server.UserControls
         }
 
 
-        private void cmbCharchter_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string character = this.cmbCharchter.SelectionBoxItem.ToString();
-            if (!string.IsNullOrEmpty(character))
-            {
-                currentCharacter = (Character)Enum.Parse(typeof(Character), character);
-            }
-        }
+        //private void cmbCharchter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    string character = this.cmbCharchter.SelectionBoxItem.ToString();
+        //    if (!string.IsNullOrEmpty(character))
+        //    {
+        //        currentCharacter = (Character)Enum.Parse(typeof(Character), character);
+        //    }
+        //}
 
         private void cmbLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string lang = this.cmbLanguage.SelectionBoxItem.ToString();
-            if (!string.IsNullOrEmpty(lang))
+            //ComboBoxItem item = (ComboBoxItem) this.cmbLanguage.SelectedItem;
+            if (this.cmbLanguage.SelectedItem != null)
             {
-                currentLanguage = (Language)Enum.Parse(typeof(Language), lang);
+                currentLanguage = (Language)Enum.Parse(typeof(Language), cmbLanguage.SelectedItem.ToString());
             }
         }
 
         private void cmbScence_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string scene = this.cmbScence.SelectionBoxItem.ToString();
-            if (!string.IsNullOrEmpty(scene))
+            if (this.cmbScence.SelectedItem != null)
             {
-                this.currentScene = Convert.ToInt32(scene);
+                this.currentScene = Convert.ToInt32(this.cmbScence.SelectedItem);
             }
         }
         #endregion
 
         #region Methods
-        private async Task LoadSubtitle()
+        private async Task LoadSubtitle(Character currentCharacter)
         {
-            MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
-            {
 
-                try
+
+            try
+            {
+                string lang = currentLanguage.ToString().Substring(0, 2).ToUpper();
+                string charachter = currentCharacter.ToString().Substring(0, 2).ToUpper();
+                string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\VDSUB";
+                string subtitleFilePath = $"{subtitleDirectory}\\VD-{charachter}-SUB-{lang}-SC-{this.currentScene.ToString("00")}.txt";
+                string text = "";
+                if (File.Exists(subtitleFilePath))
                 {
-                    string lang = currentLanguage.ToString().Substring(0, 2).ToUpper();
-                    string charachter = currentCharacter.ToString().Substring(0, 2).ToUpper();
-                    string subtitleDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA\\VDSUB";
-                    string subtitleFilePath = $"{subtitleDirectory}\\VD-{charachter}-SUB-{lang}-SC-{this.currentScene.ToString("00")}.txt";
-                    string text = "";
-                    if (File.Exists(subtitleFilePath))
+                    text = System.IO.File.ReadAllText(subtitleFilePath);
+                    Subtitle[] subtitles = FillSubtitleListBox(text);
+                    if (currentSub.ContainsKey(currentCharacter))
                     {
-                        text = System.IO.File.ReadAllText(subtitleFilePath);
-                        FillSubtitleListBox(text);
-                        await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
-                        {
-                            Command = Command.Prepare,
-                            Mode = Mode.Theater,
-                            Scene = this.currentScene
-                        });
+                        currentSub[currentCharacter] = subtitles;
                     }
                     else
                     {
-                        MessageBox.Show("File Does NOT Exist");
+                        currentSub.Add(currentCharacter, subtitles);
                     }
-
+                    await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+                    {
+                        Command = Command.Prepare,
+                        Mode = Mode.Theater,
+                        Scene = this.currentScene
+                    });
                 }
-                catch (Exception ex)
+                else
                 {
-                    throw new Exception("Load Subtitle error", ex);
+                    MessageBox.Show("File Does NOT Exist");
                 }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Load Subtitle error", ex);
             }
         }
-        private void FillSubtitleListBox(string text)
+        private Subtitle[] FillSubtitleListBox(string text)
         {
             List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
                               StringSplitOptions.RemoveEmptyEntries).ToList();
-            this.currentSub = new List<Subtitle>();
-            this.currentSubIndex = 0;
+            List<Subtitle> subList = new List<Subtitle>();
+            //this.currentSubIndex = 0;
 
             //List<string> subLine = new List<string>();
             foreach (var item in list)
@@ -156,20 +190,18 @@ namespace Swegrant.Server.UserControls
                     line += parts[i];
                 }
                 sub.Text = line;
-                currentSub.Add(sub);
+                subList.Add(sub);
             }
-            this.lstSub.ItemsSource = currentSub.Select(c => c.Text).ToArray();
-            this.lstSub.SelectedIndex = 0;
+            return subList.ToArray();
         }
 
-        private void PlaySub()
+        private void PlaySub(Character currentCharacter)
         {
-            if (this.currentSubIndex == 0)
-            {
-                TimeSpan initial = this.currentSub[this.currentSubIndex].StartTime;
-                Thread.Sleep(initial);
-            }
-            for (int i = this.currentSubIndex; i < this.currentSub.Count; i++)
+            //int currentSubIndex = 0;
+
+            TimeSpan initial = this.currentSub[currentCharacter][0].StartTime;
+            Thread.Sleep(initial);
+            for (int i = 0; i < this.currentSub.Count; i++)
             {
                 try
                 {
@@ -178,20 +210,19 @@ namespace Swegrant.Server.UserControls
                         this.currentSubCancellationToken.ThrowIfCancellationRequested();
                         return;
                     }
-                    this.currentSubIndex = i;
 
-                    MainWindow.Singleton.DisplaySecondarySub(currentSub[i].Text);
+                    MainWindow.Singleton.DisplaySecondarySub(this.currentSub[currentCharacter][i].Text);
 
-                    Thread.Sleep(currentSub[i].Duration);
+                    Thread.Sleep(this.currentSub[currentCharacter][i].Duration);
                     if (this.currentSubCancelationSource.IsCancellationRequested)
                     {
                         this.currentSubCancellationToken.ThrowIfCancellationRequested();
                         return;
                     }
                     MainWindow.Singleton.DisplaySecondarySub(" ");
-                    if (this.currentSubIndex < this.currentSub.Count - 1)
+                    if (i < this.currentSub.Count - 1)
                     {
-                        TimeSpan gap = currentSub[i + 1].StartTime - currentSub[i].EndTime;
+                        TimeSpan gap = this.currentSub[currentCharacter][i + 1].StartTime - this.currentSub[currentCharacter][i].EndTime;
                         Thread.Sleep(gap);
                     }
                 }
@@ -203,7 +234,55 @@ namespace Swegrant.Server.UserControls
         }
         #endregion
 
-        private void btnPlayVideo_Click(object sender, RoutedEventArgs e)
+        private async void btnPlayVideo_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+
+                //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
+                //string scence = this.cmbvdScence.SelectionBoxItem.ToString();
+                //this.currentScene = Convert.ToInt32(scence);
+                string text = "";
+                string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Video";
+                string videoFilePath = $"{VideoDirectory}\\VD-SC-{this.currentScene.ToString("00")}.mp4";
+                if (File.Exists(videoFilePath))
+                {
+
+                    await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+                    {
+                        Command = Command.Play,
+                        Mode = Mode.Video,
+                        Scene = this.currentScene
+                    });
+
+                    this.currentSubCancelationSource = new CancellationTokenSource();
+                    this.currentSubTask = Task.Run(() =>
+                    {
+                        this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
+                        PlaySub(Character.Lyla);
+                        PlaySub(Character.Sina);
+                        PlaySub(Character.Tara);
+                        MainWindow.Singleton.DisplaySecondaryVideo(videoFilePath);
+
+                    }, this.currentSubCancelationSource.Token);
+
+                    
+
+                    //PLayVideo(videoFilePath);
+                    //Task.Run(PlaySub);
+                    //_SecondaryWindow.Play(videoFilePath);
+
+
+                }
+                else
+                {
+                    MessageBox.Show("File Does NOT Exist");
+                }
+            }
+        }
+
+        private void btnSwitchVideo_Click(object sender, RoutedEventArgs e)
         {
 
         }

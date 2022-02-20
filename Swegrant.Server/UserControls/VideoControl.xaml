@@ -11,7 +11,7 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="4*" />
+            <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -20,27 +20,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <Button x:Name="btnLoadSubTitle" 
-                    Grid.Row="0" Grid.Column="0"
-                                Content="Load Subtitle" 
-                                Style="{StaticResource ButtonStyle}"
-                                Click="btnLoadSubTitle_Click">
-        </Button>
-        <Button x:Name="btnPrepareAudio" 
-                    Grid.Row="0" Grid.Column="1"
-                    Content="Prepare Audio/Subtitle" 
-                    Style="{StaticResource ButtonStyle}"
-                    Click="btnPrepareAudio_Click">
-        </Button>
-        <Button x:Name="btnPlayVideo" 
-                    Grid.Row="0" Grid.Column="2"
-                    Content="Play Video" 
-                    Style="{StaticResource ButtonStyle}"
-                    Click="btnPlayVideo_Click">
-        </Button> 
-
-
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+        <!--<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
             <TextBlock Text="Charchter" Style="{StaticResource TextBlockStyle}" />
 
             <ComboBox x:Name="cmbCharchter" 
@@ -51,41 +31,82 @@
                 <ComboBoxItem>Sina</ComboBoxItem>
                 <ComboBoxItem>Tara</ComboBoxItem>
             </ComboBox>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+        </StackPanel>-->
+        <Button x:Name="btnSwitchVideo" 
+                    Grid.Row="0" Grid.Column="0"
+                                Content="Switch To Video" 
+                                Style="{StaticResource ButtonStyle}"
+                                Click="btnSwitchVideo_Click">
+        </Button>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
             <TextBlock Margin="20">Language :</TextBlock>
             <ComboBox x:Name="cmbLanguage" 
                       Style="{StaticResource ComboBoxStyle}"
                       SelectionChanged="cmbLanguage_SelectionChanged"
                       SelectedIndex="0">
-                <ComboBoxItem>Farsi</ComboBoxItem>
-                <ComboBoxItem>Svenska</ComboBoxItem>
+                <!--<ComboBoxItem>Farsi</ComboBoxItem>
+                <ComboBoxItem>Svenska</ComboBoxItem>-->
             </ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
             <TextBlock Style="{StaticResource TextBlockStyle}">Scene :</TextBlock>
             <ComboBox x:Name="cmbScence" 
                       SelectionChanged="cmbScence_SelectionChanged"
                       Style="{StaticResource ComboBoxStyle}"
                       SelectedIndex="0">
-                <ComboBoxItem>01</ComboBoxItem>
+                <!--<ComboBoxItem>01</ComboBoxItem>
                 <ComboBoxItem>02</ComboBoxItem>
                 <ComboBoxItem>03</ComboBoxItem>
                 <ComboBoxItem>04</ComboBoxItem>
-                <ComboBoxItem>05</ComboBoxItem>
+                <ComboBoxItem>05</ComboBoxItem>-->
             </ComboBox>
         </StackPanel>
+
+
+        <Button x:Name="btnLoadSubTitle" 
+                    Grid.Row="1" Grid.Column="0"
+                                Content="Load Multi Subtitle" 
+                                Style="{StaticResource ButtonStyle}"
+                                Click="btnLoadSubTitle_Click">
+        </Button>
+        <Button x:Name="btnPrepareAudio" 
+                    Grid.Row="1" Grid.Column="1"
+                    Content="Prepare Audio/Subtitle" 
+                    Style="{StaticResource ButtonStyle}"
+                   Click="btnPrepareAudio_Click">
+        </Button>
+        <Button x:Name="btnPlayVideo" 
+                    Grid.Row="1" Grid.Column="2"
+                    Content="Play Video" 
+                    Style="{StaticResource ButtonStyle}"
+                    Click="btnPlayVideo_Click">
+        </Button> 
+
+
+        
+        
         <TextBlock Grid.Row="2" Grid.Column="0" 
-                   Style="{StaticResource TextBlockStyle}">Current Line :</TextBlock>
+                   Style="{StaticResource TextBlockStyle}" Text="Leyla" />
         <TextBlock Grid.Row="2" Grid.Column="1" 
+                   Style="{StaticResource TextBlockStyle}" Text="Sina" />
+        <TextBlock Grid.Row="2" Grid.Column="2" 
+                   Style="{StaticResource TextBlockStyle}" Text="Tara" />
+        <!--<TextBlock Grid.Row="2" Grid.Column="1" 
                    Style="{StaticResource TextBlockStyle}" 
-                   Text="NONE" x:Name="txtCurrentLine">
-                        <!--<TextBlock.RenderTransform>
+                   Text="NONE" x:Name="txtCurrentLine"/>-->
+        <!--<TextBlock.RenderTransform>
                             <ScaleTransform ScaleX="-1" />
                         </TextBlock.RenderTransform>-->
-        </TextBlock>
 
-        <ListBox Grid.Row="3" Grid.ColumnSpan="3" x:Name="lstSub">
+
+        <ListBox Grid.Row="3" Grid.Column="0" x:Name="lstSubLeyla">
+
+        </ListBox>
+        <ListBox Grid.Row="3" Grid.Column="1" x:Name="lstSubSina">
+
+        </ListBox>
+        <ListBox Grid.Row="3" Grid.Column="2" x:Name="lstSubTara">
 
         </ListBox>
     </Grid>

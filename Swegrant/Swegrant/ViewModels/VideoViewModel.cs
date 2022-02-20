@@ -73,7 +73,7 @@ namespace Swegrant.ViewModels
             }
             else
             {
-                this.CurrentCharchter = Character.Leyla;
+                this.CurrentCharchter = Character.Lyla;
             }
             this.CurrentScene = 1;
 
@@ -286,7 +286,7 @@ namespace Swegrant.ViewModels
 
             switch (CurrentCharchter)
             {
-                case Character.Leyla:
+                case Character.Lyla:
                     filename += "LY-";
                     break;
                 case Character.Sina:
@@ -401,7 +401,7 @@ namespace Swegrant.ViewModels
 
                 switch (CurrentCharchter)
                 {
-                    case Character.Leyla:
+                    case Character.Lyla:
                         filename += "LY-";
                         break;
                     case Character.Sina:

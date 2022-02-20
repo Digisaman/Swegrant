@@ -75,7 +75,7 @@ namespace Swegrant.ViewModels
             {
                 return new string[]
                 {
-                    Character.Leyla.ToString(),
+                    Character.Lyla.ToString(),
                     Character.Tara.ToString(),
                     Character.Sina.ToString()
                 };
