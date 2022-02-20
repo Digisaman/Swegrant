@@ -59,7 +59,7 @@ namespace Swegrant.Server.UserControls
                 if (File.Exists(subtitleFilePath))
                 {
                     string text = System.IO.File.ReadAllText(subtitleFilePath);
-                    currentSub = FillSubtitleListBox(text);
+                    currentSub = PopulateSub(text);
                     this.lstSub.ItemsSource = currentSub.Select(c => c.Text).ToArray();
                     this.CurrentIndex = 0;
                 }
@@ -74,7 +74,7 @@ namespace Swegrant.Server.UserControls
             }
         }
 
-        private Subtitle[] FillSubtitleListBox(string text)
+        private Subtitle[] PopulateSub(string text)
         {
             List<string> list = text.Split(new string[] { Environment.NewLine + Environment.NewLine },
                               StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -94,7 +94,12 @@ namespace Swegrant.Server.UserControls
                 string line = "";
                 for (int i = 2; i < parts.Length; i++)
                 {
+                   
                     line += parts[i];
+                    if (i != parts.Length - 1)
+                    {
+                        line += Environment.NewLine;
+                    }
                 }
                 sub.Text = line;
                 subList.Add(sub);

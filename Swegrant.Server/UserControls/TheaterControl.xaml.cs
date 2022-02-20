@@ -299,6 +299,13 @@ namespace Swegrant.Server.UserControls
                         return;
                     }
                     MainWindow.Singleton.DisplaySecondarySub(" ");
+
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        this.lstSub.SelectedIndex = this.lstSub.SelectedIndex + 1;
+                        this.lstSub.ScrollIntoView(this.lstSub.Items[this.lstSub.SelectedIndex]);
+                    }));
+
                     if (this.currentSubIndex < this.currentSub.Count - 1)
                     {
                         TimeSpan gap = currentSub[i + 1].StartTime - currentSub[i].EndTime;

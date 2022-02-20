@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:Swegrant.Server.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ListBox x:Name="lstSub">
+    <ListBox x:Name="lstSub" 
+             ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
     </ListBox>
 </UserControl>
