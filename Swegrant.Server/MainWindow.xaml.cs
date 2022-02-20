@@ -168,7 +168,8 @@ namespace Swegrant.Server
         {
             try
             {
-                _SecondaryWindow.Play(videoFilePath);
+                _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                    _SecondaryWindow.Play(videoFilePath)));
             }
             catch (Exception ex)
             {

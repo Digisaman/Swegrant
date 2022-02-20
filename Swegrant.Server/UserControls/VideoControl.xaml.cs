@@ -211,15 +211,28 @@ namespace Swegrant.Server.UserControls
                         return;
                     }
 
-                    MainWindow.Singleton.DisplaySecondarySub(this.currentSub[currentCharacter][i].Text);
-
                     Thread.Sleep(this.currentSub[currentCharacter][i].Duration);
                     if (this.currentSubCancelationSource.IsCancellationRequested)
                     {
                         this.currentSubCancellationToken.ThrowIfCancellationRequested();
                         return;
                     }
-                    MainWindow.Singleton.DisplaySecondarySub(" ");
+                    switch (currentCharacter)
+                    {
+                        case Character.Lyla:
+                            this.Dispatcher.BeginInvoke(new Action(() =>
+                                this.lstSubLeyla.SelectedIndex = this.lstSubLeyla.SelectedIndex + 1));
+                            break;
+                        case Character.Sina:
+                            this.Dispatcher.BeginInvoke(new Action(() =>
+                                this.lstSubSina.SelectedIndex = this.lstSubSina.SelectedIndex + 1));
+                            break;
+                        case Character.Tara:
+                            this.Dispatcher.BeginInvoke(new Action(() =>
+                                this.lstSubTara.SelectedIndex = this.lstSubTara.SelectedIndex + 1));
+                            break;
+                    }
+
                     if (i < this.currentSub.Count - 1)
                     {
                         TimeSpan gap = this.currentSub[currentCharacter][i + 1].StartTime - this.currentSub[currentCharacter][i].EndTime;
@@ -260,9 +273,9 @@ namespace Swegrant.Server.UserControls
                     this.currentSubTask = Task.Run(() =>
                     {
                         this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
-                        PlaySub(Character.Lyla);
-                        PlaySub(Character.Sina);
-                        PlaySub(Character.Tara);
+                        //PlaySub(Character.Lyla);
+                        //PlaySub(Character.Sina);
+                        //PlaySub(Character.Tara);
                         MainWindow.Singleton.DisplaySecondaryVideo(videoFilePath);
 
                     }, this.currentSubCancelationSource.Token);
