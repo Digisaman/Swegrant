@@ -136,7 +136,9 @@
 
 
 
-        <Grid HorizontalOptions="CenterAndExpand" Grid.Row="2" Grid.ColumnSpan="2">
+        <Grid HorizontalOptions="CenterAndExpand" 
+              Grid.Row="2" Grid.ColumnSpan="2"
+              IsVisible="{Binding IsLangugeVisible}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>

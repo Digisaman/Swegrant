@@ -54,12 +54,27 @@ namespace Swegrant.ViewModels
             }
         }
 
+
+        bool isLangugeVisible;
+        public bool IsLangugeVisible
+        {
+            get => isLangugeVisible;
+            set
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    SetProperty(ref isLangugeVisible, value);
+                });
+            }
+        }
+
         #region Language
         bool isAudioSV = false;
         public bool IsAudioSV
         {
             get { return isAudioSV; }
-            set {
+            set
+            {
                 SetProperty(ref isAudioSV, value);
                 if (value)
                 {
@@ -72,7 +87,8 @@ namespace Swegrant.ViewModels
         public bool IsAudioFA
         {
             get { return isAudioFA; }
-            set { 
+            set
+            {
                 SetProperty(ref isAudioFA, value);
                 if (value)
                 {
@@ -146,6 +162,7 @@ namespace Swegrant.ViewModels
                 this.CurrentCharchter = Character.Lyla;
             }
             this.CurrentScene = 1;
+            IsLangugeVisible = true;
 
             isAudioFA = (this.CurrnetAudioLanguage == Language.Farsi);
             isAudioSV = (this.CurrnetAudioLanguage == Language.Svenska);
@@ -163,7 +180,7 @@ namespace Swegrant.ViewModels
             SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
             ConnectCommand = new MvvmHelpers.Commands.Command(async () => await Connect());
             DisconnectCommand = new MvvmHelpers.Commands.Command(async () => await Disconnect());
-            ChangeAudioCommand = new MvvmHelpers.Commands.Command(async () => await PlayAudio()); 
+            ChangeAudioCommand = new MvvmHelpers.Commands.Command(async () => await PlayAudio());
             random = new Random();
 
             ChatService.Init(Settings.ServerIP, Settings.UseHttps);
@@ -261,17 +278,32 @@ namespace Swegrant.ViewModels
                     if (message.StartsWith("{"))
                     {
                         ServiceMessage serviceMessage = JsonConvert.DeserializeObject<ServiceMessage>(message);
-                        if (serviceMessage != null)
+
+
+                        if (serviceMessage.Mode == Shared.Models.Mode.Video ||
+                        (serviceMessage.Mode == Shared.Models.Mode.Theater && serviceMessage.Command == Shared.Models.Command.ChangeMode))
                         {
+                            this.CurrentScene = serviceMessage.Scene;
                             switch (serviceMessage.Command)
                             {
-                                //case Shared.Models.Command.ChangeMode:
-                                //    if (serviceMessage.Mode == Shared.Models.Mode.Theater)
-                                //    {
-                                //        Task.Run(() => NavigatTheater());
-                                //    }
-                                //    break;
+                                case Shared.Models.Command.ChangeMode:
+                                    if (serviceMessage.Mode == Shared.Models.Mode.Theater)
+                                    {
+                                        Shell.Current.GoToAsync($"//{nameof(TheaterPage)}");
+                                    }
+                                    else
+                                    {
+                                        Messages.Clear();
+                                        Messages.Insert(0, new ChatMessage
+                                        {
+                                            Message = "Put on your Headphones.",
+                                            User = user,
+                                            Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
+                                        });
+                                    }
+                                    break;
                                 case Swegrant.Shared.Models.Command.Play:
+                                    this.currentSubIndex = 0;
                                     PlayAudio();
                                     BeginPlaySub();
                                     break;
@@ -281,6 +313,7 @@ namespace Swegrant.ViewModels
                                     break;
                             }
                         }
+
                     }
                     else
                     {
@@ -353,6 +386,7 @@ namespace Swegrant.ViewModels
                 User = Helpers.Settings.UserName,
                 Color = Color.FromRgba(0, 0, 0, 0)
             });
+            IsLangugeVisible = false;
         }
 
         private async Task PrepareAudio(Language language)

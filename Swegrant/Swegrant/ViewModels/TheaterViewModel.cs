@@ -290,52 +290,59 @@ namespace Swegrant.ViewModels
                 {
                     ServiceMessage serviceMessage = JsonConvert.DeserializeObject<ServiceMessage>(message);
                     if (serviceMessage != null)
-                    {
-                        switch (serviceMessage.Command)
+                    {   
+                        if (serviceMessage.Mode == Shared.Models.Mode.Theater || 
+                        (serviceMessage.Mode == Shared.Models.Mode.Video && serviceMessage.Command == Shared.Models.Command.ChangeMode))
                         {
-                            case Shared.Models.Command.ChangeMode:
-                                if (serviceMessage.Mode == Shared.Models.Mode.Video)
-                                {
-                                    Shell.Current.GoToAsync($"//{nameof(VideoPage)}");
-                                    return;
-                                }
-                                else
-                                {
-                                    Messages.Clear();
-                                    Messages.Insert(0, new ChatMessage
+                            this.CurrentScene = serviceMessage.Scene;
+                            switch (serviceMessage.Command)
+                            {
+                                case Shared.Models.Command.ChangeMode:
+                                    if (serviceMessage.Mode == Shared.Models.Mode.Video)
                                     {
-                                        Message = "Remove your Headphones.",
-                                        User = user,
-                                        Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
-                                    });
-                                }
-                                break;
-                            case Swegrant.Shared.Models.Command.Prepare:
-                                Task.Run(() => PrepareSubtitle());
-                                break;
-                            case Swegrant.Shared.Models.Command.Play:
-                            case Swegrant.Shared.Models.Command.ResumeAutoSub:
-                                ResumeAutoSub();
-                                break;
-                            case Swegrant.Shared.Models.Command.ShowSubtitle:
-                                Task.Run(() => ShowSubtitle());
-                                break;
-                            case Swegrant.Shared.Models.Command.HideSubtitle:
-                                Task.Run(() => HideSubtitle());
-                                break;
-                            case Swegrant.Shared.Models.Command.PauseAutoSub:
-                                Task.Run(() => PauseAutoSub());
-                                break;
-                            case Swegrant.Shared.Models.Command.DisplayManualSub:
-                                Task.Run(() => DisplayManualSub(serviceMessage.Index));
-                                break;
-                            case Swegrant.Shared.Models.Command.ShowSelectCharacter:
-                                Task.Run(() => SelectCharchter(true));
-                                break;
+                                        Shell.Current.GoToAsync($"//{nameof(VideoPage)}");
+                                    }
+                                    else
+                                    {
+                                        Messages.Clear();
+                                        Messages.Insert(0, new ChatMessage
+                                        {
+                                            Message = "Remove your Headphones.",
+                                            User = user,
+                                            Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
+                                        });
+                                    }
+                                    break;
+                                case Swegrant.Shared.Models.Command.Prepare:
+                                    Task.Run(() => PrepareSubtitle());
+                                    break;
+                                case Swegrant.Shared.Models.Command.Play:
+                                    this.currentSubIndex = 0;
+                                    ResumeAutoSub();
+                                    break;
+                                case Swegrant.Shared.Models.Command.ResumeAutoSub:
+                                    ResumeAutoSub();
+                                    break;
+                                case Swegrant.Shared.Models.Command.ShowSubtitle:
+                                    Task.Run(() => ShowSubtitle());
+                                    break;
+                                case Swegrant.Shared.Models.Command.HideSubtitle:
+                                    Task.Run(() => HideSubtitle());
+                                    break;
+                                case Swegrant.Shared.Models.Command.PauseAutoSub:
+                                    Task.Run(() => PauseAutoSub());
+                                    break;
+                                case Swegrant.Shared.Models.Command.DisplayManualSub:
+                                    Task.Run(() => DisplayManualSub(serviceMessage.Index));
+                                    break;
+                                case Swegrant.Shared.Models.Command.ShowSelectCharacter:
+                                    Task.Run(() => SelectCharchter(true));
+                                    break;
 
-                            case Swegrant.Shared.Models.Command.HideSelectCharchter:
-                                Task.Run(() => SelectCharchter(false));
-                                break;
+                                case Swegrant.Shared.Models.Command.HideSelectCharchter:
+                                    Task.Run(() => SelectCharchter(false));
+                                    break;
+                            }
                         }
                     }
                 }
@@ -489,19 +496,27 @@ namespace Swegrant.ViewModels
 
                 //filename += ".txt";
                 string subtitleContent = "";
-
+                string filename = $"TH-SUB-FA-SC-{CurrentScene.ToString("00")}.txt";
+                subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Theater, filename);
                 if (!MultiSub.ContainsKey(Language.Farsi))
                 {
-                    string filename = $"TH-SUB-FA-SC-{CurrentScene.ToString("00")}.txt";
-                    subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Theater, filename);
                     MultiSub.Add(Language.Farsi, Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent));
                 }
+                else
+                {
+                    MultiSub[Language.Farsi] = Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent);
+                }
 
+                filename = $"TH-SUB-SV-SC-{CurrentScene.ToString("00")}.txt";
+                subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Theater, filename);
                 if (!MultiSub.ContainsKey(Language.Svenska))
                 {
-                    string filename = $"TH-SUB-SV-SC-{CurrentScene.ToString("00")}.txt";
-                    subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Theater, filename);
+                    
                     MultiSub.Add(Language.Svenska, Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent));
+                }
+                else
+                {
+                    MultiSub[Language.Svenska] = Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent);
                 }
                 Messages.Clear();
 

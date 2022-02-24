@@ -101,7 +101,7 @@ namespace Swegrant.Server
                 string port = Swegrant.Shared.Models.ChatSettings.DefaultPort;
                 if (!string.IsNullOrEmpty(localIP))
                 {
-                    txtServerAddress.Text = $"{localIP}:{port}";
+                    
                     Task task = new Task(() => StartServer(localIP, port));
                     task.Start();
 

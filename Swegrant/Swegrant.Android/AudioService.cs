@@ -47,25 +47,16 @@ namespace Swegrant.Droid
                 string pathToAudioDirectory = Path.Combine(appDataDirectory, DownloadCategory.AUDIO.ToString());
                 string pathToAudioFile = Path.Combine(pathToAudioDirectory, fileName);
                 currentPosition = 0;
-                //if (mediaPlayers[currentLanguage].IsPlaying)
-                //{
-                //    currentPosition = mediaPlayers[currentLanguage].CurrentPosition;
-                //    mediaPlayers[currentLanguage].Stop();
-
-                //   // mediaPlayers[currentLanguage] = new MediaPlayer();
-
-                //    this.changeAudioDateTime = DateTime.Now;
-                //    mediaPlayers[currentLanguage].Prepared += (s, e) =>
-                //    {
-                //        PlayAudioFile();
-                //    };
-                //}
+                if (File.Exists(pathToAudioFile))
+                {
+                 
 
 
 
-                mediaPlayers[selectedLanguage].SetDataSource(pathToAudioFile);
+                    mediaPlayers[selectedLanguage].SetDataSource(pathToAudioFile);
 
-                mediaPlayers[selectedLanguage].Prepare();
+                    mediaPlayers[selectedLanguage].Prepare();
+                }
 
                 
                 

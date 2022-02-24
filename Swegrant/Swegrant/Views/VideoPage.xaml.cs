@@ -52,6 +52,8 @@ namespace Swegrant.Views
             base.OnDisappearing();
         }
 
+        
+
         //private void btnPlayEn_Clicked(object sender, EventArgs e)
         //{
         //    VM.CurrnetAudioLanguage = Language.English;
