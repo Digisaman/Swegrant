@@ -17,13 +17,14 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Horizontal" 
-            Grid.Row="0" Grid.Column="0">
+            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock 
                     Style="{StaticResource TextBlockStyle}">Language :</TextBlock>
             <ComboBox x:Name="cmbLanguage" 
@@ -32,9 +33,6 @@
                       Style="{StaticResource ComboBoxStyle}"
                       SelectionChanged="cmbLanguage_SelectionChanged">
             </ComboBox>
-        <!--</StackPanel>
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="0" Grid.Column="1">-->
             <TextBlock 
                     Style="{StaticResource TextBlockStyle}">Scene :</TextBlock>
             <ComboBox x:Name="cmbScence" 
@@ -45,10 +43,11 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="0" Grid.Column="1">
+                    Grid.Row="0" Grid.Column="2"   VerticalAlignment="Center" >
             <TextBlock 
-                    Style="{StaticResource TextBlockStyle}">Background Video :</TextBlock>
+                    Style="{StaticResource TextBlockStyle}">Video :</TextBlock>
             <ComboBox x:Name="cmbVideo" 
+                      HorizontalAlignment="Right"
                       Style="{StaticResource ComboBoxStyle}"
                       SelectionChanged="cmbVideo_SelectionChanged">
             </ComboBox>
@@ -57,79 +56,110 @@
         <Button x:Name="btnSwitchTheater" 
                     Grid.Row="1" Grid.Column="0"
                     Content="Switch Theater Mode" 
+                     Background="Red"
                     Style="{StaticResource ButtonStyle}"
                     Click="btnSwitchTheater_Click"/>
 
         <Button x:Name="btnLoadSubTitle" 
-                    Grid.Row="1" Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                     Content="Load/Prepare Subtitle" 
                     Style="{StaticResource ButtonStyle}"
                     Click="btnLoadSubTitle_Click"/>
       
 
         <Button x:Name="btnPlayVideo" 
+                        FontWeight="Bold"
                         Grid.Row="2" Grid.Column="0"
                         Content="Play Video" 
                         Style="{StaticResource ButtonStyle}"
                         Click="btnPlayVideo_Click">
         </Button>
         <Button x:Name="btnChangeVideo" 
-                    Grid.Row="2" Grid.Column="1"
+                HorizontalAlignment="Center"
+                    Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                FontWeight="Bold"
                         Content="Change Video"  
                         Style="{StaticResource ButtonStyle}"
                         Click="btnChangeVideo_Click">
         </Button>
 
-        <Button x:Name="btnStopVideo"  
+        <Button x:Name="btnShowVideo"  
+                FontWeight="Bold"
                 Grid.Row="3" Grid.Column="0" 
+                Content="Show Video" 
+                Style="{StaticResource ButtonStyle}"
+                Click="btnShowVideo_Click"/>
+        
+        <Button x:Name="btnHideVideo"  
+                FontWeight="Bold"
+                Grid.Row="3" Grid.Column="1" 
+                HorizontalAlignment="Center"
+                Grid.ColumnSpan="2"
                 Content="Hide Video" 
                 Style="{StaticResource ButtonStyle}"
-                Click="btnStopVideo_Click"/>
+                Click="btnHideVideo_Click"/>
 
-        <Button x:Name="btnNextSub" 
-                Grid.Row="3" Grid.Column="1" 
-                Content="Next Subtitle Line" 
-                Style="{StaticResource ButtonStyle}"
-                Click="btnNextSub_Click">
-        </Button>
+        
+
+        
 
         <Button  x:Name="btnPauseAutoSub" 
                  Grid.Row="4" Grid.Column="0"
-                Content="Pause Auto Subtitle" 
+                 Background="Black"
+                 Foreground="White"
+                Content="Pause Sub" 
                 Style="{StaticResource ButtonStyle}"
                 Click="btnPauseAutoSub_Click">
         </Button>
-        <Button x:Name="btnRsumeAutoSub"
+        <Button x:Name="btnNextSub" 
                 Grid.Row="4" Grid.Column="1" 
-                Content="Resume Auto Subtitle" 
+                Background="Black"
+                 Foreground="White"
+                Content="Next Sub" 
+                Style="{StaticResource ButtonStyle}"
+                Click="btnNextSub_Click">
+        </Button>
+        <Button x:Name="btnRsumeAutoSub"
+                Grid.Row="4" Grid.Column="2" 
+                Background="Black"
+                 Foreground="White"
+                Content="Resume Sub" 
                 Style="{StaticResource ButtonStyle}"
                 Click="btnRsumeAutoSub_Click">
         </Button>
 
         <Button x:Name="btnShowSub"
                 Grid.Row="5" Grid.Column="0"
-                Content="Show Subtitle" 
+                Content="Show Sub" 
+                Background="Black"
+                 Foreground="White"
                 Style="{StaticResource ButtonStyle}"
                 Click="btnShowSub_Click">
         </Button>
         <Button x:Name="btnHideSub"
-            Grid.Row="5" Grid.Column="1"
-                Content="Hide Subtitle" 
+            Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                Background="Black"
+                 Foreground="White"
+                Content="Hide Sub" 
                 Style="{StaticResource ButtonStyle}" 
                 Click="btnHideSub_Click">
         </Button>
 
         <Button x:Name="btnShowSelectCharchter"  
                 Grid.Row="6" Grid.Column="0" 
-                Content="Show Select Charchter" 
+                Content="Show Charchter" 
                 Style="{StaticResource ButtonStyle}" 
                 Click="btnShowSelectCharchter_Click">
         </Button>
 
         <Button x:Name="btnHideSelectCharchter"  
                 Style="{StaticResource ButtonStyle}" 
+                HorizontalAlignment="Center"
                 Grid.Row="6" Grid.Column="1" 
-                Content="Hide Select Charchter" 
+                Grid.ColumnSpan="2"
+                Content="Hide Charchter" 
                 Click="btnHideSelectCharchter_Click">
         </Button>
 

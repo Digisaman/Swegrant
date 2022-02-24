@@ -34,6 +34,7 @@
             </ComboBox>
         </StackPanel>-->
         <Button x:Name="btnSwitchVideo" 
+                Background="Red"
                     Grid.Row="0" Grid.Column="0"
                                 Content="Switch To Video" 
                                 Style="{StaticResource ButtonStyle}"
@@ -51,7 +52,9 @@
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
-            <TextBlock Style="{StaticResource TextBlockStyle}">Scene :</TextBlock>
+            <TextBlock Background="Red"
+                       FontSize="20"
+                       Style="{StaticResource TextBlockStyle}">Scene :</TextBlock>
             <ComboBox x:Name="cmbScence" 
                       SelectionChanged="cmbScence_SelectionChanged"
                       Style="{StaticResource ComboBoxStyle}"
@@ -90,9 +93,10 @@
         <TextBlock Grid.Row="2" Grid.Column="0" 
                    Style="{StaticResource TextBlockStyle}" Text="Leyla" />
         <TextBlock Grid.Row="2" Grid.Column="1" 
-                   Style="{StaticResource TextBlockStyle}" Text="Sina" />
-        <TextBlock Grid.Row="2" Grid.Column="2" 
                    Style="{StaticResource TextBlockStyle}" Text="Tara" />
+        <TextBlock Grid.Row="2" Grid.Column="2" 
+                   Style="{StaticResource TextBlockStyle}" Text="Sina" />
+        
         <!--<TextBlock Grid.Row="2" Grid.Column="1" 
                    Style="{StaticResource TextBlockStyle}" 
                    Text="NONE" x:Name="txtCurrentLine"/>-->
@@ -104,11 +108,12 @@
         <local:SubtitlePlayer Grid.Row="3" Grid.Column="0" x:Name="subLeyla">
 
         </local:SubtitlePlayer>
-        <local:SubtitlePlayer Grid.Row="3" Grid.Column="1" x:Name="subSina">
+        <local:SubtitlePlayer Grid.Row="3" Grid.Column="1" x:Name="subTara">
 
         </local:SubtitlePlayer>
-        <local:SubtitlePlayer Grid.Row="3" Grid.Column="2" x:Name="subTara">
+        <local:SubtitlePlayer Grid.Row="3" Grid.Column="2" x:Name="subSina">
 
         </local:SubtitlePlayer>
+        
     </Grid>
 </UserControl>

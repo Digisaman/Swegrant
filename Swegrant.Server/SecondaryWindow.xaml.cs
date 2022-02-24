@@ -48,11 +48,12 @@ namespace Swegrant.Server
 
         }
 
-        public void Stop()
+        public void ToggleVideoVisibility(bool display)
         {
             try
             {
-                this.videoPlayer.Visibility = Visibility.Hidden;
+                this.videoPlayer.Visibility = ( display ? Visibility.Visible : Visibility.Hidden);
+                this.txtSub.Visibility = (display ? Visibility.Visible : Visibility.Hidden);
             }
             catch (Exception ex)
             {

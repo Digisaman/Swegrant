@@ -155,7 +155,7 @@ namespace Swegrant.Server.UserControls
                 MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning");
                 if (result == MessageBoxResult.OK)
                 {
-                    MainWindow.Singleton.StopSecondaryVideo();
+                    MainWindow.Singleton.ToggleVideoVisibility(false);
                 }
             }
             catch (Exception ex)
@@ -485,6 +485,35 @@ namespace Swegrant.Server.UserControls
             await SwitchToTheater();
         }
 
-
+        private void btnShowVideo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                
+                
+                    MainWindow.Singleton.ToggleVideoVisibility(true);
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+       
+        private void btnHideVideo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning");
+                if (result == MessageBoxResult.OK)
+                {
+                    MainWindow.Singleton.ToggleVideoVisibility(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

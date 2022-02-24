@@ -199,12 +199,12 @@ namespace Swegrant.Server
 
         }
 
-        public void StopSecondaryVideo()
+        public void ToggleVideoVisibility(bool display)
         {
             try
             {
                 _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
-                    _SecondaryWindow.Stop()));
+                    _SecondaryWindow.ToggleVideoVisibility(display)));
             }
             catch (Exception ex)
             {
