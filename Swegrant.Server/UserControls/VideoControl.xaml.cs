@@ -270,7 +270,7 @@ namespace Swegrant.Server.UserControls
                         this.subLeyla.PlaySub();
                         this.subSina.PlaySub();
                         this.subTara.PlaySub();
-                        MainWindow.Singleton.DisplaySecondaryVideo(videoFilePath);
+                        MainWindow.Singleton.PlaySecondaryVideo(videoFilePath);
 
                     }, this.currentSubCancelationSource.Token);
 

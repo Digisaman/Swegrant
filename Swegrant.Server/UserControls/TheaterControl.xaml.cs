@@ -1,4 +1,5 @@
-﻿using Swegrant.Shared.Models;
+﻿using Swegrant.Server.Helpers;
+using Swegrant.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,13 +33,28 @@ namespace Swegrant.Server.UserControls
         private Task currentSubTask;
         private CancellationTokenSource currentSubCancelationSource;
         private CancellationToken currentSubCancellationToken;
-        private int theaterSceneSelectedIndex;
+        private string currentBackgroundVideo;
+        private string selectedBackGroundVideo;
         #endregion
 
 
         public TheaterControl()
         {
             InitializeComponent();
+            this.cmbLanguage.ItemsSource = new Language[]
+            {
+                Shared.Models.Language.Farsi,
+                Shared.Models.Language.Svenska
+            };
+            this.cmbScence.ItemsSource = new int[]
+            {
+                1,
+                2,
+                3,
+                4,
+                5
+            };
+            
         }
 
 
@@ -74,9 +90,12 @@ namespace Swegrant.Server.UserControls
 
         private async void btnPlayVideo_Click(object sender, RoutedEventArgs e)
         {
-            string scence = this.cmbScence.SelectionBoxItem.ToString();
-            this.currentScene = Convert.ToInt32(scence);
-            PlayVideo();
+            MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+
+                PlayVideo();
+            }
         }
 
         private async void btnLoadSubTitle_Click(object sender, RoutedEventArgs e)
@@ -91,7 +110,7 @@ namespace Swegrant.Server.UserControls
             }
         }
 
-        
+
 
         private async void btnHideSub_Click(object sender, RoutedEventArgs e)
         {
@@ -103,19 +122,19 @@ namespace Swegrant.Server.UserControls
         {
             try
             {
-                if (this.cmbScence.SelectedIndex != this.theaterSceneSelectedIndex)
+                if (this.currentBackgroundVideo!= this.selectedBackGroundVideo)
                 {
                     string text = "";
                     //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
                     string scence = this.cmbScence.SelectionBoxItem.ToString();
                     string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater";
-                    string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{scence}.mp4";
+                    string videoFilePath = $"{VideoDirectory}\\{selectedBackGroundVideo}";
                     if (File.Exists(videoFilePath))
                     {
                         //PLayVideo(videoFilePath);
                         //Task.Run(PlaySub);
-                        MainWindow.Singleton.DisplaySecondaryVideo(videoFilePath);
-                        this.theaterSceneSelectedIndex = this.cmbScence.SelectedIndex;
+                        MainWindow.Singleton.PlaySecondaryVideo(videoFilePath);
+                        this.currentBackgroundVideo = this.selectedBackGroundVideo;
                     }
                     else
                     {
@@ -136,7 +155,7 @@ namespace Swegrant.Server.UserControls
                 MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning");
                 if (result == MessageBoxResult.OK)
                 {
-                   //MainWindow.Singleton.Stop();
+                    MainWindow.Singleton.StopSecondaryVideo();
                 }
             }
             catch (Exception ex)
@@ -149,36 +168,34 @@ namespace Swegrant.Server.UserControls
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
-                if (result == MessageBoxResult.OK)
+
+                string text = "";
+                string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater";
+                string videoFilePath = $"{VideoDirectory}\\{selectedBackGroundVideo}";
+                if (File.Exists(videoFilePath))
                 {
-                    string text = "";
-                    string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Theater";
-                    string videoFilePath = $"{VideoDirectory}\\TH-BK-SC-{this.currentScene.ToString("00")}.mp4";
-                    if (File.Exists(videoFilePath))
+                    await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
                     {
-                        await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
-                        {
-                            Command = Command.Play,
-                            Mode = Mode.Theater,
-                            Scene = this.currentScene
-                        });
-                        this.currentSubCancelationSource = new CancellationTokenSource();
-                        this.currentSubTask = Task.Run(() =>
-                        {
-                            this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
-                            PlaySub();
-
-                        }, this.currentSubCancelationSource.Token);
-                        MainWindow.Singleton.DisplaySecondaryVideo(videoFilePath);
-
-
-                    }
-                    else
+                        Command = Command.Play,
+                        Mode = Mode.Theater,
+                        Scene = this.currentScene
+                    });
+                    this.currentSubCancelationSource = new CancellationTokenSource();
+                    this.currentSubTask = Task.Run(() =>
                     {
-                        MessageBox.Show("File Does NOT Exist");
-                    }
+                        this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
+                        PlaySub();
+
+                    }, this.currentSubCancelationSource.Token);
+                    MainWindow.Singleton.PlaySecondaryVideo(videoFilePath);
+                    this.currentBackgroundVideo = this.selectedBackGroundVideo;
+
                 }
+                else
+                {
+                    MessageBox.Show("File Does NOT Exist");
+                }
+
             }
             catch (Exception ex)
             {
@@ -188,19 +205,33 @@ namespace Swegrant.Server.UserControls
 
         private void cmbScence_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string scene = this.cmbScence.SelectionBoxItem.ToString();
-            if (!string.IsNullOrEmpty(scene))
+            object scene = this.cmbScence.SelectedItem;
+            if (scene != null)
             {
                 this.currentScene = Convert.ToInt32(scene);
+                string[] videos = FileHelpers.GetFileList(Mode.Theater, this.currentScene);
+                if (videos.Any())
+                {
+                    cmbVideo.ItemsSource = videos;
+                    cmbVideo.SelectedIndex = 0;
+                }
             }
         }
 
         private void cmbLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string lang = this.cmbLanguage.SelectionBoxItem.ToString();
+            string lang = this.cmbLanguage.SelectedItem.ToString();
             if (!string.IsNullOrEmpty(lang))
             {
                 currentLanguage = (Language)Enum.Parse(typeof(Language), lang);
+            }
+        }
+
+        private void cmbVideo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbVideo.SelectedItem != null)
+            {
+                this.selectedBackGroundVideo = cmbVideo.SelectedItem.ToString();
             }
         }
 
@@ -436,7 +467,7 @@ namespace Swegrant.Server.UserControls
         }
 
         private async Task SwitchToTheater()
-        {   
+        {
             await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
             {
                 Command = Command.ChangeMode,
@@ -453,5 +484,7 @@ namespace Swegrant.Server.UserControls
         {
             await SwitchToTheater();
         }
+
+
     }
 }

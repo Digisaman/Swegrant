@@ -31,23 +31,26 @@
                       SelectedIndex="0"
                       Style="{StaticResource ComboBoxStyle}"
                       SelectionChanged="cmbLanguage_SelectionChanged">
-                <ComboBoxItem>Farsi</ComboBoxItem>
-                <ComboBoxItem>Svenska</ComboBoxItem>
             </ComboBox>
-        </StackPanel>
+        <!--</StackPanel>
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="0" Grid.Column="1">
+                    Grid.Row="0" Grid.Column="1">-->
             <TextBlock 
                     Style="{StaticResource TextBlockStyle}">Scene :</TextBlock>
             <ComboBox x:Name="cmbScence" 
                       SelectedIndex="0"
                       Style="{StaticResource ComboBoxStyle}"
                       SelectionChanged="cmbScence_SelectionChanged">
-                <ComboBoxItem>01</ComboBoxItem>
-                <ComboBoxItem>02</ComboBoxItem>
-                <ComboBoxItem>03</ComboBoxItem>
-                <ComboBoxItem>04</ComboBoxItem>
-                <ComboBoxItem>05</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0" Grid.Column="1">
+            <TextBlock 
+                    Style="{StaticResource TextBlockStyle}">Background Video :</TextBlock>
+            <ComboBox x:Name="cmbVideo" 
+                      Style="{StaticResource ComboBoxStyle}"
+                      SelectionChanged="cmbVideo_SelectionChanged">
             </ComboBox>
         </StackPanel>
 

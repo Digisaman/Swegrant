@@ -63,7 +63,7 @@
                 Style="{StaticResource ButtonStyle}"
                 Click="btnvdCloseSecondary_Click">
         </Button>
-        <TabControl Grid.Row="1" Grid.ColumnSpan="5">
+        <TabControl x:Name="tabControl" Grid.Row="1" Grid.ColumnSpan="5">
             <TabItem x:Name="tabTheater" Header="Theater Mode" FontSize="16">
                 
                 <uc:TheaterControl/>

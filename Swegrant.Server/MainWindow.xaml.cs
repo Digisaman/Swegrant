@@ -89,8 +89,7 @@ namespace Swegrant.Server
             }
 
             MainWindow.Singleton = this;
-
-
+            this.tabControl.IsEnabled = false;
         }
 
         private async void btnStartServer_Click(object sender, RoutedEventArgs e)
@@ -107,7 +106,7 @@ namespace Swegrant.Server
                     task.Start();
 
                     Helpers.AppConfigHelpers.SaveConfig("ServerIP", localIP);
-
+                   
                     MessageBox.Show("Server Started");
                 }
                 else
@@ -186,12 +185,26 @@ namespace Swegrant.Server
             }
         }
 
-        public void DisplaySecondaryVideo(string videoFilePath)
+        public void PlaySecondaryVideo(string videoFilePath)
         {
             try
             {
                 _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
                     _SecondaryWindow.Play(videoFilePath)));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("SecondaryWindowVideo", ex);
+            }
+
+        }
+
+        public void StopSecondaryVideo()
+        {
+            try
+            {
+                _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                    _SecondaryWindow.Stop()));
             }
             catch (Exception ex)
             {
@@ -229,6 +242,8 @@ namespace Swegrant.Server
                 _SecondaryWindow.WindowState = WindowState.Normal;
             }
             _SecondaryWindow.Show();
+
+            this.tabControl.IsEnabled = true;
         }
 
         private void btnvdCloseSecondary_Click(object sender, RoutedEventArgs e)

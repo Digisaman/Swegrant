@@ -13,6 +13,7 @@
             <Setter Property="FontSize" Value="16"/>
         </Style>
         <Style TargetType="ComboBox" x:Key="ComboBoxStyle">
+            <Setter Property="Height" Value="40"/>
             <Setter Property="Margin" Value="20"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
