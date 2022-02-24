@@ -22,7 +22,7 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-    
+
         <CollectionView
             Grid.Row="0"
             Grid.ColumnSpan="2"
@@ -68,23 +68,23 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-       
+
         <!--<Button x:Name="btnPlaySv" Text="Switch SV Audio" Grid.Row="1" Grid.ColumnSpan="2" Clicked="btnPlaySV_Clicked"/>
         <Button x:Name="btnPlayFa" Text="Switch FA Audio" Grid.Row="2" Grid.ColumnSpan="2" Clicked="btnPlayFa_Clicked"/>-->
         <!--<Button x:Name="btnStopPlayback" Text="STOP" Grid.Row="3" Grid.ColumnSpan="2" Clicked="btnStopPlayback_Clicked"/>-->
-        
+
         <!--<Button x:Name="btnEnglish" Text="English" Clicked="btnEnglish_Clicked" />-->
 
 
-        <extensions:Expander Grid.Row="2" Grid.Column="0" >
+        <!--<extensions:Expander Grid.Row="2" Grid.ColumnSpan="2" >
 
             <extensions:Expander.Header>
-                <Label Text="Select Audio language"
+                <Label Text="Audio language : "
                        TextColor="White"
                FontAttributes="Bold"
                FontSize="Medium" />
             </extensions:Expander.Header>
-            <StackLayout Orientation="Vertical"
+            <StackLayout Orientation="Horizontal"
                          HorizontalOptions="CenterAndExpand">
 
                 <RadioButton BackgroundColor="{StaticResource Primary}" 
@@ -105,10 +105,10 @@
 
         </extensions:Expander>
 
-        <extensions:Expander Grid.Row="2" Grid.Column="1" >
+        <extensions:Expander Grid.Row="3" Grid.ColumnSpan="2" >
 
             <extensions:Expander.Header>
-                <Label Text="Select Subtitle language"
+                <Label Text="Subtitle language :"
                        TextColor="White"
                FontAttributes="Bold"
                FontSize="Medium" />
@@ -132,58 +132,78 @@
 
             </StackLayout>
 
-        </extensions:Expander>
+        </extensions:Expander>-->
 
 
 
+        <Grid HorizontalOptions="CenterAndExpand" Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-        <!--<StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="0"
-                         HorizontalOptions="CenterAndExpand">
-            <Label Text="Select Audio language"
+            <Label Grid.Row="0" Grid.Column="0"
+                    Text="Audio language : "
                        TextColor="White"
+                   HorizontalOptions="Center"
+                     VerticalOptions="Center"
                FontAttributes="Bold"
                FontSize="Medium" />
-
-
-            <RadioButton BackgroundColor="{StaticResource Primary}" 
-                         FontSize="Large" 
+            <StackLayout Orientation="Horizontal"
+                         Grid.Row="0" Grid.Column="1">
+            <RadioButton 
+                             BackgroundColor="{StaticResource Primary}" 
+                         HorizontalOptions="FillAndExpand"
+                         FontSize="Medium" 
                          FontAttributes="Bold"
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsAudioFA}" 
                          Content="فارسی"/>
-                <RadioButton BackgroundColor="{StaticResource Primary}" 
-                         FontSize="Large" 
+            <RadioButton 
+                        BackgroundColor="{StaticResource Primary}" 
+                         HorizontalOptions="FillAndExpand"
+                         FontSize="Medium" 
                          FontAttributes="Bold" 
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsAudioSV}" 
                          Content="Svenska"/>
-
-
             </StackLayout>
 
-            <StackLayout Orientation="Vertical"
-                         Grid.Row="2" Grid.Column="1"
-                         HorizontalOptions="CenterAndExpand">
-            <Label Text="Select Subtitle language"
-                       TextColor="White"/>
-
-            <RadioButton BackgroundColor="{StaticResource Primary}" 
-                         FontSize="Large" 
+            <Label  Grid.Row="1" Grid.Column="0"
+                Text="Subtitle language : "
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                       TextColor="White"
+               FontAttributes="Bold"
+               FontSize="Medium" />
+            <StackLayout Orientation="Horizontal"
+                         Grid.Row="1" Grid.Column="1">
+                <RadioButton  
+                BackgroundColor="{StaticResource Primary}" 
+                         HorizontalOptions="FillAndExpand"
+                         FontSize="Medium" 
                          FontAttributes="Bold"
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsSubFA}" 
                          Content="فارسی"/>
-                <RadioButton BackgroundColor="{StaticResource Primary}" 
-                         FontSize="Large" 
+                <RadioButton  
+                BackgroundColor="{StaticResource Primary}" 
+                         HorizontalOptions="FillAndExpand"
+                         FontSize="Medium" 
                          FontAttributes="Bold" 
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsSubSV}" 
                          Content="Svenska"/>
+            </StackLayout>
+
+        </Grid>
 
 
-            </StackLayout>-->
 
-   
 
         <ActivityIndicator
             Grid.ColumnSpan="2"

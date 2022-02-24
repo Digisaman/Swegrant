@@ -43,7 +43,7 @@ namespace Swegrant.Views
             }
             catch(Exception ex)
             {
-                DependencyService.Get<IAudio>().StopAudioFile();
+                DependencyService.Get<IAudio>().StopAudioFile(VM.CurrnetAudioLanguage);
             }
         }
 
@@ -52,30 +52,30 @@ namespace Swegrant.Views
             base.OnDisappearing();
         }
 
-        private void btnPlayEn_Clicked(object sender, EventArgs e)
-        {
-            VM.CurrnetAudioLanguage = Language.English;
-            VM.ChangeAudioCommand.Execute(null);
-            //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
-        }
+        //private void btnPlayEn_Clicked(object sender, EventArgs e)
+        //{
+        //    VM.CurrnetAudioLanguage = Language.English;
+        //    VM.ChangeAudioCommand.Execute(null);
+        //    //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
+        //}
 
-        private void btnStopPlayback_Clicked(object sender, EventArgs e)
-        {
-            DependencyService.Get<IAudio>().StopAudioFile();
-        }
+        //private void btnStopPlayback_Clicked(object sender, EventArgs e)
+        //{
+        //    DependencyService.Get<IAudio>().StopAudioFile(VM.CurrnetAudioLanguage);
+        //}
 
-        private void btnPlayFa_Clicked(object sender, EventArgs e)
-        {
-            VM.CurrnetAudioLanguage = Swegrant.Shared.Models.Language.Farsi;
-            VM.ChangeAudioCommand.Execute(null);
-            //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-FA-SC-01.mp3");
-        }
+        //private void btnPlayFa_Clicked(object sender, EventArgs e)
+        //{
+        //    VM.CurrnetAudioLanguage = Swegrant.Shared.Models.Language.Farsi;
+        //    VM.ChangeAudioCommand.Execute(null);
+        //    //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-FA-SC-01.mp3");
+        //}
 
-        private void btnPlaySV_Clicked(object sender, EventArgs e)
-        {
-            VM.CurrnetAudioLanguage = Swegrant.Shared.Models.Language.Svenska;
-            VM.ChangeAudioCommand.Execute(null);
-            //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
-        }
+        //private void btnPlaySV_Clicked(object sender, EventArgs e)
+        //{
+        //    VM.CurrnetAudioLanguage = Swegrant.Shared.Models.Language.Svenska;
+        //    VM.ChangeAudioCommand.Execute(null);
+        //    //DependencyService.Get<IAudio>().PlayAudioFile("VD-LY-AUD-EN-SC-01.mp3");
+        //}
     }
 }

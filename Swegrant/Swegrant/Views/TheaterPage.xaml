@@ -69,7 +69,7 @@
         </CollectionView>
 
         <StackLayout Grid.Row="1"
-                     HorizontalOptions="CenterAndExpand"
+                     HorizontalOptions="FillAndExpand"
                      IsVisible="{Binding IsCharchterVisible}">
             <Label Text="Select Chrachter"
                       IsVisible="{Binding IsCharchterVisible}"
@@ -87,20 +87,22 @@
                 </Picker.Items>
             </Picker>-->
             <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="CenterAndExpand">
+                         HorizontalOptions="FillAndExpand">
                 
             <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         HorizontalOptions="EndAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold"
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsLeylaSelected}" Content="Leyla"/>
                 <RadioButton BackgroundColor="{StaticResource Primary}" 
+                             HorizontalOptions="EndAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold" 
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsSinaSelected}" Content="Sina"/>
                 <RadioButton BackgroundColor="{StaticResource Primary}" 
-                             HorizontalOptions="Fill"
+                             HorizontalOptions="EndAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold" 
                          TextColor="{StaticResource 

@@ -67,8 +67,8 @@ namespace Swegrant.Droid
 
                 mediaPlayers[selectedLanguage].Prepare();
 
-                this.currentLanguage = selectedLanguage;
-                //}
+                
+                
             }
             catch (Exception ex)
             {
@@ -82,20 +82,22 @@ namespace Swegrant.Droid
             try
             {
 
-
-                if (mediaPlayers[currentLanguage].IsPlaying)
+                if (currentLanguage != Language.None)
                 {
-                    this.changeAudioDateTime = DateTime.Now;
-                    currentPosition = mediaPlayers[currentLanguage].CurrentPosition;
-                    mediaPlayers[currentLanguage].Pause();
+                    if (mediaPlayers[currentLanguage].IsPlaying)
+                    {
+                        this.changeAudioDateTime = DateTime.Now;
+                        currentPosition = mediaPlayers[currentLanguage].CurrentPosition;
+                        mediaPlayers[currentLanguage].Pause();
 
-                    // mediaPlayers[currentLanguage] = new MediaPlayer();
+                        // mediaPlayers[currentLanguage] = new MediaPlayer();
 
 
-                    //mediaPlayers[currentLanguage].Prepared += (s, e) =>
-                    //{
-                    //    PlayAudioFile();
-                    //};
+                        //mediaPlayers[currentLanguage].Prepared += (s, e) =>
+                        //{
+                        //    PlayAudioFile();
+                        //};
+                    }
                 }
 
                 if (this.currentPosition != 0)
@@ -113,13 +115,13 @@ namespace Swegrant.Droid
             }
         }
 
-        public void StopAudioFile()
+        public void StopAudioFile(Language selectedLanguage)
         {
             try
             {
-                if (mediaPlayers[currentLanguage] != null)
+                if (mediaPlayers[selectedLanguage] != null)
                 {
-                    mediaPlayers[currentLanguage].Stop();
+                    mediaPlayers[selectedLanguage].Stop();
                     mediaPlayers[currentLanguage] = new MediaPlayer();
                 }
             }

@@ -91,7 +91,7 @@ namespace Swegrant.ViewModels
                 SetProperty(ref isSubSV, value);
                 if (value)
                 {
-                    CurrnetSubtitleLanguage = Language.Farsi;
+                    CurrnetSubtitleLanguage = Language.Svenska;
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace Swegrant.ViewModels
                 SetProperty(ref isSubFA, value);
                 if (value)
                 {
-                    CurrnetSubtitleLanguage = Language.Svenska;
+                    CurrnetSubtitleLanguage = Language.Farsi;
                 }
             }
         }

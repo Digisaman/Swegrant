@@ -12,6 +12,6 @@ namespace Swegrant.Interfaces
 
         void PlayAudioFile(Language selectedLanguage);
 
-        void StopAudioFile();
+        void StopAudioFile(Language selectedLanguage);
     }
 }
