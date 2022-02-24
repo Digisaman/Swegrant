@@ -13,8 +13,10 @@
                      VerticalOptions= "FillAndExpand" 
                      Navigated="webBrowser_Navigated"
                      Navigating="webBrowser_Navigating"/>
-            <Button x:Name="btnNext" Text="NEXT" Clicked="btnNext_Clicked"/>
-
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Button x:Name="btnPrevious" Text="Previous" Clicked="btnPrevious_Clicked" HorizontalOptions="FillAndExpand"/>
+                <Button x:Name="btnNext" Text="Next" Clicked="btnNext_Clicked" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
 
         </StackLayout>
     </ContentPage.Content>

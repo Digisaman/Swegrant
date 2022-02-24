@@ -1,4 +1,5 @@
 ﻿using Swegrant.Helpers;
+using Swegrant.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,12 @@ namespace Swegrant.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            this.webBrowser.Source = $"http://{Settings.ServerIP}:{Settings.ServerPort}/index.html";
+            Language CurrnetLanguage = Helpers.Settings.CurrentLanguage;
+            if ( CurrnetLanguage == Language.None)
+            {
+                CurrnetLanguage = Language.Farsi;
+            }
+            this.webBrowser.Source = $"http://{Settings.ServerIP}:{Settings.ServerPort}/{CurrnetLanguage.ToString().ToUpper().Substring(0,2)}/index.html";
             this.webBrowser.Reload();
             //this.webBrowser.Reload();
 
@@ -32,9 +38,19 @@ namespace Swegrant.Views
         {
             NavigateTheater();
         }
+        private void btnPrevious_Clicked(object sender, EventArgs e)
+        {
+            NavigateMain();
+        }
+
         private async void NavigateTheater()
         {
             await Shell.Current.GoToAsync($"//{nameof(TheaterPage)}");
+        }
+
+        private async void NavigateMain()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
         }
 
         private void webBrowser_Navigated(object sender, WebNavigatedEventArgs e)
@@ -46,5 +62,7 @@ namespace Swegrant.Views
         {
             this.progressBar.IsVisible = true;
         }
+
+      
     }
 }

@@ -80,7 +80,7 @@ namespace Swegrant.Helpers
 
             get
             {
-                string val = Preferences.Get(nameof(CurrentLanguage), defaultCharachter);
+                string val = Preferences.Get(nameof(CurrentLanguage), defaultLanguage);
                 return (Language)Enum.Parse(typeof(Language), val);
             }
 
