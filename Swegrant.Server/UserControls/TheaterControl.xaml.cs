@@ -41,6 +41,7 @@ namespace Swegrant.Server.UserControls
         public TheaterControl()
         {
             InitializeComponent();
+            this.btnPlayVideo.IsEnabled = false;   
             this.cmbLanguage.ItemsSource = new Language[]
             {
                 Shared.Models.Language.Farsi,
@@ -90,6 +91,7 @@ namespace Swegrant.Server.UserControls
 
         private async void btnPlayVideo_Click(object sender, RoutedEventArgs e)
         {
+            this.btnPlayVideo.IsEnabled = false;
             MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
             {
@@ -102,6 +104,7 @@ namespace Swegrant.Server.UserControls
         {
             try
             {
+                this.btnPlayVideo.IsEnabled = true; 
                 await LoadSubtitle();
             }
             catch (Exception ex)
@@ -360,7 +363,8 @@ namespace Swegrant.Server.UserControls
             {
 
                 string message = this.lstSub.SelectedItem.ToString();
-                this.lstSub.SelectedIndex = this.lstSub.SelectedIndex + 1;
+                this.currentSubIndex++;
+                this.lstSub.SelectedIndex = currentSubIndex;
 
                 MainWindow.Singleton.DisplaySecondarySub(this.currentSub[this.currentSubIndex].Text);
                 await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
@@ -371,7 +375,7 @@ namespace Swegrant.Server.UserControls
                     Scene = this.currentScene
                 });
 
-                this.currentSubIndex++;
+                
             }
             catch (Exception ex)
             {

@@ -289,6 +289,7 @@ namespace Swegrant.ViewModels
                                 case Shared.Models.Command.ChangeMode:
                                     if (serviceMessage.Mode == Shared.Models.Mode.Theater)
                                     {
+                                        StopAudio();
                                         Shell.Current.GoToAsync($"//{nameof(TheaterPage)}");
                                     }
                                     else
@@ -368,6 +369,14 @@ namespace Swegrant.ViewModels
                 DependencyService.Get<IAudio>().PlayAudioFile(CurrnetAudioLanguage);
             });
 
+        }
+
+        private async Task StopAudio()
+        {
+            Task.Run(() =>
+            {
+                DependencyService.Get<IAudio>().StopAudioFile(CurrnetAudioLanguage);
+            });
         }
 
 

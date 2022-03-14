@@ -54,7 +54,8 @@
                          Margin="20"
                      WidthRequest="500"
                      VerticalOptions="CenterAndExpand"
-                     HorizontalOptions="Fill" />
+                     HorizontalOptions="Fill" 
+                         ProgressColor="{StaticResource SecondaryColor}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
