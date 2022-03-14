@@ -137,7 +137,7 @@
             Grid.RowSpan="3"
             d:IsRunning="True"
             d:IsVisible="True"
-            Color="{StaticResource PrimaryDarkColor}"
+            Color="{StaticResource SecondaryColor}"
             HorizontalOptions="CenterAndExpand"
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}"

@@ -79,6 +79,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetAudioLanguage = Language.Svenska;
+                    Helpers.Settings.CurrentAudioLanguage = CurrnetAudioLanguage;
                 }
             }
         }
@@ -93,6 +94,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetAudioLanguage = Language.Farsi;
+                    Helpers.Settings.CurrentAudioLanguage = CurrnetAudioLanguage;
                 }
             }
         }
@@ -107,6 +109,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetAudioLanguage = Language.Original;
+                    Helpers.Settings.CurrentAudioLanguage = CurrnetAudioLanguage;
                 }
             }
         }
@@ -122,6 +125,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetSubtitleLanguage = Language.Svenska;
+                    Helpers.Settings.CurrentLanguage = CurrnetSubtitleLanguage;
                 }
             }
         }
@@ -136,6 +140,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetSubtitleLanguage = Language.Farsi;
+                    Helpers.Settings.CurrentLanguage = CurrnetSubtitleLanguage;
                 }
             }
         }
@@ -157,33 +162,7 @@ namespace Swegrant.ViewModels
         Random random;
         public VideoViewModel()
         {
-            if (Helpers.Settings.CurrentLanguage != Language.None)
-            {
-                this.CurrnetAudioLanguage = Language.Farsi;
-                this.CurrnetSubtitleLanguage = Helpers.Settings.CurrentLanguage;
-            }
-            else
-            {
-                this.CurrnetAudioLanguage = Language.Farsi;
-                this.CurrnetSubtitleLanguage = Language.Farsi;
-            }
-            if (Helpers.Settings.CurrentCharachter != Character.None)
-            {
-                this.CurrentCharchter = Helpers.Settings.CurrentCharachter;
-            }
-            else
-            {
-                this.CurrentCharchter = Character.Lyla;
-            }
-            this.CurrentScene = 1;
-            IsLangugeVisible = true;
-
-            isAudioOR = (this.CurrnetAudioLanguage == Language.Original);
-            isAudioFA = (this.CurrnetAudioLanguage == Language.Farsi);
-            isAudioSV = (this.CurrnetAudioLanguage == Language.Svenska);
-            isSubFA = (this.CurrnetSubtitleLanguage == Language.Farsi);
-
-            isSubSV = (this.CurrnetSubtitleLanguage == Language.Svenska);
+            InitilizeSettings();
 
             if (DesignMode.IsDesignModeEnabled)
                 return;
@@ -220,6 +199,48 @@ namespace Swegrant.ViewModels
 
         }
 
+        private void InitilizeSettings(int currentScene = 1)
+        {
+            this.CurrentScene = currentScene;
+            if (Helpers.Settings.CurrentLanguage != Language.None)
+            {
+                this.CurrnetSubtitleLanguage = Helpers.Settings.CurrentLanguage;
+            }
+            else
+            {
+                this.CurrnetAudioLanguage = Language.Original;
+                this.CurrnetSubtitleLanguage = Language.Farsi;
+            }
+
+            if (Helpers.Settings.CurrentAudioLanguage != Language.None)
+            {
+                this.CurrnetAudioLanguage = Helpers.Settings.CurrentAudioLanguage;
+            }
+            else
+            {
+                this.CurrnetAudioLanguage = Language.Original;
+            }
+
+            if (Helpers.Settings.CurrentCharachter != Character.None)
+            {
+                this.CurrentCharchter = Helpers.Settings.CurrentCharachter;
+            }
+            else
+            {
+                this.CurrentCharchter = Character.Lyla;
+            }
+            
+            
+
+            isAudioOR = (this.CurrnetAudioLanguage == Language.Original);
+            isAudioFA = (this.CurrnetAudioLanguage == Language.Farsi);
+            isAudioSV = (this.CurrnetAudioLanguage == Language.Svenska);
+
+            isSubFA = (this.CurrnetSubtitleLanguage == Language.Farsi);
+            isSubSV = (this.CurrnetSubtitleLanguage == Language.Svenska);
+
+            IsLangugeVisible = true;
+        }
 
         async Task Connect()
         {
@@ -310,6 +331,7 @@ namespace Swegrant.ViewModels
                                     }
                                     else
                                     {
+                                        InitilizeSettings(serviceMessage.Scene);
                                         Messages.Clear();
                                         Messages.Insert(0, new ChatMessage
                                         {

@@ -175,15 +175,7 @@ namespace Swegrant.ViewModels
 
         public TheaterViewModel()
         {
-            this.IsSubtitleVisible = true;
-            this.CurrnetLanguage = Helpers.Settings.CurrentLanguage;
-            this.CurrentCharchter = Helpers.Settings.CurrentCharachter;
-            IsLeylaSelected = (CurrentCharchter == Character.Lyla);
-            IsSinaSelected = (CurrentCharchter == Character.Sina);
-            IsTaraSelected = (CurrentCharchter == Character.Tara);
-
-            this.CurrentScene = 1;
-            this.MultiSub = new Dictionary<Language, Subtitle[]>();
+            InitializeSettings();
 
             if (DesignMode.IsDesignModeEnabled)
                 return;
@@ -217,6 +209,19 @@ namespace Swegrant.ViewModels
             };
         }
 
+        private void InitializeSettings(int currentScene = 1)
+        {
+            this.MultiSub = new Dictionary<Language, Subtitle[]>();
+            this.IsSubtitleVisible = true;
+            this.CurrnetLanguage = Helpers.Settings.CurrentLanguage;
+            this.CurrentCharchter = Helpers.Settings.CurrentCharachter;
+            IsLeylaSelected = (CurrentCharchter == Character.Lyla);
+            IsSinaSelected = (CurrentCharchter == Character.Sina);
+            IsTaraSelected = (CurrentCharchter == Character.Tara);
+
+            this.CurrentScene = currentScene;
+            
+        }
 
         async Task Connect()
         {
@@ -304,6 +309,7 @@ namespace Swegrant.ViewModels
                                     }
                                     else
                                     {
+                                        InitializeSettings(serviceMessage.Scene);
                                         Messages.Clear();
                                         Messages.Insert(0, new ChatMessage
                                         {

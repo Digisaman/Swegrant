@@ -87,6 +87,18 @@ namespace Swegrant.Helpers
             set => Preferences.Set(nameof(CurrentLanguage), value.ToString());
         }
 
+        public static Language CurrentAudioLanguage
+        {
+
+            get
+            {
+                string val = Preferences.Get(nameof(CurrentAudioLanguage), defaultLanguage);
+                return (Language)Enum.Parse(typeof(Language), val);
+            }
+
+            set => Preferences.Set(nameof(CurrentAudioLanguage), value.ToString());
+        }
+
         private static string mediaInfo = "";
 
         public static string MediaInfo
