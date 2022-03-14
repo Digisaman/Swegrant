@@ -6,11 +6,14 @@
         <StackLayout>
             <Label Text="Welcome to Swegrant!" FontSize="Title"
                 VerticalOptions="Start"
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand" 
+                   
+                   TextColor="Black"/>
 
             <Label Text="Please Choose Your Language" FontSize="Large"
                 VerticalOptions="Start"
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand"
+                   TextColor="Black"/>
 
 
             <Button x:Name="btnPersian" Text="فارسی" Clicked="btnPersian_Clicked" />
