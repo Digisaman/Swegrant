@@ -365,6 +365,7 @@ namespace Swegrant.Server.UserControls
                 MainWindow.Singleton.DisplaySecondarySub(this.currentSub[this.currentSubIndex].Text);
                 await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
                 {
+                    Mode = Mode.Theater,
                     Command = Command.DisplayManualSub,
                     Index = currentSubIndex,
                     Scene = this.currentScene

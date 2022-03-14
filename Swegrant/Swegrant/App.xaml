@@ -11,10 +11,10 @@
             <Color x:Key="PrimaryColor">#001b74</Color>
             <Color x:Key="PrimaryLightColor">#001b74</Color>
             <Color x:Key="PrimaryDarkColor">#000000</Color>
-            <Color x:Key="SecondaryColor">#aa00ff</Color>
-            <Color x:Key="SecondaryLightColor">#e254ff</Color>
-            <Color x:Key="SecondaryDarkColor">#7200ca</Color>
-            <Color x:Key="PrimaryBackColor">#ffffff</Color>
+            <Color x:Key="SecondaryColor">#eef110</Color>
+            <Color x:Key="SecondaryLightColor">#eef110</Color>
+            <Color x:Key="SecondaryDarkColor">#eef110</Color>
+            <Color x:Key="PrimaryBackColor">#000000</Color>
             <Color x:Key="PrimaryTextColor">#000000</Color>
             <Color x:Key="SecondaryTextColor">#ffffff</Color>
             <Style TargetType="Button">

@@ -5,7 +5,7 @@
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <AssemblyVersion>1.4.3.0</AssemblyVersion>
     <FileVersion>1.4.3.0</FileVersion>
-    <Version>1.4.3</Version>
+    <Version>1.6.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
