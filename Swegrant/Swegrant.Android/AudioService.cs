@@ -36,6 +36,11 @@ namespace Swegrant.Droid
                 mediaPlayers.Add(Language.Svenska,
                     new MediaPlayer());
             }
+            if (!mediaPlayers.ContainsKey(Language.Original))
+            {
+                mediaPlayers.Add(Language.Original,
+                    new MediaPlayer());
+            }
         }
         public void PrepareAudioFile(Language selectedLanguage, string fileName)
         {

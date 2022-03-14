@@ -97,6 +97,20 @@ namespace Swegrant.ViewModels
             }
         }
 
+        bool isAudioOR = false;
+        public bool IsAudioOR
+        {
+            get { return isAudioOR; }
+            set
+            {
+                SetProperty(ref isAudioOR, value);
+                if (value)
+                {
+                    CurrnetAudioLanguage = Language.Original;
+                }
+            }
+        }
+
 
         bool isSubSV = false;
         public bool IsSubSV
@@ -145,7 +159,7 @@ namespace Swegrant.ViewModels
         {
             if (Helpers.Settings.CurrentLanguage != Language.None)
             {
-                this.CurrnetAudioLanguage = Helpers.Settings.CurrentLanguage;
+                this.CurrnetAudioLanguage = Language.Farsi;
                 this.CurrnetSubtitleLanguage = Helpers.Settings.CurrentLanguage;
             }
             else
@@ -164,9 +178,11 @@ namespace Swegrant.ViewModels
             this.CurrentScene = 1;
             IsLangugeVisible = true;
 
+            isAudioOR = (this.CurrnetAudioLanguage == Language.Original);
             isAudioFA = (this.CurrnetAudioLanguage == Language.Farsi);
             isAudioSV = (this.CurrnetAudioLanguage == Language.Svenska);
             isSubFA = (this.CurrnetSubtitleLanguage == Language.Farsi);
+
             isSubSV = (this.CurrnetSubtitleLanguage == Language.Svenska);
 
             if (DesignMode.IsDesignModeEnabled)
@@ -384,7 +400,7 @@ namespace Swegrant.ViewModels
         {
             await Task.Run(() =>
             {
-
+                PrepareAudio(Language.Original);
                 PrepareAudio(Language.Farsi);
                 PrepareAudio(Language.Svenska);
             });
@@ -400,41 +416,41 @@ namespace Swegrant.ViewModels
 
         private async Task PrepareAudio(Language language)
         {
-            string filename = "VD-";
+            string filename = $"VD-{CurrentCharchter.ToString().Substring(0,2).ToUpper()}-AUD-{language.ToString().Substring(0,2).ToUpper()}-SC-{CurrentScene.ToString("00")}.mp3";
 
-            switch (CurrentCharchter)
-            {
-                case Character.Lyla:
-                    filename += "LY-";
-                    break;
-                case Character.Sina:
-                    filename += "SI-";
-                    break;
-                case Character.Tara:
-                    filename += "TA-";
-                    break;
-            }
+            //switch (CurrentCharchter)
+            //{
+            //    case Character.Lyla:
+            //        filename += "LY-";
+            //        break;
+            //    case Character.Sina:
+            //        filename += "SI-";
+            //        break;
+            //    case Character.Tara:
+            //        filename += "TA-";
+            //        break;
+            //}
 
-            filename += "AUD-";
+            //filename += "AUD-";
 
-            switch (language)
-            {
-                case Language.English:
-                    filename += "EN-";
-                    break;
-                case Language.Farsi:
-                    filename += "FA-";
-                    break;
-                case Language.Svenska:
-                    filename += "SV-";
-                    break;
-            }
+            //switch (language)
+            //{
+            //    case Language.English:
+            //        filename += "OR-";
+            //        break;
+            //    case Language.Farsi:
+            //        filename += "FA-";
+            //        break;
+            //    case Language.Svenska:
+            //        filename += "SV-";
+            //        break;
+            //}
 
-            filename += "SC-";
+            //filename += "SC-";
 
-            filename += CurrentScene.ToString("00");
+            //filename += CurrentScene.ToString("00");
 
-            filename += ".mp3";
+            //filename += ".mp3";
 
             DependencyService.Get<IAudio>().PrepareAudioFile(language, filename);
         }

@@ -29,7 +29,7 @@
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10" HorizontalOptions="CenterAndExpand">
-                <Label Text="Swegrant" HorizontalOptions="CenterAndExpand" FontSize="Title"/>
+                <Label Text="Dven Drare" HorizontalOptions="CenterAndExpand" FontSize="Title"/>
                 <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Padding="0,24,0,0">
                     <Label.FormattedText>
                         <FormattedString>

@@ -69,72 +69,6 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!--<Button x:Name="btnPlaySv" Text="Switch SV Audio" Grid.Row="1" Grid.ColumnSpan="2" Clicked="btnPlaySV_Clicked"/>
-        <Button x:Name="btnPlayFa" Text="Switch FA Audio" Grid.Row="2" Grid.ColumnSpan="2" Clicked="btnPlayFa_Clicked"/>-->
-        <!--<Button x:Name="btnStopPlayback" Text="STOP" Grid.Row="3" Grid.ColumnSpan="2" Clicked="btnStopPlayback_Clicked"/>-->
-
-        <!--<Button x:Name="btnEnglish" Text="English" Clicked="btnEnglish_Clicked" />-->
-
-
-        <!--<extensions:Expander Grid.Row="2" Grid.ColumnSpan="2" >
-
-            <extensions:Expander.Header>
-                <Label Text="Audio language : "
-                       TextColor="White"
-               FontAttributes="Bold"
-               FontSize="Medium" />
-            </extensions:Expander.Header>
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="CenterAndExpand">
-
-                <RadioButton BackgroundColor="{StaticResource Primary}" 
-                         FontSize="Large" 
-                         FontAttributes="Bold"
-                         TextColor="{StaticResource SecondaryTextColor}" 
-                         IsChecked="{Binding IsAudioFA}" 
-                         Content="فارسی"/>
-                <RadioButton BackgroundColor="{StaticResource Primary}" 
-                         FontSize="Large" 
-                         FontAttributes="Bold" 
-                         TextColor="{StaticResource SecondaryTextColor}" 
-                         IsChecked="{Binding IsAudioSV}" 
-                         Content="Svenska"/>
-             
-
-            </StackLayout>
-
-        </extensions:Expander>
-
-        <extensions:Expander Grid.Row="3" Grid.ColumnSpan="2" >
-
-            <extensions:Expander.Header>
-                <Label Text="Subtitle language :"
-                       TextColor="White"
-               FontAttributes="Bold"
-               FontSize="Medium" />
-            </extensions:Expander.Header>
-            <StackLayout Orientation="Vertical"
-                         HorizontalOptions="CenterAndExpand">
-
-                <RadioButton BackgroundColor="{StaticResource Primary}" 
-                         FontSize="Large" 
-                         FontAttributes="Bold"
-                         TextColor="{StaticResource SecondaryTextColor}" 
-                         IsChecked="{Binding IsSubFA}" 
-                         Content="فارسی"/>
-                <RadioButton BackgroundColor="{StaticResource Primary}" 
-                         FontSize="Large" 
-                         FontAttributes="Bold" 
-                         TextColor="{StaticResource SecondaryTextColor}" 
-                         IsChecked="{Binding IsSubSV}" 
-                         Content="Svenska"/>
-
-
-            </StackLayout>
-
-        </extensions:Expander>-->
-
-
 
         <Grid HorizontalOptions="CenterAndExpand" 
               Grid.Row="2" Grid.ColumnSpan="2"
@@ -145,11 +79,11 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0"
-                    Text="Audio language : "
+                    Text="Audio : "
                        TextColor="White"
                    HorizontalOptions="Center"
                      VerticalOptions="Center"
@@ -157,7 +91,15 @@
                FontSize="Medium" />
             <StackLayout Orientation="Horizontal"
                          Grid.Row="0" Grid.Column="1">
-            <RadioButton 
+                <RadioButton 
+                             BackgroundColor="{StaticResource Primary}" 
+                         HorizontalOptions="FillAndExpand"
+                         FontSize="Medium" 
+                         FontAttributes="Bold"
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsAudioOR}" 
+                         Content="Original"/>
+                <RadioButton 
                              BackgroundColor="{StaticResource Primary}" 
                          HorizontalOptions="FillAndExpand"
                          FontSize="Medium" 
@@ -165,7 +107,7 @@
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsAudioFA}" 
                          Content="فارسی"/>
-            <RadioButton 
+                <RadioButton 
                         BackgroundColor="{StaticResource Primary}" 
                          HorizontalOptions="FillAndExpand"
                          FontSize="Medium" 
@@ -176,7 +118,7 @@
             </StackLayout>
 
             <Label  Grid.Row="1" Grid.Column="0"
-                Text="Subtitle language : "
+                Text="Subtitle : "
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                        TextColor="White"
@@ -185,19 +127,19 @@
             <StackLayout Orientation="Horizontal"
                          Grid.Row="1" Grid.Column="1">
                 <RadioButton  
-                BackgroundColor="{StaticResource Primary}" 
+                BackgroundColor="{StaticResource SecondaryColor}" 
                          HorizontalOptions="FillAndExpand"
                          FontSize="Medium" 
                          FontAttributes="Bold"
-                         TextColor="{StaticResource SecondaryTextColor}" 
+                         TextColor="{StaticResource Primary}" 
                          IsChecked="{Binding IsSubFA}" 
                          Content="فارسی"/>
                 <RadioButton  
-                BackgroundColor="{StaticResource Primary}" 
+                BackgroundColor="{StaticResource SecondaryColor}" 
                          HorizontalOptions="FillAndExpand"
                          FontSize="Medium" 
                          FontAttributes="Bold" 
-                         TextColor="{StaticResource SecondaryTextColor}" 
+                         TextColor="{StaticResource Primary}" 
                          IsChecked="{Binding IsSubSV}" 
                          Content="Svenska"/>
             </StackLayout>
@@ -212,7 +154,7 @@
             Grid.RowSpan="3"
             d:IsRunning="True"
             d:IsVisible="True"
-            Color="{StaticResource PrimaryDarkColor}"
+            Color="{StaticResource SecondaryColor}"
             HorizontalOptions="CenterAndExpand"
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}"
