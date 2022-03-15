@@ -65,8 +65,10 @@
                 <uc:TheaterControl/>
             </TabItem>
             <TabItem x:Name="tabVideo" Header="Video Mode" FontSize="16">
-
                 <uc:VideoControl/>
+            </TabItem>
+            <TabItem x:Name="tabQuestionnaire" Header="Questionnaire" FontSize="16">
+                <uc:QuestionnaireControl/>
             </TabItem>
         </TabControl>
     </Grid>

@@ -88,20 +88,20 @@
             </Picker>-->
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="FillAndExpand">
-                
-            <RadioButton BackgroundColor="{StaticResource Primary}" 
+
+                <RadioButton BackgroundColor="{StaticResource SecondaryBackColor}" 
                          HorizontalOptions="EndAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold"
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsLeylaSelected}" Content="Leyla"/>
-                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                <RadioButton BackgroundColor="{StaticResource SecondaryBackColor}" 
                              HorizontalOptions="EndAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold" 
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsSinaSelected}" Content="Sina"/>
-                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                <RadioButton BackgroundColor="{StaticResource SecondaryBackColor}" 
                              HorizontalOptions="EndAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold" 

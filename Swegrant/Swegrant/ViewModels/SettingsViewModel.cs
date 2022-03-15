@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers.Commands;
+using Swegrant.Shared.Models;
 using Swegrant.Views;
 using System;
 using System.Collections.Generic;
@@ -33,10 +34,57 @@ namespace Swegrant.ViewModels
             set { SetProperty(ref this.serverPort, value); }
         }
 
+        #region Charchter
+        bool isLeylaSelected = false;
+        public bool IsLeylaSelected
+        {
+            get { return isLeylaSelected; }
+            set
+            {
+                SetProperty(ref isLeylaSelected, value);
+                if (value)
+                {
+                    CurrentCharchter = Character.Lyla;
+                }
+            }
+        }
+
+        bool isSinaSelected = false;
+        public bool IsSinaSelected
+        {
+            get { return isSinaSelected; }
+            set
+            {
+                SetProperty(ref isSinaSelected, value);
+                if (value)
+                {
+                    CurrentCharchter = Character.Sina;
+                }
+            }
+        }
+
+        bool isTaraSelected = false;
+        public bool IsTaraSelected
+        {
+            get { return isTaraSelected; }
+            set
+            {
+                SetProperty(ref isTaraSelected, value);
+                if (value)
+                {
+                    CurrentCharchter = Character.Tara;
+                }
+            }
+        }
+
+        public Character CurrentCharchter { get; private set; }
+        #endregion
+
         private void SaveSettings()
         {
             Helpers.Settings.ServerIP = this.ServerIP;
             Helpers.Settings.ServerPort = this.ServerPort;
+            Helpers.Settings.CurrentCharachter = this.CurrentCharchter;
             NavigatFile();
         }
 

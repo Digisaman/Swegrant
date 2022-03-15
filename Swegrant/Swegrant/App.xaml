@@ -15,8 +15,9 @@
             <Color x:Key="SecondaryLightColor">#eef110</Color>
             <Color x:Key="SecondaryDarkColor">#eef110</Color>
             <Color x:Key="PrimaryBackColor">#000000</Color>
-            <Color x:Key="PrimaryTextColor">#000000</Color>
-            <Color x:Key="SecondaryTextColor">#ffffff</Color>
+            <Color x:Key="PrimaryTextColor">#ffffff</Color>
+            <Color x:Key="SecondaryTextColor">#000000</Color>
+            <Color x:Key="SecondaryBackColor">#ffffff</Color>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">

@@ -140,7 +140,9 @@ namespace Swegrant.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            this.mediaInfo = await GetFileUrls();
+            this.mediaInfo = await GetMediaInfo();
+            Helpers.Settings.Questionnaire = await GetQuestionnaire();
+
             this.currentIndex = 0;
             if (this.mediaInfo.AUDIO.Count > 0)
             {
@@ -150,7 +152,7 @@ namespace Swegrant.Views
 
         }
 
-        public async Task<MediaInfo> GetFileUrls()
+        public async Task<MediaInfo> GetMediaInfo()
         {
             MediaInfo info = null;
             try
@@ -162,6 +164,27 @@ namespace Swegrant.Views
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     info = JsonConvert.DeserializeObject<MediaInfo>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            return info;
+        }
+
+        public async Task<Questionnaire> GetQuestionnaire()
+        {
+            Questionnaire info = null;
+            try
+            {
+                Uri uri = new Uri($"{(Swegrant.Helpers.Settings.UseHttps ? "https" : "http")}://{Swegrant.Helpers.Settings.ServerIP}:{Swegrant.Helpers.Settings.ServerPort}/api/media/GetQuestionnaire");
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    info = JsonConvert.DeserializeObject<Questionnaire>(content);
                 }
             }
             catch (Exception ex)

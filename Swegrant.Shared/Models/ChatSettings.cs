@@ -13,5 +13,7 @@ namespace Swegrant.Shared.Models
         public static readonly string ServerUser = "SERVER";
 
         public static readonly string DefaultPort = "5000";
+
+        public static readonly string DefaultProtocol = "http";
     }
 }

@@ -17,6 +17,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -33,7 +35,35 @@
                HorizontalOptions="Center"
                VerticalOptions="Center"/>
         <Entry Text="{Binding ServerPort}" Grid.Row="1" Grid.Column="1"></Entry>
-        <Button  Grid.Row="2" Grid.ColumnSpan="2"
+        <Label Text="Character :" Grid.Row="2" Grid.Column="0"
+               FontSize="Large"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="3" Grid.ColumnSpan="2"
+                         HorizontalOptions="FillAndExpand">
+
+            <RadioButton BackgroundColor="{StaticResource SecondaryBackColor}" 
+                         HorizontalOptions="EndAndExpand"
+                         FontSize="Large" 
+                         FontAttributes="Bold"
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsLeylaSelected}" Content="Leyla"/>
+            <RadioButton BackgroundColor="{StaticResource SecondaryBackColor}" 
+                             HorizontalOptions="EndAndExpand"
+                         FontSize="Large" 
+                         FontAttributes="Bold" 
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsSinaSelected}" Content="Sina"/>
+            <RadioButton BackgroundColor="{StaticResource SecondaryBackColor}" 
+                             HorizontalOptions="EndAndExpand"
+                         FontSize="Large" 
+                         FontAttributes="Bold" 
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsTaraSelected}" Content="Tara"/>
+
+        </StackLayout>
+        <Button  Grid.Row="4" Grid.ColumnSpan="2"
                  Text="NEXT"
                         Command="{Binding SaveSettingsCommand}"
                         HorizontalOptions="FillAndExpand"

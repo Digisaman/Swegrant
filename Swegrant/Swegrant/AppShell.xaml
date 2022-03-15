@@ -93,6 +93,9 @@
     <FlyoutItem Title="Video" Icon="icon_feed.png">
         <ShellContent Route="VideoPage" ContentTemplate="{DataTemplate local:VideoPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Questionnaire" Icon="icon_feed.png">
+        <ShellContent Route="QuestionnairePage" ContentTemplate="{DataTemplate local:QuestionnairePage}" />
+    </FlyoutItem>
       <FlyoutItem Title="Settings" Icon="icon_feed.png">
         <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>

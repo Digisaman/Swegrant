@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Swegrant.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
@@ -12,6 +13,24 @@ namespace Swegrant.Server.Controllers
     [ApiController]
     public class MediaController : ControllerBase
     {
+        #region Properties
+        private static ObservableCollection<SubmitQuestion> _Questions;
+        public static ObservableCollection<SubmitQuestion> Questions
+        {
+            get
+            {
+                if (_Questions == null)
+                {
+                    _Questions = new ObservableCollection<SubmitQuestion>();
+                }
+                return _Questions;
+            }
+
+        }
+
+        public static Questionnaire Questionnaire { get; private set; }
+        #endregion
+
         [HttpGet]
         [Route(nameof(GetCurrentTime))]
         public DateTime GetCurrentTime()
@@ -36,8 +55,8 @@ namespace Swegrant.Server.Controllers
             }
 
             string localIP = Helpers.AppConfigHelpers.LoadConfig("ServerIP").ToString();
-            string port = "5000";
-            string protocol = "http";
+            string port = ChatSettings.DefaultPort;
+            string protocol = ChatSettings.DefaultProtocol;
 
             List<string> urls = new List<string>();
             foreach (MediaFile mediafile in mediaInfo.AUDIO)
@@ -82,6 +101,54 @@ namespace Swegrant.Server.Controllers
 
 
 
+        }
+
+        [HttpGet]
+        [Route(nameof(GetQuestionnaire))]
+        public Questionnaire GetQuestionnaire()
+        {
+            try
+            {
+                DirectoryInfo mediaDirectory = new DirectoryInfo($"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA");
+
+                Questionnaire = null;
+                string questionnaireFilePath = $"{mediaDirectory}\\Questionnaire.json";
+                using (StreamReader streamReader = new StreamReader(questionnaireFilePath))
+                {
+                    string content = streamReader.ReadToEnd();
+                    Questionnaire = JsonConvert.DeserializeObject<Questionnaire>(content);
+                }
+
+                return Questionnaire;
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
+        }
+
+        [HttpPost]
+        [Route(nameof(SubmitQuestion))]
+        public void SubmitQuestion([FromBody] SubmitQuestion question)
+        {
+            try
+            {
+                question.Id = Questions.Count + 1;
+                Question selectedQuestion = Questionnaire.Questions.FirstOrDefault(c => c.Id == question.Id);
+                if (selectedQuestion != null)
+                {
+                    question.Title = selectedQuestion.Title;
+                    question.Value = (question.Type == QuestionType.MultiAnswer 
+                        ? selectedQuestion.Answers.FirstOrDefault(c => c.Id == question.AnswerId).Value 
+                        : question.CommentValue);
+                }
+               Questions.Add(question);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 

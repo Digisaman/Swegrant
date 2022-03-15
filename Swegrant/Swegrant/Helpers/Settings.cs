@@ -1,4 +1,5 @@
-﻿using Swegrant.Shared.Models;
+﻿using Newtonsoft.Json;
+using Swegrant.Shared.Models;
 using System;
 using Xamarin.Essentials;
 
@@ -22,6 +23,7 @@ namespace Swegrant.Helpers
 
         static readonly string defaultCharachter = Character.None.ToString();
 
+        static readonly string questionnaire = "";
 
         public static bool UseHttps
         {
@@ -105,6 +107,33 @@ namespace Swegrant.Helpers
         {
             get => Preferences.Get(nameof(ServerIP), defaultIP);
             set => Preferences.Set(nameof(ServerIP), value);
+        }
+
+
+        public static Questionnaire Questionnaire
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(QuestionnaireJson))
+                {
+                    return JsonConvert.DeserializeObject<Questionnaire>(QuestionnaireJson);
+                }
+                return new Questionnaire();
+            }
+            set
+            {
+                if (value != null)
+                {
+                    QuestionnaireJson = JsonConvert.SerializeObject(value);
+                }
+
+            }
+        }
+
+        private static string QuestionnaireJson
+        {
+            get => Preferences.Get(nameof(Questionnaire), questionnaire);
+            set => Preferences.Set(nameof(Questionnaire), value);
         }
 
     }
