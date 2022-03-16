@@ -36,6 +36,13 @@ namespace Swegrant.ViewModels
             SubmitQuestionCommand = new MvvmHelpers.Commands.Command(async () => await SubmitQuestion());
         }
 
+        private bool CanExecuteSubmitQuestion()
+        {
+            bool result =CurrentQuestion.Answers.Any(c => c.IsSelected);
+            return result;
+            //return CurrentQuestion.IsAnswerSelected;
+        }
+
         private async Task SubmitQuestion()
         {
             try
@@ -51,7 +58,7 @@ namespace Swegrant.ViewModels
                 {
                     AnswerId = answer.Id,
                     Type = QuestionType.MultiAnswer,
-                    Usernanme = Helpers.Settings.UserName
+                    Username = Helpers.Settings.UserName
                 };
                 Uri uri = new Uri($"{(Swegrant.Helpers.Settings.UseHttps ? "https" : "http")}://{Swegrant.Helpers.Settings.ServerIP}:{Swegrant.Helpers.Settings.ServerPort}/api/media/submitquestion");
                 var json = JsonConvert.SerializeObject(submitQuestion);
@@ -65,6 +72,10 @@ namespace Swegrant.ViewModels
                     {
                         CurentIndex++;
                         await LoadQuestions();
+                    }
+                    else
+                    {
+                        await DialogService.DisplayAlert("Information", "Thank you for takeing the time to fill out the questionnaire.", "");
                     }
                 }
             }

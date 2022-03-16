@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace Swegrant.Models
@@ -29,6 +30,14 @@ namespace Swegrant.Models
         public ObservableQuestion()
         {
             Answers = new ObservableCollection<ObservableAnswer>(); 
+        }
+
+        public bool IsAnswerSelected
+        {
+            get
+            {
+                return Answers.Any(c => c.IsSelected);
+            }
         }
 
     }

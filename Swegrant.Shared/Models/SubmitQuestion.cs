@@ -21,7 +21,7 @@ namespace Swegrant.Shared.Models
         public int AnswerId { get; set; }
 
         public QuestionType Type { get; set; }
-        public string Usernanme { get; set; }
+        public string Username { get; set; }
 
         
 

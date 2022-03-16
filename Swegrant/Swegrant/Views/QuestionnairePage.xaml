@@ -18,7 +18,9 @@
                         <ViewCell>
                             <StackLayout>
                                 <StackLayout Orientation="Horizontal">
-                                    <RadioButton 
+                                   
+                                    
+                                    <RadioButton GroupName="Answers"
                                         BackgroundColor="{StaticResource SecondaryBackColor}"
                                         TextColor="{StaticResource SecondaryTextColor}" 
                                         IsChecked="{Binding IsSelected}"/>
