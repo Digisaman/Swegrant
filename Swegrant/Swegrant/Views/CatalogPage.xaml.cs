@@ -27,7 +27,7 @@ namespace Swegrant.Views
             {
                 CurrnetLanguage = Language.Farsi;
             }
-            this.webBrowser.Source = $"http://{Settings.ServerIP}:{Settings.ServerPort}/{CurrnetLanguage.ToString().ToUpper().Substring(0,2)}/index.htm";
+            this.webBrowser.Source = $"http://{Settings.ServerIP}:{Settings.ServerPort}/{CurrnetLanguage.ToString().ToUpper().Substring(0,2)}/index.html";
             this.webBrowser.Reload();
             //this.webBrowser.Reload();
 

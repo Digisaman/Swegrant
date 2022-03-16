@@ -26,7 +26,11 @@
         },
         {
           "Id": 6,
-          "Value": "I prefer not to say "
+          "Value": "Other"
+        },
+        {
+          "Id": 7,
+          "Value": "I prefer not to say"
         }
       ]
     },
@@ -36,19 +40,19 @@
       "Answers": [
         {
           "Id": 1,
-          "Value": "13–20"
+          "Value": "13-19"
         },
         {
           "Id": 2,
-          "Value": "20-35"
+          "Value": "20-34"
         },
         {
           "Id": 3,
-          "Value": "35-50"
+          "Value": "35-49"
         },
         {
           "Id": 4,
-          "Value": "50-65"
+          "Value": "50-64"
         },
         {
           "Id": 5,
@@ -78,7 +82,7 @@
         },
         {
           "Id": 4,
-          "Value": "No I have watched more than 3 times "
+          "Value": "No I have watched more than 3 times"
         }
       ]
     },
@@ -102,7 +106,7 @@
     },
     {
       "Id": 5,
-      "Title": "Please choose from Poor to Excellent:",
+      "Title": "How would you rate the acting?",
       "Answers": [
         {
           "Id": 1,
@@ -154,7 +158,7 @@
     },
     {
       "Id": 7,
-      "Title": "Overall how would you rate 'SvenDrare'?",
+      "Title": "Overall, how would you rate 'SvenDrare'?",
       "Answers": [
         {
           "Id": 1,
@@ -179,8 +183,8 @@
       ]
     },
     {
-      "Id": 0,
-      "Title": "How would you rate the way that this theater was performed (choosing character, using video clip, …)",
+      "Id": 8,
+      "Title": "How would you rate the way that this theater was performed (choosing character, using video clip, …)?",
       "Answers": [
         {
           "Id": 1,
@@ -206,7 +210,7 @@
     },
     {
       "Id": 9,
-      "Title": "Did you face any technical problem during the performance? ",
+      "Title": "Did you face any technical problem during the performance?",
       "Answers": [
         {
           "Id": 1,
@@ -224,7 +228,7 @@
       "Answers": [
         {
           "Id": 1,
-          "Value": "From Chaharsoo social media "
+          "Value": "From Chaharsoo social media"
         },
         {
           "Id": 2,
@@ -238,7 +242,7 @@
     },
     {
       "Id": 11,
-      "Title": "How did you hear of SvenDrare:",
+      "Title": "Have you ever seen any other play from Chaharsoo theatre group?",
       "Answers": [
         {
           "Id": 1,
@@ -251,6 +255,10 @@
         {
           "Id": 3,
           "Value": "Logndagen"
+        },
+        {
+          "Id": 4,
+          "Value": "Both"
         }
       ]
     }
