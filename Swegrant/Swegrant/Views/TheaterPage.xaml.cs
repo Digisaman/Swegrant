@@ -29,7 +29,8 @@ namespace Swegrant.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            
+            Shell.SetNavBarIsVisible(this, Helpers.Settings.IsUserAdmin);
+
             if (!DesignMode.IsDesignModeEnabled)
                 VM.ConnectCommand.Execute(null);
         }

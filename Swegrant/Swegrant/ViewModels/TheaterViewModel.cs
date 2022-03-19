@@ -175,12 +175,13 @@ namespace Swegrant.ViewModels
 
         public TheaterViewModel()
         {
+            Title = Resources.Theater.Title;
             InitializeSettings();
 
             if (DesignMode.IsDesignModeEnabled)
                 return;
 
-            Title = Settings.Group;
+            //Title = Settings.Group;
 
             ChatMessage = new ChatMessage();
             Messages = new ObservableCollection<ChatMessage>();

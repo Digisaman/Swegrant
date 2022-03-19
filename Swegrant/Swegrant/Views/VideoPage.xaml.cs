@@ -39,6 +39,7 @@ namespace Swegrant.Views
             try
             {
                 base.OnAppearing();
+                Shell.SetNavBarIsVisible(this, Helpers.Settings.IsUserAdmin);
                 VM.ConnectCommand.Execute(null);
             }
             catch(Exception ex)

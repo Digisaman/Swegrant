@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Swegrant.ViewModels
 {
-    class MainViewModel
+    public class MainViewModel : BaseViewModel
     {
+        public MainViewModel()
+        {
+            Title = Resources.Main.Title;
+        }
     }
 }

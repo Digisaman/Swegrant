@@ -14,6 +14,7 @@ namespace Swegrant.ViewModels
 
         public SettingsViewModel()
         {
+            Title = Resources.Settings.Title;
             SaveSettingsCommand = new MvvmHelpers.Commands.Command(() => SaveSettings());
             serverIP = Helpers.Settings.ServerIP;
             serverPort = Helpers.Settings.ServerPort;

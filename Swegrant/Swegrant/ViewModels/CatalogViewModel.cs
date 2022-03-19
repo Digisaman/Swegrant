@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Swegrant.ViewModels
 {
-    public class CatalogViewModel
+    public class CatalogViewModel : BaseViewModel
     {
+        public CatalogViewModel()
+        {
+            Title = Resources.Catalog.Title;
+        }
     }
 }

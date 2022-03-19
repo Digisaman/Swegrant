@@ -8,6 +8,13 @@
              Shell.NavBarIsVisible="False">
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
+            <RadioButton x:Name="rdAdminUser" Content="Admin User" IsChecked="{Binding IsAdmin}" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="Password :"/>
+                <Entry IsPassword="True" Text="{Binding AdminPass}" IsEnabled="{Binding IsAdmin}" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <RadioButton x:Name="rdNormalUser" Content="Normal User"  IsChecked="{Binding IsNormal}"  />
+
             <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
         </StackLayout>
     </ContentPage.Content>

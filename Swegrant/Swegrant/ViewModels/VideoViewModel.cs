@@ -162,12 +162,13 @@ namespace Swegrant.ViewModels
         Random random;
         public VideoViewModel()
         {
+            Title = Resources.Video.Title;
             InitilizeSettings();
 
             if (DesignMode.IsDesignModeEnabled)
                 return;
 
-            Title = Settings.Group;
+           
 
             ChatMessage = new ChatMessage();
             Messages = new ObservableCollection<ChatMessage>();

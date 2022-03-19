@@ -17,6 +17,12 @@ namespace Swegrant.Views
             InitializeComponent();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Shell.SetNavBarIsVisible(this, Helpers.Settings.IsUserAdmin);
+        }
+
         private async void btnPersian_Clicked(object sender, EventArgs e)
         {
             bool answer = await DisplayAlert("Question?", "All subtitles will be displayed in the selected language", "Yes", "No");

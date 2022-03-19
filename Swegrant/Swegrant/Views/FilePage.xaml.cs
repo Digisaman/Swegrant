@@ -140,6 +140,7 @@ namespace Swegrant.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            Shell.SetNavBarIsVisible(this, Helpers.Settings.IsUserAdmin);
             this.mediaInfo = await GetMediaInfo();
             Helpers.Settings.Questionnaire = await GetQuestionnaire();
 

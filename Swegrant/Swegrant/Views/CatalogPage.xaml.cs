@@ -22,6 +22,7 @@ namespace Swegrant.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            Shell.SetNavBarIsVisible(this, Helpers.Settings.IsUserAdmin);
             Language CurrnetLanguage = Helpers.Settings.CurrentLanguage;
             if ( CurrnetLanguage == Language.None)
             {
@@ -33,6 +34,7 @@ namespace Swegrant.Views
 
 
         }
+
 
         private void btnNext_Clicked(object sender, EventArgs e)
         {

@@ -2,12 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             x:Class="Swegrant.Views.TheaterPage"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:model="clr-namespace:Swegrant.Models"
-    xmlns:viewmodel="clr-namespace:Swegrant.ViewModels" xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:viewmodel="clr-namespace:Swegrant.ViewModels" 
+             xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="Swegrant.Views.TheaterPage"
              Title="{Binding Title}"
-    mc:Ignorable="d"
+             mc:Ignorable="d"
              BackgroundColor="{StaticResource PrimaryBackColor}">
     <ContentPage.BindingContext>
         <viewmodel:TheaterViewModel />

@@ -22,5 +22,11 @@ namespace Swegrant.Views
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Shell.SetNavBarIsVisible(this, Helpers.Settings.IsUserAdmin);
+        }
     }
 }

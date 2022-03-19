@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 namespace Swegrant.ViewModels
 {
     public class QuestionnaireViewModel : BaseViewModel
-    {
+    {  
+
         #region Properties
         private ObservableQuestion currentQuestion = null;
         public ObservableQuestion CurrentQuestion 
@@ -31,7 +32,7 @@ namespace Swegrant.ViewModels
 
         public QuestionnaireViewModel()
         {
-
+            Title = Resources.Questionnaire.Title;
             LoadQuestionsCommand = new MvvmHelpers.Commands.Command(async () => await LoadQuestions());
             SubmitQuestionCommand = new MvvmHelpers.Commands.Command(async () => await SubmitQuestion());
         }

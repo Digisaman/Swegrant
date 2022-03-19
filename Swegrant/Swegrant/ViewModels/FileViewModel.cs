@@ -6,5 +6,9 @@ namespace Swegrant.ViewModels
 {
     public class FileViewModel : BaseViewModel
     {
+        public FileViewModel()
+        {
+            Title = Resources.File.Title;
+        }
     }
 }

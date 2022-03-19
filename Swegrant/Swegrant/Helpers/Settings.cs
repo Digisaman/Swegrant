@@ -25,6 +25,8 @@ namespace Swegrant.Helpers
 
         static readonly string questionnaire = "";
 
+        static readonly bool isUserAdmin = true;
+
         public static bool UseHttps
         {
             get => false;
@@ -56,7 +58,14 @@ namespace Swegrant.Helpers
             set => Preferences.Set(nameof(UserName), value);
         }
 
-        
+        public static bool IsUserAdmin
+        {
+            get => Preferences.Get(nameof(IsUserAdmin), isUserAdmin);
+            //get => "User1";
+            set => Preferences.Set(nameof(IsUserAdmin), value);
+        }
+
+
         public static string Group
         {
             //get => Preferences.Get(nameof(Group), string.Empty);
