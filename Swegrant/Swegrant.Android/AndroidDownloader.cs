@@ -33,18 +33,18 @@ namespace Swegrant.Droid
                 string appDataDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
                 string pathToNewFolder = Path.Combine(appDataDirectory, folder);
                 string pathToNewFile = Path.Combine(pathToNewFolder, Path.GetFileName(url));
-                if (!File.Exists(pathToNewFile))
-                {
+                //if (!File.Exists(pathToNewFile))
+                //{
                     Directory.CreateDirectory(pathToNewFolder);
                     WebClient webClient = new WebClient();
                     webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
                     webClient.DownloadFileAsync(new Uri(url), pathToNewFile);
-                }
-                else
-                {
-                    if (OnFileDownloaded != null)
-                        OnFileDownloaded.Invoke(this, new DownloadEventArgs(true));
-                }
+                //}
+                //else
+                //{
+                //    if (OnFileDownloaded != null)
+                //        OnFileDownloaded.Invoke(this, new DownloadEventArgs(true));
+                //}
             }
             catch (Exception ex)
             {

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Swegrant.Shared.Models
 {
@@ -15,6 +17,14 @@ namespace Swegrant.Shared.Models
         public List<MediaFile> THSUB { get; set; }
 
         public List<MediaFile> VDSUB { get; set; }
+
+        public bool HasFiles
+        {
+            get
+            {
+                return (AUDIO.Any() || THSUB.Any() || VDSUB.Any());
+            }
+        }
 
         public DownloadCategory CurrentCategory { get; set; }
     }

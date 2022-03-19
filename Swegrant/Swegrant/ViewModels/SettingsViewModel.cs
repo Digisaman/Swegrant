@@ -18,6 +18,10 @@ namespace Swegrant.ViewModels
             SaveSettingsCommand = new MvvmHelpers.Commands.Command(() => SaveSettings());
             serverIP = Helpers.Settings.ServerIP;
             serverPort = Helpers.Settings.ServerPort;
+            isLeylaSelected = (Helpers.Settings.CurrentCharachter == Character.Lyla);
+            isSinaSelected = (Helpers.Settings.CurrentCharachter == Character.Sina);
+            isTaraSelected = (Helpers.Settings.CurrentCharachter == Character.Tara);
+            
         }
 
 

@@ -61,7 +61,52 @@ namespace Swegrant.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About.
+        ///   Looks up a localized string similar to Downloading Audio files....
+        /// </summary>
+        public static string DonwloadingAudioFiles {
+            get {
+                return ResourceManager.GetString("DonwloadingAudioFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Completed..
+        /// </summary>
+        public static string DownloadCompleted {
+            get {
+                return ResourceManager.GetString("DownloadCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading Theater Subtitles....
+        /// </summary>
+        public static string DownloadTHSubFiles {
+            get {
+                return ResourceManager.GetString("DownloadTHSubFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading Video Subtitles....
+        /// </summary>
+        public static string DownloadVDSubFiles {
+            get {
+                return ResourceManager.GetString("DownloadVDSubFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files Are Up to Date..
+        /// </summary>
+        public static string FilesUpToDate {
+            get {
+                return ResourceManager.GetString("FilesUpToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files.
         /// </summary>
         public static string Title {
             get {

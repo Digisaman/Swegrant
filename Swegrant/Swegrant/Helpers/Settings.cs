@@ -24,6 +24,7 @@ namespace Swegrant.Helpers
         static readonly string defaultCharachter = Character.None.ToString();
 
         static readonly string questionnaire = "";
+        static readonly string mediaInfo = "";
 
         static readonly bool isUserAdmin = true;
 
@@ -110,12 +111,31 @@ namespace Swegrant.Helpers
             set => Preferences.Set(nameof(CurrentAudioLanguage), value.ToString());
         }
 
-        private static string mediaInfo = "";
+        
 
-        public static string MediaInfo
+        public static MediaInfo MediaInfo
         {
-            get => Preferences.Get(nameof(ServerIP), defaultIP);
-            set => Preferences.Set(nameof(ServerIP), value);
+            get
+            {
+                if (!string.IsNullOrEmpty(MediaInfoJson))
+                {
+                    return JsonConvert.DeserializeObject<MediaInfo>(MediaInfoJson);
+                }
+                return new MediaInfo();
+            }
+            set
+            {
+                if (value != null)
+                {
+                    MediaInfoJson = JsonConvert.SerializeObject(value);
+                }
+            }
+        }
+
+        private static string MediaInfoJson
+        {
+            get => Preferences.Get(nameof(MediaInfo), mediaInfo);
+            set => Preferences.Set(nameof(MediaInfo), value);
         }
 
 
@@ -135,7 +155,6 @@ namespace Swegrant.Helpers
                 {
                     QuestionnaireJson = JsonConvert.SerializeObject(value);
                 }
-
             }
         }
 

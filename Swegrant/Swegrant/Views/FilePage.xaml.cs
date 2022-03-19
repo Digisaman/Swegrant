@@ -24,7 +24,9 @@ namespace Swegrant.Views
         //{
         //    get => vm ?? (vm = (FileViewModel)BindingContext);
         //}
-        private MediaInfo mediaInfo;
+        private MediaInfo currentMediaInfo;
+        private MediaInfo clientMediaInfo;
+        private MediaInfo serverMediaInfo;
         private int currentIndex;
         private IDownloader downloader = null;
         private float progress;
@@ -36,7 +38,7 @@ namespace Swegrant.Views
             {
                 downloader = DependencyService.Get<IDownloader>();
                 downloader.OnFileDownloaded += Downloader_OnFileDownloaded;
-                this.mediaInfo = new MediaInfo();
+                this.currentMediaInfo = new MediaInfo();
             }
             catch (Exception ex)
             {
@@ -49,11 +51,11 @@ namespace Swegrant.Views
             if (e.FileSaved)
             {
                 //DisplayAlert("Swegrant", "File Saved Successfully", "Close");
-                if (mediaInfo.CurrentCategory == DownloadCategory.AUDIO)
+                if (currentMediaInfo.CurrentCategory == DownloadCategory.AUDIO)
                 {
-                    if ((currentIndex+1) < mediaInfo.AUDIO.Count)
+                    if ((currentIndex+1) < currentMediaInfo.AUDIO.Count)
                     {
-                        progress = ((float)(currentIndex + 1) / (float)mediaInfo.AUDIO.Count);
+                        progress = ((float)(currentIndex + 1) / (float)currentMediaInfo.AUDIO.Count);
                         // directly set the new progress value
                         defaultProgressBar.Progress = progress;
 
@@ -61,22 +63,44 @@ namespace Swegrant.Views
                         await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
 
                         this.currentIndex++;
-                        downloader.DownloadFile(mediaInfo.AUDIO[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
+                        downloader.DownloadFile(currentMediaInfo.AUDIO[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
                     }
                     else
                     {
                         await defaultProgressBar.ProgressTo(1, 500, Easing.Linear);
-                        mediaInfo.CurrentCategory = DownloadCategory.THSUB;
-                        currentIndex = 0;
-                        downloader.DownloadFile(mediaInfo.THSUB[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
-                        this.lblTitle.Text = "Downloading Theater Subtitles...";
+                        if (currentMediaInfo.THSUB.Any())
+                        {
+                            currentMediaInfo.CurrentCategory = DownloadCategory.THSUB;
+                            currentIndex = 0;
+                            downloader.DownloadFile(currentMediaInfo.THSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
+                            this.lblTitle.Text = Swegrant.Resources.File.DownloadTHSubFiles;
+                        }
+                        else if (currentMediaInfo.VDSUB.Any())
+                        {
+                            await defaultProgressBar.ProgressTo(1, 500, Easing.Linear);
+                            currentMediaInfo.CurrentCategory = DownloadCategory.VDSUB;
+                            currentIndex = 0;
+                            downloader.DownloadFile(currentMediaInfo.VDSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
+                            this.lblTitle.Text = Swegrant.Resources.File.DownloadVDSubFiles;
+                        }
+                        else
+                        {
+                            progress = 1;
+                            currentIndex = 0;
+                            Helpers.Settings.MediaInfo = currentMediaInfo;
+                            await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
+                            Helpers.Settings.MediaInfo = this.serverMediaInfo;
+                            this.lblTitle.Text = Swegrant.Resources.File.DownloadCompleted;
+                        }
+
+
                     }
                 }
-                else if (mediaInfo.CurrentCategory == DownloadCategory.THSUB)
+                else if (currentMediaInfo.CurrentCategory == DownloadCategory.THSUB)
                 {
-                    if ((currentIndex + 1) < mediaInfo.THSUB.Count)
+                    if ((currentIndex + 1) < currentMediaInfo.THSUB.Count)
                     {
-                        progress = ((float)(currentIndex + 1) / (float)mediaInfo.THSUB.Count);
+                        progress = ((float)(currentIndex + 1) / (float)currentMediaInfo.THSUB.Count);
                         // directly set the new progress value
                         defaultProgressBar.Progress = progress;
 
@@ -84,23 +108,37 @@ namespace Swegrant.Views
                         await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
 
                         this.currentIndex++;
-                        downloader.DownloadFile(mediaInfo.THSUB[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
+                        downloader.DownloadFile(currentMediaInfo.THSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
                     }
                     else
                     {
                         await defaultProgressBar.ProgressTo(1, 500, Easing.Linear);
-                        mediaInfo.CurrentCategory = DownloadCategory.VDSUB;
-                        currentIndex = 0;
-                        downloader.DownloadFile(mediaInfo.VDSUB[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
-                        this.lblTitle.Text = "Downloading Video Subtitles...";
+
+                        if (currentMediaInfo.VDSUB.Any())
+                        {
+                            await defaultProgressBar.ProgressTo(1, 500, Easing.Linear);
+                            currentMediaInfo.CurrentCategory = DownloadCategory.VDSUB;
+                            currentIndex = 0;
+                            downloader.DownloadFile(currentMediaInfo.VDSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
+                            this.lblTitle.Text = Swegrant.Resources.File.DownloadVDSubFiles;
+                        }
+                        else
+                        {
+                            progress = 1;
+                            currentIndex = 0;
+                            Helpers.Settings.MediaInfo = currentMediaInfo;
+                            await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
+                            Helpers.Settings.MediaInfo = this.serverMediaInfo;
+                            this.lblTitle.Text = Swegrant.Resources.File.DownloadCompleted;
+                        }
                     }
 
                 }
-                else if (mediaInfo.CurrentCategory == DownloadCategory.VDSUB)
+                else if (currentMediaInfo.CurrentCategory == DownloadCategory.VDSUB)
                 {
-                    if ((currentIndex + 1) < mediaInfo.VDSUB.Count)
+                    if ((currentIndex + 1) < currentMediaInfo.VDSUB.Count)
                     {
-                        progress = ((float)(currentIndex + 1) / (float)mediaInfo.VDSUB.Count);
+                        progress = ((float)(currentIndex + 1) / (float)currentMediaInfo.VDSUB.Count);
                         // directly set the new progress value
                         defaultProgressBar.Progress = progress;
 
@@ -108,17 +146,19 @@ namespace Swegrant.Views
                         await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
 
                         this.currentIndex++;
-                        downloader.DownloadFile(mediaInfo.VDSUB[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
+                        downloader.DownloadFile(currentMediaInfo.VDSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
                     }
                     else
                     {
                         progress = 1;
                         currentIndex = 0;
-                        
+                        Helpers.Settings.MediaInfo = currentMediaInfo;
                         await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
-                        this.lblTitle.Text = "Download Completed";
-                        Thread.Sleep(1000);
-                        NavigateMain();
+                        Helpers.Settings.MediaInfo = this.serverMediaInfo;
+                        this.lblTitle.Text = Swegrant.Resources.File.DownloadCompleted;
+                        
+                        //Thread.Sleep(1000);
+                        //NavigateMain();
                     }
                 }
             }
@@ -141,16 +181,98 @@ namespace Swegrant.Views
         {
             base.OnAppearing();
             Shell.SetNavBarIsVisible(this, Helpers.Settings.IsUserAdmin);
-            this.mediaInfo = await GetMediaInfo();
+            this.serverMediaInfo = await GetMediaInfo();
+            this.clientMediaInfo = Helpers.Settings.MediaInfo;
+            currentMediaInfo = new MediaInfo();
+            CalculateMediaInfo();
+           
             Helpers.Settings.Questionnaire = await GetQuestionnaire();
 
             this.currentIndex = 0;
-            if (this.mediaInfo.AUDIO.Count > 0)
+            if (this.currentMediaInfo.HasFiles)
             {
-                this.lblTitle.Text = "Downloading Audio files...";
-                downloader.DownloadFile(mediaInfo.AUDIO[currentIndex].Url, mediaInfo.CurrentCategory.ToString());
+                if (this.currentMediaInfo.AUDIO.Count > 0)
+                {
+                    this.lblTitle.Text = Swegrant.Resources.File.DonwloadingAudioFiles;
+                    currentMediaInfo.CurrentCategory = DownloadCategory.AUDIO;
+                    downloader.DownloadFile(currentMediaInfo.AUDIO[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
+                    return;
+                }
+
+                if (this.currentMediaInfo.THSUB.Count > 0)
+                {
+                    this.lblTitle.Text = Swegrant.Resources.File.DownloadTHSubFiles;
+                    currentMediaInfo.CurrentCategory = DownloadCategory.AUDIO;
+                    downloader.DownloadFile(currentMediaInfo.THSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
+                    return;
+                }
+
+                if (this.currentMediaInfo.VDSUB.Count > 0)
+                {
+                    this.lblTitle.Text = Swegrant.Resources.File.DownloadVDSubFiles;
+                    downloader.DownloadFile(currentMediaInfo.VDSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
+                    return;
+                }
+            }
+            else
+            {
+                this.lblTitle.Text = Swegrant.Resources.File.FilesUpToDate;
             }
 
+        }
+
+        private void CalculateMediaInfo()
+        {
+            foreach(var item in serverMediaInfo.AUDIO)
+            {
+                MediaFile currentServerFile = serverMediaInfo.AUDIO.FirstOrDefault(c => c.FileName == item.FileName);
+                MediaFile currentClientFile = clientMediaInfo.AUDIO.FirstOrDefault(c => c.FileName == item.FileName);
+                if (currentClientFile != null)
+                {
+                    if (currentClientFile.Version != currentServerFile.Version)
+                    {
+                        currentMediaInfo.AUDIO.Add(currentServerFile);
+                    }
+                }
+                else
+                {
+                    currentMediaInfo.AUDIO.Add(currentServerFile);
+                }
+            }
+
+            foreach (var item in serverMediaInfo.VDSUB)
+            {
+                MediaFile currentServerFile = serverMediaInfo.VDSUB.FirstOrDefault(c => c.FileName == item.FileName);
+                MediaFile currentClientFile = clientMediaInfo.VDSUB.FirstOrDefault(c => c.FileName == item.FileName);
+                if (currentClientFile != null)
+                {
+                    if (currentClientFile.Version != currentServerFile.Version)
+                    {
+                        currentMediaInfo.VDSUB.Add(currentServerFile);
+                    }
+                }
+                else
+                {
+                    currentMediaInfo.VDSUB.Add(currentServerFile);
+                }
+            }
+
+            foreach (var item in serverMediaInfo.THSUB)
+            {
+                MediaFile currentServerFile = serverMediaInfo.THSUB.FirstOrDefault(c => c.FileName == item.FileName);
+                MediaFile currentClientFile = clientMediaInfo.THSUB.FirstOrDefault(c => c.FileName == item.FileName);
+                if (currentClientFile != null)
+                {
+                    if (currentClientFile.Version != currentServerFile.Version)
+                    {
+                        currentMediaInfo.THSUB.Add(currentServerFile);
+                    }
+                }
+                else
+                {
+                    currentMediaInfo.THSUB.Add(currentServerFile);
+                }
+            }
         }
 
         public async Task<MediaInfo> GetMediaInfo()
