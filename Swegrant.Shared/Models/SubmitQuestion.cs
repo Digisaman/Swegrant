@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -24,13 +23,5 @@ namespace Swegrant.Shared.Models
         public string Username { get; set; }
 
         
-
-        
-    }
-
-    public enum QuestionType
-    {
-        MultiAnswer,
-        Comment
     }
 }

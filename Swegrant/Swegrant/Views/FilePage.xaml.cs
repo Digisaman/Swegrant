@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Swegrant.Helpers;
 using Swegrant.Interfaces;
 using Swegrant.Models;
 using Swegrant.Shared.Models;
@@ -181,12 +182,12 @@ namespace Swegrant.Views
         {
             base.OnAppearing();
             Shell.SetNavBarIsVisible(this, Helpers.Settings.IsUserAdmin);
-            this.serverMediaInfo = await GetMediaInfo();
+            this.serverMediaInfo = await ServerHelper.GetMediaInfo();
             this.clientMediaInfo = Helpers.Settings.MediaInfo;
             currentMediaInfo = new MediaInfo();
             CalculateMediaInfo();
            
-            Helpers.Settings.Questionnaire = await GetQuestionnaire();
+            Helpers.Settings.Questionnaire = await ServerHelper.GetQuestionnaire();
 
             this.currentIndex = 0;
             if (this.currentMediaInfo.HasFiles)
@@ -275,47 +276,7 @@ namespace Swegrant.Views
             }
         }
 
-        public async Task<MediaInfo> GetMediaInfo()
-        {
-            MediaInfo info = null;
-            try
-            {
-                Uri uri = new Uri($"{(Helpers.Settings.UseHttps ? "https" : "http")}://{Helpers.Settings.ServerIP}:{Helpers.Settings.ServerPort}/api/media/GetMediaInfo");
-                HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    info = JsonConvert.DeserializeObject<MediaInfo>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            return info;
-        }
-
-        public async Task<Questionnaire> GetQuestionnaire()
-        {
-            Questionnaire info = null;
-            try
-            {
-                Uri uri = new Uri($"{(Swegrant.Helpers.Settings.UseHttps ? "https" : "http")}://{Swegrant.Helpers.Settings.ServerIP}:{Swegrant.Helpers.Settings.ServerPort}/api/media/GetQuestionnaire");
-                HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    info = JsonConvert.DeserializeObject<Questionnaire>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            return info;
-        }
+        
 
         private async void NavigateMain()
         {

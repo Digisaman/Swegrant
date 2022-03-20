@@ -28,6 +28,21 @@ namespace Swegrant.Server.Controllers
 
         }
 
+
+        private static ObservableCollection<SubmitUserStatus> _UserStatuses;
+        public static ObservableCollection<SubmitUserStatus> UserStatuses
+        {
+            get
+            {
+                if (_UserStatuses == null)
+                {
+                    _UserStatuses = new ObservableCollection<SubmitUserStatus>();
+                }
+                return _UserStatuses;
+            }
+
+        }
+
         public static Questionnaire Questionnaire { get; private set; }
         #endregion
 
@@ -144,6 +159,22 @@ namespace Swegrant.Server.Controllers
                         : question.CommentValue);
                 }
                Questions.Add(question);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        [HttpPost]
+        [Route(nameof(SubmitUserStatus))]
+        public void SubmitUserStatus([FromBody] SubmitUserStatus userStatus)
+        {
+            try
+            {
+                userStatus.Id = Questions.Count + 1;
+                userStatus.Time = DateTime.Now;
+                UserStatuses.Add(userStatus);
             }
             catch (Exception ex)
             {

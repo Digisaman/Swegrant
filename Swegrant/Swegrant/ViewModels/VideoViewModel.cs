@@ -32,9 +32,31 @@ namespace Swegrant.ViewModels
             }
         }
 
-        public Language CurrnetAudioLanguage { get; set; }
+        
+        public Language CurrnetAudioLanguage
+        {
+            get
+            {
+                return Helpers.Settings.CurrentAudioLanguage;
+            }
+            set
+            {
+                Helpers.Settings.CurrentAudioLanguage = value;
+                Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AudioLanguageSelected, value.ToString());
+            }
+        }
 
-        public Language CurrnetSubtitleLanguage { get; set; }
+        public Language CurrnetSubtitleLanguage
+        {
+            get
+            {
+                return Helpers.Settings.CurrentLanguage;
+            }
+            set
+            {
+                Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AppLanguageSelected, value.ToString());
+            }
+        }
 
 
         public Character CurrentCharchter { get; set; }
@@ -79,7 +101,6 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetAudioLanguage = Language.Svenska;
-                    Helpers.Settings.CurrentAudioLanguage = CurrnetAudioLanguage;
                 }
             }
         }
@@ -94,7 +115,6 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetAudioLanguage = Language.Farsi;
-                    Helpers.Settings.CurrentAudioLanguage = CurrnetAudioLanguage;
                 }
             }
         }
@@ -109,7 +129,6 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetAudioLanguage = Language.Original;
-                    Helpers.Settings.CurrentAudioLanguage = CurrnetAudioLanguage;
                 }
             }
         }
@@ -125,7 +144,6 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetSubtitleLanguage = Language.Svenska;
-                    Helpers.Settings.CurrentLanguage = CurrnetSubtitleLanguage;
                 }
             }
         }
@@ -140,7 +158,6 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetSubtitleLanguage = Language.Farsi;
-                    Helpers.Settings.CurrentLanguage = CurrnetSubtitleLanguage;
                 }
             }
         }
@@ -351,7 +368,12 @@ namespace Swegrant.ViewModels
                                     BeginPrepareAudio();
                                     PrepareSubtitle();
                                     break;
+                            
                             }
+                        }
+                        else if ( serviceMessage.Mode == Mode.None && serviceMessage.Command == Shared.Models.Command.NavigateQuestionnaire)
+                        {
+                            Shell.Current.GoToAsync($"//{nameof(QuestionnairePage)}");
                         }
 
                     }

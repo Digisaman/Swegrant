@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Swegrant.Helpers;
 using Swegrant.Models;
 using Swegrant.Shared.Models;
 using System;
@@ -61,13 +62,8 @@ namespace Swegrant.ViewModels
                     Type = QuestionType.MultiAnswer,
                     Username = Helpers.Settings.UserName
                 };
-                Uri uri = new Uri($"{(Swegrant.Helpers.Settings.UseHttps ? "https" : "http")}://{Swegrant.Helpers.Settings.ServerIP}:{Swegrant.Helpers.Settings.ServerPort}/api/media/submitquestion");
-                var json = JsonConvert.SerializeObject(submitQuestion);
-                var data = new StringContent(json, Encoding.UTF8, "application/json");
-
-                HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.PostAsync(uri, data);
-                if (response.IsSuccessStatusCode)
+                bool result = await ServerHelper.SubmitQuestion(submitQuestion);
+                if (result)
                 {
                     if ( CurentIndex < Helpers.Settings.Questionnaire.Questions.Length - 1)
                     {
@@ -76,7 +72,9 @@ namespace Swegrant.ViewModels
                     }
                     else
                     {
-                        await DialogService.DisplayAlert("Information", "Thank you for takeing the time to fill out the questionnaire.", "");
+                        //await DialogService.DisplayAlert("Information", "Thank you for takeing the time to fill out the questionnaire.", "");
+                        ServerHelper.SubmitStatus(UserEvent.QuestionnaireCompleted, "");
+                        await App.Current.MainPage.DisplayAlert("Information", "Thank you for takeing the time to fill out the questionnaire.","Ok", "");
                     }
                 }
             }

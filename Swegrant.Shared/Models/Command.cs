@@ -12,6 +12,7 @@
         ResumeAutoSub,
         DisplayManualSub,
         ShowSelectCharacter,
-        HideSelectCharchter
+        HideSelectCharchter,
+        NavigateQuestionnaire
     }
 }

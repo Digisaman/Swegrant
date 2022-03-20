@@ -151,6 +151,8 @@ namespace Swegrant.ViewModels
             {
                 _CurnetCharcter = value;
                 Helpers.Settings.CurrentCharachter = _CurnetCharcter;
+                
+              
             }
         }
 
@@ -349,7 +351,14 @@ namespace Swegrant.ViewModels
                                 case Swegrant.Shared.Models.Command.HideSelectCharchter:
                                     Task.Run(() => SelectCharchter(false));
                                     break;
+                                case Swegrant.Shared.Models.Command.NavigateQuestionnaire:
+                                    Shell.Current.GoToAsync($"//{nameof(QuestionnairePage)}");
+                                    break;
                             }
+                        }
+                        else if (serviceMessage.Mode == Mode.None && serviceMessage.Command == Shared.Models.Command.NavigateQuestionnaire)
+                        {
+                            Shell.Current.GoToAsync($"//{nameof(QuestionnairePage)}");
                         }
                     }
                 }

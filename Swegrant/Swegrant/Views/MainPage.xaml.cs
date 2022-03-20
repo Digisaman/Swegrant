@@ -29,6 +29,7 @@ namespace Swegrant.Views
             if (answer)
             {
                 Helpers.Settings.CurrentLanguage = Shared.Models.Language.Farsi;
+                await Helpers.ServerHelper.SubmitStatusAsync(Shared.Models.UserEvent.AppLanguageSelected, Helpers.Settings.CurrentLanguage.ToString());
                 await Shell.Current.GoToAsync($"//{nameof(CatalogPage)}");
             }
         }
@@ -39,6 +40,7 @@ namespace Swegrant.Views
             if (answer)
             {
                 Helpers.Settings.CurrentLanguage = Shared.Models.Language.Svenska;
+                await Helpers.ServerHelper.SubmitStatusAsync(Shared.Models.UserEvent.AppLanguageSelected, Helpers.Settings.CurrentLanguage.ToString());
                 await Shell.Current.GoToAsync($"//{nameof(CatalogPage)}");
             }
         }
@@ -49,6 +51,7 @@ namespace Swegrant.Views
             if (answer)
             {
                 Helpers.Settings.CurrentLanguage = Shared.Models.Language.English;
+                await Helpers.ServerHelper.SubmitStatusAsync(Shared.Models.UserEvent.AppLanguageSelected, Helpers.Settings.CurrentLanguage.ToString());
                 await Shell.Current.GoToAsync($"//{nameof(CatalogPage)}");
             }
         }
