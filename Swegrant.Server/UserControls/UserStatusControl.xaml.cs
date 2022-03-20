@@ -50,9 +50,10 @@ namespace Swegrant.Server.UserControls
         }
 
         public void AddUserStatus(SubmitUserStatus submitUserStatus)
-        {
+        {   
             submitUserStatus.Id = UserStatuses.Count + 1;
             UserStatuses.Add(submitUserStatus);
+            //this.dgInfo.ScrollIntoView(this.dgInfo.Items.GetItemAt(this.dgInfo.Items.Count - 1));
         }
     }
 }

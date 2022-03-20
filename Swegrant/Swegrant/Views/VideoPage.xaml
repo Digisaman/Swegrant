@@ -27,18 +27,7 @@
             Grid.Row="0"
             Grid.ColumnSpan="2"
             ItemsSource="{Binding Messages}"
-            
             Rotation="180">
-            <d:CollectionView.ItemsSource>
-                <x:Array Type="{x:Type model:ChatMessage}">
-                    <model:ChatMessage FirstLetter="J" Message="Hello world from SignalR!"
-                        User="James" Color="Red" />
-                    <model:ChatMessage FirstLetter="H" Message="Hello world!"
-                        User="Heather" Color="Pink" />
-                    <model:ChatMessage FirstLetter="M" Message="Hello world!"
-                        User="Motz" Color="Orange" />
-                </x:Array>
-            </d:CollectionView.ItemsSource>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid
@@ -84,7 +73,7 @@
 
             <Label Grid.Row="0" Grid.Column="0"
                     Text="Audio : "
-                       TextColor="White"
+                       TextColor="{StaticResource PrimaryTextColor}"
                    HorizontalOptions="Center"
                      VerticalOptions="Center"
                FontAttributes="Bold"
@@ -94,7 +83,7 @@
                 <RadioButton 
                              BackgroundColor="{StaticResource Primary}" 
                          HorizontalOptions="FillAndExpand"
-                         FontSize="Medium" 
+                         FontSize="Large" 
                          FontAttributes="Bold"
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsAudioOR}" 
@@ -102,7 +91,7 @@
                 <RadioButton 
                              BackgroundColor="{StaticResource Primary}" 
                          HorizontalOptions="FillAndExpand"
-                         FontSize="Medium" 
+                         FontSize="Large" 
                          FontAttributes="Bold"
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsAudioFA}" 
@@ -110,7 +99,7 @@
                 <RadioButton 
                         BackgroundColor="{StaticResource Primary}" 
                          HorizontalOptions="FillAndExpand"
-                         FontSize="Medium" 
+                         FontSize="Large" 
                          FontAttributes="Bold" 
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsAudioSV}" 

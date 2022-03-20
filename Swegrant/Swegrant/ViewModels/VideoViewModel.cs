@@ -41,8 +41,7 @@ namespace Swegrant.ViewModels
             }
             set
             {
-                Helpers.Settings.CurrentAudioLanguage = value;
-                Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AudioLanguageSelected, value.ToString());
+                Helpers.Settings.CurrentAudioLanguage = value;                
             }
         }
 
@@ -101,7 +100,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetAudioLanguage = Language.Svenska;
-                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AppLanguageSelected, CurrnetAudioLanguage.ToString());
+                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AudioLanguageSelected, CurrnetAudioLanguage.ToString());
                 }
             }
         }
@@ -116,7 +115,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetAudioLanguage = Language.Farsi;
-                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AppLanguageSelected, CurrnetAudioLanguage.ToString());
+                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AudioLanguageSelected, CurrnetAudioLanguage.ToString());
                 }
             }
         }
@@ -147,7 +146,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetSubtitleLanguage = Language.Svenska;
-                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AppLanguageSelected, CurrnetSubtitleLanguage.ToString());
+                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.SubtitleLanguageSelected, CurrnetSubtitleLanguage.ToString());
                 }
             }
         }
@@ -162,7 +161,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetSubtitleLanguage = Language.Farsi;
-                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AppLanguageSelected, CurrnetSubtitleLanguage.ToString());
+                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.SubtitleLanguageSelected, CurrnetSubtitleLanguage.ToString());
                 }
             }
         }
@@ -230,8 +229,7 @@ namespace Swegrant.ViewModels
                 this.CurrnetSubtitleLanguage = Helpers.Settings.CurrentLanguage;
             }
             else
-            {
-                this.CurrnetAudioLanguage = Language.Original;
+            {  
                 this.CurrnetSubtitleLanguage = Language.Farsi;
             }
 

@@ -18,8 +18,10 @@
     </ContentPage.ToolbarItems>-->
     <Grid ColumnSpacing="0" RowSpacing="0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="6*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <CollectionView
             Grid.Row="0"
@@ -27,16 +29,6 @@
             ItemsSource="{Binding Messages}"
             IsVisible="{Binding IsSubtitleVisible}"
             Rotation="180">
-            <d:CollectionView.ItemsSource>
-                <x:Array Type="{x:Type model:ChatMessage}">
-                    <model:ChatMessage FirstLetter="J" Message="Hello world from SignalR!"
-                        User="James" Color="Red" />
-                    <model:ChatMessage FirstLetter="H" Message="Hello world!"
-                        User="Heather" Color="Pink" />
-                    <model:ChatMessage FirstLetter="M" Message="Hello world!"
-                        User="Motz" Color="Orange" />
-                </x:Array>
-            </d:CollectionView.ItemsSource>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid
@@ -69,69 +61,52 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <StackLayout Grid.Row="1"
-                     HorizontalOptions="FillAndExpand"
-                     IsVisible="{Binding IsCharchterVisible}">
-            <Label Text="Select Chrachter"
-                      IsVisible="{Binding IsCharchterVisible}"
-                   HorizontalOptions="CenterAndExpand"
-                       TextColor="White"
+        <Grid HorizontalOptions="CenterAndExpand" 
+              Grid.Row="2" Grid.ColumnSpan="2"
+              IsVisible="{Binding IsCharchterVisible}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0"
+                   Text="Select Chrachter"
+                   IsVisible="{Binding IsCharchterVisible}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="{StaticResource PrimaryTextColor}"
                FontAttributes="Bold"
                FontSize="Medium" />
-            <!--<Picker HorizontalOptions="FillAndExpand" 
-                       IsVisible="{Binding IsCharchterVisible}"
-                    SelectedItem="{Binding SelectedCharchter}" BackgroundColor="White" TextColor="White">
-                <Picker.Items>
-                    <x:String>Leyla</x:String>
-                    <x:String>Tara</x:String>
-                    <x:String>Sina</x:String>
-                </Picker.Items>
-            </Picker>-->
             <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="FillAndExpand">
+                         Grid.Row="0" Grid.Column="1">
 
-                <RadioButton BackgroundColor="{StaticResource SecondaryBackColor}" 
-                         HorizontalOptions="EndAndExpand"
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         HorizontalOptions="FillAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold"
                          TextColor="{StaticResource SecondaryTextColor}" 
-                         IsChecked="{Binding IsLeylaSelected}" Content="Leyla"/>
-                <RadioButton BackgroundColor="{StaticResource SecondaryBackColor}" 
-                             HorizontalOptions="EndAndExpand"
+                         IsChecked="{Binding IsLeylaSelected}" 
+                         Content="Leyla"/>
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                             HorizontalOptions="FillAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold" 
                          TextColor="{StaticResource SecondaryTextColor}" 
-                         IsChecked="{Binding IsSinaSelected}" Content="Sina"/>
-                <RadioButton BackgroundColor="{StaticResource SecondaryBackColor}" 
-                             HorizontalOptions="EndAndExpand"
+                         IsChecked="{Binding IsSinaSelected}" 
+                         Content="Sina"/>
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                             HorizontalOptions="FillAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold" 
-                         TextColor="{StaticResource 
-                SecondaryTextColor}" IsChecked="{Binding IsTaraSelected}" Content="Tara"/>
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsTaraSelected}" 
+                         Content="Tara"/>
 
             </StackLayout>
-
-        </StackLayout>
-
-        <!--<extensions:Expander Grid.Row="1" >
-
-            <extensions:Expander.Header>
-                <Label Text="Select your chrachter"
-                       TextColor="White"
-               FontAttributes="Bold"
-               FontSize="Medium" />
-            </extensions:Expander.Header>
-            <Grid Padding="10">
-                <Grid.RowDefinitions/>
-                <Picker SelectedItem="{Binding SelectedCharchter}"  TextColor="White">
-                    <Picker.Items>
-                        <x:String>Leyla</x:String>
-                        <x:String>Tara</x:String>
-                        <x:String>Sina</x:String>
-                    </Picker.Items>
-                </Picker>
-            </Grid>
-        </extensions:Expander>-->
+        </Grid>
+     
 
         <ActivityIndicator x:Name="activityIndicator"
             Grid.ColumnSpan="2"

@@ -10,7 +10,12 @@
         <Button x:Name="btnNavigate" Content="Navigate Questionnaire" Click="btnNavigate_Click" />
         <!--<Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click" />-->
         
-        <DataGrid x:Name="dgInfo" AutoGenerateColumns="False">
+        <DataGrid x:Name="dgInfo" 
+                  ScrollViewer.CanContentScroll="True" 
+		    ScrollViewer.VerticalScrollBarVisibility="Hidden"
+		    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>

@@ -4,6 +4,7 @@
     {
         AppLanguageSelected,
         AudioLanguageSelected,
+        SubtitleLanguageSelected,
         CharacterSelected,
         QuestionnaireCompleted
     }
