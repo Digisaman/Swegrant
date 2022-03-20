@@ -64,6 +64,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrentCharchter = Character.Lyla;
+                    Helpers.ServerHelper.SubmitStatus(UserEvent.CharacterSelected, CurrentCharchter.ToString());
                 }
             }
         }
@@ -77,6 +78,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrentCharchter = Character.Sina;
+                    Helpers.ServerHelper.SubmitStatus(UserEvent.CharacterSelected, CurrentCharchter.ToString());
                 }
             }
         }
@@ -90,6 +92,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrentCharchter = Character.Tara;
+                    Helpers.ServerHelper.SubmitStatus(UserEvent.CharacterSelected, CurrentCharchter.ToString());
                 }
             }
         }
@@ -151,6 +154,7 @@ namespace Swegrant.ViewModels
             {
                 _CurnetCharcter = value;
                 Helpers.Settings.CurrentCharachter = _CurnetCharcter;
+                
                 
               
             }

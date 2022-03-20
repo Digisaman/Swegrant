@@ -42,7 +42,12 @@
         <StackLayout Orientation="Horizontal"
                      Grid.Row="3" Grid.ColumnSpan="2"
                          HorizontalOptions="FillAndExpand">
-
+            <RadioButton BackgroundColor="{StaticResource SecondaryBackColor}" 
+                         HorizontalOptions="EndAndExpand"
+                         FontSize="Large" 
+                         FontAttributes="Bold"
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsNoneSelected}" Content="None"/>
             <RadioButton BackgroundColor="{StaticResource SecondaryBackColor}" 
                          HorizontalOptions="EndAndExpand"
                          FontSize="Large" 

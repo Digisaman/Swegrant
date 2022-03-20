@@ -70,6 +70,9 @@
             <TabItem x:Name="tabQuestionnaire" Header="Questionnaire" FontSize="16">
                 <uc:QuestionnaireControl/>
             </TabItem>
+            <TabItem x:Name="tabUserStatus" Header="User Status" FontSize="16">
+                <uc:UserStatusControl/>
+            </TabItem>
         </TabControl>
     </Grid>
 

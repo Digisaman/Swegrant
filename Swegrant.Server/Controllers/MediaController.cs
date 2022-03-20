@@ -29,14 +29,14 @@ namespace Swegrant.Server.Controllers
         }
 
 
-        private static ObservableCollection<SubmitUserStatus> _UserStatuses;
-        public static ObservableCollection<SubmitUserStatus> UserStatuses
+        private static List<SubmitUserStatus> _UserStatuses;
+        public static List<SubmitUserStatus> UserStatuses
         {
             get
             {
                 if (_UserStatuses == null)
                 {
-                    _UserStatuses = new ObservableCollection<SubmitUserStatus>();
+                    _UserStatuses = new List<SubmitUserStatus>();
                 }
                 return _UserStatuses;
             }
@@ -172,7 +172,7 @@ namespace Swegrant.Server.Controllers
         {
             try
             {
-                userStatus.Id = Questions.Count + 1;
+                userStatus.Id = UserStatuses.Count + 1;
                 userStatus.Time = DateTime.Now;
                 UserStatuses.Add(userStatus);
             }

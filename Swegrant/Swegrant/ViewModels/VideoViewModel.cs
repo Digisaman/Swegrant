@@ -54,7 +54,7 @@ namespace Swegrant.ViewModels
             }
             set
             {
-                Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AppLanguageSelected, value.ToString());
+                Helpers.Settings.CurrentLanguage = value;
             }
         }
 
@@ -101,6 +101,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetAudioLanguage = Language.Svenska;
+                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AppLanguageSelected, CurrnetAudioLanguage.ToString());
                 }
             }
         }
@@ -115,6 +116,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetAudioLanguage = Language.Farsi;
+                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AppLanguageSelected, CurrnetAudioLanguage.ToString());
                 }
             }
         }
@@ -129,6 +131,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetAudioLanguage = Language.Original;
+                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AudioLanguageSelected, CurrnetAudioLanguage.ToString());
                 }
             }
         }
@@ -144,6 +147,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetSubtitleLanguage = Language.Svenska;
+                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AppLanguageSelected, CurrnetSubtitleLanguage.ToString());
                 }
             }
         }
@@ -158,6 +162,7 @@ namespace Swegrant.ViewModels
                 if (value)
                 {
                     CurrnetSubtitleLanguage = Language.Farsi;
+                    Helpers.ServerHelper.SubmitStatus(Shared.Models.UserEvent.AppLanguageSelected, CurrnetSubtitleLanguage.ToString());
                 }
             }
         }

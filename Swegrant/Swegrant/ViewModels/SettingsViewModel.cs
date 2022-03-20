@@ -18,6 +18,7 @@ namespace Swegrant.ViewModels
             SaveSettingsCommand = new MvvmHelpers.Commands.Command(() => SaveSettings());
             serverIP = Helpers.Settings.ServerIP;
             serverPort = Helpers.Settings.ServerPort;
+            isNoneSelected = (Helpers.Settings.CurrentCharachter == Character.None);
             isLeylaSelected = (Helpers.Settings.CurrentCharachter == Character.Lyla);
             isSinaSelected = (Helpers.Settings.CurrentCharachter == Character.Sina);
             isTaraSelected = (Helpers.Settings.CurrentCharachter == Character.Tara);
@@ -40,6 +41,20 @@ namespace Swegrant.ViewModels
         }
 
         #region Charchter
+        bool isNoneSelected = false;
+        public bool IsNoneSelected
+        {
+            get { return isNoneSelected; }
+            set
+            {
+                SetProperty(ref isNoneSelected, value);
+                if (value)
+                {
+                    CurrentCharchter = Character.None;
+                }
+            }
+        }
+
         bool isLeylaSelected = false;
         public bool IsLeylaSelected
         {

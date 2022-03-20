@@ -218,6 +218,7 @@ namespace Swegrant.Views
             else
             {
                 this.lblTitle.Text = Swegrant.Resources.File.FilesUpToDate;
+                await defaultProgressBar.ProgressTo(1, 500, Easing.Linear);
             }
 
         }
