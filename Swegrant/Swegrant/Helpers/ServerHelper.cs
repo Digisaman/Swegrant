@@ -10,6 +10,7 @@ namespace Swegrant.Helpers
 {
     public class ServerHelper
     {
+        #region Media Controller
         public static void SubmitStatus(UserEvent userEvent, string value)
         {
             SubmitStatusAsync(userEvent, value);
@@ -98,5 +99,85 @@ namespace Swegrant.Helpers
             Uri uri = new Uri($"{(Swegrant.Helpers.Settings.UseHttps ? "https" : "http")}://{Swegrant.Helpers.Settings.ServerIP}:{Swegrant.Helpers.Settings.ServerPort}/api/{controller}/{method}");
             return uri;
         }
+        #endregion
+
+        #region Subtitle Controller
+        public async static Task<bool> HideSubtitle()
+        {
+            try
+            {
+                Uri uri = ServerHelper.GetApiUri("HideSubtitle", "subtitle");
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(uri);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async static Task<bool> ShowSubtitle()
+        {
+            try
+            {
+                Uri uri = ServerHelper.GetApiUri("ShowSubtitle", "subtitle");
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(uri);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async static Task<bool> ResumeAutoSub()
+        {
+            try
+            {
+                Uri uri = ServerHelper.GetApiUri("ResumeAutoSub", "subtitle");
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(uri);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async static Task<bool> PauseAutoSub()
+        {
+            try
+            {
+                Uri uri = ServerHelper.GetApiUri("PauseAutoSub", "subtitle");
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(uri);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async static Task<bool> NextMaunualSub()
+        {
+            try
+            {
+                Uri uri = ServerHelper.GetApiUri("NextMaunualSub", "subtitle");
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(uri);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
+        #endregion
     }
 }

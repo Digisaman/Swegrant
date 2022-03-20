@@ -320,5 +320,84 @@ namespace Swegrant.Server
             }
         }
 
+        public void ShowSubtitle()
+        {
+            try
+            {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                this.Dispatcher.Invoke(new Action(() =>
+                    ucTheater.ShowSubtitle()
+                ));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public void HideSubtitle()
+        {
+            try
+            {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                this.Dispatcher.Invoke(new Action(() =>
+                    ucTheater.HideSubtitle()
+                ));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public void PauseAutoSub()
+        {
+            try
+            {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                this.Dispatcher.Invoke(new Action(() =>
+                    ucTheater.PauseAutoSub()
+                ));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public void ResumeAutoSub()
+        {
+            try
+            {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                this.Dispatcher.Invoke(new Action(() =>
+                    ucTheater.ResumeAutoSub()
+                ));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public void NextMaunualSub()
+        {
+            try
+            {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                this.Dispatcher.Invoke(new Action(() =>
+                    ucTheater.LoadNextSubtitleLine()
+                ));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
 }

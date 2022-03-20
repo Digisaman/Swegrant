@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Swegrant.Views.SubtitleControllerPage"
+             xmlns:vm="clr-namespace:Swegrant.ViewModels"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:SubtitleControllerViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center">
+            <Button Margin="20" Text="Resume Auto Sub"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding ResumeAutoSub}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
+            <Button Margin="20" Text="Pause Auto Sub"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding PauseAutoSub}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
+            <Button Margin="20" Text="Next Maunual Sub"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding NextMaunualSub}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
+            <Button Margin="20" Text="Hide Subtitle"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding HideSubtitle}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
+            <Button Margin="20" Text="Show Subtitle"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding ShowSubtitle}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
+            
+            
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

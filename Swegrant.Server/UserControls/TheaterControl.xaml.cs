@@ -357,7 +357,7 @@ namespace Swegrant.Server.UserControls
             }
         }
 
-        private async Task LoadNextSubtitleLine()
+        public async Task LoadNextSubtitleLine()
         {
             try
             {
@@ -383,7 +383,7 @@ namespace Swegrant.Server.UserControls
             }
         }
 
-        private async Task ResumeAutoSub()
+        public async Task ResumeAutoSub()
         {
             try
             {
@@ -411,7 +411,7 @@ namespace Swegrant.Server.UserControls
         }
 
 
-        private async Task PauseAutoSub()
+        public async Task PauseAutoSub()
         {
             await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
             {
@@ -426,7 +426,7 @@ namespace Swegrant.Server.UserControls
         }
 
 
-        private async Task ShowSelectCharacter()
+        public async Task ShowSelectCharacter()
         {
             await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
             {
@@ -448,7 +448,7 @@ namespace Swegrant.Server.UserControls
             });
         }
 
-        private async Task ShowSubtitle()
+        public async Task ShowSubtitle()
         {
 
             MainWindow.Singleton.ToggleSecondarySubVisibility(true);
@@ -460,7 +460,7 @@ namespace Swegrant.Server.UserControls
             });
         }
 
-        private async Task HideSubtitle()
+        public async Task HideSubtitle()
         {
             MainWindow.Singleton.ToggleSecondarySubVisibility(false);
             await MainWindow.Singleton.SendGroupMessage(new ServiceMessage

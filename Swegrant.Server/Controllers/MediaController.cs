@@ -13,44 +13,7 @@ namespace Swegrant.Server.Controllers
     [ApiController]
     public class MediaController : ControllerBase
     {
-        #region Properties
-        static MediaController()
-        {
-            
-        }
-
-        //private static ObservableCollection<SubmitQuestion> _Questions;
-        //public static ObservableCollection<SubmitQuestion> Questions
-        //{
-        //    get
-        //    {
-        //        if (_Questions == null)
-        //        {
-        //            _Questions = new ObservableCollection<SubmitQuestion>();
-        //        }
-        //        return _Questions;
-        //    }
-
-        //}
-
-
-        //private static List<SubmitUserStatus> _UserStatuses;
-        //public static List<SubmitUserStatus> UserStatuses
-        //{
-        //    get
-        //    {
-        //        if (_UserStatuses == null)
-        //        {
-        //            _UserStatuses = new List<SubmitUserStatus>();
-        //        }
-        //        return _UserStatuses;
-        //    }
-
-        //}
-
-        //public static Questionnaire Questionnaire { get; private set; }
-        #endregion
-
+      
         [HttpGet]
         [Route(nameof(GetCurrentTime))]
         public DateTime GetCurrentTime()

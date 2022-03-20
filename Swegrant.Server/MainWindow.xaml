@@ -62,10 +62,10 @@
         <TabControl x:Name="tabControl" Grid.Row="1" Grid.ColumnSpan="5">
             <TabItem x:Name="tabTheater" Header="Theater Mode" FontSize="16">
                 
-                <uc:TheaterControl/>
+                <uc:TheaterControl x:Name="ucTheater"/>
             </TabItem>
             <TabItem x:Name="tabVideo" Header="Video Mode" FontSize="16">
-                <uc:VideoControl/>
+                <uc:VideoControl x:Name="ucVideo"/>
             </TabItem>
             <TabItem x:Name="tabQuestionnaire" Header="Questionnaire" FontSize="16">
                 <uc:QuestionnaireControl x:Name="ucQuestionnaire"/>
