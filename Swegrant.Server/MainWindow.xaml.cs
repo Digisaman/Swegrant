@@ -292,7 +292,33 @@ namespace Swegrant.Server
         }
 
 
+        public void AddUserStatus(SubmitUserStatus submitUserStatus)
+        {
+            try
+            {
+                this.Dispatcher.Invoke(new Action(() =>
+                    this.ucUserStatus.AddUserStatus(submitUserStatus)
+                ));
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
 
+        public void AddQuestion(SubmitQuestion submitQuestion)
+        {
+            try
+            {
+                this.Dispatcher.Invoke(new Action(() =>
+                    this.ucQuestionnaire.AddUserStatus(submitQuestion)
+                ));
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
 
     }
 }

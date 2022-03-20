@@ -1,6 +1,8 @@
 ﻿using Swegrant.Server.Controllers;
+using Swegrant.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +23,19 @@ namespace Swegrant.Server.UserControls
     /// </summary>
     public partial class UserStatusControl : UserControl
     {
+        
+        public ObservableCollection<SubmitUserStatus> UserStatuses
+        {
+            get; set;
+
+        }
+
         public UserStatusControl()
         {
             InitializeComponent();
+            this.UserStatuses = new ObservableCollection<SubmitUserStatus>();
+            this.dgInfo.ItemsSource = this.UserStatuses;
+            
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
@@ -34,7 +46,13 @@ namespace Swegrant.Server.UserControls
         private void SetDataSource()
         {
             this.dgInfo.ItemsSource = null;
-            this.dgInfo.ItemsSource = MediaController.UserStatuses;
+            this.dgInfo.ItemsSource = this.UserStatuses;
+        }
+
+        public void AddUserStatus(SubmitUserStatus submitUserStatus)
+        {
+            submitUserStatus.Id = UserStatuses.Count + 1;
+            UserStatuses.Add(submitUserStatus);
         }
     }
 }

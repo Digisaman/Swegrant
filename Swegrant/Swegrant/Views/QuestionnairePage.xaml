@@ -24,11 +24,12 @@
                                     <RadioButton GroupName="Answers"
                                         BackgroundColor="{StaticResource SecondaryBackColor}"
                                         TextColor="{StaticResource SecondaryTextColor}" 
+                                        Content="{Binding Value}"
                                         IsChecked="{Binding IsSelected}"/>
-                                    <Label VerticalOptions="StartAndExpand" Text="{Binding Value}" LineBreakMode="WordWrap"
+                                    <!--<Label VerticalOptions="StartAndExpand" Text="{Binding Value}" LineBreakMode="WordWrap"
                                         TextColor="{StaticResource SecondaryTextColor}"
                                         Background="{StaticResource SecondaryBackColor}"
-                                        FontSize="Medium"/>
+                                        FontSize="Medium"/>-->
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

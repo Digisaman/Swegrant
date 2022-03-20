@@ -2,6 +2,7 @@
 using Swegrant.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +23,16 @@ namespace Swegrant.Server.UserControls
     /// </summary>
     public partial class QuestionnaireControl : UserControl
     {
+        public ObservableCollection<SubmitQuestion> Questions
+        {
+            get; set;
+
+        }
         public QuestionnaireControl()
         {
             InitializeComponent();
+            Questions = new ObservableCollection<SubmitQuestion>();
+            this.dgInfo.ItemsSource = Questions;
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
@@ -35,7 +43,7 @@ namespace Swegrant.Server.UserControls
         private void SetDataSource()
         {
             this.dgInfo.ItemsSource = null;
-            this.dgInfo.ItemsSource = MediaController.Questions;
+            this.dgInfo.ItemsSource = Questions;
         }
 
         private async void btnNavigate_Click(object sender, RoutedEventArgs e)
@@ -45,6 +53,12 @@ namespace Swegrant.Server.UserControls
                 Command = Command.NavigateQuestionnaire,
                 Mode = Mode.None
             });
+        }
+
+        public void AddUserStatus(SubmitQuestion submitQuestion)
+        {
+            submitQuestion.Id = Questions.Count + 1;
+            this.Questions.Add(submitQuestion);
         }
     }
 }

@@ -58,7 +58,8 @@ namespace Swegrant.ViewModels
 
                 SubmitQuestion submitQuestion = new SubmitQuestion
                 {
-                    AnswerId = answer.Id,
+                    Title = CurrentQuestion.Title,
+                    Value = answer.Value,
                     Type = QuestionType.MultiAnswer,
                     Username = Helpers.Settings.UserName
                 };
@@ -74,7 +75,8 @@ namespace Swegrant.ViewModels
                     {
                         //await DialogService.DisplayAlert("Information", "Thank you for takeing the time to fill out the questionnaire.", "");
                         ServerHelper.SubmitStatus(UserEvent.QuestionnaireCompleted, "");
-                        await App.Current.MainPage.DisplayAlert("Information", "Thank you for takeing the time to fill out the questionnaire.","Ok", "");
+                        await App.Current.MainPage.DisplayAlert("Information", "Thank you for takeing the time to fill out the questionnaire.","Ok", "Cancel");
+                        CurrentQuestion = new ObservableQuestion();
                     }
                 }
             }

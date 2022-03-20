@@ -10,27 +10,34 @@ namespace Swegrant.Helpers
 {
     public class ServerHelper
     {
-        public static bool SubmitStatus(UserEvent userEvent, string value)
+        public static void SubmitStatus(UserEvent userEvent, string value)
         {
-            bool result = SubmitStatusAsync(userEvent, value).GetAwaiter().GetResult();
-            return result;
+            SubmitStatusAsync(userEvent, value);
+            return;
         }
         public async static Task<bool> SubmitStatusAsync(UserEvent userEvent, string value)
         {
-            SubmitUserStatus submitStatus = new SubmitUserStatus
+            try
             {
-                Event = userEvent,
-                Value = value,
-                Username = Helpers.Settings.UserName
-            };
-            Uri uri = GetApiUri("submituserstatus");
-            var json = JsonConvert.SerializeObject(submitStatus);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
+                SubmitUserStatus submitStatus = new SubmitUserStatus
+                {
+                    Event = userEvent,
+                    Value = value,
+                    Username = Helpers.Settings.UserName
+                };
+                Uri uri = GetApiUri("submituserstatus");
+                var json = JsonConvert.SerializeObject(submitStatus);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            HttpClient httpClient = new HttpClient();
-            HttpClient client = httpClient;
-            HttpResponseMessage response = await client.PostAsync(uri, data);
-            return response.IsSuccessStatusCode;
+                HttpClient httpClient = new HttpClient();
+                HttpClient client = httpClient;
+                HttpResponseMessage response = await client.PostAsync(uri, data);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public async static Task<bool> SubmitQuestion(SubmitQuestion submitQuestion)

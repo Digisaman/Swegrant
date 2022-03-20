@@ -9,17 +9,18 @@ namespace Swegrant.Shared.Models
         [JsonIgnore]
         public int Id { get; set; }
 
-        [JsonIgnore]
+       
         public string Title { get; set; }
 
-        [JsonIgnore]
+       
         public string Value { get; set; }
 
-        public string CommentValue { get; set; }
+        //public string CommentValue { get; set; }
 
-        public int AnswerId { get; set; }
+        //public int AnswerId { get; set; }
 
         public QuestionType Type { get; set; }
+        
         public string Username { get; set; }
 
         

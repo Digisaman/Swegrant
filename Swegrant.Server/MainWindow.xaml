@@ -68,10 +68,10 @@
                 <uc:VideoControl/>
             </TabItem>
             <TabItem x:Name="tabQuestionnaire" Header="Questionnaire" FontSize="16">
-                <uc:QuestionnaireControl/>
+                <uc:QuestionnaireControl x:Name="ucQuestionnaire"/>
             </TabItem>
             <TabItem x:Name="tabUserStatus" Header="User Status" FontSize="16">
-                <uc:UserStatusControl/>
+                <uc:UserStatusControl x:Name="ucUserStatus"/>
             </TabItem>
         </TabControl>
     </Grid>

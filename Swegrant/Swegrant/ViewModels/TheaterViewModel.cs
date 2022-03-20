@@ -59,12 +59,15 @@ namespace Swegrant.ViewModels
         public bool IsLeylaSelected
         {
             get { return isLeylaSelected; }
-            set { 
-                SetProperty(ref isLeylaSelected, value); 
+            set
+            {
+                SetProperty(ref isLeylaSelected, value);
                 if (value)
                 {
+
                     CurrentCharchter = Character.Lyla;
                     Helpers.ServerHelper.SubmitStatus(UserEvent.CharacterSelected, CurrentCharchter.ToString());
+
                 }
             }
         }
@@ -73,12 +76,14 @@ namespace Swegrant.ViewModels
         public bool IsSinaSelected
         {
             get { return isSinaSelected; }
-            set { 
+            set
+            {
                 SetProperty(ref isSinaSelected, value);
                 if (value)
                 {
                     CurrentCharchter = Character.Sina;
                     Helpers.ServerHelper.SubmitStatus(UserEvent.CharacterSelected, CurrentCharchter.ToString());
+
                 }
             }
         }
@@ -87,12 +92,15 @@ namespace Swegrant.ViewModels
         public bool IsTaraSelected
         {
             get { return isTaraSelected; }
-            set { 
+            set
+            {
                 SetProperty(ref isTaraSelected, value);
                 if (value)
                 {
+
                     CurrentCharchter = Character.Tara;
                     Helpers.ServerHelper.SubmitStatus(UserEvent.CharacterSelected, CurrentCharchter.ToString());
+
                 }
             }
         }
@@ -143,8 +151,8 @@ namespace Swegrant.ViewModels
         public Language CurrnetLanguage { get; set; }
 
         private Character _CurnetCharcter;
-        public Character CurrentCharchter 
-        { 
+        public Character CurrentCharchter
+        {
             get
             {
                 _CurnetCharcter = Helpers.Settings.CurrentCharachter;
@@ -154,9 +162,9 @@ namespace Swegrant.ViewModels
             {
                 _CurnetCharcter = value;
                 Helpers.Settings.CurrentCharachter = _CurnetCharcter;
-                
-                
-              
+
+
+
             }
         }
 
@@ -173,8 +181,9 @@ namespace Swegrant.ViewModels
         public bool IsSubtitleVisible
         {
             get { return isSubtitleVisible; }
-            set { 
-                SetProperty(ref isSubtitleVisible, value); 
+            set
+            {
+                SetProperty(ref isSubtitleVisible, value);
             }
         }
         #endregion
@@ -222,12 +231,12 @@ namespace Swegrant.ViewModels
             this.IsSubtitleVisible = true;
             this.CurrnetLanguage = Helpers.Settings.CurrentLanguage;
             this.CurrentCharchter = Helpers.Settings.CurrentCharachter;
-            IsLeylaSelected = (CurrentCharchter == Character.Lyla);
-            IsSinaSelected = (CurrentCharchter == Character.Sina);
-            IsTaraSelected = (CurrentCharchter == Character.Tara);
+            isLeylaSelected = (CurrentCharchter == Character.Lyla);
+            isSinaSelected = (CurrentCharchter == Character.Sina);
+            isTaraSelected = (CurrentCharchter == Character.Tara);
 
             this.CurrentScene = currentScene;
-            
+
         }
 
         async Task Connect()
@@ -302,8 +311,8 @@ namespace Swegrant.ViewModels
                 {
                     ServiceMessage serviceMessage = JsonConvert.DeserializeObject<ServiceMessage>(message);
                     if (serviceMessage != null)
-                    {   
-                        if (serviceMessage.Mode == Shared.Models.Mode.Theater || 
+                    {
+                        if (serviceMessage.Mode == Shared.Models.Mode.Theater ||
                         (serviceMessage.Mode == Shared.Models.Mode.Video && serviceMessage.Command == Shared.Models.Command.ChangeMode))
                         {
                             this.CurrentScene = serviceMessage.Scene;
@@ -384,7 +393,7 @@ namespace Swegrant.ViewModels
             await Shell.Current.GoToAsync($"//{nameof(VideoPage)}");
         }
 
-        
+
 
         private void SelectCharchter(bool isVisible)
         {
@@ -531,7 +540,7 @@ namespace Swegrant.ViewModels
                 subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Theater, filename);
                 if (!MultiSub.ContainsKey(Language.Svenska))
                 {
-                    
+
                     MultiSub.Add(Language.Svenska, Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent));
                 }
                 else

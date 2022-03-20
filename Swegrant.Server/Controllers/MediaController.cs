@@ -14,36 +14,41 @@ namespace Swegrant.Server.Controllers
     public class MediaController : ControllerBase
     {
         #region Properties
-        private static ObservableCollection<SubmitQuestion> _Questions;
-        public static ObservableCollection<SubmitQuestion> Questions
+        static MediaController()
         {
-            get
-            {
-                if (_Questions == null)
-                {
-                    _Questions = new ObservableCollection<SubmitQuestion>();
-                }
-                return _Questions;
-            }
-
+            
         }
 
+        //private static ObservableCollection<SubmitQuestion> _Questions;
+        //public static ObservableCollection<SubmitQuestion> Questions
+        //{
+        //    get
+        //    {
+        //        if (_Questions == null)
+        //        {
+        //            _Questions = new ObservableCollection<SubmitQuestion>();
+        //        }
+        //        return _Questions;
+        //    }
 
-        private static List<SubmitUserStatus> _UserStatuses;
-        public static List<SubmitUserStatus> UserStatuses
-        {
-            get
-            {
-                if (_UserStatuses == null)
-                {
-                    _UserStatuses = new List<SubmitUserStatus>();
-                }
-                return _UserStatuses;
-            }
+        //}
 
-        }
 
-        public static Questionnaire Questionnaire { get; private set; }
+        //private static List<SubmitUserStatus> _UserStatuses;
+        //public static List<SubmitUserStatus> UserStatuses
+        //{
+        //    get
+        //    {
+        //        if (_UserStatuses == null)
+        //        {
+        //            _UserStatuses = new List<SubmitUserStatus>();
+        //        }
+        //        return _UserStatuses;
+        //    }
+
+        //}
+
+        //public static Questionnaire Questionnaire { get; private set; }
         #endregion
 
         [HttpGet]
@@ -126,15 +131,15 @@ namespace Swegrant.Server.Controllers
             {
                 DirectoryInfo mediaDirectory = new DirectoryInfo($"{Directory.GetCurrentDirectory()}\\wwwroot\\MEDIA");
 
-                Questionnaire = null;
+                Questionnaire questionnaire = null;
                 string questionnaireFilePath = $"{mediaDirectory}\\Questionnaire.json";
                 using (StreamReader streamReader = new StreamReader(questionnaireFilePath))
                 {
                     string content = streamReader.ReadToEnd();
-                    Questionnaire = JsonConvert.DeserializeObject<Questionnaire>(content);
+                    questionnaire = JsonConvert.DeserializeObject<Questionnaire>(content);
                 }
 
-                return Questionnaire;
+                return questionnaire;
             }
             catch(Exception ex)
             {
@@ -149,16 +154,20 @@ namespace Swegrant.Server.Controllers
         {
             try
             {
-                question.Id = Questions.Count + 1;
-                Question selectedQuestion = Questionnaire.Questions.FirstOrDefault(c => c.Id == question.Id);
-                if (selectedQuestion != null)
-                {
-                    question.Title = selectedQuestion.Title;
-                    question.Value = (question.Type == QuestionType.MultiAnswer 
-                        ? selectedQuestion.Answers.FirstOrDefault(c => c.Id == question.AnswerId).Value 
-                        : question.CommentValue);
-                }
-               Questions.Add(question);
+                //question.Id = Questions.Count + 1;
+                //if (Questionnaire == null )
+                //{
+                //    Questionnaire = GetQuestionnaire();
+                //}
+                //Question selectedQuestion = Questionnaire.Questions.FirstOrDefault(c => c.Id == question.Id);
+                //if (selectedQuestion != null)
+                //{
+                //    question.Title = selectedQuestion.Title;
+                //    question.Value = (question.Type == QuestionType.MultiAnswer 
+                //        ? selectedQuestion.Answers.FirstOrDefault(c => c.Id == question.AnswerId).Value 
+                //        : question.CommentValue);
+                //}
+               MainWindow.Singleton.AddQuestion(question);
             }
             catch (Exception ex)
             {
@@ -172,9 +181,11 @@ namespace Swegrant.Server.Controllers
         {
             try
             {
-                userStatus.Id = UserStatuses.Count + 1;
+                //userStatus.Id = UserStatuses.Count + 1;
                 userStatus.Time = DateTime.Now;
-                UserStatuses.Add(userStatus);
+                //UserStatuses.Add(userStatus);
+                
+                MainWindow.Singleton.AddUserStatus(userStatus);
             }
             catch (Exception ex)
             {
