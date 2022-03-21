@@ -61,11 +61,29 @@ namespace Swegrant.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please Choose Your Language.
+        /// </summary>
+        public static string ChooseLanguage {
+            get {
+                return ResourceManager.GetString("ChooseLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All subtitles will be displayed in the selected language.
+        /// </summary>
+        public static string ConfirmLanguage {
+            get {
+                return ResourceManager.GetString("ConfirmLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] Flag_Iran {
+        public static byte[] FA_Flag {
             get {
-                object obj = ResourceManager.GetObject("Flag_Iran", resourceCulture);
+                object obj = ResourceManager.GetObject("FA_Flag", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -73,9 +91,9 @@ namespace Swegrant.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] Flag_Sweden {
+        public static byte[] SV_Flag {
             get {
-                object obj = ResourceManager.GetObject("Flag_Sweden", resourceCulture);
+                object obj = ResourceManager.GetObject("SV_Flag", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -86,6 +104,15 @@ namespace Swegrant.Resources {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to SvenDrare.
+        /// </summary>
+        public static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
     }

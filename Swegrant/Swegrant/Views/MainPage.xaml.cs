@@ -15,6 +15,7 @@ namespace Swegrant.Views
         public MainPage()
         {
             InitializeComponent();
+            
         }
 
         protected override void OnAppearing()

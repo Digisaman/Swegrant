@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Swegrant.ViewModels"
+             xmlns:resx="clr-namespace:Swegrant.Resources"
              x:Class="Swegrant.Views.MainPage"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
@@ -9,7 +10,10 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Swegrant!" FontSize="Title"
+            <Label 
+                
+                Text="Welcome to SvenDrare!"
+                FontSize="Title"
                 VerticalOptions="Start"
                 HorizontalOptions="CenterAndExpand" 
                    
@@ -21,9 +25,11 @@
                    TextColor="Black"/>
 
 
-            <Button x:Name="btnPersian" Text="فارسی" Clicked="btnPersian_Clicked" />
+            <Button x:Name="btnPersian" Text="فارسی" Clicked="btnPersian_Clicked"
+                    ImageSource="{Binding FAFlag}"/>
             <!--<Button x:Name="btnEnglish" Text="English" Clicked="btnEnglish_Clicked" />-->
-            <Button x:Name="btnSweden" Text="Svenska" Clicked="btnSweden_Clicked" />
+            <Button x:Name="btnSweden" Text="Svenska" Clicked="btnSweden_Clicked"
+                      ImageSource="{Binding SVFlag}"/>
         </StackLayout>
 
 
