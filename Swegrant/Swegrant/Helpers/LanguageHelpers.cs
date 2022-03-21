@@ -16,7 +16,7 @@ namespace Swegrant.Helpers
         {
             string languageName = "";
             if (language != Language.None)
-                languageName = (language == Language.Svenska ? "Swedish" : "Farsi");
+                languageName = (language == Language.Svenska ? "Swedish" : "Persian");
             else
                 languageName = "English";
 

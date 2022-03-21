@@ -10,8 +10,8 @@ namespace Swegrant.ViewModels
         public MainViewModel()
         {
             Title = Resources.MenuTitles.Main;
-            SVFlag = ImageSource.FromResource("Swegrant.Resources.FA_Flag.png");
-            FAFlag = ImageSource.FromResource("Swegrant.Resources.SV_Flag.png");
+            SVFlag = ImageSource.FromResource("Swegrant.Resources.SV_Flag.png");
+            FAFlag = ImageSource.FromResource("Swegrant.Resources.FA_Flag.png");
         }
 
         public ImageSource SVFlag { get; set; }

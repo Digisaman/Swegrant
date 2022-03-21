@@ -50,7 +50,7 @@ namespace Swegrant.Views
 
         private async void btnSweden_Clicked(object sender, EventArgs e)
         {
-            Helpers.LanguageHelper.ChangeLanguage(Shared.Models.Language.Farsi);
+            Helpers.LanguageHelper.ChangeLanguage(Shared.Models.Language.Svenska);
             bool answer = await DisplayAlert(AppResources.Information, 
                 AppResources.ConfirmLanguage, 
                 AppResources.Yes, 
@@ -73,7 +73,7 @@ namespace Swegrant.Views
               AppResources.No);
             if (answer)
             {
-                Helpers.Settings.CurrentLanguage = Shared.Models.Language.English;
+                Helpers.Settings.CurrentLanguage = Shared.Models.Language.None;
                 await Helpers.ServerHelper.SubmitStatusAsync(Shared.Models.UserEvent.AppLanguageSelected, Helpers.Settings.CurrentLanguage.ToString());
                 await Shell.Current.GoToAsync($"//{nameof(CatalogPage)}");
             }
