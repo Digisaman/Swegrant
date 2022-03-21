@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Swegrant.Views.VideoPage"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:resx="clr-namespace:Swegrant.Resources"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:Swegrant.Models"
     xmlns:viewmodel="clr-namespace:Swegrant.ViewModels" xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
@@ -72,7 +73,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0"
-                    Text="Audio : "
+                    Text="{x:Static resx:AppResources.Audio}"
                        TextColor="{StaticResource PrimaryTextColor}"
                    HorizontalOptions="Center"
                      VerticalOptions="Center"
@@ -87,7 +88,7 @@
                          FontAttributes="Bold"
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsAudioOR}" 
-                         Content="Original"/>
+                         Content="{x:Static resx:AppResources.Original}"/>
                 <RadioButton 
                              BackgroundColor="{StaticResource Primary}" 
                          HorizontalOptions="FillAndExpand"
@@ -95,7 +96,7 @@
                          FontAttributes="Bold"
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsAudioFA}" 
-                         Content="فارسی"/>
+                         Content="{x:Static resx:AppResources.Farsi}"/>
                 <RadioButton 
                         BackgroundColor="{StaticResource Primary}" 
                          HorizontalOptions="FillAndExpand"
@@ -103,11 +104,11 @@
                          FontAttributes="Bold" 
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsAudioSV}" 
-                         Content="Svenska"/>
+                         Content="{x:Static resx:AppResources.Svenska}"/>
             </StackLayout>
 
             <Label  Grid.Row="1" Grid.Column="0"
-                Text="Subtitle : "
+                Text="{x:Static resx:AppResources.Subtitle}"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                        TextColor="White"
@@ -122,7 +123,7 @@
                          FontAttributes="Bold"
                          TextColor="{StaticResource Primary}" 
                          IsChecked="{Binding IsSubFA}" 
-                         Content="فارسی"/>
+                         Content="{x:Static resx:AppResources.Farsi}"/>
                 <RadioButton  
                 BackgroundColor="{StaticResource SecondaryColor}" 
                          HorizontalOptions="FillAndExpand"
@@ -130,7 +131,7 @@
                          FontAttributes="Bold" 
                          TextColor="{StaticResource Primary}" 
                          IsChecked="{Binding IsSubSV}" 
-                         Content="Svenska"/>
+                         Content="{x:Static resx:AppResources.Svenska}"/>
             </StackLayout>
 
         </Grid>

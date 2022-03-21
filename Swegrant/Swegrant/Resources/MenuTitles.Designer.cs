@@ -22,14 +22,14 @@ namespace Swegrant.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class File {
+    public class MenuTitles {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal File() {
+        internal MenuTitles() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Swegrant.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Swegrant.Resources.File", typeof(File).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Swegrant.Resources.MenuTitles", typeof(MenuTitles).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,101 @@ namespace Swegrant.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading Audio files....
+        ///   Looks up a localized string similar to About.
         /// </summary>
-        public static string DonwloadingAudioFiles {
+        public static string About {
             get {
-                return ResourceManager.GetString("DonwloadingAudioFiles", resourceCulture);
+                return ResourceManager.GetString("About", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download Completed..
+        ///   Looks up a localized string similar to Catalog.
         /// </summary>
-        public static string DownloadCompleted {
+        public static string Catalog {
             get {
-                return ResourceManager.GetString("DownloadCompleted", resourceCulture);
+                return ResourceManager.GetString("Catalog", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading Theater Subtitles....
+        ///   Looks up a localized string similar to File.
         /// </summary>
-        public static string DownloadTHSubFiles {
+        public static string File {
             get {
-                return ResourceManager.GetString("DownloadTHSubFiles", resourceCulture);
+                return ResourceManager.GetString("File", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading Video Subtitles....
+        ///   Looks up a localized string similar to Login.
         /// </summary>
-        public static string DownloadVDSubFiles {
+        public static string Login {
             get {
-                return ResourceManager.GetString("DownloadVDSubFiles", resourceCulture);
+                return ResourceManager.GetString("Login", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Files Are Up to Date..
+        ///   Looks up a localized string similar to Logout.
         /// </summary>
-        public static string FilesUpToDate {
+        public static string Logout {
             get {
-                return ResourceManager.GetString("FilesUpToDate", resourceCulture);
+                return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Files.
+        ///   Looks up a localized string similar to Welcome.
         /// </summary>
-        public static string Title {
+        public static string Main {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("Main", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Questionnaire.
+        /// </summary>
+        public static string Questionnaire {
+            get {
+                return ResourceManager.GetString("Questionnaire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subtitle Controller.
+        /// </summary>
+        public static string SubtitleController {
+            get {
+                return ResourceManager.GetString("SubtitleController", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theater.
+        /// </summary>
+        public static string Theater {
+            get {
+                return ResourceManager.GetString("Theater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Video.
+        /// </summary>
+        public static string Video {
+            get {
+                return ResourceManager.GetString("Video", resourceCulture);
             }
         }
     }

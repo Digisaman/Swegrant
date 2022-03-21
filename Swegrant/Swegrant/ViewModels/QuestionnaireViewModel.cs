@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Swegrant.Helpers;
 using Swegrant.Models;
+using Swegrant.Resources;
 using Swegrant.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace Swegrant.ViewModels
 
         public QuestionnaireViewModel()
         {
-            Title = Resources.Questionnaire.Title;
+            Title = Resources.MenuTitles.Questionnaire;
             LoadQuestionsCommand = new MvvmHelpers.Commands.Command(async () => await LoadQuestions());
             SubmitQuestionCommand = new MvvmHelpers.Commands.Command(async () => await SubmitQuestion());
         }
@@ -75,7 +76,10 @@ namespace Swegrant.ViewModels
                     {
                         //await DialogService.DisplayAlert("Information", "Thank you for takeing the time to fill out the questionnaire.", "");
                         ServerHelper.SubmitStatus(UserEvent.QuestionnaireCompleted, "");
-                        await App.Current.MainPage.DisplayAlert("Information", "Thank you for takeing the time to fill out the questionnaire.","Ok", "Cancel");
+                        await App.Current.MainPage.DisplayAlert(AppResources.Information, 
+                            AppResources.QuestionnaireFinalMessage,
+                            AppResources.OK, 
+                            AppResources.Cancel);
                         CurrentQuestion = new ObservableQuestion();
                     }
                 }

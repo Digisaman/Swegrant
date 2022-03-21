@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:model="clr-namespace:Swegrant.Models"
+             xmlns:resx="clr-namespace:Swegrant.Resources"
              xmlns:viewmodel="clr-namespace:Swegrant.ViewModels" 
              xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
              x:Class="Swegrant.Views.TheaterPage"
@@ -72,7 +73,7 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0"
-                   Text="Select Chrachter"
+                   Text="{x:Static resx:AppResources.SelectCharachter}"
                    IsVisible="{Binding IsCharchterVisible}"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
@@ -88,21 +89,21 @@
                          FontAttributes="Bold"
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsLeylaSelected}" 
-                         Content="Leyla"/>
+                         Content="{x:Static resx:AppResources.Leyla}"/>
                 <RadioButton BackgroundColor="{StaticResource Primary}" 
                              HorizontalOptions="FillAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold" 
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsSinaSelected}" 
-                         Content="Sina"/>
+                         Content="{x:Static resx:AppResources.Sina}"/>
                 <RadioButton BackgroundColor="{StaticResource Primary}" 
                              HorizontalOptions="FillAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold" 
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsTaraSelected}" 
-                         Content="Tara"/>
+                         Content="{x:Static resx:AppResources.Tara}"/>
 
             </StackLayout>
         </Grid>

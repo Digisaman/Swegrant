@@ -12,23 +12,22 @@
         <StackLayout>
             <Label 
                 
-                Text="Welcome to SvenDrare!"
+                Text="{x:Static resx:AppResources.Welcome}"
                 FontSize="Title"
                 VerticalOptions="Start"
                 HorizontalOptions="CenterAndExpand" 
-                   
-                   TextColor="Black"/>
+                TextColor="Black"/>
 
-            <Label Text="Please Choose Your Language" FontSize="Large"
+            <Label Text="{x:Static resx:AppResources.ChooseLanguage}" FontSize="Large"
                 VerticalOptions="Start"
                 HorizontalOptions="CenterAndExpand"
                    TextColor="Black"/>
 
 
-            <Button x:Name="btnPersian" Text="فارسی" Clicked="btnPersian_Clicked"
+            <Button x:Name="btnPersian" Text="{x:Static resx:AppResources.Farsi}" Clicked="btnPersian_Clicked"
                     ImageSource="{Binding FAFlag}"/>
             <!--<Button x:Name="btnEnglish" Text="English" Clicked="btnEnglish_Clicked" />-->
-            <Button x:Name="btnSweden" Text="Svenska" Clicked="btnSweden_Clicked"
+            <Button x:Name="btnSweden" Text="{x:Static resx:AppResources.Svenska}" Clicked="btnSweden_Clicked"
                       ImageSource="{Binding SVFlag}"/>
         </StackLayout>
 

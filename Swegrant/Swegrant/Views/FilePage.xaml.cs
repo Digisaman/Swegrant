@@ -74,7 +74,7 @@ namespace Swegrant.Views
                             currentMediaInfo.CurrentCategory = DownloadCategory.THSUB;
                             currentIndex = 0;
                             downloader.DownloadFile(currentMediaInfo.THSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
-                            this.lblTitle.Text = Swegrant.Resources.File.DownloadTHSubFiles;
+                            this.lblTitle.Text = Swegrant.Resources.AppResources.DownloadTHSubFiles;
                         }
                         else if (currentMediaInfo.VDSUB.Any())
                         {
@@ -82,7 +82,7 @@ namespace Swegrant.Views
                             currentMediaInfo.CurrentCategory = DownloadCategory.VDSUB;
                             currentIndex = 0;
                             downloader.DownloadFile(currentMediaInfo.VDSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
-                            this.lblTitle.Text = Swegrant.Resources.File.DownloadVDSubFiles;
+                            this.lblTitle.Text = Swegrant.Resources.AppResources.DownloadVDSubFiles;
                         }
                         else
                         {
@@ -91,7 +91,7 @@ namespace Swegrant.Views
                             Helpers.Settings.MediaInfo = currentMediaInfo;
                             await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
                             Helpers.Settings.MediaInfo = this.serverMediaInfo;
-                            this.lblTitle.Text = Swegrant.Resources.File.DownloadCompleted;
+                            this.lblTitle.Text = Swegrant.Resources.AppResources.DownloadCompleted;
                         }
 
 
@@ -121,7 +121,7 @@ namespace Swegrant.Views
                             currentMediaInfo.CurrentCategory = DownloadCategory.VDSUB;
                             currentIndex = 0;
                             downloader.DownloadFile(currentMediaInfo.VDSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
-                            this.lblTitle.Text = Swegrant.Resources.File.DownloadVDSubFiles;
+                            this.lblTitle.Text = Swegrant.Resources.AppResources.DownloadVDSubFiles;
                         }
                         else
                         {
@@ -130,7 +130,7 @@ namespace Swegrant.Views
                             Helpers.Settings.MediaInfo = currentMediaInfo;
                             await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
                             Helpers.Settings.MediaInfo = this.serverMediaInfo;
-                            this.lblTitle.Text = Swegrant.Resources.File.DownloadCompleted;
+                            this.lblTitle.Text = Swegrant.Resources.AppResources.DownloadCompleted;
                         }
                     }
 
@@ -156,7 +156,7 @@ namespace Swegrant.Views
                         Helpers.Settings.MediaInfo = currentMediaInfo;
                         await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
                         Helpers.Settings.MediaInfo = this.serverMediaInfo;
-                        this.lblTitle.Text = Swegrant.Resources.File.DownloadCompleted;
+                        this.lblTitle.Text = Swegrant.Resources.AppResources.DownloadCompleted;
                         
                         //Thread.Sleep(1000);
                         //NavigateMain();
@@ -194,7 +194,7 @@ namespace Swegrant.Views
             {
                 if (this.currentMediaInfo.AUDIO.Count > 0)
                 {
-                    this.lblTitle.Text = Swegrant.Resources.File.DonwloadingAudioFiles;
+                    this.lblTitle.Text = Swegrant.Resources.AppResources.DonwloadingAudioFiles;
                     currentMediaInfo.CurrentCategory = DownloadCategory.AUDIO;
                     downloader.DownloadFile(currentMediaInfo.AUDIO[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
                     return;
@@ -202,7 +202,7 @@ namespace Swegrant.Views
 
                 if (this.currentMediaInfo.THSUB.Count > 0)
                 {
-                    this.lblTitle.Text = Swegrant.Resources.File.DownloadTHSubFiles;
+                    this.lblTitle.Text = Swegrant.Resources.AppResources.DownloadTHSubFiles;
                     currentMediaInfo.CurrentCategory = DownloadCategory.AUDIO;
                     downloader.DownloadFile(currentMediaInfo.THSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
                     return;
@@ -210,14 +210,14 @@ namespace Swegrant.Views
 
                 if (this.currentMediaInfo.VDSUB.Count > 0)
                 {
-                    this.lblTitle.Text = Swegrant.Resources.File.DownloadVDSubFiles;
+                    this.lblTitle.Text = Swegrant.Resources.AppResources.DownloadVDSubFiles;
                     downloader.DownloadFile(currentMediaInfo.VDSUB[currentIndex].Url, currentMediaInfo.CurrentCategory.ToString());
                     return;
                 }
             }
             else
             {
-                this.lblTitle.Text = Swegrant.Resources.File.FilesUpToDate;
+                this.lblTitle.Text = Swegrant.Resources.AppResources.FilesUpToDate;
                 await defaultProgressBar.ProgressTo(1, 500, Easing.Linear);
             }
 

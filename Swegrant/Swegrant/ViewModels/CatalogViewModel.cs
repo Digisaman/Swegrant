@@ -8,7 +8,7 @@ namespace Swegrant.ViewModels
     {
         public CatalogViewModel()
         {
-            Title = Resources.Catalog.Title;
+            Title = Resources.MenuTitles.Catalog;
         }
     }
 }

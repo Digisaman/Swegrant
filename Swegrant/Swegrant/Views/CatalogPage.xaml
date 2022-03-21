@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Swegrant.ViewModels"
+             xmlns:resx="clr-namespace:Swegrant.Resources"
              x:Class="Swegrant.Views.CatalogPage"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
@@ -19,8 +20,8 @@
                      Navigated="webBrowser_Navigated"
                      Navigating="webBrowser_Navigating"/>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Button x:Name="btnPrevious" Text="Previous" Clicked="btnPrevious_Clicked" HorizontalOptions="FillAndExpand"/>
-                <Button x:Name="btnNext" Text="Next" Clicked="btnNext_Clicked" HorizontalOptions="FillAndExpand"/>
+                <Button x:Name="btnPrevious" Text="{x:Static resx:AppResources.Previous}" Clicked="btnPrevious_Clicked" HorizontalOptions="FillAndExpand"/>
+                <Button x:Name="btnNext" Text="{x:Static resx:AppResources.Next}" Clicked="btnNext_Clicked" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
 
         </StackLayout>

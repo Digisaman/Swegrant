@@ -9,7 +9,7 @@ namespace Swegrant.ViewModels
     {
         public AboutViewModel()
         {
-            Title = Resources.About.Title;
+            Title = Resources.MenuTitles.About;
             OpenOwnerCommand = new Command(async () => await Browser.OpenAsync("https://www.chaharsoo.se/"));
             OpenDeveloperCommand = new Command(async () => await Browser.OpenAsync("http://samanpirooz.com/swegrant"));
             VersionTracking.Track();

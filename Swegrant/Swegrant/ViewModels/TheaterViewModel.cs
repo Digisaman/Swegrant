@@ -190,7 +190,7 @@ namespace Swegrant.ViewModels
 
         public TheaterViewModel()
         {
-            Title = Resources.Theater.Title;
+            Title = Resources.MenuTitles.Theater;
             InitializeSettings();
 
             if (DesignMode.IsDesignModeEnabled)

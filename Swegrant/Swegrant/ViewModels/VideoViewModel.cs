@@ -183,7 +183,7 @@ namespace Swegrant.ViewModels
         Random random;
         public VideoViewModel()
         {
-            Title = Resources.Video.Title;
+            Title = Resources.MenuTitles.About;
             InitilizeSettings();
 
             if (DesignMode.IsDesignModeEnabled)

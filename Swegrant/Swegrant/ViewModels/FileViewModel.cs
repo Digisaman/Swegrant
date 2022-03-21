@@ -8,7 +8,7 @@ namespace Swegrant.ViewModels
     {
         public FileViewModel()
         {
-            Title = Resources.File.Title;
+            Title = Resources.MenuTitles.File;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Swegrant.ViewModels
     {
         public SubtitleControllerViewModel()
         {
-            Title = "Subtitle Controller";
+            Title = Resources.MenuTitles.SubtitleController;
             HideSubtitle = new Command(async () => await ServerHelper.HideSubtitle());
             ShowSubtitle = new Command(async () => await ServerHelper.ShowSubtitle());
             ResumeAutoSub = new Command(async () => await ServerHelper.ResumeAutoSub());
