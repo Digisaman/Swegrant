@@ -14,12 +14,15 @@ namespace Swegrant.Converters
             {
                 bool isVisible = (bool)value;
                 if (isVisible)
-                    return new Color(0, 27, 116);
+                {
+                    Color BackColor = Color.FromHex("001b74");
+                    return BackColor;
+                }
                 else
-                    return new Color(0, 0, 0);
+                    return Color.Black;
 
             }
-            return new Color(0, 0, 0);
+            return Color.Black;
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
