@@ -333,20 +333,21 @@
         {
           "Id": 1,
           "Value": "From Chaharsoo social media",
-          "ValueFA": "Från Chaharsoo sociala medier",
-          "ValueSV": "از سوشال مدیا ی گروه چهارسو"
+          "ValueFA": "از سوشال مدیا ی گروه چهارسو",
+          "ValueSV": "Från Chaharsoo sociala medier"
         },
         {
           "Id": 2,
           "Value": "From a friend",
-          "ValueFA": "Från en vän",
-          "ValueSV": "از طریق یک دوست"
+          "ValueFA": "از طریق یک دوست",
+          "ValueSV": "Från en vän"
+
         },
         {
           "Id": 3,
           "Value": "From advertisements",
-          "ValueFA": "Från annonser",
-          "ValueSV": "از طریق تبلیغات"
+          "ValueFA": "از طریق تبلیغات",
+          "ValueSV": "Från annonser"
         }
       ]
     },
