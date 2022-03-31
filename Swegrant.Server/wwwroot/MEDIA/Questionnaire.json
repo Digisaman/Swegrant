@@ -1,382 +1,378 @@
-{
+﻿{
   "Questions": [
     {
       "Id": 1,
       "Title": "About you:",
-      "TitleFA": "",
-      "TitleSV": "",
+      "TitleFA": "درباره شما",
+      "TitleSV": "Om dig:",
       "Answers": [
         {
           "Id": 1,
           "Value": "Female",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "زن",
+          "ValueSV": "Kvinna"
         },
         {
           "Id": 2,
           "Value": "Male",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "مرد",
+          "ValueSV": "Man"
         },
         {
           "Id": 3,
           "Value": "Nonbinary",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "نان‌باینری یا نادوگانه",
+          "ValueSV": "Ickebinär"
         },
         {
           "Id": 4,
           "Value": "Intersex",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "بِیناجنس",
+          "ValueSV": "Intersex"
         },
         {
           "Id": 5,
-          "Value": "Transgender"
+          "Value": "Transgender",
+          "ValueFA": "تراجنسیتی",
+          "ValueSV": "Transgender"
         },
         {
           "Id": 6,
           "Value": "Other",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "دیگری",
+          "ValueSV": "Övrig"
         },
         {
           "Id": 7,
           "Value": "I prefer not to say",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "ترجیح می دهم نگویم.",
+          "ValueSV": "Jag föredrar att inte säga"
         }
       ]
     },
     {
       "Id": 2,
       "Title": "Age",
-      "TitleFA": "",
-      "TitleSV": "",
+      "TitleFA": "سن",
+      "TitleSV": "Ålder",
       "Answers": [
         {
           "Id": 1,
           "Value": "13-19",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "13-19",
+          "ValueSV": "13-19"
         },
         {
           "Id": 2,
           "Value": "20-34",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "20-34",
+          "ValueSV": "20-34"
         },
         {
           "Id": 3,
           "Value": "35-49",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "35-49",
+          "ValueSV": "35-49"
         },
         {
           "Id": 4,
           "Value": "50-64",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "50-64",
+          "ValueSV": "50-64"
         },
         {
           "Id": 5,
           "Value": "65-80",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "65-80",
+          "ValueSV": "65-80"
         },
         {
           "Id": 6,
           "Value": "+80",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "+80",
+          "ValueSV": "+80"
         }
       ]
     },
     {
       "Id": 3,
       "Title": "Was this the first time that you watched SvenDrare:",
-      "TitleFA": "",
-      "TitleSV": "",
+      "TitleFA": "آیا اولین بار است که نمایش SvenDrare را می بینید.",
+      "TitleSV": "Var det här första gången du såg SvenDrare:",
       "Answers": [
         {
           "Id": 1,
           "Value": "Yes",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "بله",
+          "ValueSV": "Ja"
         },
         {
           "Id": 2,
           "Value": "No it was the Second time",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خیر. بار دوم است.",
+          "ValueSV": "Nej, det var andra gången"
         },
         {
           "Id": 3,
           "Value": "No it was the third time",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خیر. بار سوم است.",
+          "ValueSV": "Nej, det var tredje gången"
         },
         {
           "Id": 4,
           "Value": "No I have watched more than 3 times",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خیر. بیش از سه بار تماشا کرده ام.",
+          "ValueSV": "Nej, jag har sett det mer än 3 gånger"
         }
       ]
     },
     {
       "Id": 4,
       "Title": "Which character did you follow during the performance?",
-      "TitleFA": "",
-      "TitleSV": "",
+      "TitleFA": "کدام شخصیت را  دنبال کردید؟",
+      "TitleSV": "Vilken karaktär följde du under föreställningen?",
       "Answers": [
         {
           "Id": 1,
           "Value": "Leila",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "لیلا",
+          "ValueSV": "Leila"
         },
         {
           "Id": 2,
           "Value": "Sina",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "سینا",
+          "ValueSV": "Sina"
         },
         {
           "Id": 3,
           "Value": "Tara",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "تارا",
+          "ValueSV": "Tara"
         }
       ]
     },
     {
       "Id": 5,
       "Title": "How would you rate the acting?",
-      "TitleFA": "",
-      "TitleSV": "",
+      "TitleFA": "چه امتیازی به بازیگران نمایش می دهید.",
+      "TitleSV": "Hur skulle du betygsätta skådespeleriet?",
       "Answers": [
         {
           "Id": 1,
           "Value": "Poor",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "ضعیف",
+          "ValueSV": "Dålig"
         },
         {
           "Id": 2,
           "Value": "Fair",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "نسبتا خوب",
+          "ValueSV": "Mindre bra"
         },
         {
           "Id": 3,
           "Value": "Good",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خوب",
+          "ValueSV": "Bra"
         },
         {
           "Id": 4,
           "Value": "Very Good",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خیلی خوب",
+          "ValueSV": "Mycket bra"
         },
         {
           "Id": 5,
           "Value": "Excellent",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "عالی",
+          "ValueSV": "Excellent"
         }
       ]
     },
     {
       "Id": 6,
       "Title": "How would you rate the script?",
-      "TitleFA": "",
-      "TitleSV": "",
+      "TitleFA": "چه امتیاز به متن نمایشنامه  می دهید.",
+      "TitleSV": "Hur skulle du betygsätta manuset?",
       "Answers": [
         {
           "Id": 1,
           "Value": "Poor",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "ضعیف",
+          "ValueSV": "Dålig"
         },
         {
           "Id": 2,
           "Value": "Fair",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "نسبتا خوب",
+          "ValueSV": "Mindre bra"
         },
         {
           "Id": 3,
           "Value": "Good",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خوب",
+          "ValueSV": "Bra"
         },
         {
           "Id": 4,
           "Value": "Very Good",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خیلی خوب",
+          "ValueSV": "Mycket bra"
         },
         {
           "Id": 5,
           "Value": "Excellent",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "عالی",
+          "ValueSV": "Excellent"
         }
       ]
     },
     {
       "Id": 7,
       "Title": "Overall, how would you rate 'SvenDrare'?",
-      "TitleFA": "",
-      "TitleSV": "",
+      "TitleFA": "چه امتیازی به کل نمایش می دهید.",
+      "TitleSV": "Hur skulle du totalt sett betygsätta 'SvenDrare'?",
       "Answers": [
         {
           "Id": 1,
           "Value": "Poor",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "ضعیف",
+          "ValueSV": "Dålig"
         },
         {
           "Id": 2,
           "Value": "Fair",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "نسبتا خوب",
+          "ValueSV": "Mindre bra"
         },
         {
           "Id": 3,
           "Value": "Good",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خوب",
+          "ValueSV": "Bra"
         },
         {
           "Id": 4,
           "Value": "Very Good",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خیلی خوب",
+          "ValueSV": "Mycket bra"
         },
         {
           "Id": 5,
           "Value": "Excellent",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "عالی",
+          "ValueSV": "Excellent"
         }
       ]
     },
     {
       "Id": 8,
-      "Title": "How would you rate the way that this theater was performed (choosing character, using video clip, �)?",
-      "TitleFA": "",
-      "TitleSV": "",
+      "Title": "How would you rate the way that this theater was performed (choosing character, using video clip, …)?",
+      "TitleFA": "چه امتیازی به شیوه اجرایی نمایش می دهید. ( امکان انتخاب شخصیت، استفاده از ویدیو و...)",
+      "TitleSV": "Hur skulle du bedöma hur den här teatern spelades (att välja karaktär, använda videoklipp, …)",
       "Answers": [
         {
           "Id": 1,
           "Value": "Poor",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "ضعیف",
+          "ValueSV": "Dålig"
         },
         {
           "Id": 2,
           "Value": "Fair",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "نسبتا خوب",
+          "ValueSV": "Mindre bra"
         },
         {
           "Id": 3,
           "Value": "Good",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خوب",
+          "ValueSV": "Bra"
         },
         {
           "Id": 4,
           "Value": "Very Good",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خیلی خوب",
+          "ValueSV": "Mycket bra"
         },
         {
           "Id": 5,
           "Value": "Excellent",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "عالی",
+          "ValueSV": "Excellent"
         }
       ]
     },
     {
       "Id": 9,
       "Title": "Did you face any technical problem during the performance?",
-      "TitleFA": "",
-      "TitleSV": "",
+      "TitleFA": "آیا در طول تماشای نمایش به مشکل تکنیکی برخورد کردید؟ ( مشکل هماهنگی صدا و تصویر یا  مشکل  نرم افزاری و ...)",
+      "TitleSV": "Stötte du på några tekniska problem under föreställningen?",
       "Answers": [
         {
           "Id": 1,
           "Value": "Yes",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "بله",
+          "ValueSV": "Ja"
         },
         {
           "Id": 2,
           "Value": "No",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "خیر",
+          "ValueSV": "Nej"
         }
       ]
     },
     {
       "Id": 10,
       "Title": "How did you hear of SvenDrare:",
-      "TitleFA": "",
-      "TitleSV": "",
+      "TitleFA": "Hur har du hört om SvenDrare:",
+      "TitleSV": "چگونه از اجرای نمایش باخبر شدید؟",
       "Answers": [
         {
           "Id": 1,
           "Value": "From Chaharsoo social media",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "Från Chaharsoo sociala medier",
+          "ValueSV": "از سوشال مدیا ی گروه چهارسو"
         },
         {
           "Id": 2,
           "Value": "From a friend",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "Från en vän",
+          "ValueSV": "از طریق یک دوست"
         },
         {
           "Id": 3,
           "Value": "From advertisements",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "Från annonser",
+          "ValueSV": "از طریق تبلیغات"
         }
       ]
     },
     {
       "Id": 11,
       "Title": "Have you ever seen any other play from Chaharsoo theatre group?",
-      "TitleFA": "",
-      "TitleSV": "",
+      "TitleFA": "آیا نمایش دیگری از گروه چهارسو دیده اید؟",
+      "TitleSV": "Har du någonsin sett någon annan pjäs från Chaharsoo teatergrupp?",
       "Answers": [
         {
           "Id": 1,
           "Value": "No",
-          "ValueFA": "",
-          "ValueSV": ""
+          "ValueFA": "Yes, both of them (Rooze Dorough, 209)",
+          "ValueSV": "Ja, båda två (Rooze Dorough, 209)"
         },
         {
           "Id": 2,
-          "Value": "209",
-          "ValueFA": "",
-          "ValueSV": ""
+          "Value": "Yes, one of them (Rooze Dorough, 209)",
+          "ValueFA": "بله، یکی از آنها (روز دروغ  و ۲۰۹)",
+          "ValueSV": "Ja, en av dem (Rooze Dorough, 209)"
         },
         {
           "Id": 3,
-          "Value": "Logndagen",
-          "ValueFA": "",
-          "ValueSV": ""
-        },
-        {
-          "Id": 4,
-          "Value": "Both",
-          "ValueFA": "",
-          "ValueSV": ""
+          "Value": "No. None of them.",
+          "ValueFA": "خیر. هیچکدام.",
+          "ValueSV": "Nej. Ingen av dem."
         }
       ]
     }
@@ -384,7 +380,7 @@
   "Comment": {
     "Id": 12,
     "Title": "Write any comment that you like",
-    "TitleFA": "",
-    "TitleSV": ""
+    "TitleFA": "هر نظری که دوست دارید بنویسید",
+    "TitleSV": "Skriv vilken kommentar du gillar"
   }
 }
