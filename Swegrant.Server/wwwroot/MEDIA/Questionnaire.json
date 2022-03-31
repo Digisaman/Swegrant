@@ -3,22 +3,32 @@
     {
       "Id": 1,
       "Title": "About you:",
+      "TitleFA": "",
+      "TitleSV": "",
       "Answers": [
         {
           "Id": 1,
-          "Value": "Female"
+          "Value": "Female",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 2,
-          "Value": "Male"
+          "Value": "Male",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 3,
-          "Value": "Nonbinary"
+          "Value": "Nonbinary",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 4,
-          "Value": "Intersex"
+          "Value": "Intersex",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 5,
@@ -26,245 +36,355 @@
         },
         {
           "Id": 6,
-          "Value": "Other"
+          "Value": "Other",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 7,
-          "Value": "I prefer not to say"
+          "Value": "I prefer not to say",
+          "ValueFA": "",
+          "ValueSV": ""
         }
       ]
     },
     {
       "Id": 2,
       "Title": "Age",
+      "TitleFA": "",
+      "TitleSV": "",
       "Answers": [
         {
           "Id": 1,
-          "Value": "13-19"
+          "Value": "13-19",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 2,
-          "Value": "20-34"
+          "Value": "20-34",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 3,
-          "Value": "35-49"
+          "Value": "35-49",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 4,
-          "Value": "50-64"
+          "Value": "50-64",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 5,
-          "Value": "65-80"
+          "Value": "65-80",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 6,
-          "Value": "+80"
+          "Value": "+80",
+          "ValueFA": "",
+          "ValueSV": ""
         }
       ]
     },
     {
       "Id": 3,
       "Title": "Was this the first time that you watched SvenDrare:",
+      "TitleFA": "",
+      "TitleSV": "",
       "Answers": [
         {
           "Id": 1,
-          "Value": "Yes"
+          "Value": "Yes",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 2,
-          "Value": "No it was the Second time"
+          "Value": "No it was the Second time",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 3,
-          "Value": "No it was the third time"
+          "Value": "No it was the third time",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 4,
-          "Value": "No I have watched more than 3 times"
+          "Value": "No I have watched more than 3 times",
+          "ValueFA": "",
+          "ValueSV": ""
         }
       ]
     },
     {
       "Id": 4,
       "Title": "Which character did you follow during the performance?",
+      "TitleFA": "",
+      "TitleSV": "",
       "Answers": [
         {
           "Id": 1,
-          "Value": "Leila"
+          "Value": "Leila",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 2,
-          "Value": "Sina"
+          "Value": "Sina",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 3,
-          "Value": "Tara"
+          "Value": "Tara",
+          "ValueFA": "",
+          "ValueSV": ""
         }
       ]
     },
     {
       "Id": 5,
       "Title": "How would you rate the acting?",
+      "TitleFA": "",
+      "TitleSV": "",
       "Answers": [
         {
           "Id": 1,
-          "Value": "Poor"
+          "Value": "Poor",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 2,
-          "Value": "Fair"
+          "Value": "Fair",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 3,
-          "Value": "Good"
+          "Value": "Good",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 4,
-          "Value": "Very Good"
+          "Value": "Very Good",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 5,
-          "Value": "Excellent"
+          "Value": "Excellent",
+          "ValueFA": "",
+          "ValueSV": ""
         }
       ]
     },
     {
       "Id": 6,
       "Title": "How would you rate the script?",
+      "TitleFA": "",
+      "TitleSV": "",
       "Answers": [
         {
           "Id": 1,
-          "Value": "Poor"
+          "Value": "Poor",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 2,
-          "Value": "Fair"
+          "Value": "Fair",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 3,
-          "Value": "Good"
+          "Value": "Good",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 4,
-          "Value": "Very Good"
+          "Value": "Very Good",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 5,
-          "Value": "Excellent"
+          "Value": "Excellent",
+          "ValueFA": "",
+          "ValueSV": ""
         }
       ]
     },
     {
       "Id": 7,
       "Title": "Overall, how would you rate 'SvenDrare'?",
+      "TitleFA": "",
+      "TitleSV": "",
       "Answers": [
         {
           "Id": 1,
-          "Value": "Poor"
+          "Value": "Poor",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 2,
-          "Value": "Fair"
+          "Value": "Fair",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 3,
-          "Value": "Good"
+          "Value": "Good",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 4,
-          "Value": "Very Good"
+          "Value": "Very Good",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 5,
-          "Value": "Excellent"
+          "Value": "Excellent",
+          "ValueFA": "",
+          "ValueSV": ""
         }
       ]
     },
     {
       "Id": 8,
       "Title": "How would you rate the way that this theater was performed (choosing character, using video clip, …)?",
+      "TitleFA": "",
+      "TitleSV": "",
       "Answers": [
         {
           "Id": 1,
-          "Value": "Poor"
+          "Value": "Poor",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 2,
-          "Value": "Fair"
+          "Value": "Fair",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 3,
-          "Value": "Good"
+          "Value": "Good",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 4,
-          "Value": "Very Good"
+          "Value": "Very Good",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 5,
-          "Value": "Excellent"
+          "Value": "Excellent",
+          "ValueFA": "",
+          "ValueSV": ""
         }
       ]
     },
     {
       "Id": 9,
       "Title": "Did you face any technical problem during the performance?",
+      "TitleFA": "",
+      "TitleSV": "",
       "Answers": [
         {
           "Id": 1,
-          "Value": "Yes"
+          "Value": "Yes",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 2,
-          "Value": "No"
+          "Value": "No",
+          "ValueFA": "",
+          "ValueSV": ""
         }
       ]
     },
     {
       "Id": 10,
       "Title": "How did you hear of SvenDrare:",
+      "TitleFA": "",
+      "TitleSV": "",
       "Answers": [
         {
           "Id": 1,
-          "Value": "From Chaharsoo social media"
+          "Value": "From Chaharsoo social media",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 2,
-          "Value": "From a friend"
+          "Value": "From a friend",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 3,
-          "Value": "From advertisements"
+          "Value": "From advertisements",
+          "ValueFA": "",
+          "ValueSV": ""
         }
       ]
     },
     {
       "Id": 11,
       "Title": "Have you ever seen any other play from Chaharsoo theatre group?",
+      "TitleFA": "",
+      "TitleSV": "",
       "Answers": [
         {
           "Id": 1,
-          "Value": "No"
+          "Value": "No",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 2,
-          "Value": "209"
+          "Value": "209",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 3,
-          "Value": "Logndagen"
+          "Value": "Logndagen",
+          "ValueFA": "",
+          "ValueSV": ""
         },
         {
           "Id": 4,
-          "Value": "Both"
+          "Value": "Both",
+          "ValueFA": "",
+          "ValueSV": ""
         }
       ]
     }
   ],
   "Comment": {
     "Id": 12,
-    "Title": "Write any comment that you like"
+    "Title": "Write any comment that you like",
+    "TitleFA": "",
+    "TitleSV": ""
   }
 }
