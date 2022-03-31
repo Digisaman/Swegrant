@@ -48,11 +48,28 @@ namespace Swegrant.ViewModels
         Random random;
 
         #region Charchter
-        bool ischarchterVisible = false;
-        public bool IsCharchterVisible
+        public MvvmHelpers.Commands.Command SelectLeyla { get; }
+        public MvvmHelpers.Commands.Command SelectSina { get; }
+        public MvvmHelpers.Commands.Command SelectTara { get; }
+
+        public ImageSource LeylaImage { get; set; }
+
+        public ImageSource SinaImage { get; set; }
+
+        public ImageSource TaraImage { get; set; }
+
+        bool isTextCharchterVisible = false;
+        public bool IsTextCharchterVisible
         {
-            get { return ischarchterVisible; }
-            set { SetProperty(ref ischarchterVisible, value); }
+            get { return isTextCharchterVisible; }
+            set { SetProperty(ref isTextCharchterVisible, value); }
+        }
+
+        bool isImageCharchterVisible = false;
+        public bool IsImageCharchterVisible
+        {
+            get { return isImageCharchterVisible; }
+            set { SetProperty(ref isImageCharchterVisible, value); }
         }
 
         bool isLeylaSelected = false;
@@ -134,6 +151,8 @@ namespace Swegrant.ViewModels
         #endregion
 
         #region Subtitle
+        public ImageSource HeadphonesImage { get; set; }
+
         public Dictionary<Language, Subtitle[]> MultiSub;
 
         public Subtitle[] CurrentSub
@@ -204,6 +223,10 @@ namespace Swegrant.ViewModels
             SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
             ConnectCommand = new MvvmHelpers.Commands.Command(async () => await Connect());
             DisconnectCommand = new MvvmHelpers.Commands.Command(async () => await Disconnect());
+
+            SelectLeyla = new MvvmHelpers.Commands.Command(async () => await SelectCharchter(Character.Lyla));
+            SelectSina = new MvvmHelpers.Commands.Command(async () => await SelectCharchter(Character.Sina));
+            SelectTara = new MvvmHelpers.Commands.Command(async () => await SelectCharchter(Character.Tara));
             random = new Random();
 
             ChatService.Init(Settings.ServerIP, Settings.UseHttps);
@@ -223,6 +246,11 @@ namespace Swegrant.ViewModels
             {
                 SendLocalMessage(args.Message, args.User);
             };
+
+            LeylaImage = ImageSource.FromResource("Swegrant.Resources.Leyla.jpg");
+            SinaImage = ImageSource.FromResource("Swegrant.Resources.Sina.jpg");
+            TaraImage = ImageSource.FromResource("Swegrant.Resources.Tara.jpg");
+            HeadphonesImage = ImageSource.FromResource("Swegrant.Resources.Headphones_Off.gif");
         }
 
         private void InitializeSettings(int currentScene = 1)
@@ -357,12 +385,18 @@ namespace Swegrant.ViewModels
                                 case Swegrant.Shared.Models.Command.DisplayManualSub:
                                     Task.Run(() => DisplayManualSub(serviceMessage.Index));
                                     break;
-                                case Swegrant.Shared.Models.Command.ShowSelectCharacter:
-                                    Task.Run(() => SelectCharchter(true));
+                                case Swegrant.Shared.Models.Command.ShowSelectCharacterText:
+                                    Task.Run(() => SelectTextCharchterVisibility(true));
                                     break;
-
+                                case Swegrant.Shared.Models.Command.ShowSelectCharacterImage:
+                                    Task.Run(() => SelectImageCharchterVisibility(true));
+                                    break;
                                 case Swegrant.Shared.Models.Command.HideSelectCharchter:
-                                    Task.Run(() => SelectCharchter(false));
+                                    Task.Run(() =>
+                                    {
+                                        SelectTextCharchterVisibility(false);
+                                        SelectImageCharchterVisibility(false);
+                                    });
                                     break;
                                 case Swegrant.Shared.Models.Command.NavigateQuestionnaire:
                                     Shell.Current.GoToAsync($"//{nameof(QuestionnairePage)}");
@@ -395,9 +429,14 @@ namespace Swegrant.ViewModels
 
 
 
-        private void SelectCharchter(bool isVisible)
+        private void SelectTextCharchterVisibility(bool isVisible)
         {
-            IsCharchterVisible = isVisible;
+            IsTextCharchterVisible = isVisible;
+        }
+
+        private void SelectImageCharchterVisibility(bool isVisible)
+        {
+            IsImageCharchterVisible = isVisible;
         }
 
         void AddRemoveUser(string name, bool add)
@@ -620,6 +659,22 @@ namespace Swegrant.ViewModels
             catch (Exception ex)
             {
 
+            }
+        }
+
+        private async Task SelectCharchter(Character character)
+        {
+            switch (character)
+            {
+                case Character.Lyla:
+                    IsLeylaSelected = true;
+                    break;
+                case Character.Sina:
+                    IsSinaSelected = true;
+                    break;
+                case Character.Tara:
+                    IsTaraSelected = true;
+                    break;
             }
         }
 

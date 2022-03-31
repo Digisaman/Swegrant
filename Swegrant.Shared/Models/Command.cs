@@ -11,8 +11,9 @@
         PauseAutoSub,
         ResumeAutoSub,
         DisplayManualSub,
-        ShowSelectCharacter,
+        ShowSelectCharacterText,
         HideSelectCharchter,
-        NavigateQuestionnaire
+        NavigateQuestionnaire,
+        ShowSelectCharacterImage,
     }
 }

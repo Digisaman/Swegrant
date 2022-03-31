@@ -75,9 +75,9 @@ namespace Swegrant.Server.UserControls
             await PauseAutoSub();
         }
 
-        private async void btnShowSelectCharchter_Click(object sender, RoutedEventArgs e)
+        private async void btnShowSelectCharchterText_Click(object sender, RoutedEventArgs e)
         {
-            await ShowSelectCharacter();
+            await ShowSelectCharacterText();
         }
 
         private async void btnHideSelectCharchter_Click(object sender, RoutedEventArgs e)
@@ -426,11 +426,21 @@ namespace Swegrant.Server.UserControls
         }
 
 
-        public async Task ShowSelectCharacter()
+        public async Task ShowSelectCharacterText()
         {
             await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
             {
-                Command = Command.ShowSelectCharacter,
+                Command = Command.ShowSelectCharacterText,
+                Mode = Mode.Theater,
+                Scene = this.currentScene
+            });
+        }
+
+        public async Task ShowSelectCharacterImage()
+        {
+            await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+            {
+                Command = Command.ShowSelectCharacterImage,
                 Mode = Mode.Theater,
                 Scene = this.currentScene
             });
@@ -519,6 +529,11 @@ namespace Swegrant.Server.UserControls
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private async void btnShowSelectCharchterImage_Click(object sender, RoutedEventArgs e)
+        {
+            await ShowSelectCharacterImage();
         }
     }
 }

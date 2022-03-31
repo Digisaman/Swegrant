@@ -19,23 +19,26 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ComboBox x:Name="cmbServerIP"
-                  Grid.Row="0" Grid.Column="0"
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0" Grid.Column="0"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="IP :" VerticalAlignment="Center"/>
+            <ComboBox x:Name="cmbServerIP"
+                      VerticalAlignment="Center"
                   Style="{StaticResource ComboBoxStyle}"
                   SelectionChanged="cmbServerIP_SelectionChanged">
-
-        </ComboBox>
-        
+            </ComboBox>
+        </StackPanel>
         <Button Grid.Row="0" Grid.Column="1"
                 x:Name="btnStartServer" 
                 Content="Start Server" 
                 Style="{StaticResource ButtonStyle}"
                 Click="btnStartServer_Click">
-          
+
         </Button>
-        
-        
-        
+
+
+
         <Button x:Name="btnvdOpenSecondary" 
                     Grid.Row="0" Grid.Column="2" 
                     Style="{StaticResource ButtonStyle}"
@@ -64,7 +67,7 @@
         </Button>
         <TabControl x:Name="tabControl" Grid.Row="1" Grid.ColumnSpan="5">
             <TabItem x:Name="tabTheater" Header="Theater Mode" FontSize="16">
-                
+
                 <uc:TheaterControl x:Name="ucTheater"/>
             </TabItem>
             <TabItem x:Name="tabVideo" Header="Video Mode" FontSize="16">

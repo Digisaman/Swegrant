@@ -7,6 +7,7 @@
              xmlns:resx="clr-namespace:Swegrant.Resources"
              xmlns:viewmodel="clr-namespace:Swegrant.ViewModels" 
              xmlns:extensions="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:converters="clr-namespace:Swegrant.Converters"
              x:Class="Swegrant.Views.TheaterPage"
              Title="{Binding Title}"
              mc:Ignorable="d"
@@ -14,6 +15,10 @@
     <ContentPage.BindingContext>
         <viewmodel:TheaterViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <converters:BackgroundColorVisibilityConverter 
+               x:Key="MyBackgroundColorVisibilityConverter"/>
+    </ContentPage.Resources>
     <!--<ContentPage.ToolbarItems>
         <ToolbarItem x:Name="ToolbarDone" Text="Done" />
     </ContentPage.ToolbarItems>-->
@@ -63,8 +68,8 @@
         </CollectionView>
 
         <Grid HorizontalOptions="CenterAndExpand" 
-              Grid.Row="2" Grid.ColumnSpan="2"
-              IsVisible="{Binding IsCharchterVisible}">
+              Grid.Row="1" Grid.ColumnSpan="2"
+              IsVisible="{Binding IsImageCharchterVisible}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -74,7 +79,54 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0"
                    Text="{x:Static resx:AppResources.SelectCharachter}"
-                   IsVisible="{Binding IsCharchterVisible}"
+                   IsVisible="{Binding IsImageCharchterVisible}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="{StaticResource PrimaryTextColor}"
+               FontAttributes="Bold"
+               FontSize="Medium" />
+            <StackLayout Orientation="Horizontal"
+                         Grid.Row="0" Grid.Column="1">
+
+                <ImageButton BackgroundColor="{Binding IsLeylaSelected, Converter={StaticResource MyBackgroundColorVisibilityConverter}}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Aspect="AspectFit"
+                        Command="{Binding SelectLeyla}"
+                        Source="{Binding LeylaImage}"/>
+                <ImageButton 
+                        BackgroundColor="{Binding IsSinaSelected, Converter={StaticResource MyBackgroundColorVisibilityConverter}}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Aspect="AspectFit"
+                        Command="{Binding SelectSina}"
+                        Source="{Binding SinaImage}"/>
+                
+                <ImageButton 
+                        BackgroundColor="{Binding IsTaraSelected, Converter={StaticResource MyBackgroundColorVisibilityConverter}}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Aspect="AspectFit"
+                        Command="{Binding SelectTara}"
+                        Source="{Binding TaraImage}"/>
+                
+
+            </StackLayout>
+        </Grid>
+        
+        <Grid HorizontalOptions="CenterAndExpand" 
+              Grid.Row="2" Grid.ColumnSpan="2"
+              IsVisible="{Binding IsTextCharchterVisible}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0"
+                   Text="{x:Static resx:AppResources.SelectCharachter}"
+                   IsVisible="{Binding IsTextCharchterVisible}"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    TextColor="{StaticResource PrimaryTextColor}"

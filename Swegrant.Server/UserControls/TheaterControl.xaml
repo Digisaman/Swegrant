@@ -147,20 +147,28 @@
                 Click="btnHideSub_Click">
         </Button>
 
-        <Button x:Name="btnShowSelectCharchter"  
+        <Button x:Name="btnShowSelectCharchterText"  
                 Grid.Row="6" Grid.Column="0" 
-                Content="Show Charchter" 
+                Content="Show Charchter Text" 
+                FontSize="14"
                 Style="{StaticResource ButtonStyle}" 
-                Click="btnShowSelectCharchter_Click">
+                Click="btnShowSelectCharchterText_Click">
         </Button>
 
         <Button x:Name="btnHideSelectCharchter"  
                 Style="{StaticResource ButtonStyle}" 
                 HorizontalAlignment="Center"
                 Grid.Row="6" Grid.Column="1" 
-                Grid.ColumnSpan="2"
                 Content="Hide Charchter" 
                 Click="btnHideSelectCharchter_Click">
+        </Button>
+
+        <Button x:Name="btnShowSelectCharchterImage"  
+                Grid.Row="6" Grid.Column="2" 
+                Content="Show Charchter Image" 
+                FontSize="14"
+                Style="{StaticResource ButtonStyle}" 
+                Click="btnShowSelectCharchterImage_Click">
         </Button>
 
 
