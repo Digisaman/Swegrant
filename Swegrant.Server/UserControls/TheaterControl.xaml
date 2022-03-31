@@ -66,7 +66,7 @@
                     Content="Load/Prepare Subtitle" 
                     Style="{StaticResource ButtonStyle}"
                     Click="btnLoadSubTitle_Click"/>
-      
+
 
         <Button x:Name="btnPlayVideo" 
                         FontWeight="Bold"
@@ -75,9 +75,22 @@
                         Style="{StaticResource ButtonStyle}"
                         Click="btnPlayVideo_Click">
         </Button>
+        <StackPanel Orientation="Vertical"  Grid.Row="2" Grid.Column="1">
+            <Button x:Name="btnPauseVideo" 
+                        FontWeight="Bold"
+                        Content="Pause" 
+                        Click="btnPauseVideo_Click">
+            </Button>
+            <Button x:Name="btnResumeVideo" 
+                        FontWeight="Bold"
+                    
+                        Content="Resume" 
+                        Click="btnResumeVideo_Click">
+            </Button>
+        </StackPanel>
         <Button x:Name="btnChangeVideo" 
                 HorizontalAlignment="Center"
-                    Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                    Grid.Row="2" Grid.Column="2"
                 FontWeight="Bold"
                         Content="Change Video"  
                         Style="{StaticResource ButtonStyle}"
@@ -90,7 +103,7 @@
                 Content="Show Video" 
                 Style="{StaticResource ButtonStyle}"
                 Click="btnShowVideo_Click"/>
-        
+
         <Button x:Name="btnHideVideo"  
                 FontWeight="Bold"
                 Grid.Row="3" Grid.Column="1" 
@@ -100,9 +113,9 @@
                 Style="{StaticResource ButtonStyle}"
                 Click="btnHideVideo_Click"/>
 
-        
 
-        
+
+
 
         <Button  x:Name="btnPauseAutoSub" 
                  Grid.Row="4" Grid.Column="0"

@@ -535,5 +535,15 @@ namespace Swegrant.Server.UserControls
         {
             await ShowSelectCharacterImage();
         }
+
+        private void btnPauseVideo_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Singleton.PauseVideo();
+        }
+
+        private void btnResumeVideo_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Singleton.ResumeVideo();
+        }
     }
 }

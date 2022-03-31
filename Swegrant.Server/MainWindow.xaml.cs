@@ -219,6 +219,34 @@ namespace Swegrant.Server
 
         }
 
+        public void PauseVideo()
+        {
+            try
+            {
+                _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                    _SecondaryWindow.PauseVideo()));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("SecondaryWindowVideo", ex);
+            }
+
+        }
+
+        public void ResumeVideo()
+        {
+            try
+            {
+                _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
+                    _SecondaryWindow.ResumeVideo()));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("SecondaryWindowVideo", ex);
+            }
+
+        }
+
         private void btnvdOpenSecondary_Click(object sender, RoutedEventArgs e)
         {
             if (_SecondaryWindow != null)

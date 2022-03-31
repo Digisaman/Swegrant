@@ -48,6 +48,36 @@ namespace Swegrant.Server
 
         }
 
+        public void PauseVideo()
+        {
+            try
+            {
+               
+                this.videoPlayer.Pause();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public void ResumeVideo()
+        {
+            try
+            {
+
+                this.videoPlayer.Play();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
         public void ToggleVideoVisibility(bool display)
         {
             try
