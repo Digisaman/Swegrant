@@ -327,8 +327,8 @@
     {
       "Id": 10,
       "Title": "How did you hear of SvenDrare:",
-      "TitleFA": "Hur har du hört om SvenDrare:",
-      "TitleSV": "چگونه از اجرای نمایش باخبر شدید؟",
+      "TitleFA": "چگونه از اجرای نمایش باخبر شدید؟",
+      "TitleSV": "Hur har du hört om SvenDrare:",
       "Answers": [
         {
           "Id": 1,
@@ -359,18 +359,24 @@
       "Answers": [
         {
           "Id": 1,
-          "Value": "No",
-          "ValueFA": "Yes, both of them (Rooze Dorough, 209)",
+          "Value": "Yes, both of them (Rooze Dorough, 209)",
+          "ValueFA": "بله ،  هر دو (روز دروغ  و ۲۰۹)",
           "ValueSV": "Ja, båda två (Rooze Dorough, 209)"
         },
         {
           "Id": 2,
-          "Value": "Yes, one of them (Rooze Dorough, 209)",
-          "ValueFA": "بله، یکی از آنها (روز دروغ  و ۲۰۹)",
-          "ValueSV": "Ja, en av dem (Rooze Dorough, 209)"
+          "Value": "Yes, (209)",
+          "ValueFA": "Ja, ( 209)",
+          "ValueSV": "بله ( ۲۰۹)"
         },
         {
           "Id": 3,
+          "Value": "Yes, (Rooze Dorough)",
+          "ValueFA": "بله (روز دروغ )",
+          "ValueSV": "Ja, (Rooze Dorough)"
+        },
+        {
+          "Id": 4,
           "Value": "No. None of them.",
           "ValueFA": "خیر. هیچکدام.",
           "ValueSV": "Nej. Ingen av dem."

@@ -39,7 +39,6 @@ namespace Swegrant.Server
                 this.videoPlayer.Source = new Uri(videoFilePath, UriKind.Absolute);
                 this.videoPlayer.IsMuted = true;
                 this.videoPlayer.Play();
-                
             }
             catch (Exception ex)
             {
