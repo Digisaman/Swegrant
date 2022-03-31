@@ -94,13 +94,7 @@
                         Aspect="AspectFit"
                         Command="{Binding SelectLeyla}"
                         Source="{Binding LeylaImage}"/>
-                <ImageButton 
-                        BackgroundColor="{Binding IsSinaSelected, Converter={StaticResource MyBackgroundColorVisibilityConverter}}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand"
-                        Aspect="AspectFit"
-                        Command="{Binding SelectSina}"
-                        Source="{Binding SinaImage}"/>
+                
                 
                 <ImageButton 
                         BackgroundColor="{Binding IsTaraSelected, Converter={StaticResource MyBackgroundColorVisibilityConverter}}"
@@ -109,7 +103,15 @@
                         Aspect="AspectFit"
                         Command="{Binding SelectTara}"
                         Source="{Binding TaraImage}"/>
-                
+
+                <ImageButton 
+                        BackgroundColor="{Binding IsSinaSelected, Converter={StaticResource MyBackgroundColorVisibilityConverter}}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Aspect="AspectFit"
+                        Command="{Binding SelectSina}"
+                        Source="{Binding SinaImage}"/>
+
 
             </StackLayout>
         </Grid>
@@ -147,15 +149,16 @@
                          FontSize="Large" 
                          FontAttributes="Bold" 
                          TextColor="{StaticResource SecondaryTextColor}" 
-                         IsChecked="{Binding IsSinaSelected}" 
-                         Content="{x:Static resx:AppResources.Sina}"/>
+                         IsChecked="{Binding IsTaraSelected}" 
+                         Content="{x:Static resx:AppResources.Tara}"/>
                 <RadioButton BackgroundColor="{StaticResource Primary}" 
                              HorizontalOptions="FillAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold" 
                          TextColor="{StaticResource SecondaryTextColor}" 
-                         IsChecked="{Binding IsTaraSelected}" 
-                         Content="{x:Static resx:AppResources.Tara}"/>
+                         IsChecked="{Binding IsSinaSelected}" 
+                         Content="{x:Static resx:AppResources.Sina}"/>
+                
 
             </StackLayout>
         </Grid>
