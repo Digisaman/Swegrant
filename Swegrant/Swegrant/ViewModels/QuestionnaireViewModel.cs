@@ -96,14 +96,20 @@ namespace Swegrant.ViewModels
             this.CurrentQuestion = new ObservableQuestion
             {
                 Id = question.Id,
-                Title = question.Title
+                Title = ( Helpers.Settings.CurrentLanguage == Language.English ? 
+                     question.Title : (Helpers.Settings.CurrentLanguage == Language.Svenska 
+                     ? question.TitleSV  : 
+                     question.TitleFA))
             };
             foreach (var item in question.Answers)
             {
                 this.CurrentQuestion.Answers.Add(new ObservableAnswer
                 {
                     Id = item.Id,
-                    Value = item.Value,
+                    Value = (Helpers.Settings.CurrentLanguage == Language.English ?
+                     item.Value : (Helpers.Settings.CurrentLanguage == Language.Svenska
+                     ? item.ValueSV :
+                     item.ValueFA))
                 });
             }
 

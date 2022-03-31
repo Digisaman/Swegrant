@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Audio" xml:space="preserve">
-    <value>Audio :</value>
+    <value>Ljud:</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Annullera</value>
   </data>
   <data name="Charchter" xml:space="preserve">
-    <value>Charchter :</value>
+    <value>Karaktär</value>
   </data>
   <data name="ChooseLanguage" xml:space="preserve">
     <value>Välj ditt språk</value>
@@ -133,28 +133,28 @@
     <value>Alla undertexter kommer att visas på det valda språket</value>
   </data>
   <data name="Connected" xml:space="preserve">
-    <value>Conneted</value>
+    <value>Ansluten</value>
   </data>
   <data name="Disconnected" xml:space="preserve">
-    <value>Disconnected</value>
+    <value>Frånkopplad</value>
   </data>
   <data name="DonwloadingAudioFiles" xml:space="preserve">
-    <value>Downloading Audio files...</value>
+    <value>Laddar ner ljudfiler...</value>
   </data>
   <data name="DownloadCompleted" xml:space="preserve">
-    <value>Download Completed.</value>
+    <value>Nedladdningen slutförd.</value>
   </data>
   <data name="DownloadTHSubFiles" xml:space="preserve">
-    <value>Downloading Theater Subtitles...</value>
+    <value>Laddar ner teaterundertexter...</value>
   </data>
   <data name="DownloadVDSubFiles" xml:space="preserve">
-    <value>Downloading Video Subtitles...</value>
+    <value>Laddar ned video undertexter...</value>
   </data>
   <data name="Farsi" xml:space="preserve">
-    <value>Farsi</value>
+    <value>Persiska</value>
   </data>
   <data name="FilesUpToDate" xml:space="preserve">
-    <value>Files Are Up to Date.</value>
+    <value>Filer är uppdaterade.</value>
   </data>
   <data name="Information" xml:space="preserve">
     <value>Information</value>
@@ -163,10 +163,10 @@
     <value>Leyla</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Next</value>
+    <value>Nästa</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>Nej</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -175,28 +175,28 @@
     <value>Original</value>
   </data>
   <data name="Previous" xml:space="preserve">
-    <value>Previous</value>
+    <value>Föregående</value>
   </data>
   <data name="PutonHeadphones" xml:space="preserve">
-    <value>Put on your Headphones.</value>
+    <value>Sätt på dina hörlurar</value>
   </data>
   <data name="QuestionnaireFinalMessage" xml:space="preserve">
-    <value>Thank you for takeing the time to fill out the questionnaire.</value>
+    <value>Tack för att du tog dig tid att fylla i enkäten</value>
   </data>
   <data name="QuestionnaireInitialMessage" xml:space="preserve">
-    <value>Thanks for taking the time to complete this survey. This information is only used for an evaluation purpose of the theatre. The form is anonymous, and your responses will be kept private and secure. The information will not be used for a discriminatory purpose.</value>
+    <value>Tack för att du tog dig tid att fylla i den här enkäten. Informationen används endast för att utvärdera teatern. Formuläret är anonymt och dina svar kommer att hållas privata och säkra. Informationen kommer inte att användas i ett diskriminerande syfte.</value>
   </data>
   <data name="RemoveHeadphones" xml:space="preserve">
-    <value>Remove your Headphones.</value>
+    <value>Ta bort dina hörlurar</value>
   </data>
   <data name="SelectCharachter" xml:space="preserve">
-    <value>Select Charachter :</value>
+    <value>Välj Karaktär:</value>
   </data>
   <data name="Sina" xml:space="preserve">
     <value>Sina</value>
   </data>
   <data name="Subtitle" xml:space="preserve">
-    <value>Subtitle :</value>
+    <value>Undertext:</value>
   </data>
   <data name="Svenska" xml:space="preserve">
     <value>Svenska</value>
@@ -211,6 +211,6 @@
     <value>Välkommen till SvenDrare</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Ja</value>
   </data>
 </root>

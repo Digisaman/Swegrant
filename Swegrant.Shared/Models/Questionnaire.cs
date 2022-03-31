@@ -30,7 +30,7 @@ namespace Swegrant.Shared.Models
 
         public string TitleFA { get; set; }
 
-        public string TileSV { get; set; }
+        public string TitleSV { get; set; }
 
         public Answer[] Answers { get; set; }
 
