@@ -63,6 +63,11 @@ namespace Swegrant.Server
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var settings = configFile.AppSettings.Settings;
 
+            this.tabControl.IsEnabled = false;
+            this.btnStartServer.IsEnabled = false;
+            this.btnvdOpenSecondary.IsEnabled = false;
+            this.btnvdCloseSecondary.IsEnabled = false;
+
             if (settings["SecondaryStyle"] != null)
             {
                 string windowStyle = settings["SecondaryStyle"].Value.ToString();
@@ -86,10 +91,9 @@ namespace Swegrant.Server
                 {
                     cmbServerIP.SelectedItem = savedIP;
                 }
-            }
-
+            }           
             MainWindow.Singleton = this;
-            this.tabControl.IsEnabled = false;
+            
         }
 
         private async void btnStartServer_Click(object sender, RoutedEventArgs e)
@@ -108,6 +112,8 @@ namespace Swegrant.Server
                     Helpers.AppConfigHelpers.SaveConfig("ServerIP", localIP);
                    
                     MessageBox.Show("Server Started");
+                    this.btnvdOpenSecondary.IsEnabled = true;
+                    this.btnvdCloseSecondary.IsEnabled = true;
                 }
                 else
                 {
@@ -398,6 +404,11 @@ namespace Swegrant.Server
             {
 
             }
+        }
+
+        private void cmbServerIP_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnStartServer.IsEnabled = true;
         }
     }
 }

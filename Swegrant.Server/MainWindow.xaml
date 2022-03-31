@@ -19,7 +19,14 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0"
+        <ComboBox x:Name="cmbServerIP"
+                  Grid.Row="0" Grid.Column="0"
+                  Style="{StaticResource ComboBoxStyle}"
+                  SelectionChanged="cmbServerIP_SelectionChanged">
+
+        </ComboBox>
+        
+        <Button Grid.Row="0" Grid.Column="1"
                 x:Name="btnStartServer" 
                 Content="Start Server" 
                 Style="{StaticResource ButtonStyle}"
@@ -27,11 +34,7 @@
           
         </Button>
         
-        <ComboBox x:Name="cmbServerIP"
-                  Grid.Row="0" Grid.Column="1"
-                  Style="{StaticResource ComboBoxStyle}">
-            
-        </ComboBox>
+        
         
         <Button x:Name="btnvdOpenSecondary" 
                     Grid.Row="0" Grid.Column="2" 
