@@ -156,6 +156,21 @@ namespace Swegrant.Server.Controllers
             }
         }
 
+        [HttpGet]
+        [Route(nameof(AutoAssignCharacter))]
+        public Character AutoAssignCharacter()
+        {
+            try
+            {
+
+                return MainWindow.Singleton.AutoAssignCharacter();
+            }
+            catch (Exception ex)
+            {
+                return Character.Tara;
+            }
+        }
+
 
     }
 }

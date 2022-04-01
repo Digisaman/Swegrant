@@ -62,5 +62,43 @@ namespace Swegrant.Server.UserControls
             bool result = FileHelpers.ExportExcelUserStatus(UserStatuses);
             MessageBox.Show((result ? "Export Successfull" : "Export Failed"));
         }
+       
+        public Character AutoAssignCharachter()
+        {
+            Character character = Character.None;
+
+            try
+            {
+
+                int countSina = UserStatuses.Count(c => c.Event == UserEvent.CharacterSelected && c.Value == Character.Sina.ToString());
+                int countTara = UserStatuses.Count(c => c.Event == UserEvent.CharacterSelected && c.Value == Character.Tara.ToString());
+                int countLeyla = UserStatuses.Count(c => c.Event == UserEvent.CharacterSelected && c.Value == Character.Lyla.ToString());
+
+
+
+                int min = Math.Min(countSina, Math.Min(countTara, countLeyla));
+
+                if (min == countSina)
+                    return Character.Sina;
+                else if (min == countTara)
+                    return Character.Tara;
+                else if (min == countLeyla)
+                    return Character.Lyla;
+                else
+                {
+                    Random random = new Random();
+                    int num = random.Next(1, 4);
+                    character = (Character)Enum.Parse(typeof(Character), num.ToString());
+                }
+            }
+            catch(Exception ex)
+            {
+                Random random = new Random();
+                int num = random.Next(1, 4);
+                character = (Character)Enum.Parse(typeof(Character), num.ToString());
+            }
+
+            return character;
+        }
     }
 }

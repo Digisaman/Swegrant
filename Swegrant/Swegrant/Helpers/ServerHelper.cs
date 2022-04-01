@@ -94,11 +94,34 @@ namespace Swegrant.Helpers
             return info;
         }
 
+        
+        public async static Task<Character> AutoAssignCharacterAsync()
+        {
+            Character character = Character.None; ;
+            try
+            {
+                Uri uri = ServerHelper.GetApiUri("AutoAssignCharacter");
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    character = JsonConvert.DeserializeObject<Character>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Character.None;
+            }
+            return character;
+        }
+
         private static Uri GetApiUri(string method, string controller = "media")
         {
             Uri uri = new Uri($"{(Swegrant.Helpers.Settings.UseHttps ? "https" : "http")}://{Swegrant.Helpers.Settings.ServerIP}:{Swegrant.Helpers.Settings.ServerPort}/api/{controller}/{method}");
             return uri;
         }
+
         #endregion
 
         #region Subtitle Controller

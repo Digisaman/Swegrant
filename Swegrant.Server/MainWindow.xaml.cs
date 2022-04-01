@@ -340,6 +340,23 @@ namespace Swegrant.Server
             }
         }
 
+        public Character AutoAssignCharacter()
+        {
+            try
+            {
+                Character autoassigned = Character.None;
+                this.Dispatcher.Invoke(new Action(() =>
+                    autoassigned = this.ucUserStatus.AutoAssignCharachter()
+                ));
+                return autoassigned;
+            }
+            catch (Exception ex)
+            {
+                
+                return Character.Lyla;
+            }
+        }
+
         public void AddQuestion(SubmitQuestion submitQuestion)
         {
             try

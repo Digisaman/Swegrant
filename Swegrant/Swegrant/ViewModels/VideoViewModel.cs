@@ -221,7 +221,7 @@ namespace Swegrant.ViewModels
 
         }
 
-        private void InitilizeSettings(int currentScene = 1)
+        private async void InitilizeSettings(int currentScene = 1)
         {
             this.CurrentScene = currentScene;
             if (Helpers.Settings.CurrentLanguage != Language.None)
@@ -248,7 +248,8 @@ namespace Swegrant.ViewModels
             }
             else
             {
-                this.CurrentCharchter = Character.Lyla;
+                this.CurrentCharchter = await ServerHelper.AutoAssignCharacterAsync();
+                Helpers.Settings.CurrentCharachter = this.CurrentCharchter;
             }
             
             
