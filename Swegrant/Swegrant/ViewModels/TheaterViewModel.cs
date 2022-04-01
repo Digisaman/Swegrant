@@ -52,11 +52,26 @@ namespace Swegrant.ViewModels
         public MvvmHelpers.Commands.Command SelectSina { get; }
         public MvvmHelpers.Commands.Command SelectTara { get; }
 
-        public ImageSource LeylaImage { get; set; }
+        private ImageSource leylaImage;
+        public ImageSource LeylaImage
+        {
+            get { return leylaImage; }
+            set { SetProperty(ref leylaImage, value); }
+        }
 
-        public ImageSource SinaImage { get; set; }
+        private ImageSource sinaImage;
+        public ImageSource SinaImage
+        {
+            get { return sinaImage; }
+            set { SetProperty(ref sinaImage, value); }
+        }
 
-        public ImageSource TaraImage { get; set; }
+        private ImageSource taraImage;
+        public ImageSource TaraImage
+        {
+            get { return taraImage; }
+            set { SetProperty(ref taraImage, value); }
+        }
 
         bool isTextCharchterVisible = false;
         public bool IsTextCharchterVisible
@@ -84,7 +99,13 @@ namespace Swegrant.ViewModels
 
                     CurrentCharchter = Character.Lyla;
                     Helpers.ServerHelper.SubmitStatus(UserEvent.CharacterSelected, CurrentCharchter.ToString());
-
+                    LeylaImage = ImageSource.FromResource("Swegrant.Resources.Leyla_Selected.jpg");
+                    TaraImage = ImageSource.FromResource("Swegrant.Resources.Tara.jpg");
+                    SinaImage = ImageSource.FromResource("Swegrant.Resources.Sina.jpg");
+                }
+                else
+                {
+                    LeylaImage = ImageSource.FromResource("Swegrant.Resources.Leyla.jpg");
                 }
             }
         }
@@ -100,7 +121,13 @@ namespace Swegrant.ViewModels
                 {
                     CurrentCharchter = Character.Sina;
                     Helpers.ServerHelper.SubmitStatus(UserEvent.CharacterSelected, CurrentCharchter.ToString());
-
+                    SinaImage = ImageSource.FromResource("Swegrant.Resources.Sina_Selected.jpg");
+                    TaraImage = ImageSource.FromResource("Swegrant.Resources.Tara.jpg");
+                    LeylaImage = ImageSource.FromResource("Swegrant.Resources.Leyla.jpg");
+                }
+                else
+                {
+                    SinaImage = ImageSource.FromResource("Swegrant.Resources.Sina.jpg");
                 }
             }
         }
@@ -117,7 +144,13 @@ namespace Swegrant.ViewModels
 
                     CurrentCharchter = Character.Tara;
                     Helpers.ServerHelper.SubmitStatus(UserEvent.CharacterSelected, CurrentCharchter.ToString());
-
+                    TaraImage = ImageSource.FromResource("Swegrant.Resources.Tara_Selected.jpg");
+                    SinaImage = ImageSource.FromResource("Swegrant.Resources.Sina.jpg");
+                    LeylaImage = ImageSource.FromResource("Swegrant.Resources.Leyla.jpg");
+                }
+                else
+                {
+                    TaraImage = ImageSource.FromResource("Swegrant.Resources.Tara.jpg");
                 }
             }
         }
@@ -247,9 +280,19 @@ namespace Swegrant.ViewModels
                 SendLocalMessage(args.Message, args.User);
             };
 
-            LeylaImage = ImageSource.FromResource("Swegrant.Resources.Leyla.jpg");
-            SinaImage = ImageSource.FromResource("Swegrant.Resources.Sina.jpg");
-            TaraImage = ImageSource.FromResource("Swegrant.Resources.Tara.jpg");
+            if (isLeylaSelected)
+                LeylaImage = ImageSource.FromResource("Swegrant.Resources.Leyla_Selected.jpg");
+            else
+                LeylaImage = ImageSource.FromResource("Swegrant.Resources.Leyla.jpg");
+            if (isSinaSelected)
+                SinaImage = ImageSource.FromResource("Swegrant.Resources.Sina_Selected.jpg");
+            else
+                SinaImage = ImageSource.FromResource("Swegrant.Resources.Sina.jpg");
+
+            if (IsTaraSelected)
+                TaraImage = ImageSource.FromResource("Swegrant.Resources.Tara_Selected.jpg");
+            else
+                TaraImage = ImageSource.FromResource("Swegrant.Resources.Tara.jpg");
             HeadphonesImage = ImageSource.FromResource("Swegrant.Resources.Headphones_Off.gif");
         }
 

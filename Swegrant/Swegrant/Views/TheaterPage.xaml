@@ -25,7 +25,7 @@
     <Grid ColumnSpacing="0" RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="5*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
@@ -67,17 +67,20 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Grid HorizontalOptions="CenterAndExpand" 
+        <Grid HorizontalOptions="FillAndExpand" 
               Grid.Row="1" Grid.ColumnSpan="2"
               IsVisible="{Binding IsImageCharchterVisible}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0"
+            <Label Grid.Row="0" Grid.ColumnSpan="3"
                    Text="{x:Static resx:AppResources.SelectCharachter}"
                    IsVisible="{Binding IsImageCharchterVisible}"
                    HorizontalOptions="Center"
@@ -85,37 +88,50 @@
                    TextColor="{StaticResource PrimaryTextColor}"
                FontAttributes="Bold"
                FontSize="Medium" />
-            <StackLayout Orientation="Horizontal"
-                         Grid.Row="0" Grid.Column="1">
 
-                <ImageButton BackgroundColor="{Binding IsLeylaSelected, Converter={StaticResource MyBackgroundColorVisibilityConverter}}"
+
+            <ImageButton 
+                    Grid.Row="1" Grid.Column="0"
+                        BackgroundColor="{StaticResource PrimaryBackColor}"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand"
                         Aspect="AspectFit"
                         Command="{Binding SelectLeyla}"
                         Source="{Binding LeylaImage}"/>
-                
-                
-                <ImageButton 
-                        BackgroundColor="{Binding IsTaraSelected, Converter={StaticResource MyBackgroundColorVisibilityConverter}}"
+
+            <Label Text="{x:Static resx:AppResources.Leyla}" Grid.Row="2" Grid.Column="0" 
+                   TextColor="{StaticResource PrimaryTextColor}"
+                   HorizontalOptions="Center"
+                   BackgroundColor="{StaticResource PrimaryBackColor}"/>
+            <ImageButton 
+                    Grid.Row="1" Grid.Column="1"
+                        BackgroundColor="{StaticResource PrimaryBackColor}"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand"
                         Aspect="AspectFit"
                         Command="{Binding SelectTara}"
                         Source="{Binding TaraImage}"/>
+            <Label Text="{x:Static resx:AppResources.Tara}" Grid.Row="2" Grid.Column="1" 
+                   TextColor="{StaticResource PrimaryTextColor}"
+                   HorizontalOptions="Center"
+                   BackgroundColor="{StaticResource PrimaryBackColor}"/>
 
-                <ImageButton 
-                        BackgroundColor="{Binding IsSinaSelected, Converter={StaticResource MyBackgroundColorVisibilityConverter}}"
+            <ImageButton 
+                    Grid.Row="1" Grid.Column="2"
+                        BackgroundColor="{StaticResource PrimaryBackColor}"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand"
                         Aspect="AspectFit"
                         Command="{Binding SelectSina}"
                         Source="{Binding SinaImage}"/>
+            <Label Text="{x:Static resx:AppResources.Sina}" Grid.Row="2" Grid.Column="2" 
+                   TextColor="{StaticResource PrimaryTextColor}"
+                   HorizontalOptions="Center"
+                   BackgroundColor="{StaticResource PrimaryBackColor}"/>
 
 
-            </StackLayout>
         </Grid>
-        
+
         <Grid HorizontalOptions="CenterAndExpand" 
               Grid.Row="2" Grid.ColumnSpan="2"
               IsVisible="{Binding IsTextCharchterVisible}">
@@ -158,11 +174,11 @@
                          TextColor="{StaticResource SecondaryTextColor}" 
                          IsChecked="{Binding IsSinaSelected}" 
                          Content="{x:Static resx:AppResources.Sina}"/>
-                
+
 
             </StackLayout>
         </Grid>
-     
+
 
         <ActivityIndicator x:Name="activityIndicator"
             Grid.ColumnSpan="2"

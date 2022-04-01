@@ -4,10 +4,45 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+
+        .header {
+            text-align: center;
+            padding: 0px;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 100%;
+            padding: 0px;
+        }
+
+            .column img {
+                margin-top: 0px;
+            }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <img src="SD.jpg" />"
+    <div class="row">
+        <div class="column">
+            <img src="SD.jpg" />"
+        </div>
     </div>
 </body>
 </html>
