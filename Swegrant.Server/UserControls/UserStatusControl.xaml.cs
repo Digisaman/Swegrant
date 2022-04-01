@@ -1,4 +1,5 @@
 ﻿using Swegrant.Server.Controllers;
+using Swegrant.Server.Helpers;
 using Swegrant.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,12 @@ namespace Swegrant.Server.UserControls
             submitUserStatus.Id = UserStatuses.Count + 1;
             UserStatuses.Add(submitUserStatus);
             //this.dgInfo.ScrollIntoView(this.dgInfo.Items.GetItemAt(this.dgInfo.Items.Count - 1));
+        }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            bool result = FileHelpers.ExportExcelUserStatus(UserStatuses);
+            MessageBox.Show((result ? "Export Successfull" : "Export Failed"));
         }
     }
 }

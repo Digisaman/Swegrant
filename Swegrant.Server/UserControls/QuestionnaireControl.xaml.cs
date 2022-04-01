@@ -1,4 +1,5 @@
 ﻿using Swegrant.Server.Controllers;
+using Swegrant.Server.Helpers;
 using Swegrant.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,12 @@ namespace Swegrant.Server.UserControls
         {
             submitQuestion.Id = Questions.Count + 1;
             this.Questions.Add(submitQuestion);
+        }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            bool result = FileHelpers.ExportExcelQuestionnaire(Questions);
+            MessageBox.Show((result ? "Export Successfull" : "Export Failed"));
         }
     }
 }
