@@ -19,7 +19,7 @@ namespace Swegrant.ViewModels
     public class TheaterViewModel : BaseViewModel
     {
 
-        public ChatMessage ChatMessage { get; }
+        public MediaMessage MediaMessage { get; }
 
         public ObservableCollection<ChatMessage> Messages { get; }
 
@@ -250,7 +250,7 @@ namespace Swegrant.ViewModels
 
             //Title = Settings.Group;
 
-            ChatMessage = new ChatMessage();
+            MediaMessage = new MediaMessage();
             Messages = new ObservableCollection<ChatMessage>();
             Users = new ObservableCollection<User>();
             SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
@@ -357,9 +357,9 @@ namespace Swegrant.ViewModels
                 IsBusy = true;
                 await ChatService.SendMessageAsync(Settings.Group,
                     Settings.UserName,
-                    ChatMessage.Message);
+                    MediaMessage.Message);
 
-                ChatMessage.Message = string.Empty;
+                MediaMessage.Message = string.Empty;
             }
             catch (Exception ex)
             {
