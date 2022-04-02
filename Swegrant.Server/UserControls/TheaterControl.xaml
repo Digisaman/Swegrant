@@ -69,15 +69,15 @@
 
         <StackPanel
               Grid.Row="2" Grid.Column="0">
-        <CheckBox x:Name="chkMuteVideo" Content="Mute Video" 
+            <CheckBox x:Name="chkMuteVideo" Content="Mute Video" 
                   HorizontalAlignment="Center"/>
-        <Button x:Name="btnPlayVideo" 
+            <Button x:Name="btnPlayVideo" 
                         FontWeight="Bold"
-                      
+                       HorizontalAlignment="Center"
                         Content="Play Video" 
                         Style="{StaticResource ButtonStyle}"
                         Click="btnPlayVideo_Click">
-        </Button>
+            </Button>
         </StackPanel>
         <StackPanel Orientation="Vertical"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom">
             <Button x:Name="btnPauseVideo" 
@@ -91,6 +91,8 @@
                         Content="Resume" 
                         Click="btnResumeVideo_Click">
             </Button>
+
+            <TextBlock x:Name="txtVideoTime" />
         </StackPanel>
         <Button x:Name="btnChangeVideo" 
                 HorizontalAlignment="Center"

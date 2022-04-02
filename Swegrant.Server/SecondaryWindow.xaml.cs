@@ -51,7 +51,7 @@ namespace Swegrant.Server
         {
             try
             {
-               
+
                 this.videoPlayer.Pause();
 
             }
@@ -81,12 +81,20 @@ namespace Swegrant.Server
         {
             try
             {
-                this.videoPlayer.Visibility = ( display ? Visibility.Visible : Visibility.Hidden);
+                this.videoPlayer.Visibility = (display ? Visibility.Visible : Visibility.Hidden);
                 this.txtSub.Visibility = (display ? Visibility.Visible : Visibility.Hidden);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        public string VideoTime
+        {
+            get
+            {
+                return $"{this.videoPlayer.Position.Minutes.ToString("00")}:{this.videoPlayer.Position.Seconds.ToString("00")} / {this.videoPlayer.NaturalDuration.TimeSpan.Minutes.ToString("00")}:{this.videoPlayer.NaturalDuration.TimeSpan.Seconds.ToString("00")}";
             }
         }
 

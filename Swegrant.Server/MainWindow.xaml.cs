@@ -219,6 +219,20 @@ namespace Swegrant.Server
 
         }
 
+        public string GetVideoTime()
+        {
+            string timer = "";
+            try
+            {
+                timer = _SecondaryWindow.VideoTime;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("SecondaryWindowVideo", ex);
+            }
+            return timer;
+        }
+
         public void PauseVideo()
         {
             try

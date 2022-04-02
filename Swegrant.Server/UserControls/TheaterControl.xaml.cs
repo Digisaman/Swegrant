@@ -35,12 +35,17 @@ namespace Swegrant.Server.UserControls
         private CancellationToken currentSubCancellationToken;
         private string currentBackgroundVideo;
         private string selectedBackGroundVideo;
+        private System.Timers.Timer VideoTimer;
         #endregion
 
 
         public TheaterControl()
         {
             InitializeComponent();
+            this.txtVideoTime.Text = "00:00";
+            this.VideoTimer = new System.Timers.Timer();
+            this.VideoTimer.Interval = 1000;
+            this.VideoTimer.Elapsed += VideoTimer_Elapsed;
             this.chkMuteVideo.IsChecked = false;
             this.btnPlayVideo.IsEnabled = false;   
             this.cmbLanguage.ItemsSource = new Language[]
@@ -56,6 +61,13 @@ namespace Swegrant.Server.UserControls
                 4,
                 5
             };
+            
+        }
+
+        private void VideoTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            this.Dispatcher.Invoke(new Action(() =>
+                this.txtVideoTime.Text = MainWindow.Singleton.GetVideoTime() ));
             
         }
 
@@ -105,7 +117,7 @@ namespace Swegrant.Server.UserControls
         {
             try
             {
-                this.btnPlayVideo.IsEnabled = true; 
+                this.btnPlayVideo.IsEnabled = true;
                 await LoadSubtitle();
             }
             catch (Exception ex)
@@ -193,6 +205,7 @@ namespace Swegrant.Server.UserControls
                     }, this.currentSubCancelationSource.Token);
                     MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, chkMuteVideo.IsChecked.Value);
                     this.currentBackgroundVideo = this.selectedBackGroundVideo;
+                    this.VideoTimer.Start();
 
                 }
                 else
@@ -236,6 +249,8 @@ namespace Swegrant.Server.UserControls
             if (cmbVideo.SelectedItem != null)
             {
                 this.selectedBackGroundVideo = cmbVideo.SelectedItem.ToString();
+                this.txtVideoTime.Text = "00:00";
+                this.VideoTimer.Stop();
             }
         }
 
@@ -404,6 +419,7 @@ namespace Swegrant.Server.UserControls
                     this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
                     PlaySub();
                 }, this.currentSubCancelationSource.Token);
+
             }
             catch (Exception ex)
             {
@@ -540,11 +556,13 @@ namespace Swegrant.Server.UserControls
         private void btnPauseVideo_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Singleton.PauseVideo();
+            this.VideoTimer.Stop();
         }
 
         private void btnResumeVideo_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Singleton.ResumeVideo();
+            this.VideoTimer.Start();
         }
     }
 }
