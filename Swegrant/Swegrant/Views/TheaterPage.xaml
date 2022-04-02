@@ -15,14 +15,14 @@
     <ContentPage.BindingContext>
         <viewmodel:TheaterViewModel />
     </ContentPage.BindingContext>
-    <ContentPage.Resources>
+    <!--<ContentPage.Resources>
         <converters:BackgroundColorVisibilityConverter 
                x:Key="MyBackgroundColorVisibilityConverter"/>
-    </ContentPage.Resources>
+    </ContentPage.Resources>-->
     <!--<ContentPage.ToolbarItems>
         <ToolbarItem x:Name="ToolbarDone" Text="Done" />
     </ContentPage.ToolbarItems>-->
-    <Grid ColumnSpacing="0" RowSpacing="0">
+    <!--<Grid ColumnSpacing="0" RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="5*" />
             <RowDefinition Height="5*" />
@@ -190,6 +190,160 @@
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}"
             VerticalOptions="CenterAndExpand" />
-    </Grid>
+    </Grid>-->
+
+
+    <StackLayout Orientation="Vertical"
+                 HorizontalOptions="CenterAndExpand"
+                 VerticalOptions="CenterAndExpand">
+
+        <Image
+                   IsVisible="{Binding IsHeadphonesVisible}"
+                    IsAnimationPlaying="True"
+                        BackgroundColor="{StaticResource PrimaryBackColor}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Aspect="AspectFit"
+            
+                        Source="Headphones_Off.gif"/>
+        <Label
+                                Margin="10,5"
+                                Text="{Binding MediaMessage.Message}"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                BackgroundColor="{StaticResource PrimaryBackColor}"
+                                TextColor="{StaticResource PrimaryTextColor}"
+                                FontSize="36"/>
+
+
+        <Grid 
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand"
+              IsVisible="{Binding IsImageCharchterVisible}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.ColumnSpan="3"
+                   Text="{x:Static resx:AppResources.SelectCharachter}"
+                   IsVisible="{Binding IsImageCharchterVisible}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="{StaticResource PrimaryTextColor}"
+               FontAttributes="Bold"
+               FontSize="Medium" />
+
+
+            <ImageButton 
+                    Grid.Row="1" Grid.Column="0"
+                        BackgroundColor="{StaticResource PrimaryBackColor}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Aspect="AspectFit"
+                        Command="{Binding SelectLeyla}"
+                        Source="{Binding LeylaImage}"/>
+
+            <Label Text="{x:Static resx:AppResources.Leyla}" Grid.Row="2" Grid.Column="0" 
+                   TextColor="{StaticResource PrimaryTextColor}"
+                   HorizontalOptions="Center"
+                   BackgroundColor="{StaticResource PrimaryBackColor}"/>
+            <ImageButton 
+                    Grid.Row="1" Grid.Column="1"
+                        BackgroundColor="{StaticResource PrimaryBackColor}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Aspect="AspectFit"
+                        Command="{Binding SelectTara}"
+                        Source="{Binding TaraImage}"/>
+            <Label Text="{x:Static resx:AppResources.Tara}" Grid.Row="2" Grid.Column="1" 
+                   TextColor="{StaticResource PrimaryTextColor}"
+                   HorizontalOptions="Center"
+                   BackgroundColor="{StaticResource PrimaryBackColor}"/>
+
+            <ImageButton 
+                    Grid.Row="1" Grid.Column="2"
+                        BackgroundColor="{StaticResource PrimaryBackColor}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Aspect="AspectFit"
+                        Command="{Binding SelectSina}"
+                        Source="{Binding SinaImage}"/>
+            <Label Text="{x:Static resx:AppResources.Sina}" Grid.Row="2" Grid.Column="2" 
+                   TextColor="{StaticResource PrimaryTextColor}"
+                   HorizontalOptions="Center"
+                   BackgroundColor="{StaticResource PrimaryBackColor}"/>
+
+
+        </Grid>
+
+        <Grid 
+              HorizontalOptions="FillAndExpand" 
+               VerticalOptions="FillAndExpand"
+              IsVisible="{Binding IsTextCharchterVisible}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0"
+                   Text="{x:Static resx:AppResources.SelectCharachter}"
+                   IsVisible="{Binding IsTextCharchterVisible}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="{StaticResource PrimaryTextColor}"
+               FontAttributes="Bold"
+               FontSize="Medium" />
+            <StackLayout Orientation="Horizontal"
+                         Grid.Row="0" Grid.Column="1">
+
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                         HorizontalOptions="FillAndExpand"
+                         FontSize="Large" 
+                         FontAttributes="Bold"
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsLeylaSelected}" 
+                         Content="{x:Static resx:AppResources.Leyla}"/>
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                             HorizontalOptions="FillAndExpand"
+                         FontSize="Large" 
+                         FontAttributes="Bold" 
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsTaraSelected}" 
+                         Content="{x:Static resx:AppResources.Tara}"/>
+                <RadioButton BackgroundColor="{StaticResource Primary}" 
+                             HorizontalOptions="FillAndExpand"
+                         FontSize="Large" 
+                         FontAttributes="Bold" 
+                         TextColor="{StaticResource SecondaryTextColor}" 
+                         IsChecked="{Binding IsSinaSelected}" 
+                         Content="{x:Static resx:AppResources.Sina}"/>
+
+
+            </StackLayout>
+        </Grid>
+
+
+        <ActivityIndicator x:Name="activityIndicator"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="3"
+            d:IsRunning="True"
+            d:IsVisible="True"
+            Color="{StaticResource SecondaryColor}"
+            HorizontalOptions="CenterAndExpand"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="CenterAndExpand" />
+    </StackLayout>
+
 
 </ContentPage>
