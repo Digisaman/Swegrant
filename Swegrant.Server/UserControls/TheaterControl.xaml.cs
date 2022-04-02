@@ -382,6 +382,12 @@ namespace Swegrant.Server.UserControls
                 this.currentSubIndex++;
                 this.lstSub.SelectedIndex = currentSubIndex;
 
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    //this.lstSub.SelectedIndex = this.lstSub.SelectedIndex + 1;
+                    this.lstSub.ScrollIntoView(this.lstSub.Items[this.lstSub.SelectedIndex]);
+                }));
+
                 MainWindow.Singleton.DisplaySecondarySub(this.currentSub[this.currentSubIndex].Text);
                 await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
                 {
