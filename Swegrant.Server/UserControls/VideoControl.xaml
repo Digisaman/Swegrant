@@ -80,23 +80,27 @@
                     Style="{StaticResource ButtonStyle}"
                    Click="btnPrepareAudio_Click">
         </Button>
-        <Button x:Name="btnPlayVideo" 
-                    Grid.Row="1" Grid.Column="2"
+
+        <StackPanel  Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+            <CheckBox x:Name="chkMuteVideo" Content="Mute Video" 
+                  HorizontalAlignment="Center"/>
+            <Button x:Name="btnPlayVideo" 
+                   
                     Content="Play Video" 
                     Style="{StaticResource ButtonStyle}"
                     Click="btnPlayVideo_Click">
-        </Button> 
+            </Button>
+        </StackPanel>
 
 
-        
-        
+
         <TextBlock Grid.Row="2" Grid.Column="0" 
                    Style="{StaticResource TextBlockStyle}" Text="Leyla" />
         <TextBlock Grid.Row="2" Grid.Column="1" 
                    Style="{StaticResource TextBlockStyle}" Text="Tara" />
         <TextBlock Grid.Row="2" Grid.Column="2" 
                    Style="{StaticResource TextBlockStyle}" Text="Sina" />
-        
+
         <!--<TextBlock Grid.Row="2" Grid.Column="1" 
                    Style="{StaticResource TextBlockStyle}" 
                    Text="NONE" x:Name="txtCurrentLine"/>-->
@@ -114,6 +118,6 @@
         <local:SubtitlePlayer Grid.Row="3" Grid.Column="2" x:Name="subSina">
 
         </local:SubtitlePlayer>
-        
+
     </Grid>
 </UserControl>

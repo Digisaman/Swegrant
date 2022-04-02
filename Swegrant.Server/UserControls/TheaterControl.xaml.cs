@@ -41,6 +41,7 @@ namespace Swegrant.Server.UserControls
         public TheaterControl()
         {
             InitializeComponent();
+            this.chkMuteVideo.IsChecked = false;
             this.btnPlayVideo.IsEnabled = false;   
             this.cmbLanguage.ItemsSource = new Language[]
             {
@@ -190,7 +191,7 @@ namespace Swegrant.Server.UserControls
                         PlaySub();
 
                     }, this.currentSubCancelationSource.Token);
-                    MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, false);
+                    MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, chkMuteVideo.IsChecked.Value);
                     this.currentBackgroundVideo = this.selectedBackGroundVideo;
 
                 }

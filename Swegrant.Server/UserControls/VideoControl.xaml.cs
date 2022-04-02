@@ -38,6 +38,7 @@ namespace Swegrant.Server.UserControls
         public VideoControl()
         {
             InitializeComponent();
+            this.chkMuteVideo.IsChecked = true;
             this.currentSub = new Dictionary<Character, Subtitle[]>();
             this.cmbLanguage.ItemsSource = new Language[]
             {
@@ -270,7 +271,7 @@ namespace Swegrant.Server.UserControls
                         this.subLeyla.PlaySub();
                         this.subSina.PlaySub();
                         this.subTara.PlaySub();
-                        MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, true);
+                        MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, chkMuteVideo.IsChecked.Value);
 
                     }, this.currentSubCancelationSource.Token);
 

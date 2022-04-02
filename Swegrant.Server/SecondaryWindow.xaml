@@ -10,27 +10,27 @@
         >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Panel.ZIndex="2" x:Name="txtSub"
-                    Grid.Row="1" Grid.Column="0"
+                   Grid.Row="0" Grid.Column="0"
                    TextAlignment="Center"
                    TextWrapping="Wrap"
-                   HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                   Margin="10"
+                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                   Margin="0,180,0,0"
                    FontSize="24" Foreground="White" >
             <!--<TextBlock.RenderTransform>
                 <ScaleTransform ScaleX="-1" />
             </TextBlock.RenderTransform>-->
         </TextBlock>
 
-        <MediaElement Panel.ZIndex="1" Grid.Row="1" Grid.Column="0" x:Name="videoPlayer" 
+        <MediaElement Panel.ZIndex="1" 
+                      Grid.Row="0" Grid.Column="0"
+                      x:Name="videoPlayer" 
             MediaOpened="videoPlayer_MediaOpened"
             ScrubbingEnabled="True"
             LoadedBehavior="Manual" />

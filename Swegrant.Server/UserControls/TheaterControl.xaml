@@ -67,15 +67,19 @@
                     Style="{StaticResource ButtonStyle}"
                     Click="btnLoadSubTitle_Click"/>
 
-
+        <StackPanel
+              Grid.Row="2" Grid.Column="0">
+        <CheckBox x:Name="chkMuteVideo" Content="Mute Video" 
+                  HorizontalAlignment="Center"/>
         <Button x:Name="btnPlayVideo" 
                         FontWeight="Bold"
-                        Grid.Row="2" Grid.Column="0"
+                      
                         Content="Play Video" 
                         Style="{StaticResource ButtonStyle}"
                         Click="btnPlayVideo_Click">
         </Button>
-        <StackPanel Orientation="Vertical"  Grid.Row="2" Grid.Column="1">
+        </StackPanel>
+        <StackPanel Orientation="Vertical"  Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom">
             <Button x:Name="btnPauseVideo" 
                         FontWeight="Bold"
                         Content="Pause" 
@@ -90,6 +94,7 @@
         </StackPanel>
         <Button x:Name="btnChangeVideo" 
                 HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
                     Grid.Row="2" Grid.Column="2"
                 FontWeight="Bold"
                         Content="Change Video"  
