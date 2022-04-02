@@ -207,6 +207,7 @@
             
                         Source="Headphones_Off.gif"/>
         <Label
+                                IsVisible="{Binding IsSubtitleVisible}"
                                 Margin="10,5"
                                 Text="{Binding MediaMessage.Message}"
                                 HorizontalTextAlignment="Center"
@@ -334,8 +335,6 @@
 
 
         <ActivityIndicator x:Name="activityIndicator"
-            Grid.ColumnSpan="2"
-            Grid.RowSpan="3"
             d:IsRunning="True"
             d:IsVisible="True"
             Color="{StaticResource SecondaryColor}"

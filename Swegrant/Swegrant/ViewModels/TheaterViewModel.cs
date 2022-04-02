@@ -21,9 +21,6 @@ namespace Swegrant.ViewModels
 
         public MediaMessage MediaMessage { get; }
 
-        public ObservableCollection<ChatMessage> Messages { get; }
-
-
 
         public ObservableCollection<User> Users { get; }
 
@@ -260,7 +257,7 @@ namespace Swegrant.ViewModels
             //Title = Settings.Group;
 
             MediaMessage = new MediaMessage();
-            Messages = new ObservableCollection<ChatMessage>();
+            //Messages = new ObservableCollection<ChatMessage>();
             Users = new ObservableCollection<User>();
             SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
             ConnectCommand = new MvvmHelpers.Commands.Command(async () => await Connect());
@@ -503,10 +500,10 @@ namespace Swegrant.ViewModels
             {
                 if (!Users.Any(u => u.Name == name))
                 {
-                    var color = Messages.FirstOrDefault(m => m.User == name)?.Color ?? Color.FromRgba(0, 0, 0, 0);
+                    //var color = Messages.FirstOrDefault(m => m.User == name)?.Color ?? Color.FromRgba(0, 0, 0, 0);
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        Users.Add(new User { Name = name, Color = color });
+                        Users.Add(new User { Name = name });
                     });
                 }
             }

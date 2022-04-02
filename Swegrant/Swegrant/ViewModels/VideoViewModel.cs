@@ -19,18 +19,12 @@ namespace Swegrant.ViewModels
     public class VideoViewModel : BaseViewModel
     {
         public Subtitle[] CurrentSub;
-        public ChatMessage ChatMessage { get; }
+        public MediaMessage MediaMessage { get; }
 
-        public ObservableCollection<ChatMessage> Messages { get; }
+        //public ObservableCollection<ChatMessage> Messages { get; }
         public ObservableCollection<User> Users { get; }
 
-        public ChatMessage LastReceivedMessage
-        {
-            get
-            {
-                return Messages.FirstOrDefault();
-            }
-        }
+       
 
         
         public Language CurrnetAudioLanguage
@@ -88,6 +82,19 @@ namespace Swegrant.ViewModels
                 });
             }
         }
+
+        bool isHeadphonesVisible = false;
+        public bool IsHeadphonesVisible
+        {
+            get { return isHeadphonesVisible; }
+            set
+            {
+                SetProperty(ref isHeadphonesVisible, value);
+            }
+        }
+
+
+      
 
         #region Language
         bool isAudioSV = false;
@@ -191,8 +198,8 @@ namespace Swegrant.ViewModels
 
            
 
-            ChatMessage = new ChatMessage();
-            Messages = new ObservableCollection<ChatMessage>();
+            MediaMessage = new MediaMessage();
+            //Messages = new ObservableCollection<ChatMessage>();
             Users = new ObservableCollection<User>();
             SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
             ConnectCommand = new MvvmHelpers.Commands.Command(async () => await Connect());
@@ -311,9 +318,9 @@ namespace Swegrant.ViewModels
                 IsBusy = true;
                 await ChatService.SendMessageAsync(Settings.Group,
                     Settings.UserName,
-                    ChatMessage.Message);
+                    MediaMessage.Message);
 
-                ChatMessage.Message = string.Empty;
+                MediaMessage.Message = string.Empty;
             }
             catch (Exception ex)
             {
@@ -333,7 +340,9 @@ namespace Swegrant.ViewModels
                 {
                     var first = Users.FirstOrDefault(u => u.Name == user);
 
-                    Messages.Clear();
+                    
+                    MediaMessage.Clear();
+
                     if (message.StartsWith("{"))
                     {
                         ServiceMessage serviceMessage = JsonConvert.DeserializeObject<ServiceMessage>(message);
@@ -354,13 +363,15 @@ namespace Swegrant.ViewModels
                                     else
                                     {
                                         InitilizeSettings(serviceMessage.Scene);
-                                        Messages.Clear();
-                                        Messages.Insert(0, new ChatMessage
-                                        {
-                                            Message = "Put on your Headphones.",
-                                            User = user,
-                                            Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
-                                        });
+                                        //Messages.Clear();
+                                        //Messages.Insert(0, new ChatMessage
+                                        //{
+                                        //    Message = "Put on your Headphones.",
+                                        //    User = user,
+                                        //    Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
+                                        //});
+                                        MediaMessage.Message = Resources.AppResources.PutonHeadphones;
+                                        this.IsHeadphonesVisible = true;
                                     }
                                     break;
                                 case Swegrant.Shared.Models.Command.Play:
@@ -383,12 +394,13 @@ namespace Swegrant.ViewModels
                     }
                     else
                     {
-                        Messages.Insert(0, new ChatMessage
-                        {
-                            Message = message,
-                            User = user,
-                            Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
-                        });
+                        //Messages.Insert(0, new ChatMessage
+                        //{
+                        //    Message = message,
+                        //    User = user,
+                        //    Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
+                        //});
+                        MediaMessage.Message = message;
                     }
 
                 });
@@ -407,10 +419,10 @@ namespace Swegrant.ViewModels
             {
                 if (!Users.Any(u => u.Name == name))
                 {
-                    var color = Messages.FirstOrDefault(m => m.User == name)?.Color ?? Color.FromRgba(0, 0, 0, 0);
+                    //var color = Messages.FirstOrDefault(m => m.User == name)?.Color ?? Color.FromRgba(0, 0, 0, 0);
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        Users.Add(new User { Name = name, Color = color });
+                        Users.Add(new User { Name = name });
                     });
                 }
             }
@@ -454,12 +466,13 @@ namespace Swegrant.ViewModels
                 PrepareAudio(Language.Svenska);
             });
 
-            Messages.Insert(0, new ChatMessage
-            {
-                Message = "Audio Files Preapred",
-                User = Helpers.Settings.UserName,
-                Color = Color.FromRgba(0, 0, 0, 0)
-            });
+            //Messages.Insert(0, new ChatMessage
+            //{
+            //    Message = "Audio Files Preapred",
+            //    User = Helpers.Settings.UserName,
+            //    Color = Color.FromRgba(0, 0, 0, 0)
+            //});
+            MediaMessage.Message = "Audio Files Preapred";
             IsLangugeVisible = false;
         }
 
@@ -527,7 +540,7 @@ namespace Swegrant.ViewModels
             {
                 try
                 {
-                    Messages.Clear();
+                    MediaMessage.Clear();
                     if (this.currentSubCancelationSource.IsCancellationRequested)
                     {
                         this.currentSubCancellationToken.ThrowIfCancellationRequested();
@@ -538,13 +551,13 @@ namespace Swegrant.ViewModels
 
 
 
-                    Messages.Insert(0, new ChatMessage
-                    {
-                        Message = this.CurrentSub[this.currentSubIndex].Text,
-                        User = Helpers.Settings.UserName,
-                        Color = Color.FromRgba(0, 0, 0, 0)
-                    });
-
+                    //Messages.Insert(0, new ChatMessage
+                    //{
+                    //    Message = this.CurrentSub[this.currentSubIndex].Text,
+                    //    User = Helpers.Settings.UserName,
+                    //    Color = Color.FromRgba(0, 0, 0, 0)
+                    //});
+                    MediaMessage.Message = this.CurrentSub[this.currentSubIndex].Text;
 
 
                     Thread.Sleep(CurrentSub[i].Duration);
@@ -556,12 +569,13 @@ namespace Swegrant.ViewModels
 
 
 
-                    Messages.Insert(0, new ChatMessage
-                    {
-                        Message = " ",
-                        User = Helpers.Settings.UserName,
-                        Color = Color.FromRgba(0, 0, 0, 0)
-                    });
+                    //Messages.Insert(0, new ChatMessage
+                    //{
+                    //    Message = " ",
+                    //    User = Helpers.Settings.UserName,
+                    //    Color = Color.FromRgba(0, 0, 0, 0)
+                    //});
+                    MediaMessage.Clear();
 
 
                     if (this.currentSubIndex < CurrentSub.Length - 1)
@@ -620,7 +634,7 @@ namespace Swegrant.ViewModels
 
                 string subtitleContent = Helpers.SubtitleHelper.ReadSubtitleFile(Shared.Models.Mode.Video, filename);
                 this.CurrentSub = Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent);
-
+                this.IsHeadphonesVisible = false;
             }
             catch (Exception ex)
             {

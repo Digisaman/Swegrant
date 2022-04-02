@@ -12,56 +12,33 @@
     <ContentPage.BindingContext>
         <viewmodel:VideoViewModel />
     </ContentPage.BindingContext>
-    <Grid ColumnSpacing="0" RowSpacing="0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="5*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
+    <StackLayout Orientation="Vertical"
+                 HorizontalOptions="CenterAndExpand"
+                 VerticalOptions="CenterAndExpand">
 
-        <CollectionView
-            Grid.Row="0"
-            Grid.ColumnSpan="2"
-            ItemsSource="{Binding Messages}"
-            Rotation="180">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid
-                        Padding="10"
-                        ColumnSpacing="0"
-                        Rotation="180">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Frame
-                            VerticalOptions="CenterAndExpand"
-                            HorizontalOptions="CenterAndExpand"
-                            Grid.Column="1"
-                            Margin="5,0,20,0"
-                            Padding="5"
-                            BackgroundColor="Black"
-                            CornerRadius="20"
-                            Visual="Material">
-                            <Label
+        <Image
+                   IsVisible="{Binding IsHeadphonesVisible}"
+                    IsAnimationPlaying="True"
+                        BackgroundColor="{StaticResource PrimaryBackColor}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Aspect="AspectFit"
+            
+                        Source="Headphones_On.gif"/>
+        <Label
                                 Margin="10,5"
-                                Text="{Binding Message}"
-                                TextColor="White"
+                                Text="{Binding MediaMessage.Message}"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                BackgroundColor="{StaticResource PrimaryBackColor}"
+                                TextColor="{StaticResource PrimaryTextColor}"
                                 FontSize="36"/>
-                        </Frame>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
 
-
-        <Grid HorizontalOptions="CenterAndExpand" 
-              Grid.Row="2" Grid.ColumnSpan="2"
+        <Grid 
+             HorizontalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand"
               IsVisible="{Binding IsLangugeVisible}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -136,12 +113,7 @@
 
         </Grid>
 
-
-
-
         <ActivityIndicator
-            Grid.ColumnSpan="2"
-            Grid.RowSpan="3"
             d:IsRunning="True"
             d:IsVisible="True"
             Color="{StaticResource SecondaryColor}"
@@ -149,5 +121,5 @@
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}"
             VerticalOptions="CenterAndExpand" />
-    </Grid>
+    </StackLayout>
 </ContentPage>
