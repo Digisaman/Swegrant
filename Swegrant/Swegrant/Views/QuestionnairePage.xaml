@@ -9,11 +9,14 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout Margin="20">
+            
             <Label Text="{Binding CurrentQuestion.Title}" 
                    TextColor="{StaticResource SecondaryTextColor}"
                    Background="{StaticResource SecondaryBackColor}"
                    FontSize="Large"/>
-            <ListView SelectionMode="None" ItemsSource="{Binding CurrentQuestion.Answers}">
+            <ListView 
+                IsVisible="{Binding IsQuestionVisibile}"
+                SelectionMode="None" ItemsSource="{Binding CurrentQuestion.Answers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -36,6 +39,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Entry IsVisible="{Binding IsCommentVisibile}"
+                   Text="{Binding CommentValue}"/>
             <Button Margin="0,10,0,0" Text="Submit Question"
                         Command="{Binding SubmitQuestionCommand}"
                         BackgroundColor="{StaticResource Primary}"

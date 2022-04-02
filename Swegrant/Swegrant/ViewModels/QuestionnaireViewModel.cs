@@ -24,6 +24,29 @@ namespace Swegrant.ViewModels
             set { SetProperty(ref this.currentQuestion, value); }
         }
 
+        private string commentValue = null;
+        public string CommentValue
+        {
+            get { return this.commentValue; }
+            set { SetProperty(ref this.commentValue, value); }
+        }
+
+
+        private bool isQuestionVisibile = false;
+        public bool IsQuestionVisibile
+        {
+            get { return this.isQuestionVisibile; }
+            set { SetProperty(ref this.isQuestionVisibile, value); }
+        }
+
+
+        private bool isCommentVisibile = false;
+        public bool IsCommentVisibile
+        {
+            get { return this.isCommentVisibile; }
+            set { SetProperty(ref this.isCommentVisibile, value); }
+        }
+
         public int CurentIndex { get; set; }
         #endregion
         #region Commands
@@ -35,6 +58,8 @@ namespace Swegrant.ViewModels
         public QuestionnaireViewModel()
         {
             Title = Resources.MenuTitles.Questionnaire;
+            IsQuestionVisibile = true;
+            IsCommentVisibile = false;
             LoadQuestionsCommand = new MvvmHelpers.Commands.Command(async () => await LoadQuestions());
             SubmitQuestionCommand = new MvvmHelpers.Commands.Command(async () => await SubmitQuestion());
         }
@@ -50,36 +75,68 @@ namespace Swegrant.ViewModels
         {
             try
             {
-                ObservableAnswer answer = CurrentQuestion.Answers.FirstOrDefault(c => c.IsSelected);
-                if (answer == null)
+                if (CurrentQuestion.Id != 0)
                 {
-                    return;
+                    ObservableAnswer answer = CurrentQuestion.Answers.FirstOrDefault(c => c.IsSelected);
+                    if (answer == null)
+                    {
+                        return;
+
+                    }
+
+                    SubmitQuestion submitQuestion = new SubmitQuestion
+                    {
+                        Title = CurrentQuestion.Title,
+                        Value = answer.Value,
+                        Type = QuestionType.MultiAnswer,
+                        Username = Helpers.Settings.UserName
+                    };
+
+                    bool result = await ServerHelper.SubmitQuestion(submitQuestion);
+                    if (result)
+                    {
+                        if (CurentIndex < Helpers.Settings.Questionnaire.Questions.Length - 1)
+                        {
+                            CurentIndex++;
+                            await LoadQuestions();
+                        }
+                        else
+                        {
+                            //await DialogService.DisplayAlert("Information", "Thank you for takeing the time to fill out the questionnaire.", "");
+
+
+
+                            //await App.Current.MainPage.DisplayAlert(AppResources.Information, 
+                            //    AppResources.QuestionnaireFinalMessage,
+                            //    AppResources.OK, 
+                            //    AppResources.Cancel);
+                            //CurrentQuestion = new ObservableQuestion();
+                            ServerHelper.SubmitStatus(UserEvent.QuestionnaireCompleted, "");
+
+                            LoadComment();
+                        }
+                    }
+
 
                 }
+                else
+                {
+                    SubmitQuestion submitQuestion = new SubmitQuestion
+                    {
+                        Title = CurrentQuestion.Title,
+                        Value = CommentValue,
+                        Type = QuestionType.Comment,
+                        Username = Helpers.Settings.UserName
+                    };
 
-                SubmitQuestion submitQuestion = new SubmitQuestion
-                {
-                    Title = CurrentQuestion.Title,
-                    Value = answer.Value,
-                    Type = QuestionType.MultiAnswer,
-                    Username = Helpers.Settings.UserName
-                };
-                bool result = await ServerHelper.SubmitQuestion(submitQuestion);
-                if (result)
-                {
-                    if ( CurentIndex < Helpers.Settings.Questionnaire.Questions.Length - 1)
+                    bool result = await ServerHelper.SubmitQuestion(submitQuestion);
+                    if (result)
                     {
-                        CurentIndex++;
-                        await LoadQuestions();
-                    }
-                    else
-                    {
-                        //await DialogService.DisplayAlert("Information", "Thank you for takeing the time to fill out the questionnaire.", "");
-                        ServerHelper.SubmitStatus(UserEvent.QuestionnaireCompleted, "");
-                        await App.Current.MainPage.DisplayAlert(AppResources.Information, 
-                            AppResources.QuestionnaireFinalMessage,
-                            AppResources.OK, 
-                            AppResources.Cancel);
+
+                        await App.Current.MainPage.DisplayAlert(AppResources.Information,
+                                  AppResources.QuestionnaireFinalMessage,
+                                  AppResources.OK,
+                                  AppResources.Cancel);
                         CurrentQuestion = new ObservableQuestion();
                     }
                 }
@@ -113,6 +170,21 @@ namespace Swegrant.ViewModels
                 });
             }
 
+        }
+
+        private async Task LoadComment()
+        {
+            IsQuestionVisibile = false;
+            IsCommentVisibile = true;
+            Comment comment= Helpers.Settings.Questionnaire.Comment;
+            this.CurrentQuestion = new ObservableQuestion
+            {
+                Id = 0,
+                Title = (Helpers.Settings.CurrentLanguage == Language.English ?
+                     comment.Title : (Helpers.Settings.CurrentLanguage == Language.Svenska
+                     ? comment.TitleSV :
+                     comment.TitleFA))
+            };
         }
     }
 }
