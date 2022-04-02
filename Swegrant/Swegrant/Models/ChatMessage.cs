@@ -66,4 +66,19 @@ namespace Swegrant.Models
             set => backgroundColor = value;
         }
     }
+
+    public class MediaMessage : ObservableObject
+    {
+        string message;
+        public string Message
+        {
+            get => message;
+            set => SetProperty(ref message, value);
+        }
+
+        public void Clear()
+        {
+            Message = "";
+        }
+    }
 }
