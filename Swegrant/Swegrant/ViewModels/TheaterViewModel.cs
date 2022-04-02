@@ -181,7 +181,7 @@ namespace Swegrant.ViewModels
         #endregion
 
         #region Subtitle
-        public ImageSource HeadphonesImage { get; set; }
+        //public ImageSource HeadphonesImage { get; set; }
 
         public Dictionary<Language, Subtitle[]> MultiSub;
 
@@ -299,7 +299,7 @@ namespace Swegrant.ViewModels
                 TaraImage = ImageSource.FromResource("Swegrant.Resources.Tara_Selected.jpg");
             else
                 TaraImage = ImageSource.FromResource("Swegrant.Resources.Tara.jpg");
-            HeadphonesImage = ImageSource.FromResource("Swegrant.Resources.Headphones_Off.gif");
+            //HeadphonesImage = ImageSource.FromResource("Swegrant.Resources.Headphones_Off.gif");
         }
 
         private void InitializeSettings(int currentScene = 1)
