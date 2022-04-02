@@ -227,6 +227,15 @@ namespace Swegrant.ViewModels
         private CancellationToken currentSubCancellationToken;
         private int currentSubIndex;
 
+        bool isHeadphonesVisible = false;
+        public bool IsHeadphonesVisible
+        {
+            get { return isHeadphonesVisible; }
+            set
+            {
+                SetProperty(ref isHeadphonesVisible, value);
+            }
+        }
 
 
         bool isSubtitleVisible = false;
@@ -397,13 +406,16 @@ namespace Swegrant.ViewModels
                                     else
                                     {
                                         InitializeSettings(serviceMessage.Scene);
-                                        Messages.Clear();
-                                        Messages.Insert(0, new ChatMessage
-                                        {
-                                            Message = "Remove your Headphones.",
-                                            User = user,
-                                            Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
-                                        });
+                                        //Messages.Clear();
+                                        //Messages.Insert(0, new ChatMessage
+                                        //{
+                                        //    Message = "Remove your Headphones.",
+                                        //    User = user,
+                                        //    Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
+                                        //});
+
+                                        MediaMessage.Message = Resources.AppResources.RemoveHeadphones;
+                                        this.IsHeadphonesVisible = true;
                                     }
                                     break;
                                 case Swegrant.Shared.Models.Command.Prepare:
@@ -454,13 +466,14 @@ namespace Swegrant.ViewModels
                 }
                 else
                 {
-                    Messages.Clear();
-                    Messages.Insert(0, new ChatMessage
-                    {
-                        Message = message,
-                        User = user,
-                        Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
-                    });
+                    //Messages.Clear();
+                    //Messages.Insert(0, new ChatMessage
+                    //{
+                    //    Message = message,
+                    //    User = user,
+                    //    Color = first?.Color ?? Color.FromRgba(0, 0, 0, 0)
+                    //});
+                    MediaMessage.Message = message;
                 }
             });
         }
@@ -537,7 +550,9 @@ namespace Swegrant.ViewModels
             {
                 try
                 {
-                    Messages.Clear();
+                    //Messages.Clear();
+                    MediaMessage.Clear();
+
                     if (this.currentSubCancelationSource.IsCancellationRequested)
                     {
                         this.currentSubCancellationToken.ThrowIfCancellationRequested();
@@ -548,12 +563,13 @@ namespace Swegrant.ViewModels
 
 
 
-                    Messages.Insert(0, new ChatMessage
-                    {
-                        Message = this.CurrentSub[this.currentSubIndex].Text,
-                        User = Helpers.Settings.UserName,
-                        Color = Color.FromRgba(0, 0, 0, 0)
-                    });
+                    //Messages.Insert(0, new ChatMessage
+                    //{
+                    //    Message = this.CurrentSub[this.currentSubIndex].Text,
+                    //    User = Helpers.Settings.UserName,
+                    //    Color = Color.FromRgba(0, 0, 0, 0)
+                    //});
+                    MediaMessage.Message = this.CurrentSub[this.currentSubIndex].Text;
 
 
 
@@ -564,7 +580,8 @@ namespace Swegrant.ViewModels
                         return;
                     }
 
-                    Messages.Clear();
+                    //Messages.Clear();
+                    MediaMessage.Clear();
 
                     if (this.currentSubIndex < CurrentSub.Length - 1)
                     {
@@ -629,14 +646,17 @@ namespace Swegrant.ViewModels
                 {
                     MultiSub[Language.Svenska] = Helpers.SubtitleHelper.PopulateSubtitle(subtitleContent);
                 }
-                Messages.Clear();
 
-                Messages.Insert(0, new ChatMessage
-                {
-                    Message = "Subtitles Loaded",
-                    User = Helpers.Settings.UserName,
-                    Color = Color.FromRgba(0, 0, 0, 0)
-                });
+
+                this.IsHeadphonesVisible = false;
+                MediaMessage.Message = Resources.AppResources.SubtitlesLoaded;
+                //Messages.Clear();
+                //Messages.Insert(0, new ChatMessage
+                //{
+                //    Message = "Subtitles Loaded",
+                //    User = Helpers.Settings.UserName,
+                //    Color = Color.FromRgba(0, 0, 0, 0)
+                //});
 
             }
             catch (Exception ex)
@@ -690,14 +710,15 @@ namespace Swegrant.ViewModels
             try
             {
                 currentSubIndex = index;
-                Messages.Clear();
+                //Messages.Clear();
 
-                Messages.Insert(0, new ChatMessage
-                {
-                    Message = this.CurrentSub[this.currentSubIndex].Text,
-                    User = Helpers.Settings.UserName,
-                    Color = Color.FromRgba(0, 0, 0, 0)
-                });
+                //Messages.Insert(0, new ChatMessage
+                //{
+                //    Message = this.CurrentSub[this.currentSubIndex].Text,
+                //    User = Helpers.Settings.UserName,
+                //    Color = Color.FromRgba(0, 0, 0, 0)
+                //});
+                MediaMessage.Message = this.CurrentSub[this.currentSubIndex].Text;
             }
             catch (Exception ex)
             {
