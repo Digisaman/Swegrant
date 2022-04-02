@@ -201,8 +201,8 @@
                    IsVisible="{Binding IsHeadphonesVisible}"
                     IsAnimationPlaying="True"
                         BackgroundColor="{StaticResource PrimaryBackColor}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
                         Aspect="AspectFit"
             
                         Source="Headphones_Off.gif"/>

@@ -37,8 +37,6 @@
 
   <ItemGroup>
     <None Remove="Resources\FA_Flag.png" />
-    <None Remove="Resources\Headphones_Off.gif" />
-    <None Remove="Resources\Headphones_On.gif" />
     <None Remove="Resources\Leyla.jpg" />
     <None Remove="Resources\Leyla_Selected.jpg" />
     <None Remove="Resources\Sina.jpg" />
@@ -50,8 +48,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\FA_Flag.png" />
-    <EmbeddedResource Include="Resources\Headphones_Off.gif" />
-    <EmbeddedResource Include="Resources\Headphones_On.gif" />
     <EmbeddedResource Include="Resources\Leyla.jpg" />
     <EmbeddedResource Include="Resources\Leyla_Selected.jpg" />
     <EmbeddedResource Include="Resources\Sina.jpg" />
