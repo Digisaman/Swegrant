@@ -191,12 +191,12 @@ namespace Swegrant.Server
             }
         }
 
-        public void PlaySecondaryVideo(string videoFilePath)
+        public void PlaySecondaryVideo(string videoFilePath, bool isMuted)
         {
             try
             {
                 _SecondaryWindow.Dispatcher.BeginInvoke(new Action(() =>
-                    _SecondaryWindow.Play(videoFilePath)));
+                    _SecondaryWindow.Play(videoFilePath, isMuted)));
             }
             catch (Exception ex)
             {

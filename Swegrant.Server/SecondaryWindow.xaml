@@ -18,8 +18,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock x:Name="txtSub"
-                    Grid.Row="0" Grid.Column="0"
+        <TextBlock Panel.ZIndex="2" x:Name="txtSub"
+                    Grid.Row="1" Grid.Column="0"
                    TextAlignment="Center"
                    TextWrapping="Wrap"
                    HorizontalAlignment="Center" VerticalAlignment="Bottom"
@@ -30,7 +30,7 @@
             </TextBlock.RenderTransform>-->
         </TextBlock>
 
-        <MediaElement Grid.Row="1" Grid.Column="0" x:Name="videoPlayer" 
+        <MediaElement Panel.ZIndex="1" Grid.Row="1" Grid.Column="0" x:Name="videoPlayer" 
             MediaOpened="videoPlayer_MediaOpened"
             ScrubbingEnabled="True"
             LoadedBehavior="Manual" />
