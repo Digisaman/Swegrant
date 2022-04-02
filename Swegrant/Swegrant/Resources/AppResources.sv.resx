@@ -198,6 +198,9 @@
   <data name="Subtitle" xml:space="preserve">
     <value>Undertext:</value>
   </data>
+  <data name="SubtitlesLoaded" xml:space="preserve">
+    <value>Subtitles Loaded</value>
+  </data>
   <data name="Svenska" xml:space="preserve">
     <value>Svenska</value>
   </data>

@@ -304,6 +304,15 @@ namespace Swegrant.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Subtitles Loaded.
+        /// </summary>
+        public static string SubtitlesLoaded {
+            get {
+                return ResourceManager.GetString("SubtitlesLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Svenska.
         /// </summary>
         public static string Svenska {
