@@ -82,7 +82,7 @@ namespace Swegrant.Server
             try
             {
                 this.videoPlayer.Visibility = (display ? Visibility.Visible : Visibility.Hidden);
-                this.txtSub.Visibility = (display ? Visibility.Visible : Visibility.Hidden);
+                //this.txtSub.Visibility = (display ? Visibility.Visible : Visibility.Hidden);
             }
             catch (Exception ex)
             {

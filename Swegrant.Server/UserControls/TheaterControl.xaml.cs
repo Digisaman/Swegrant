@@ -151,6 +151,11 @@ namespace Swegrant.Server.UserControls
                         //Task.Run(PlaySub);
                         MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, false);
                         this.currentBackgroundVideo = this.selectedBackGroundVideo;
+
+                        this.VideoTimer.Stop();
+                        this.txtVideoTime.Text = "00:00";
+                        this.VideoTimer.Start();
+                        
                     }
                     else
                     {
@@ -205,6 +210,9 @@ namespace Swegrant.Server.UserControls
                     }, this.currentSubCancelationSource.Token);
                     MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, chkMuteVideo.IsChecked.Value);
                     this.currentBackgroundVideo = this.selectedBackGroundVideo;
+
+                    this.VideoTimer.Stop();
+                    this.txtVideoTime.Text = "00:00";
                     this.VideoTimer.Start();
 
                 }
@@ -249,8 +257,7 @@ namespace Swegrant.Server.UserControls
             if (cmbVideo.SelectedItem != null)
             {
                 this.selectedBackGroundVideo = cmbVideo.SelectedItem.ToString();
-                this.txtVideoTime.Text = "00:00";
-                this.VideoTimer.Stop();
+                
             }
         }
 
