@@ -271,7 +271,10 @@ namespace Swegrant.Server.UserControls
                         this.subLeyla.PlaySub();
                         this.subSina.PlaySub();
                         this.subTara.PlaySub();
-                        MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, chkMuteVideo.IsChecked.Value);
+                        this.Dispatcher.Invoke(new Action(() =>
+                        {
+                            MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, chkMuteVideo.IsChecked.Value);
+                        }));
 
                     }, this.currentSubCancelationSource.Token);
 
