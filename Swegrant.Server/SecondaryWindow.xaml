@@ -21,8 +21,8 @@
                    TextAlignment="Center"
                    TextWrapping="Wrap"
                    HorizontalAlignment="Center" VerticalAlignment="Top"
-                   Margin="0,100,0,0"
-                   FontSize="24" Foreground="White" >
+                   Margin="0,85,0,0"
+                   FontSize="36" Foreground="White" >
             <!--<TextBlock.RenderTransform>
                 <ScaleTransform ScaleX="-1" />
             </TextBlock.RenderTransform>-->

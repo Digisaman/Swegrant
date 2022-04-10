@@ -205,7 +205,7 @@ namespace Swegrant.Server.UserControls
                     this.currentSubTask = Task.Run(() =>
                     {
                         this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
-                        PlaySub();
+                        //PlaySub();
 
                     }, this.currentSubCancelationSource.Token);
                     MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, chkMuteVideo.IsChecked.Value);
@@ -430,7 +430,7 @@ namespace Swegrant.Server.UserControls
                     });
 
                     this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
-                    PlaySub();
+                    //PlaySub();
                 }, this.currentSubCancelationSource.Token);
 
             }
@@ -549,11 +549,11 @@ namespace Swegrant.Server.UserControls
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning");
-                if (result == MessageBoxResult.OK)
-                {
+                //MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning");
+                //if (result == MessageBoxResult.OK)
+                //{
                     MainWindow.Singleton.ToggleVideoVisibility(false);
-                }
+                //}
             }
             catch (Exception ex)
             {
