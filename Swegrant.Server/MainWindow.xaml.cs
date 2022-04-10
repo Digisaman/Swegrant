@@ -469,5 +469,14 @@ namespace Swegrant.Server
         {
             btnStartServer.IsEnabled = true;
         }
+
+        private async void btnNavigateTheater_Click(object sender, RoutedEventArgs e)
+        {
+            await SendGroupMessage(new ServiceMessage
+            {
+                Command = Command.NavigateTheater,
+                Mode = Mode.None
+            });
+        }
     }
 }

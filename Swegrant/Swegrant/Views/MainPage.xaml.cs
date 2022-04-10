@@ -1,4 +1,5 @@
 ﻿using Swegrant.Resources;
+using Swegrant.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,6 +16,11 @@ namespace Swegrant.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
+        MainViewModel vm;
+        MainViewModel VM
+        {
+            get => vm ?? (vm = (MainViewModel)BindingContext);
+        }
         public MainPage()
         {
             InitializeComponent();
@@ -26,10 +32,19 @@ namespace Swegrant.Views
             base.OnAppearing();
             Shell.SetNavBarIsVisible(this, Helpers.Settings.IsUserAdmin);
 
-            
-            
-            
+            VM.ConnectCommand.Execute(null);
+        }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            VM.Dispose();
+            this.BindingContext = null;
+        }
+
+        ~MainPage()
+        {
+            OnDisappearing();
         }
 
         private async void btnPersian_Clicked(object sender, EventArgs e)

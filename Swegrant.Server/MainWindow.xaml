@@ -18,6 +18,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal"
                     Grid.Row="0" Grid.Column="0"
@@ -45,7 +46,7 @@
                     Content="Open Secondary Window"
                     Click="btnvdOpenSecondary_Click">
         </Button>
-        <StackPanel Orientation="Horizontal"
+        <StackPanel Orientation="Vertical"
             Grid.Row="0" Grid.Column="3" 
                     HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Window Mode : " />
@@ -59,13 +60,21 @@
                 IsChecked="False" 
                 Checked="rdSecondaryWindowFull_Checked"/>
         </StackPanel>
-        <Button x:Name="btnvdCloseSecondary" 
-                Grid.Row="0" Grid.Column="4"  
+
+
+
+        <Button x:Name="btnNavigateTheater" 
+                    Grid.Row="0" Grid.Column="4"
+                     Style="{StaticResource ButtonStyle}"
+                    Content="Navigate To Theater" 
+                    Click="btnNavigateTheater_Click"/>
+        <Button x:Name="btnvdCloseSecondary"
+                    Grid.Row="0" Grid.Column="5"
                 Content="Close Secondary Window" 
                 Style="{StaticResource ButtonStyle}"
                 Click="btnvdCloseSecondary_Click">
         </Button>
-        <TabControl x:Name="tabControl" Grid.Row="1" Grid.ColumnSpan="5">
+        <TabControl x:Name="tabControl" Grid.Row="1" Grid.ColumnSpan="6">
             <TabItem x:Name="tabTheater" Header="Theater Mode" FontSize="16">
 
                 <uc:TheaterControl x:Name="ucTheater"/>

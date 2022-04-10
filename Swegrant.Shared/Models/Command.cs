@@ -15,5 +15,8 @@
         HideSelectCharchter,
         NavigateQuestionnaire,
         ShowSelectCharacterImage,
+        NavigateTheater,
+        ResetSettings,
+        ResetMediaCache
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Swegrant.Helpers;
 using Swegrant.Shared.Models;
+using Swegrant.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,11 @@ namespace Swegrant.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CatalogPage : ContentPage
     {
+        CatalogViewModel vm;
+        CatalogViewModel VM
+        {
+            get => vm ?? (vm = (CatalogViewModel)BindingContext);
+        }
         public CatalogPage()
         {
             InitializeComponent();
@@ -30,9 +36,22 @@ namespace Swegrant.Views
             }
             this.webBrowser.Source = $"http://{Settings.ServerIP}:{Settings.ServerPort}/{CurrnetLanguage.ToString().ToUpper().Substring(0,2)}/index.html";
             this.webBrowser.Reload();
-            //this.webBrowser.Reload();
+            VM.ConnectCommand.Execute(null);
 
 
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            VM.Dispose();
+            this.BindingContext = null;
+        }
+
+        ~CatalogPage()
+        {
+            OnDisappearing();
         }
 
 
