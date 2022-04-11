@@ -75,12 +75,12 @@
         </StackPanel>
 
         <Button x:Name="btnvdCloseSecondary"
-                    Grid.Row="0" Grid.Column="6"
+                    Grid.Row="0" Grid.Column="7"
                 Content="Close Secondary" 
                 Style="{StaticResource ButtonStyle}"
                 Click="btnvdCloseSecondary_Click">
         </Button>
-        <TabControl x:Name="tabControl" Grid.Row="1" Grid.ColumnSpan="6">
+        <TabControl x:Name="tabControl" Grid.Row="1" Grid.ColumnSpan="7">
             <TabItem x:Name="tabTheater" Header="Theater Mode" FontSize="16">
 
                 <uc:TheaterControl x:Name="ucTheater"/>
