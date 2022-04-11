@@ -19,6 +19,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal"
                     Grid.Row="0" Grid.Column="0"
@@ -46,8 +47,20 @@
                     Content="Open Secondary Window"
                     Click="btnvdOpenSecondary_Click">
         </Button>
+        
+        <Button x:Name="btnNavigateTheater" 
+                    Grid.Row="0" Grid.Column="3"
+                     Style="{StaticResource ButtonStyle}"
+                    Content="Navigate Theater" 
+                    Click="btnNavigateTheater_Click"/>
+        <Button x:Name="btnResetMediaCache" 
+                    Grid.Row="0" Grid.Column="4"
+                     Style="{StaticResource ButtonStyle}"
+                    Content="Reset Media Cache" 
+                    Click="btnResetMediaCache_Click"/>
+
         <StackPanel Orientation="Vertical"
-            Grid.Row="0" Grid.Column="3" 
+            Grid.Row="0" Grid.Column="5" 
                     HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Window Mode : " />
             <RadioButton x:Name="rdSecondaryWindowNoraml" 
@@ -61,16 +74,9 @@
                 Checked="rdSecondaryWindowFull_Checked"/>
         </StackPanel>
 
-
-
-        <Button x:Name="btnNavigateTheater" 
-                    Grid.Row="0" Grid.Column="4"
-                     Style="{StaticResource ButtonStyle}"
-                    Content="Navigate To Theater" 
-                    Click="btnNavigateTheater_Click"/>
         <Button x:Name="btnvdCloseSecondary"
-                    Grid.Row="0" Grid.Column="5"
-                Content="Close Secondary Window" 
+                    Grid.Row="0" Grid.Column="6"
+                Content="Close Secondary" 
                 Style="{StaticResource ButtonStyle}"
                 Click="btnvdCloseSecondary_Click">
         </Button>

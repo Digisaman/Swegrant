@@ -32,20 +32,21 @@ namespace Swegrant.Views
             base.OnAppearing();
             Shell.SetNavBarIsVisible(this, Helpers.Settings.IsUserAdmin);
 
+            VM.InitilizeImages();
             VM.ConnectCommand.Execute(null);
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            VM.Dispose();
-            this.BindingContext = null;
+            //VM.Dispose();
+            //this.BindingContext = null;
         }
 
-        ~MainPage()
-        {
-            OnDisappearing();
-        }
+        //~MainPage()
+        //{
+        //    OnDisappearing();
+        //}
 
         private async void btnPersian_Clicked(object sender, EventArgs e)
         {

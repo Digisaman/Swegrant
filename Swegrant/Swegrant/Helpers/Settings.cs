@@ -166,6 +166,7 @@ namespace Swegrant.Helpers
 
         public static void ResetSettings()
         {
+            ServerIP = defaultIP;
             CurrentAudioLanguage = Language.None;
             CurrentLanguage = Language.None;
             CurrentCharachter = Character.None;

@@ -420,7 +420,7 @@ namespace Swegrant.ViewModels
                                     break;
                                 case Swegrant.Shared.Models.Command.Play:
                                     this.currentSubIndex = 0;
-                                    ResumeAutoSub();
+                                    //ResumeAutoSub();
                                     break;
                                 case Swegrant.Shared.Models.Command.ResumeAutoSub:
                                     ResumeAutoSub();

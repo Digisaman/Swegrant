@@ -8,10 +8,16 @@ namespace Swegrant.Shared.Models
     {
         public MediaInfo()
         {
+            Initialize();
+        }
+
+        public void Initialize()
+        {
             AUDIO = new List<MediaFile>();
             THSUB = new List<MediaFile>();
             VDSUB = new List<MediaFile>();
         }
+
         public List<MediaFile> AUDIO { get; set; }
 
         public List<MediaFile> THSUB { get; set; }

@@ -478,5 +478,14 @@ namespace Swegrant.Server
                 Mode = Mode.None
             });
         }
+
+        private async void btnResetMediaCache_Click(object sender, RoutedEventArgs e)
+        {
+            await SendGroupMessage(new ServiceMessage
+            {
+                Command = Command.ResetMediaCache,
+                Mode = Mode.None
+            });
+        }
     }
 }

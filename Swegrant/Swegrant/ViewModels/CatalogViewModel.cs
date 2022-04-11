@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace Swegrant.ViewModels
 {
-    public class CatalogViewModel : BaseViewModel, IDisposable
+    public class CatalogViewModel : BaseViewModel
     {
         public CatalogViewModel()
         {
@@ -144,11 +144,11 @@ namespace Swegrant.ViewModels
             }
         }
 
-        public void Dispose()
-        {
-            GC.Collect();
-            //await Disconnect();
-        }
+        //public void Dispose()
+        //{
+        //    GC.Collect();
+        //    //await Disconnect();
+        //}
 
 
 

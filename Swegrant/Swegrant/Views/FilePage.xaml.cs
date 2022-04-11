@@ -157,9 +157,9 @@ namespace Swegrant.Views
                         await defaultProgressBar.ProgressTo(progress, 500, Easing.Linear);
                         Helpers.Settings.MediaInfo = this.serverMediaInfo;
                         this.lblTitle.Text = Swegrant.Resources.AppResources.DownloadCompleted;
-                        
-                        //Thread.Sleep(1000);
-                        //NavigateMain();
+
+                        Thread.Sleep(500);
+                        NavigateMain();
                     }
                 }
             }
@@ -219,6 +219,8 @@ namespace Swegrant.Views
             {
                 this.lblTitle.Text = Swegrant.Resources.AppResources.FilesUpToDate;
                 await defaultProgressBar.ProgressTo(1, 500, Easing.Linear);
+                Thread.Sleep(500);
+                NavigateMain();
             }
 
         }

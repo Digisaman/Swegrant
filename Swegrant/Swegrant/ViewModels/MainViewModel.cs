@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace Swegrant.ViewModels
 {
-    public class MainViewModel : BaseViewModel, IDisposable
+    public class MainViewModel : BaseViewModel
     {
         public ImageSource SVFlag { get; set; }
 
@@ -19,8 +19,7 @@ namespace Swegrant.ViewModels
         public MainViewModel()
         {
             Title = Resources.MenuTitles.Main;
-            SVFlag = ImageSource.FromResource("Swegrant.Resources.SV_Flag.png");
-            FAFlag = ImageSource.FromResource("Swegrant.Resources.FA_Flag.png");
+            InitilizeImages();
 
             SendMessageCommand = new MvvmHelpers.Commands.Command(async () => await SendMessage());
             ConnectCommand = new MvvmHelpers.Commands.Command(async () => await Connect());
@@ -38,6 +37,12 @@ namespace Swegrant.ViewModels
             {
                 SendLocalMessage(args.Message, args.User);
             };
+        }
+
+        public void InitilizeImages()
+        {
+            SVFlag = ImageSource.FromResource("Swegrant.Resources.SV_Flag.png");
+            FAFlag = ImageSource.FromResource("Swegrant.Resources.FA_Flag.png");
         }
 
         #region Properties
@@ -123,7 +128,7 @@ namespace Swegrant.ViewModels
         {
             try
             {
-                Device.BeginInvokeOnMainThread(() =>
+                Device.BeginInvokeOnMainThread(async () =>
                 {
                     if (message.StartsWith("{"))
                     {
@@ -137,6 +142,10 @@ namespace Swegrant.ViewModels
                                 case Shared.Models.Command.NavigateTheater:
                                     Shell.Current.GoToAsync($"//{nameof(TheaterPage)}");
                                     break;
+                                case Shared.Models.Command.ResetMediaCache:
+                                    Helpers.FileHelpers.ResetMediaCache();
+                                    Shell.Current.GoToAsync($"//{nameof(FilePage)}");
+                                    break;
                             }
                         }
                     }
@@ -149,11 +158,11 @@ namespace Swegrant.ViewModels
             }
         }
 
-        public void Dispose()
-        {
-            GC.Collect();
-            //await Disconnect();
-        }
+        //public void Dispose()
+        //{
+        //    GC.Collect();
+        //    //await Disconnect();
+        //}
 
 
 

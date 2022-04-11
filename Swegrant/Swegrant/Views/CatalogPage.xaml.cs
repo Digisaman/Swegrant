@@ -45,8 +45,8 @@ namespace Swegrant.Views
         {
             base.OnDisappearing();
 
-            VM.Dispose();
-            this.BindingContext = null;
+            //VM.Dispose();
+            //this.BindingContext = null;
         }
 
         ~CatalogPage()
