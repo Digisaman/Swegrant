@@ -472,20 +472,28 @@ namespace Swegrant.Server
 
         private async void btnNavigateTheater_Click(object sender, RoutedEventArgs e)
         {
-            await SendGroupMessage(new ServiceMessage
+            MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
             {
-                Command = Command.NavigateTheater,
-                Mode = Mode.None
-            });
+                await SendGroupMessage(new ServiceMessage
+                {
+                    Command = Command.NavigateTheater,
+                    Mode = Mode.None
+                });
+            }
         }
 
         private async void btnResetMediaCache_Click(object sender, RoutedEventArgs e)
         {
-            await SendGroupMessage(new ServiceMessage
+            MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
             {
-                Command = Command.ResetMediaCache,
-                Mode = Mode.None
-            });
+                await SendGroupMessage(new ServiceMessage
+                {
+                    Command = Command.ResetMediaCache,
+                    Mode = Mode.None
+                });
+            }
         }
     }
 }

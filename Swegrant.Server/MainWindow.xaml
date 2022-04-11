@@ -55,6 +55,7 @@
                     Click="btnNavigateTheater_Click"/>
         <Button x:Name="btnResetMediaCache" 
                     Grid.Row="0" Grid.Column="4"
+                Background="Red"
                      Style="{StaticResource ButtonStyle}"
                     Content="Reset Media Cache" 
                     Click="btnResetMediaCache_Click"/>
