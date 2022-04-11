@@ -12,7 +12,7 @@ namespace Swegrant.Helpers
 
 #if DEBUG
         //static readonly string defaultIP = DeviceInfo.Platform == DevicePlatform.Android ? "10.0.2.2" : "localhost";
-        static readonly string defaultIP = "192.168.1.10";
+        static readonly string defaultIP = "192.168.0.10";
 #else
                 static readonly string defaultIP = "192.168.0.10";
 #endif
@@ -164,5 +164,11 @@ namespace Swegrant.Helpers
             set => Preferences.Set(nameof(Questionnaire), value);
         }
 
+        public static void ResetSettings()
+        {
+            CurrentAudioLanguage = Language.None;
+            CurrentLanguage = Language.None;
+            CurrentCharachter = Character.None;
+        }
     }
 }
