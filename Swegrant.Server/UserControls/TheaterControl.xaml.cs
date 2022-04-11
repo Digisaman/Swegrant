@@ -364,7 +364,7 @@ namespace Swegrant.Server.UserControls
                     this.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         this.lstSub.SelectedIndex = this.lstSub.SelectedIndex + 1;
-                        this.lstSub.ScrollIntoView(this.lstSub.Items[this.lstSub.SelectedIndex]);
+                        this.lstSub.ScrollToCenterOfView(this.lstSub.Items[this.lstSub.SelectedIndex]);
                     }));
 
                     if (this.currentSubIndex < this.currentSub.Count - 1)
@@ -392,7 +392,8 @@ namespace Swegrant.Server.UserControls
                 this.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     //this.lstSub.SelectedIndex = this.lstSub.SelectedIndex + 1;
-                    this.lstSub.ScrollIntoView(this.lstSub.Items[this.lstSub.SelectedIndex]);
+                    //this.lstSub.ScrollIntoView(this.lstSub.Items[this.lstSub.SelectedIndex]);
+                    this.lstSub.ScrollToCenterOfView(this.lstSub.Items[this.lstSub.SelectedIndex]);
                 }));
 
                 MainWindow.Singleton.DisplaySecondarySub(this.currentSub[this.currentSubIndex].Text);
@@ -430,7 +431,7 @@ namespace Swegrant.Server.UserControls
                     });
 
                     this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
-                    //PlaySub();
+                    PlaySub();
                 }, this.currentSubCancelationSource.Token);
 
             }

@@ -1,4 +1,5 @@
-﻿using Swegrant.Shared.Models;
+﻿using Swegrant.Server.Helpers;
+using Swegrant.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -173,7 +174,7 @@ namespace Swegrant.Server.UserControls
                     this.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     this.lstSub.SelectedIndex = this.lstSub.SelectedIndex + 1;
-                    this.lstSub.ScrollIntoView(this.lstSub.Items[this.lstSub.SelectedIndex]);
+                    this.lstSub.ScrollToCenterOfView(this.lstSub.Items[this.lstSub.SelectedIndex]);
                 }));
 
                     if (i < this.currentSub.Length - 1)
