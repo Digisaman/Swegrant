@@ -156,6 +156,9 @@
   <data name="FilesUpToDate" xml:space="preserve">
     <value>همه فایل ها بروزرسانی شد.</value>
   </data>
+  <data name="FinalChanceToSelectCharacter" xml:space="preserve">
+    <value>آخرین فرصت برای انتخاب شخصیت</value>
+  </data>
   <data name="Information" xml:space="preserve">
     <value>اطلاعات</value>
   </data>

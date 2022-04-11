@@ -178,6 +178,15 @@ namespace Swegrant.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Final Chance To Select Character.
+        /// </summary>
+        public static string FinalChanceToSelectCharacter {
+            get {
+                return ResourceManager.GetString("FinalChanceToSelectCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string Information {

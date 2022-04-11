@@ -156,6 +156,9 @@
   <data name="FilesUpToDate" xml:space="preserve">
     <value>Filer är uppdaterade.</value>
   </data>
+  <data name="FinalChanceToSelectCharacter" xml:space="preserve">
+    <value>Nu är det sista möjligheten att välja din karaktär.</value>
+  </data>
   <data name="Information" xml:space="preserve">
     <value>Information</value>
   </data>

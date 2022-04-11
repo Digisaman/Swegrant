@@ -32,7 +32,7 @@ namespace Swegrant.Views
             base.OnAppearing();
             Shell.SetNavBarIsVisible(this, Helpers.Settings.IsUserAdmin);
 
-            VM.InitilizeImages();
+            //VM.InitilizeImages();
             VM.ConnectCommand.Execute(null);
         }
 
