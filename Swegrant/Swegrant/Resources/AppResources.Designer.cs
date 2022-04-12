@@ -205,7 +205,7 @@ namespace Swegrant.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Next.
+        ///   Looks up a localized string similar to Enter Theater.
         /// </summary>
         public static string Next {
             get {
