@@ -4,6 +4,7 @@
              xmlns:vm="clr-namespace:Swegrant.ViewModels"
              xmlns:resx="clr-namespace:Swegrant.Resources"
              x:Class="Swegrant.Views.CatalogPage"
+             BackgroundColor="Black"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:CatalogViewModel />
@@ -14,8 +15,8 @@
             HorizontalOptions="CenterAndExpand">
             <ProgressBar x:Name="progressBar"  HorizontalOptions="FillAndExpand" />
             <WebView x:Name="webBrowser"
-                     HeightRequest="1000"
-                     WidthRequest="1000"  
+                     HeightRequest="1280"
+                     WidthRequest="1280"  
                      VerticalOptions= "FillAndExpand" 
                      Navigated="webBrowser_Navigated"
                      Navigating="webBrowser_Navigating"/>

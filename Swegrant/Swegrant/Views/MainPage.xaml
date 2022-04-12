@@ -4,32 +4,47 @@
              xmlns:vm="clr-namespace:Swegrant.ViewModels"
              xmlns:resx="clr-namespace:Swegrant.Resources"
              x:Class="Swegrant.Views.MainPage"
+             BackgroundColor="Black"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:MainViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Label 
-                
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+                <Label 
+                    Margin="10"
                 Text="{x:Static resx:AppResources.Welcome}"
+                    FontAttributes="Bold"
                 FontSize="Title"
                 VerticalOptions="Start"
                 HorizontalOptions="CenterAndExpand" 
-                TextColor="Black"/>
-
-            <Label Text="{x:Static resx:AppResources.ChooseLanguage}" FontSize="Large"
+                TextColor="White"/>
+                    
+                <Label 
+                    Text="{x:Static resx:AppResources.ChooseLanguage}" FontSize="Large"
+                    Margin="10"
                 VerticalOptions="Start"
                 HorizontalOptions="CenterAndExpand"
-                   TextColor="Black"/>
+                   TextColor="Red"/>
+            </StackLayout>
 
-
-            <Button x:Name="btnPersian" Text="{x:Static resx:AppResources.Farsi}" Clicked="btnPersian_Clicked"
+            <Button  Grid.Row="1" x:Name="btnPersian" Text="{x:Static resx:AppResources.Farsi}"
+                     FontSize="Title"
+                     Clicked="btnPersian_Clicked"
                     ImageSource="{Binding FAFlag}"/>
             <!--<Button x:Name="btnEnglish" Text="English" Clicked="btnEnglish_Clicked" />-->
-            <Button x:Name="btnSweden" Text="{x:Static resx:AppResources.Svenska}" Clicked="btnSweden_Clicked"
+            <Button Grid.Row="2" x:Name="btnSweden" Text="{x:Static resx:AppResources.Svenska}" Clicked="btnSweden_Clicked"
+                    FontSize="Title"
                       ImageSource="{Binding SVFlag}"/>
-        </StackLayout>
+        </Grid>
+        
+
 
 
     </ContentPage.Content>

@@ -160,7 +160,7 @@ namespace Swegrant.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Farsi.
+        ///   Looks up a localized string similar to فارسی.
         /// </summary>
         public static string Farsi {
             get {

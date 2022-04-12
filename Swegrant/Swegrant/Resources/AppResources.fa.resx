@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Audio" xml:space="preserve">
-    <value>صدا :</value>
+    <value>صدا</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>لغو</value>
   </data>
   <data name="Charchter" xml:space="preserve">
-    <value>شخصیت :</value>
+    <value>شخصیت</value>
   </data>
   <data name="ChooseLanguage" xml:space="preserve">
-    <value>لطفا زبان خود را انتخاب کنید</value>
+    <value>لطفا زبان خود را انتخاب کنید.</value>
   </data>
   <data name="ConfirmLanguage" xml:space="preserve">
     <value>همه زیرنویس ها به زبان فارسی نمایش داده خواهد شد.</value>
@@ -157,7 +157,7 @@
     <value>همه فایل ها بروزرسانی شد.</value>
   </data>
   <data name="FinalChanceToSelectCharacter" xml:space="preserve">
-    <value>آخرین فرصت برای انتخاب شخصیت</value>
+    <value>آخرین فرصت برای انتخاب شخصیت.</value>
   </data>
   <data name="Information" xml:space="preserve">
     <value>اطلاعات</value>
@@ -166,7 +166,7 @@
     <value>لیلا</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>ورود به تئاتر</value>
+    <value>ورود به نمایش</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>خیر</value>
@@ -193,19 +193,16 @@
     <value>هدفون خود را بردارید.</value>
   </data>
   <data name="SelectCharachter" xml:space="preserve">
-    <value>شخصیت  که مایلید دنبال کنید را انتخاب کنید :</value>
+    <value>شخصیتی  که مایلید دنبال کنید را انتخاب کنید.</value>
   </data>
   <data name="Sina" xml:space="preserve">
     <value>سینا</value>
   </data>
   <data name="Subtitle" xml:space="preserve">
-    <value>زیرنویس :</value>
-  </data>
-  <data name="SubtitlesLoaded" xml:space="preserve">
-    <value>Subtitles Loaded</value>
+    <value>زیرنویس</value>
   </data>
   <data name="Svenska" xml:space="preserve">
-    <value>سوندی</value>
+    <value>سوئدی</value>
   </data>
   <data name="Tara" xml:space="preserve">
     <value>تارا</value>
@@ -214,7 +211,7 @@
     <value>خوش آمدید.</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>به تماشای .... خوش آمدید.</value>
+    <value>به تماشای SvenDrare خوش آمدید.</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>بله</value>
