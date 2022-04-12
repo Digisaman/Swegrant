@@ -30,12 +30,12 @@ namespace Swegrant.Server
 
         }
 
-        public void Play(string videoFilePath, bool isMuted)
+        public void Play(string videoFilePath, bool isMuted, bool showVideo, bool showSub)
         {
             try
             {
-                this.txtSub.Visibility = Visibility.Hidden;
-                this.videoPlayer.Visibility = Visibility.Hidden;
+                this.txtSub.Visibility = (showSub ? Visibility.Visible : Visibility.Hidden);
+                this.videoPlayer.Visibility = (showVideo ? Visibility.Visible : Visibility.Hidden);
                 videoFilePath = videoFilePath.Replace("\\", "/");
                 this.videoPlayer.Source = new Uri(videoFilePath, UriKind.Absolute);
                 this.videoPlayer.IsMuted = isMuted;

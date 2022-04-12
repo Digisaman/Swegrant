@@ -149,7 +149,7 @@ namespace Swegrant.Server.UserControls
                     {
                         //PLayVideo(videoFilePath);
                         //Task.Run(PlaySub);
-                        MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, false);
+                        MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, false, true, false);
                         this.currentBackgroundVideo = this.selectedBackGroundVideo;
 
                         this.VideoTimer.Stop();
@@ -208,7 +208,7 @@ namespace Swegrant.Server.UserControls
                         //PlaySub();
 
                     }, this.currentSubCancelationSource.Token);
-                    MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, chkMuteVideo.IsChecked.Value);
+                    MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, chkMuteVideo.IsChecked.Value, false, false);
                     this.currentBackgroundVideo = this.selectedBackGroundVideo;
 
                     this.VideoTimer.Stop();

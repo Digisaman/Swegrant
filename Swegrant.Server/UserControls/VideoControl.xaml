@@ -90,6 +90,8 @@
                     Style="{StaticResource ButtonStyle}"
                     Click="btnPlayVideo_Click">
             </Button>
+            
+            
         </StackPanel>
 
 
