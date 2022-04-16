@@ -195,7 +195,7 @@ namespace Swegrant.Server.UserControls
                 string videoFilePath = $"{VideoDirectory}\\{selectedBackGroundVideo}";
                 if (File.Exists(videoFilePath))
                 {
-                    await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+                    MainWindow.Singleton.SendGroupMessage(new ServiceMessage
                     {
                         Command = Command.Play,
                         Mode = Mode.Theater,

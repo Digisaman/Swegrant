@@ -256,7 +256,8 @@ namespace Swegrant.Server.UserControls
                 if (File.Exists(videoFilePath))
                 {
 
-                    await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+                    MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+                    //await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
                     {
                         Command = Command.Play,
                         Mode = Mode.Video,
