@@ -140,6 +140,11 @@ namespace Swegrant.ViewModels
                             {
 
                                 case Shared.Models.Command.NavigateTheater:
+                                    if (Helpers.Settings.CurrentLanguage == Language.None)
+                                    {
+                                        Helpers.Settings.CurrentLanguage = Language.Farsi;
+                                        Helpers.LanguageHelper.ChangeLanguage(Shared.Models.Language.Farsi);
+                                    }
                                     Shell.Current.GoToAsync($"//{nameof(TheaterPage)}");
                                     break;
                                 case Shared.Models.Command.ResetMediaCache:
