@@ -24,9 +24,9 @@ namespace Swegrant.ViewModels
         //public ObservableCollection<ChatMessage> Messages { get; }
         public ObservableCollection<User> Users { get; }
 
-       
 
-        
+
+
         public Language CurrnetAudioLanguage
         {
             get
@@ -35,7 +35,7 @@ namespace Swegrant.ViewModels
             }
             set
             {
-                Helpers.Settings.CurrentAudioLanguage = value;                
+                Helpers.Settings.CurrentAudioLanguage = value;
             }
         }
 
@@ -94,7 +94,7 @@ namespace Swegrant.ViewModels
         }
 
 
-      
+
 
         #region Language
         bool isAudioSV = false;
@@ -196,7 +196,7 @@ namespace Swegrant.ViewModels
             if (DesignMode.IsDesignModeEnabled)
                 return;
 
-           
+
 
             MediaMessage = new MediaMessage();
             //Messages = new ObservableCollection<ChatMessage>();
@@ -236,7 +236,7 @@ namespace Swegrant.ViewModels
                 this.CurrnetSubtitleLanguage = Helpers.Settings.CurrentLanguage;
             }
             else
-            {  
+            {
                 this.CurrnetSubtitleLanguage = Language.Farsi;
             }
 
@@ -258,8 +258,8 @@ namespace Swegrant.ViewModels
                 this.CurrentCharchter = await ServerHelper.AutoAssignCharacterAsync();
                 Helpers.Settings.CurrentCharachter = this.CurrentCharchter;
             }
-            
-            
+
+
 
             isAudioOR = (this.CurrnetAudioLanguage == Language.Original);
             isAudioFA = (this.CurrnetAudioLanguage == Language.Farsi);
@@ -268,7 +268,7 @@ namespace Swegrant.ViewModels
             isSubFA = (this.CurrnetSubtitleLanguage == Language.Farsi);
             isSubSV = (this.CurrnetSubtitleLanguage == Language.Svenska);
 
-            IsLangugeVisible = true;
+            IsLangugeVisible = this.CurrentScene == 1;
         }
 
         async Task Connect()
@@ -284,7 +284,7 @@ namespace Swegrant.ViewModels
 
                 AddRemoveUser(Settings.UserName, true);
                 await Task.Delay(500);
-                SendLocalMessage("Connected...", Settings.UserName);
+                SendLocalMessage("Ready", Settings.UserName);
             }
             catch (Exception ex)
             {
@@ -340,7 +340,7 @@ namespace Swegrant.ViewModels
                 {
                     var first = Users.FirstOrDefault(u => u.Name == user);
 
-                    
+
                     MediaMessage.Clear();
 
                     if (message.StartsWith("{"))
@@ -383,10 +383,10 @@ namespace Swegrant.ViewModels
                                     BeginPrepareAudio();
                                     PrepareSubtitle();
                                     break;
-                            
+
                             }
                         }
-                        else if ( serviceMessage.Mode == Mode.None && serviceMessage.Command == Shared.Models.Command.NavigateQuestionnaire)
+                        else if (serviceMessage.Mode == Mode.None && serviceMessage.Command == Shared.Models.Command.NavigateQuestionnaire)
                         {
                             Shell.Current.GoToAsync($"//{nameof(QuestionnairePage)}");
                         }
@@ -472,13 +472,13 @@ namespace Swegrant.ViewModels
             //    User = Helpers.Settings.UserName,
             //    Color = Color.FromRgba(0, 0, 0, 0)
             //});
-            MediaMessage.Message = "Audio Files Preapred";
+            MediaMessage.Message = "Ready";
             IsLangugeVisible = false;
         }
 
         private async Task PrepareAudio(Language language)
         {
-            string filename = $"VD-{CurrentCharchter.ToString().Substring(0,2).ToUpper()}-AUD-{language.ToString().Substring(0,2).ToUpper()}-SC-{CurrentScene.ToString("00")}.mp3";
+            string filename = $"VD-{CurrentCharchter.ToString().Substring(0, 2).ToUpper()}-AUD-{language.ToString().Substring(0, 2).ToUpper()}-SC-{CurrentScene.ToString("00")}.mp3";
 
             //switch (CurrentCharchter)
             //{

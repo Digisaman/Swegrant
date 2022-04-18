@@ -106,7 +106,7 @@ namespace Swegrant.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Conneted.
+        ///   Looks up a localized string similar to Ready.
         /// </summary>
         public static string Connected {
             get {
@@ -313,7 +313,7 @@ namespace Swegrant.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Subtitles Loaded.
+        ///   Looks up a localized string similar to Ready.
         /// </summary>
         public static string SubtitlesLoaded {
             get {

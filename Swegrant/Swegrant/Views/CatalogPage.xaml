@@ -13,18 +13,18 @@
         <StackLayout 
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand">
-            <!--<ProgressBar x:Name="progressBar"  HorizontalOptions="FillAndExpand" />-->
-            <!--<WebView x:Name="webBrowser"
+            <ProgressBar x:Name="progressBar"  HorizontalOptions="FillAndExpand" />
+            <WebView x:Name="webBrowser"
                      HeightRequest="1280"
                      WidthRequest="1280"  
                      VerticalOptions= "FillAndExpand" 
                      Navigated="webBrowser_Navigated"
-                     Navigating="webBrowser_Navigating"/>-->
-            <ScrollView>
+                     Navigating="webBrowser_Navigating"/>
+            <!--<ScrollView>
 
                 <Image x:Name="imgWeb" HorizontalOptions="FillAndExpand"/>
 
-            </ScrollView>
+            </ScrollView>-->
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                 <Button x:Name="btnPrevious" Text="{x:Static resx:AppResources.Previous}" Clicked="btnPrevious_Clicked" HorizontalOptions="FillAndExpand"/>
                 <Button x:Name="btnNext" Text="{x:Static resx:AppResources.Next}" Clicked="btnNext_Clicked" HorizontalOptions="FillAndExpand"/>

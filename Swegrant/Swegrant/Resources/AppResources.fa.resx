@@ -133,10 +133,10 @@
     <value>همه زیرنویس ها به زبان فارسی نمایش داده خواهد شد.</value>
   </data>
   <data name="Connected" xml:space="preserve">
-    <value>پیوسته به شبکه / متصل</value>
+    <value>Ready</value>
   </data>
   <data name="Disconnected" xml:space="preserve">
-    <value>ناپیوسته / منفصل</value>
+    <value>Disconnected</value>
   </data>
   <data name="DonwloadingAudioFiles" xml:space="preserve">
     <value>بارگذاری صداها</value>
@@ -151,13 +151,13 @@
     <value>بارکذاری زیرنویس ویدیو ها</value>
   </data>
   <data name="Farsi" xml:space="preserve">
-    <value>فارسی</value>
+    <value>دوبله فارسی</value>
   </data>
   <data name="FilesUpToDate" xml:space="preserve">
     <value>همه فایل ها بروزرسانی شد.</value>
   </data>
   <data name="FinalChanceToSelectCharacter" xml:space="preserve">
-    <value>آخرین فرصت برای انتخاب شخصیت.</value>
+    <value> انتخاب شخصیت :</value>
   </data>
   <data name="Information" xml:space="preserve">
     <value>اطلاعات</value>
@@ -202,7 +202,7 @@
     <value>زیرنویس</value>
   </data>
   <data name="Svenska" xml:space="preserve">
-    <value>سوئدی</value>
+    <value>دوبله سوئدی</value>
   </data>
   <data name="Tara" xml:space="preserve">
     <value>تارا</value>

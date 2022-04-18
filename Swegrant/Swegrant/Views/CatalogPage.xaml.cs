@@ -34,9 +34,9 @@ namespace Swegrant.Views
             {
                 CurrnetLanguage = Language.Farsi;
             }
-            this.imgWeb.Source = $"http://{Settings.ServerIP}:{Settings.ServerPort}/{CurrnetLanguage.ToString().ToUpper().Substring(0, 2)}/SD.jpg";
-            //this.webBrowser.Source = $"http://{Settings.ServerIP}:{Settings.ServerPort}/{CurrnetLanguage.ToString().ToUpper().Substring(0,2)}/index.html";
-            //this.webBrowser.Reload();
+            //this.imgWeb.Source = $"http://{Settings.ServerIP}:{Settings.ServerPort}/{CurrnetLanguage.ToString().ToUpper().Substring(0, 2)}/SD.jpg";
+            this.webBrowser.Source = $"http://{Settings.ServerIP}:{Settings.ServerPort}/{CurrnetLanguage.ToString().ToUpper().Substring(0, 2)}/index.html";
+            this.webBrowser.Reload();
             VM.ConnectCommand.Execute(null);
 
 
@@ -77,12 +77,12 @@ namespace Swegrant.Views
 
         private void webBrowser_Navigated(object sender, WebNavigatedEventArgs e)
         {
-            //this.progressBar.IsVisible = false;
+            this.progressBar.IsVisible = false;
         }
 
         private void webBrowser_Navigating(object sender, WebNavigatingEventArgs e)
         {
-            //this.progressBar.IsVisible = true;
+            this.progressBar.IsVisible = true;
         }
 
       

@@ -329,7 +329,7 @@ namespace Swegrant.ViewModels
 
                 AddRemoveUser(Settings.UserName, true);
                 await Task.Delay(500);
-                SendLocalMessage("Connected", Settings.UserName);
+                SendLocalMessage("Ready", Settings.UserName);
             }
             catch (Exception ex)
             {

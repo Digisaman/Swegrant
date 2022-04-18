@@ -133,7 +133,7 @@
     <value>All subtitles will be displayed in the selected language</value>
   </data>
   <data name="Connected" xml:space="preserve">
-    <value>Conneted</value>
+    <value>Ready</value>
   </data>
   <data name="Disconnected" xml:space="preserve">
     <value>Disconnected</value>
@@ -202,7 +202,7 @@
     <value>Subtitle :</value>
   </data>
   <data name="SubtitlesLoaded" xml:space="preserve">
-    <value>Subtitles Loaded</value>
+    <value>Ready</value>
   </data>
   <data name="Svenska" xml:space="preserve">
     <value>Svenska</value>

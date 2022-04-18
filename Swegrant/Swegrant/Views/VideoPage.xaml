@@ -42,7 +42,7 @@
               IsVisible="{Binding IsLangugeVisible}">
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition/>
+                <!--<RowDefinition/>-->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -63,7 +63,7 @@
                          HorizontalOptions="FillAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold"
-                         TextColor="{StaticResource SecondaryTextColor}" 
+                         TextColor="{StaticResource PrimaryTextColor}" 
                          IsChecked="{Binding IsAudioOR}" 
                          Content="{x:Static resx:AppResources.Original}"/>
                 <RadioButton 
@@ -71,7 +71,7 @@
                          HorizontalOptions="FillAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold"
-                         TextColor="{StaticResource SecondaryTextColor}" 
+                         TextColor="{StaticResource PrimaryTextColor}" 
                          IsChecked="{Binding IsAudioFA}" 
                          Content="{x:Static resx:AppResources.Farsi}"/>
                 <RadioButton 
@@ -79,12 +79,12 @@
                          HorizontalOptions="FillAndExpand"
                          FontSize="Large" 
                          FontAttributes="Bold" 
-                         TextColor="{StaticResource SecondaryTextColor}" 
+                         TextColor="{StaticResource PrimaryTextColor}" 
                          IsChecked="{Binding IsAudioSV}" 
                          Content="{x:Static resx:AppResources.Svenska}"/>
             </StackLayout>
 
-            <Label  Grid.Row="1" Grid.Column="0"
+            <!--<Label  Grid.Row="1" Grid.Column="0"
                 Text="{x:Static resx:AppResources.Subtitle}"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
@@ -109,7 +109,7 @@
                          TextColor="{StaticResource Primary}" 
                          IsChecked="{Binding IsSubSV}" 
                          Content="{x:Static resx:AppResources.Svenska}"/>
-            </StackLayout>
+            </StackLayout>-->
 
         </Grid>
 

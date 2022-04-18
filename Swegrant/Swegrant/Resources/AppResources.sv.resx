@@ -151,13 +151,13 @@
     <value>Laddar ned video undertexter...</value>
   </data>
   <data name="Farsi" xml:space="preserve">
-    <value>Persiska</value>
+    <value>Dubbad på persiska</value>
   </data>
   <data name="FilesUpToDate" xml:space="preserve">
     <value>Filer är uppdaterade.</value>
   </data>
   <data name="FinalChanceToSelectCharacter" xml:space="preserve">
-    <value>Nu är det sista möjligheten att välja din karaktär.</value>
+    <value>Välj Karaktär:</value>
   </data>
   <data name="Information" xml:space="preserve">
     <value>Information</value>
@@ -202,7 +202,7 @@
     <value>Undertext:</value>
   </data>
   <data name="Svenska" xml:space="preserve">
-    <value>Svenska</value>
+    <value>Dubbad på svenska</value>
   </data>
   <data name="Tara" xml:space="preserve">
     <value>Tara</value>
