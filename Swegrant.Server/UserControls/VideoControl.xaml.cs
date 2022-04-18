@@ -243,54 +243,64 @@ namespace Swegrant.Server.UserControls
 
         private async void btnPlayVideo_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
+            try
             {
-
-                //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
-                //string scence = this.cmbvdScence.SelectionBoxItem.ToString();
-                //this.currentScene = Convert.ToInt32(scence);
-                string text = "";
-                string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Video";
-                string videoFilePath = $"{VideoDirectory}\\VD-SC-{this.currentScene.ToString("00")}.mp4";
-                if (File.Exists(videoFilePath))
+                MessageBoxResult result = MessageBox.Show("Are You Sure?", "Warning", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
                 {
 
-                    MainWindow.Singleton.SendGroupMessage(new ServiceMessage
-                    //await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+                    //string lang = this.cmbthLanguage.SelectionBoxItem.ToString();
+                    //string scence = this.cmbvdScence.SelectionBoxItem.ToString();
+                    //this.currentScene = Convert.ToInt32(scence);
+                    int delay = Convert.ToInt32(txtPLayDelay.Text);
+                    string text = "";
+                    string VideoDirectory = $"{Directory.GetCurrentDirectory()}\\Video";
+                    string videoFilePath = $"{VideoDirectory}\\VD-SC-{this.currentScene.ToString("00")}.mp4";
+                    if (File.Exists(videoFilePath))
                     {
-                        Command = Command.Play,
-                        Mode = Mode.Video,
-                        Scene = this.currentScene
-                    });
-
-                    this.currentSubCancelationSource = new CancellationTokenSource();
-                    this.currentSubTask = Task.Run(() =>
-                    {
-                        this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
-
-                        this.subLeyla.PlaySub();
-                        this.subSina.PlaySub();
-                        this.subTara.PlaySub();
-                        this.Dispatcher.Invoke(new Action(() =>
+                        this.Dispatcher.BeginInvoke(new Action(() =>
                         {
                             MainWindow.Singleton.PlaySecondaryVideo(videoFilePath, chkMuteVideo.IsChecked.Value, true, false);
                         }));
-
-                    }, this.currentSubCancelationSource.Token);
-
-                    
-
-                    //PLayVideo(videoFilePath);
-                    //Task.Run(PlaySub);
-                    //_SecondaryWindow.Play(videoFilePath);
+                        await Task.Delay(delay);
 
 
+                        MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+                        {
+                            Command = Command.Play,
+                            Mode = Mode.Video,
+                            Scene = this.currentScene
+                        });
+
+                        this.currentSubCancelationSource = new CancellationTokenSource();
+                        this.currentSubTask = Task.Run(() =>
+                        {
+                            this.currentSubCancelationSource.Token.ThrowIfCancellationRequested();
+
+                            this.subLeyla.PlaySub();
+                            this.subSina.PlaySub();
+                            this.subTara.PlaySub();
+
+
+                        }, this.currentSubCancelationSource.Token);
+
+
+
+                        //PLayVideo(videoFilePath);
+                        //Task.Run(PlaySub);
+                        //_SecondaryWindow.Play(videoFilePath);
+
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("File Does NOT Exist");
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("File Does NOT Exist");
-                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
             }
         }
 
