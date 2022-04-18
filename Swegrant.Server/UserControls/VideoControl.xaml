@@ -35,7 +35,7 @@
         </StackPanel>-->
         <Button x:Name="btnSwitchVideo" 
                 Background="Red"
-                    Grid.Row="0" Grid.Column="0"
+                    Grid.Row="0" Grid.Column="2"
                                 Content="Switch To Video" 
                                 Style="{StaticResource ButtonStyle}"
                                 Click="btnSwitchVideo_Click">
@@ -51,7 +51,7 @@
                 <ComboBoxItem>Svenska</ComboBoxItem>-->
             </ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
             <TextBlock Background="Red"
                        FontSize="20"
                        Style="{StaticResource TextBlockStyle}">Scene :</TextBlock>

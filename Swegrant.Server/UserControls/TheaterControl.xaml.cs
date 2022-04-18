@@ -504,12 +504,12 @@ namespace Swegrant.Server.UserControls
         public async Task HideSubtitle()
         {
             MainWindow.Singleton.ToggleSecondarySubVisibility(false);
-            await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
-            {
-                Command = Command.HideSubtitle,
-                Mode = Mode.Theater,
-                Scene = currentScene
-            });
+            //await MainWindow.Singleton.SendGroupMessage(new ServiceMessage
+            //{
+            //    Command = Command.HideSubtitle,
+            //    Mode = Mode.Theater,
+            //    Scene = currentScene
+            //});
         }
 
         private async Task SwitchToTheater()
